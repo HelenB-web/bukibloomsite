@@ -77,7 +77,7 @@
           try {
             testStringCoercion(value);
             var JSCompiler_inline_result = false;
-          } catch (e2) {
+          } catch (e) {
             JSCompiler_inline_result = true;
           }
           if (JSCompiler_inline_result) {
@@ -133,7 +133,7 @@
                 type = type._init;
                 try {
                   return getComponentNameFromType(type(innerType));
-                } catch (x2) {
+                } catch (x) {
                 }
             }
           return null;
@@ -145,7 +145,7 @@
           try {
             var name = getComponentNameFromType(type);
             return name ? "<" + name + ">" : "<...>";
-          } catch (x2) {
+          } catch (x) {
             return "<...>";
           }
         }
@@ -184,8 +184,8 @@
           componentName = this.props.ref;
           return void 0 !== componentName ? componentName : null;
         }
-        function ReactElement(type, key, self2, source, owner, props, debugStack, debugTask) {
-          self2 = props.ref;
+        function ReactElement(type, key, self, source, owner, props, debugStack, debugTask) {
+          self = props.ref;
           type = {
             $$typeof: REACT_ELEMENT_TYPE,
             type,
@@ -193,7 +193,7 @@
             props,
             _owner: owner
           };
-          null !== (void 0 !== self2 ? self2 : null) ? Object.defineProperty(type, "ref", {
+          null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
             enumerable: false,
             get: elementRefGetterWithDeprecationWarning
           }) : Object.defineProperty(type, "ref", { enumerable: false, value: null });
@@ -308,8 +308,8 @@
             invokeCallback = children;
             callback = callback(invokeCallback);
             var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
-            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c2) {
-              return c2;
+            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
+              return c;
             })) : null != callback && (isValidElement(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(
               callback,
               escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(
@@ -322,19 +322,19 @@
           invokeCallback = 0;
           childKey = "" === nameSoFar ? "." : nameSoFar + ":";
           if (isArrayImpl(children))
-            for (var i2 = 0; i2 < children.length; i2++)
-              nameSoFar = children[i2], type = childKey + getElementKey(nameSoFar, i2), invokeCallback += mapIntoArray(
+            for (var i = 0; i < children.length; i++)
+              nameSoFar = children[i], type = childKey + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(
                 nameSoFar,
                 array,
                 escapedPrefix,
                 type,
                 callback
               );
-          else if (i2 = getIteratorFn(children), "function" === typeof i2)
-            for (i2 === children.entries && (didWarnAboutMaps || console.warn(
+          else if (i = getIteratorFn(children), "function" === typeof i)
+            for (i === children.entries && (didWarnAboutMaps || console.warn(
               "Using Maps as children is not supported. Use an array of keyed ReactElements instead."
-            ), didWarnAboutMaps = true), children = i2.call(children), i2 = 0; !(nameSoFar = children.next()).done; )
-              nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i2++), invokeCallback += mapIntoArray(
+            ), didWarnAboutMaps = true), children = i.call(children), i = 0; !(nameSoFar = children.next()).done; )
+              nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(
                 nameSoFar,
                 array,
                 escapedPrefix,
@@ -420,8 +420,8 @@
             }
           return enqueueTaskImpl(task);
         }
-        function aggregateErrors(errors2) {
-          return 1 < errors2.length && "function" === typeof AggregateError ? new AggregateError(errors2) : errors2[0];
+        function aggregateErrors(errors) {
+          return 1 < errors.length && "function" === typeof AggregateError ? new AggregateError(errors) : errors[0];
         }
         function popActScope(prevActQueue, prevActScopeDepth) {
           prevActScopeDepth !== actScopeDepth - 1 && console.error(
@@ -448,17 +448,17 @@
         function flushActQueue(queue) {
           if (!isFlushing) {
             isFlushing = true;
-            var i2 = 0;
+            var i = 0;
             try {
-              for (; i2 < queue.length; i2++) {
-                var callback = queue[i2];
+              for (; i < queue.length; i++) {
+                var callback = queue[i];
                 do {
                   ReactSharedInternals.didUsePromise = false;
                   var continuation = callback(false);
                   if (null !== continuation) {
                     if (ReactSharedInternals.didUsePromise) {
-                      queue[i2] = callback;
-                      queue.splice(0, i2);
+                      queue[i] = callback;
+                      queue.splice(0, i);
                       return;
                     }
                     callback = continuation;
@@ -467,7 +467,7 @@
               }
               queue.length = 0;
             } catch (error) {
-              queue.splice(0, i2 + 1), ReactSharedInternals.thrownErrors.push(error);
+              queue.splice(0, i + 1), ReactSharedInternals.thrownErrors.push(error);
             } finally {
               isFlushing = false;
             }
@@ -581,11 +581,11 @@
             );
           },
           count: function(children) {
-            var n3 = 0;
+            var n = 0;
             mapChildren(children, function() {
-              n3++;
+              n++;
             });
-            return n3;
+            return n;
           },
           toArray: function(children) {
             return mapChildren(children, function(child) {
@@ -721,8 +721,8 @@
           if (1 === propName) props.children = children;
           else if (1 < propName) {
             JSCompiler_inline_result = Array(propName);
-            for (var i2 = 0; i2 < propName; i2++)
-              JSCompiler_inline_result[i2] = arguments[i2 + 2];
+            for (var i = 0; i < propName; i++)
+              JSCompiler_inline_result[i] = arguments[i + 2];
             props.children = JSCompiler_inline_result;
           }
           props = ReactElement(
@@ -758,30 +758,30 @@
           return defaultValue;
         };
         exports.createElement = function(type, config, children) {
-          for (var i2 = 2; i2 < arguments.length; i2++) {
-            var node = arguments[i2];
+          for (var i = 2; i < arguments.length; i++) {
+            var node = arguments[i];
             isValidElement(node) && node._store && (node._store.validated = 1);
           }
-          i2 = {};
+          i = {};
           node = null;
           if (null != config)
             for (propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = true, console.warn(
               "Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform"
             )), hasValidKey(config) && (checkKeyStringCoercion(config.key), node = "" + config.key), config)
-              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i2[propName] = config[propName]);
+              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
           var childrenLength = arguments.length - 2;
-          if (1 === childrenLength) i2.children = children;
+          if (1 === childrenLength) i.children = children;
           else if (1 < childrenLength) {
             for (var childArray = Array(childrenLength), _i = 0; _i < childrenLength; _i++)
               childArray[_i] = arguments[_i + 2];
             Object.freeze && Object.freeze(childArray);
-            i2.children = childArray;
+            i.children = childArray;
           }
           if (type && type.defaultProps)
             for (propName in childrenLength = type.defaultProps, childrenLength)
-              void 0 === i2[propName] && (i2[propName] = childrenLength[propName]);
+              void 0 === i[propName] && (i[propName] = childrenLength[propName]);
           node && defineKeyPropWarningGetter(
-            i2,
+            i,
             "function" === typeof type ? type.displayName || type.name || "Unknown" : type
           );
           var propName = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
@@ -791,7 +791,7 @@
             void 0,
             void 0,
             getOwner(),
-            i2,
+            i,
             propName ? Error("react-stack-top-frame") : unknownOwnerDebugStack,
             propName ? createTask(getTaskName(type)) : unknownOwnerDebugTask
           );
@@ -1067,9 +1067,9 @@
           }
           return first;
         }
-        function compare(a2, b3) {
-          var diff = a2.sortIndex - b3.sortIndex;
-          return 0 !== diff ? diff : a2.id - b3.id;
+        function compare(a, b) {
+          var diff = a.sortIndex - b.sortIndex;
+          return 0 !== diff ? diff : a.id - b.id;
         }
         function advanceTimers(currentTime) {
           for (var timer = peek(timerQueue); null !== timer; ) {
@@ -1263,7 +1263,7 @@
           try {
             testStringCoercion(key);
             var JSCompiler_inline_result = false;
-          } catch (e2) {
+          } catch (e) {
             JSCompiler_inline_result = true;
           }
           JSCompiler_inline_result && (console.error(
@@ -1297,7 +1297,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React28 = require_react(), Internals = {
+        var React2 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1315,7 +1315,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React28.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -1477,8 +1477,8 @@
         exports.requestFormReset = function(form) {
           Internals.d.r(form);
         };
-        exports.unstable_batchedUpdates = function(fn, a2) {
-          return fn(a2);
+        exports.unstable_batchedUpdates = function(fn, a) {
+          return fn(a);
         };
         exports.useFormState = function(action, initialState, permalink) {
           return resolveDispatcher().useFormState(action, initialState, permalink);
@@ -1525,8 +1525,8 @@
           if (oldPath.length !== newPath.length)
             console.warn("copyWithRename() expects paths of the same length");
           else {
-            for (var i2 = 0; i2 < newPath.length - 1; i2++)
-              if (oldPath[i2] !== newPath[i2]) {
+            for (var i = 0; i < newPath.length - 1; i++)
+              if (oldPath[i] !== newPath[i]) {
                 console.warn(
                   "copyWithRename() expects paths to be the same except for the deepest key"
                 );
@@ -1635,55 +1635,55 @@
               throw Error("Unable to find node on an unmounted component.");
             return alternate !== fiber ? null : fiber;
           }
-          for (var a2 = fiber, b3 = alternate; ; ) {
-            var parentA = a2.return;
+          for (var a = fiber, b = alternate; ; ) {
+            var parentA = a.return;
             if (null === parentA) break;
             var parentB = parentA.alternate;
             if (null === parentB) {
-              b3 = parentA.return;
-              if (null !== b3) {
-                a2 = b3;
+              b = parentA.return;
+              if (null !== b) {
+                a = b;
                 continue;
               }
               break;
             }
             if (parentA.child === parentB.child) {
               for (parentB = parentA.child; parentB; ) {
-                if (parentB === a2) return assertIsMounted(parentA), fiber;
-                if (parentB === b3) return assertIsMounted(parentA), alternate;
+                if (parentB === a) return assertIsMounted(parentA), fiber;
+                if (parentB === b) return assertIsMounted(parentA), alternate;
                 parentB = parentB.sibling;
               }
               throw Error("Unable to find node on an unmounted component.");
             }
-            if (a2.return !== b3.return) a2 = parentA, b3 = parentB;
+            if (a.return !== b.return) a = parentA, b = parentB;
             else {
               for (var didFindChild = false, _child = parentA.child; _child; ) {
-                if (_child === a2) {
+                if (_child === a) {
                   didFindChild = true;
-                  a2 = parentA;
-                  b3 = parentB;
+                  a = parentA;
+                  b = parentB;
                   break;
                 }
-                if (_child === b3) {
+                if (_child === b) {
                   didFindChild = true;
-                  b3 = parentA;
-                  a2 = parentB;
+                  b = parentA;
+                  a = parentB;
                   break;
                 }
                 _child = _child.sibling;
               }
               if (!didFindChild) {
                 for (_child = parentB.child; _child; ) {
-                  if (_child === a2) {
+                  if (_child === a) {
                     didFindChild = true;
-                    a2 = parentB;
-                    b3 = parentA;
+                    a = parentB;
+                    b = parentA;
                     break;
                   }
-                  if (_child === b3) {
+                  if (_child === b) {
                     didFindChild = true;
-                    b3 = parentB;
-                    a2 = parentA;
+                    b = parentB;
+                    a = parentA;
                     break;
                   }
                   _child = _child.sibling;
@@ -1694,14 +1694,14 @@
                   );
               }
             }
-            if (a2.alternate !== b3)
+            if (a.alternate !== b)
               throw Error(
                 "Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue."
               );
           }
-          if (3 !== a2.tag)
+          if (3 !== a.tag)
             throw Error("Unable to find node on an unmounted component.");
-          return a2.stateNode.current === a2 ? fiber : alternate;
+          return a.stateNode.current === a ? fiber : alternate;
         }
         function findCurrentHostFiberImpl(node) {
           var tag = node.tag;
@@ -1760,7 +1760,7 @@
                 type = type._init;
                 try {
                   return getComponentNameFromType(type(innerType));
-                } catch (x2) {
+                } catch (x) {
                 }
             }
           return null;
@@ -1822,8 +1822,8 @@
             case 29:
               type = fiber._debugInfo;
               if (null != type) {
-                for (var i2 = type.length - 1; 0 <= i2; i2--)
-                  if ("string" === typeof type[i2].name) return type[i2].name;
+                for (var i = type.length - 1; 0 <= i; i--)
+                  if ("string" === typeof type[i].name) return type[i].name;
               }
               if (null !== fiber.return)
                 return getComponentNameFromFiber(fiber.return);
@@ -1842,11 +1842,11 @@
           fiberStack[index$jscomp$0] = fiber;
           cursor.current = value;
         }
-        function requiredContext(c2) {
-          null === c2 && console.error(
+        function requiredContext(c) {
+          null === c && console.error(
             "Expected host context to exist. This error is likely caused by a bug in React. Please file an issue."
           );
-          return c2;
+          return c;
         }
         function pushHostContainer(fiber, nextRootInstance) {
           push(rootInstanceStackCursor, nextRootInstance, fiber);
@@ -1913,7 +1913,7 @@
         function willCoercionThrow(value) {
           try {
             return testStringCoercion(value), false;
-          } catch (e2) {
+          } catch (e) {
             return true;
           }
         }
@@ -1991,9 +1991,9 @@
         function markStateUpdateScheduled(fiber, lane) {
           null !== injectedProfilingHooks && "function" === typeof injectedProfilingHooks.markStateUpdateScheduled && injectedProfilingHooks.markStateUpdateScheduled(fiber, lane);
         }
-        function clz32Fallback(x2) {
-          x2 >>>= 0;
-          return 0 === x2 ? 32 : 31 - (log(x2) / LN2 | 0) | 0;
+        function clz32Fallback(x) {
+          x >>>= 0;
+          return 0 === x ? 32 : 31 - (log(x) / LN2 | 0) | 0;
         }
         function getLabelForLane(lane) {
           if (lane & 1) return "SyncHydrationLane";
@@ -2135,7 +2135,7 @@
           return lane;
         }
         function createLaneMap(initial) {
-          for (var laneMap = [], i2 = 0; 31 > i2; i2++) laneMap.push(initial);
+          for (var laneMap = [], i = 0; 31 > i; i++) laneMap.push(initial);
           return laneMap;
         }
         function markRootUpdated$1(root2, updateLane) {
@@ -2468,10 +2468,10 @@
           if (void 0 === prefix)
             try {
               throw Error();
-            } catch (x2) {
-              var match = x2.stack.trim().match(/\n( *(at )?)/);
+            } catch (x) {
+              var match = x.stack.trim().match(/\n( *(at )?)/);
               prefix = match && match[1] || "";
-              suffix = -1 < x2.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x2.stack.indexOf("@") ? "@unknown:0:0" : "";
+              suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
             }
           return "\n" + prefix + name + suffix;
         }
@@ -2502,8 +2502,8 @@
                     if ("object" === typeof Reflect && Reflect.construct) {
                       try {
                         Reflect.construct(Fake, []);
-                      } catch (x2) {
-                        var control = x2;
+                      } catch (x) {
+                        var control = x;
                       }
                       Reflect.construct(fn, [], Fake);
                     } else {
@@ -2629,8 +2629,8 @@
               info += describeFiber(workInProgress2);
               var debugInfo = workInProgress2._debugInfo;
               if (debugInfo)
-                for (var i2 = debugInfo.length - 1; 0 <= i2; i2--) {
-                  var entry = debugInfo[i2];
+                for (var i = debugInfo.length - 1; 0 <= i; i--) {
+                  var entry = debugInfo[i];
                   if ("string" === typeof entry.name) {
                     var JSCompiler_temp_const = info, env = entry.env;
                     var JSCompiler_inline_result = describeBuiltInComponentFrame(
@@ -2642,8 +2642,8 @@
               workInProgress2 = workInProgress2.return;
             } while (workInProgress2);
             return info;
-          } catch (x2) {
-            return "\nError generating stack: " + x2.message + "\n" + x2.stack;
+          } catch (x) {
+            return "\nError generating stack: " + x.message + "\n" + x.stack;
           }
         }
         function describeFunctionComponentFrameWithoutLineNumber(fn) {
@@ -2699,8 +2699,8 @@
                 (workInProgress2 = workInProgress2.owner) && ownerStack && (info += "\n" + formatOwnerStack(ownerStack));
               } else break;
             var JSCompiler_inline_result = info;
-          } catch (x2) {
-            JSCompiler_inline_result = "\nError generating stack: " + x2.message + "\n" + x2.stack;
+          } catch (x) {
+            JSCompiler_inline_result = "\nError generating stack: " + x.message + "\n" + x.stack;
           }
           return JSCompiler_inline_result;
         }
@@ -2797,7 +2797,7 @@
           if ("undefined" === typeof doc) return null;
           try {
             return doc.activeElement || doc.body;
-          } catch (e2) {
+          } catch (e) {
             return doc.body;
           }
         }
@@ -2857,7 +2857,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React28.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React2.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -2876,20 +2876,20 @@
           node = node.options;
           if (multiple) {
             multiple = {};
-            for (var i2 = 0; i2 < propValue.length; i2++)
-              multiple["$" + propValue[i2]] = true;
+            for (var i = 0; i < propValue.length; i++)
+              multiple["$" + propValue[i]] = true;
             for (propValue = 0; propValue < node.length; propValue++)
-              i2 = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i2 && (node[propValue].selected = i2), i2 && setDefaultSelected && (node[propValue].defaultSelected = true);
+              i = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i && (node[propValue].selected = i), i && setDefaultSelected && (node[propValue].defaultSelected = true);
           } else {
             propValue = "" + getToStringValue(propValue);
             multiple = null;
-            for (i2 = 0; i2 < node.length; i2++) {
-              if (node[i2].value === propValue) {
-                node[i2].selected = true;
-                setDefaultSelected && (node[i2].defaultSelected = true);
+            for (i = 0; i < node.length; i++) {
+              if (node[i].value === propValue) {
+                node[i].selected = true;
+                setDefaultSelected && (node[i].defaultSelected = true);
                 return;
               }
-              null !== multiple || node[i2].disabled || (multiple = node[i2]);
+              null !== multiple || node[i].disabled || (multiple = node[i]);
             }
             null !== multiple && (multiple.selected = true);
           }
@@ -3002,7 +3002,7 @@
           return indentation(indent) + describeTextNode(clientText, maxLength) + "\n";
         }
         function objectName(object) {
-          return Object.prototype.toString.call(object).replace(/^\[object (.*)\]$/, function(m2, p0) {
+          return Object.prototype.toString.call(object).replace(/^\[object (.*)\]$/, function(m, p0) {
             return p0;
           });
         }
@@ -3148,21 +3148,21 @@
           skipToNode = "";
           var debugInfo = node.fiber._debugInfo;
           if (debugInfo)
-            for (var i2 = 0; i2 < debugInfo.length; i2++) {
-              var serverComponentName = debugInfo[i2].name;
+            for (var i = 0; i < debugInfo.length; i++) {
+              var serverComponentName = debugInfo[i].name;
               "string" === typeof serverComponentName && (skipToNode += indentation(indent) + "<" + serverComponentName + ">\n", indent++);
             }
           debugInfo = "";
-          i2 = node.fiber.pendingProps;
+          i = node.fiber.pendingProps;
           if (6 === node.fiber.tag)
-            debugInfo = describeTextDiff(i2, node.serverProps, indent), indent++;
+            debugInfo = describeTextDiff(i, node.serverProps, indent), indent++;
           else if (serverComponentName = describeFiberType(node.fiber), null !== serverComponentName)
             if (void 0 === node.serverProps) {
               debugInfo = indent;
               var maxLength = 120 - 2 * debugInfo - serverComponentName.length - 2, content = "";
-              for (propName in i2)
-                if (i2.hasOwnProperty(propName) && "children" !== propName) {
-                  var propValue = describePropValue(i2[propName], 15);
+              for (propName in i)
+                if (i.hasOwnProperty(propName) && "children" !== propName) {
+                  var propValue = describePropValue(i[propName], 15);
                   maxLength -= propName.length + propValue.length + 2;
                   if (0 > maxLength) {
                     content += " ...";
@@ -3175,25 +3175,25 @@
             } else
               null === node.serverProps ? (debugInfo = describeExpandedElement(
                 serverComponentName,
-                i2,
+                i,
                 added(indent)
               ), indent++) : "string" === typeof node.serverProps ? console.error(
                 "Should not have matched a non HostText fiber to a Text node. This is a bug in React."
               ) : (debugInfo = describeElementDiff(
                 serverComponentName,
-                i2,
+                i,
                 node.serverProps,
                 indent
               ), indent++);
           var propName = "";
-          i2 = node.fiber.child;
-          for (serverComponentName = 0; i2 && serverComponentName < node.children.length; )
-            maxLength = node.children[serverComponentName], maxLength.fiber === i2 ? (propName += describeNode(maxLength, indent), serverComponentName++) : propName += describeSiblingFiber(i2, indent), i2 = i2.sibling;
-          i2 && 0 < node.children.length && (propName += indentation(indent) + "...\n");
-          i2 = node.serverTail;
+          i = node.fiber.child;
+          for (serverComponentName = 0; i && serverComponentName < node.children.length; )
+            maxLength = node.children[serverComponentName], maxLength.fiber === i ? (propName += describeNode(maxLength, indent), serverComponentName++) : propName += describeSiblingFiber(i, indent), i = i.sibling;
+          i && 0 < node.children.length && (propName += indentation(indent) + "...\n");
+          i = node.serverTail;
           null === node.serverProps && indent--;
-          for (node = 0; node < i2.length; node++)
-            serverComponentName = i2[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\n") : propName + describeExpandedElement(
+          for (node = 0; node < i.length; node++)
+            serverComponentName = i[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\n") : propName + describeExpandedElement(
               serverComponentName.type,
               serverComponentName.props,
               removed(indent)
@@ -3203,7 +3203,7 @@
         function describeDiff(rootNode) {
           try {
             return "\n\n" + describeNode(rootNode, 0);
-          } catch (x2) {
+          } catch (x) {
             return "";
           }
         }
@@ -3432,7 +3432,7 @@
           node.textContent = text;
         }
         function camelize(string) {
-          return string.replace(hyphenPattern, function(_2, character) {
+          return string.replace(hyphenPattern, function(_, character) {
             return character.toUpperCase();
           });
         }
@@ -3472,8 +3472,8 @@
               if (prevStyles) {
                 for (var key in prevStyles)
                   if (prevStyles.hasOwnProperty(key) && !styles.hasOwnProperty(key))
-                    for (var longhands = shorthandToLonghand[key] || [key], i2 = 0; i2 < longhands.length; i2++)
-                      expandedUpdates[longhands[i2]] = key;
+                    for (var longhands = shorthandToLonghand[key] || [key], i = 0; i < longhands.length; i++)
+                      expandedUpdates[longhands[i]] = key;
               }
               for (var _key in styles)
                 if (styles.hasOwnProperty(_key) && (!prevStyles || prevStyles[_key] !== styles[_key]))
@@ -3485,12 +3485,12 @@
                   _key[key[longhands]] = key$jscomp$0;
               key$jscomp$0 = {};
               for (var _key2 in expandedUpdates)
-                if (key = expandedUpdates[_key2], (longhands = _key[_key2]) && key !== longhands && (i2 = key + "," + longhands, !key$jscomp$0[i2])) {
-                  key$jscomp$0[i2] = true;
-                  i2 = console;
+                if (key = expandedUpdates[_key2], (longhands = _key[_key2]) && key !== longhands && (i = key + "," + longhands, !key$jscomp$0[i])) {
+                  key$jscomp$0[i] = true;
+                  i = console;
                   var value = styles[key];
-                  i2.error.call(
-                    i2,
+                  i.error.call(
+                    i,
                     "%s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.",
                     null == value || "boolean" === typeof value || "" === value ? "Removing" : "Updating",
                     key,
@@ -3847,16 +3847,16 @@
             }
           }
         }
-        function batchedUpdates$1(fn, a2, b3) {
-          if (isInsideEventHandler) return fn(a2, b3);
+        function batchedUpdates$1(fn, a, b) {
+          if (isInsideEventHandler) return fn(a, b);
           isInsideEventHandler = true;
           try {
-            var JSCompiler_inline_result = fn(a2);
+            var JSCompiler_inline_result = fn(a);
             return JSCompiler_inline_result;
           } finally {
             if (isInsideEventHandler = false, null !== restoreTarget || null !== restoreQueue) {
-              if (flushSyncWork$1(), restoreTarget && (a2 = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a2), fn))
-                for (a2 = 0; a2 < fn.length; a2++) restoreStateOfTarget(fn[a2]);
+              if (flushSyncWork$1(), restoreTarget && (a = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a), fn))
+                for (a = 0; a < fn.length; a++) restoreStateOfTarget(fn[a]);
             }
           }
         }
@@ -4061,8 +4061,8 @@
           if ("input" === domEventName || "change" === domEventName)
             return getInstIfValueChanged(targetInst);
         }
-        function is(x2, y2) {
-          return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
+        function is(x, y) {
+          return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
         }
         function shallowEqual(objA, objB) {
           if (objectIs(objA, objB)) return true;
@@ -4179,15 +4179,15 @@
           };
         }
         function finishQueueingConcurrentUpdates() {
-          for (var endIndex = concurrentQueuesIndex, i2 = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i2 < endIndex; ) {
-            var fiber = concurrentQueues[i2];
-            concurrentQueues[i2++] = null;
-            var queue = concurrentQueues[i2];
-            concurrentQueues[i2++] = null;
-            var update = concurrentQueues[i2];
-            concurrentQueues[i2++] = null;
-            var lane = concurrentQueues[i2];
-            concurrentQueues[i2++] = null;
+          for (var endIndex = concurrentQueuesIndex, i = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i < endIndex; ) {
+            var fiber = concurrentQueues[i];
+            concurrentQueues[i++] = null;
+            var queue = concurrentQueues[i];
+            concurrentQueues[i++] = null;
+            var update = concurrentQueues[i];
+            concurrentQueues[i++] = null;
+            var lane = concurrentQueues[i];
+            concurrentQueues[i++] = null;
             if (null !== queue && null !== update) {
               var pending = queue.pending;
               null === pending ? update.next = update : (update.next = pending.next, pending.next = update);
@@ -4772,8 +4772,8 @@
               a: for (; null !== list; ) {
                 var dependency = list;
                 list = fiber;
-                for (var i2 = 0; i2 < contexts.length; i2++)
-                  if (dependency.context === contexts[i2]) {
+                for (var i = 0; i < contexts.length; i++)
+                  if (dependency.context === contexts[i]) {
                     list.lanes |= renderLanes2;
                     dependency = list.alternate;
                     null !== dependency && (dependency.lanes |= renderLanes2);
@@ -4992,7 +4992,7 @@
             currentEntangledListeners = null;
             currentEntangledLane = 0;
             currentEntangledActionThenable = null;
-            for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])();
+            for (var i = 0; i < listeners.length; i++) (0, listeners[i])();
           }
         }
         function chainThenableValue(thenable, result) {
@@ -5008,7 +5008,7 @@
             function() {
               thenableWithOverride.status = "fulfilled";
               thenableWithOverride.value = result;
-              for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])(result);
+              for (var i = 0; i < listeners.length; i++) (0, listeners[i])(result);
             },
             function(error) {
               thenableWithOverride.status = "rejected";
@@ -5362,9 +5362,9 @@
           if (null !== hookTypesDev && (hookTypesUpdateIndexDev++, hookTypesDev[hookTypesUpdateIndexDev] !== hookName)) {
             var componentName2 = getComponentNameFromFiber(currentlyRenderingFiber);
             if (!didWarnAboutMismatchedHooksForComponent.has(componentName2) && (didWarnAboutMismatchedHooksForComponent.add(componentName2), null !== hookTypesDev)) {
-              for (var table = "", i2 = 0; i2 <= hookTypesUpdateIndexDev; i2++) {
-                var oldHookName = hookTypesDev[i2], newHookName = i2 === hookTypesUpdateIndexDev ? hookName : oldHookName;
-                for (oldHookName = i2 + 1 + ". " + oldHookName; 30 > oldHookName.length; )
+              for (var table = "", i = 0; i <= hookTypesUpdateIndexDev; i++) {
+                var oldHookName = hookTypesDev[i], newHookName = i === hookTypesUpdateIndexDev ? hookName : oldHookName;
+                for (oldHookName = i + 1 + ". " + oldHookName; 30 > oldHookName.length; )
                   oldHookName += " ";
                 oldHookName += newHookName + "\n";
                 table += oldHookName;
@@ -5409,8 +5409,8 @@
             "[" + prevDeps.join(", ") + "]",
             "[" + nextDeps.join(", ") + "]"
           );
-          for (var i2 = 0; i2 < prevDeps.length && i2 < nextDeps.length; i2++)
-            if (!objectIs(nextDeps[i2], prevDeps[i2])) return false;
+          for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++)
+            if (!objectIs(nextDeps[i], prevDeps[i])) return false;
           return true;
         }
         function renderWithHooks(current2, workInProgress2, Component, props, secondArg, nextRenderLanes) {
@@ -6029,7 +6029,7 @@
         }
         function notifyActionListeners(actionNode) {
           actionNode = actionNode.listeners;
-          for (var i2 = 0; i2 < actionNode.length; i2++) (0, actionNode[i2])();
+          for (var i = 0; i < actionNode.length; i++) (0, actionNode[i])();
         }
         function actionStateReducer(oldState, newState) {
           return newState;
@@ -6131,9 +6131,9 @@
           if ("object" === typeof currentStateHook && null !== currentStateHook && "function" === typeof currentStateHook.then)
             try {
               var state = useThenable(currentStateHook);
-            } catch (x2) {
-              if (x2 === SuspenseException) throw SuspenseActionException;
-              throw x2;
+            } catch (x) {
+              if (x === SuspenseException) throw SuspenseActionException;
+              throw x;
             }
           else state = currentStateHook;
           currentStateHook = updateWorkInProgressHook();
@@ -6629,8 +6629,8 @@
           return previousDebugInfo;
         }
         function validateFragmentProps(element, fiber, returnFiber) {
-          for (var keys = Object.keys(element.props), i2 = 0; i2 < keys.length; i2++) {
-            var key = keys[i2];
+          for (var keys = Object.keys(element.props), i = 0; i < keys.length; i++) {
+            var key = keys[i];
             if ("children" !== key && "key" !== key) {
               null === fiber && (fiber = createFiberFromElement(element, returnFiber.mode, 0), fiber._debugInfo = currentDebugInfo, fiber.return = returnFiber);
               runWithFiberInDEV(
@@ -7292,19 +7292,19 @@
               );
               thenableState = null;
               return firstChildFiber;
-            } catch (x2) {
-              if (x2 === SuspenseException || x2 === SuspenseActionException) throw x2;
-              var fiber = createFiber(29, x2, null, returnFiber.mode);
+            } catch (x) {
+              if (x === SuspenseException || x === SuspenseActionException) throw x;
+              var fiber = createFiber(29, x, null, returnFiber.mode);
               fiber.lanes = lanes;
               fiber.return = returnFiber;
               var debugInfo = fiber._debugInfo = currentDebugInfo;
               fiber._debugOwner = returnFiber._debugOwner;
               fiber._debugTask = returnFiber._debugTask;
               if (null != debugInfo) {
-                for (var i2 = debugInfo.length - 1; 0 <= i2; i2--)
-                  if ("string" === typeof debugInfo[i2].stack) {
-                    fiber._debugOwner = debugInfo[i2];
-                    fiber._debugTask = debugInfo[i2].debugTask;
+                for (var i = debugInfo.length - 1; 0 <= i; i--)
+                  if ("string" === typeof debugInfo[i].stack) {
+                    fiber._debugOwner = debugInfo[i];
+                    fiber._debugTask = debugInfo[i].debugTask;
                     break;
                   }
               }
@@ -8548,12 +8548,12 @@
           )));
           a: if (("forwards" === revealOrder || "backwards" === revealOrder) && void 0 !== nextProps && null !== nextProps && false !== nextProps)
             if (isArrayImpl(nextProps))
-              for (var i2 = 0; i2 < nextProps.length; i2++) {
-                if (!validateSuspenseListNestedChild(nextProps[i2], i2)) break a;
+              for (var i = 0; i < nextProps.length; i++) {
+                if (!validateSuspenseListNestedChild(nextProps[i], i)) break a;
               }
-            else if (i2 = getIteratorFn(nextProps), "function" === typeof i2) {
-              if (i2 = i2.call(nextProps))
-                for (var step = i2.next(), _i = 0; !step.done; step = i2.next()) {
+            else if (i = getIteratorFn(nextProps), "function" === typeof i) {
+              if (i = i.call(nextProps))
+                for (var step = i.next(), _i = 0; !step.done; step = i.next()) {
                   if (!validateSuspenseListNestedChild(step.value, _i)) break a;
                   _i++;
                 }
@@ -9694,11 +9694,11 @@
                   addendum = null === lastEffect ? " You returned null. If your effect does not require clean up, return undefined (or nothing)." : "function" === typeof lastEffect.then ? "\n\nIt looks like you wrote " + hookName + "(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\n\n" + hookName + "(() => {\n  async function fetchData() {\n    // You can await here\n    const response = await MyAPI.getData(someId);\n    // ...\n  }\n  fetchData();\n}, [someId]); // Or [] if effect doesn't need props or state\n\nLearn more about data fetching with Hooks: https://react.dev/link/hooks-data-fetching" : " You returned: " + lastEffect;
                   runWithFiberInDEV(
                     finishedWork,
-                    function(n3, a2) {
+                    function(n, a) {
                       console.error(
                         "%s must not return anything besides a function, which is used for clean-up.%s",
-                        n3,
-                        a2
+                        n,
+                        a
                       );
                     },
                     hookName,
@@ -10551,8 +10551,8 @@
         function recursivelyTraverseMutationEffects(root$jscomp$0, parentFiber) {
           var deletions = parentFiber.deletions;
           if (null !== deletions)
-            for (var i2 = 0; i2 < deletions.length; i2++) {
-              var root2 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i2], parent = returnFiber;
+            for (var i = 0; i < deletions.length; i++) {
+              var root2 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i], parent = returnFiber;
               a: for (; null !== parent; ) {
                 switch (parent.tag) {
                   case 27:
@@ -10648,9 +10648,9 @@
                               root2
                             ).get(flags + (current2.href || ""));
                             if (maybeNodes) {
-                              for (var i2 = 0; i2 < maybeNodes.length; i2++)
-                                if (hoistableRoot = maybeNodes[i2], hoistableRoot.getAttribute("href") === (null == current2.href || "" === current2.href ? null : current2.href) && hoistableRoot.getAttribute("rel") === (null == current2.rel ? null : current2.rel) && hoistableRoot.getAttribute("title") === (null == current2.title ? null : current2.title) && hoistableRoot.getAttribute("crossorigin") === (null == current2.crossOrigin ? null : current2.crossOrigin)) {
-                                  maybeNodes.splice(i2, 1);
+                              for (var i = 0; i < maybeNodes.length; i++)
+                                if (hoistableRoot = maybeNodes[i], hoistableRoot.getAttribute("href") === (null == current2.href || "" === current2.href ? null : current2.href) && hoistableRoot.getAttribute("rel") === (null == current2.rel ? null : current2.rel) && hoistableRoot.getAttribute("title") === (null == current2.title ? null : current2.title) && hoistableRoot.getAttribute("crossorigin") === (null == current2.crossOrigin ? null : current2.crossOrigin)) {
+                                  maybeNodes.splice(i, 1);
                                   break b;
                                 }
                             }
@@ -10664,12 +10664,12 @@
                               "content",
                               root2
                             ).get(flags + (current2.content || ""))) {
-                              for (i2 = 0; i2 < maybeNodes.length; i2++)
-                                if (hoistableRoot = maybeNodes[i2], checkAttributeStringCoercion(
+                              for (i = 0; i < maybeNodes.length; i++)
+                                if (hoistableRoot = maybeNodes[i], checkAttributeStringCoercion(
                                   current2.content,
                                   "content"
                                 ), hoistableRoot.getAttribute("content") === (null == current2.content ? null : "" + current2.content) && hoistableRoot.getAttribute("name") === (null == current2.name ? null : current2.name) && hoistableRoot.getAttribute("property") === (null == current2.property ? null : current2.property) && hoistableRoot.getAttribute("http-equiv") === (null == current2.httpEquiv ? null : current2.httpEquiv) && hoistableRoot.getAttribute("charset") === (null == current2.charSet ? null : current2.charSet)) {
-                                  maybeNodes.splice(i2, 1);
+                                  maybeNodes.splice(i, 1);
                                   break b;
                                 }
                             }
@@ -10840,10 +10840,10 @@
                     if (null === current2) {
                       wasHidden = root2;
                       try {
-                        i2 = wasHidden.stateNode, hoistableRoot ? runWithFiberInDEV(wasHidden, hideTextInstance, i2) : runWithFiberInDEV(
+                        i = wasHidden.stateNode, hoistableRoot ? runWithFiberInDEV(wasHidden, hideTextInstance, i) : runWithFiberInDEV(
                           wasHidden,
                           unhideTextInstance,
-                          i2,
+                          i,
                           wasHidden.memoizedProps
                         );
                       } catch (error) {
@@ -11367,8 +11367,8 @@
           var deletions = parentFiber.deletions;
           if (0 !== (parentFiber.flags & 16)) {
             if (null !== deletions)
-              for (var i2 = 0; i2 < deletions.length; i2++) {
-                var childToDelete = deletions[i2];
+              for (var i = 0; i < deletions.length; i++) {
+                var childToDelete = deletions[i];
                 nextEffect = childToDelete;
                 commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
                   childToDelete,
@@ -11415,8 +11415,8 @@
           var deletions = parentFiber.deletions;
           if (0 !== (parentFiber.flags & 16)) {
             if (null !== deletions)
-              for (var i2 = 0; i2 < deletions.length; i2++) {
-                var childToDelete = deletions[i2];
+              for (var i = 0; i < deletions.length; i++) {
+                var childToDelete = deletions[i];
                 nextEffect = childToDelete;
                 commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
                   childToDelete,
@@ -11751,8 +11751,8 @@
           for (var node = finishedWork; ; ) {
             var tag = node.tag;
             if ((0 === tag || 11 === tag || 15 === tag) && node.flags & 16384 && (tag = node.updateQueue, null !== tag && (tag = tag.stores, null !== tag)))
-              for (var i2 = 0; i2 < tag.length; i2++) {
-                var check = tag[i2], getSnapshot = check.getSnapshot;
+              for (var i = 0; i < tag.length; i++) {
+                var check = tag[i], getSnapshot = check.getSnapshot;
                 check = check.value;
                 try {
                   if (!objectIs(getSnapshot(), check)) return false;
@@ -12967,8 +12967,8 @@
         }
         function processDispatchQueue(dispatchQueue, eventSystemFlags) {
           eventSystemFlags = 0 !== (eventSystemFlags & 4);
-          for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
-            var _dispatchQueue$i = dispatchQueue[i2];
+          for (var i = 0; i < dispatchQueue.length; i++) {
+            var _dispatchQueue$i = dispatchQueue[i];
             a: {
               var previousInstance = void 0, event = _dispatchQueue$i.event;
               _dispatchQueue$i = _dispatchQueue$i.listeners;
@@ -14418,8 +14418,8 @@
         function getStylesObjectFromElement(domElement) {
           var serverValueInObjectForm = {};
           domElement = domElement.style;
-          for (var i2 = 0; i2 < domElement.length; i2++) {
-            var styleName = domElement[i2];
+          for (var i = 0; i < domElement.length; i++) {
+            var styleName = domElement[i];
             serverValueInObjectForm[styleName] = domElement.getPropertyValue(styleName);
           }
           return serverValueInObjectForm;
@@ -14555,8 +14555,8 @@
           warnForPropDifference(propKey, domElement, value, serverDifferences);
         }
         function diffHydratedProperties(domElement, tag, props, hostContext) {
-          for (var serverDifferences = {}, extraAttributes = /* @__PURE__ */ new Set(), attributes = domElement.attributes, i2 = 0; i2 < attributes.length; i2++)
-            switch (attributes[i2].name.toLowerCase()) {
+          for (var serverDifferences = {}, extraAttributes = /* @__PURE__ */ new Set(), attributes = domElement.attributes, i = 0; i < attributes.length; i++)
+            switch (attributes[i].name.toLowerCase()) {
               case "value":
                 break;
               case "checked":
@@ -14564,7 +14564,7 @@
               case "selected":
                 break;
               default:
-                extraAttributes.add(attributes[i2].name);
+                extraAttributes.add(attributes[i].name);
             }
           if (isCustomElement(tag))
             for (var propKey in props) {
@@ -14867,11 +14867,11 @@
                     case "capture":
                     case "download":
                       a: {
-                        i2 = domElement;
+                        i = domElement;
                         var attributeName = attributes = value, serverDifferences$jscomp$0 = serverDifferences;
                         extraAttributes.delete(attributeName);
-                        i2 = i2.getAttribute(attributeName);
-                        if (null === i2)
+                        i = i.getAttribute(attributeName);
+                        if (null === i)
                           switch (typeof propKey) {
                             case "undefined":
                             case "function":
@@ -14886,15 +14886,15 @@
                             case "symbol":
                               break;
                             case "boolean":
-                              if (true === propKey && "" === i2) break a;
+                              if (true === propKey && "" === i) break a;
                               break;
                             default:
-                              if (checkAttributeStringCoercion(propKey, attributes), i2 === "" + propKey)
+                              if (checkAttributeStringCoercion(propKey, attributes), i === "" + propKey)
                                 break a;
                           }
                         warnForPropDifference(
                           attributes,
-                          i2,
+                          i,
                           propKey,
                           serverDifferences$jscomp$0
                         );
@@ -14905,12 +14905,12 @@
                     case "size":
                     case "span":
                       a: {
-                        i2 = domElement;
+                        i = domElement;
                         attributeName = attributes = value;
                         serverDifferences$jscomp$0 = serverDifferences;
                         extraAttributes.delete(attributeName);
-                        i2 = i2.getAttribute(attributeName);
-                        if (null === i2)
+                        i = i.getAttribute(attributeName);
+                        if (null === i)
                           switch (typeof propKey) {
                             case "undefined":
                             case "function":
@@ -14927,12 +14927,12 @@
                             case "boolean":
                               break;
                             default:
-                              if (!(isNaN(propKey) || 1 > propKey) && (checkAttributeStringCoercion(propKey, attributes), i2 === "" + propKey))
+                              if (!(isNaN(propKey) || 1 > propKey) && (checkAttributeStringCoercion(propKey, attributes), i === "" + propKey))
                                 break a;
                           }
                         warnForPropDifference(
                           attributes,
-                          i2,
+                          i,
                           propKey,
                           serverDifferences$jscomp$0
                         );
@@ -15074,21 +15074,21 @@
                       continue;
                     default:
                       if (!(2 < value.length) || "o" !== value[0] && "O" !== value[0] || "n" !== value[1] && "N" !== value[1]) {
-                        i2 = getAttributeAlias(value);
+                        i = getAttributeAlias(value);
                         attributes = false;
-                        hostContext.context === HostContextNamespaceNone && "svg" !== tag && "math" !== tag ? extraAttributes.delete(i2.toLowerCase()) : (attributeName = value.toLowerCase(), attributeName = possibleStandardNames.hasOwnProperty(
+                        hostContext.context === HostContextNamespaceNone && "svg" !== tag && "math" !== tag ? extraAttributes.delete(i.toLowerCase()) : (attributeName = value.toLowerCase(), attributeName = possibleStandardNames.hasOwnProperty(
                           attributeName
-                        ) ? possibleStandardNames[attributeName] || null : null, null !== attributeName && attributeName !== value && (attributes = true, extraAttributes.delete(attributeName)), extraAttributes.delete(i2));
-                        a: if (attributeName = domElement, serverDifferences$jscomp$0 = i2, i2 = propKey, isAttributeNameSafe(serverDifferences$jscomp$0))
+                        ) ? possibleStandardNames[attributeName] || null : null, null !== attributeName && attributeName !== value && (attributes = true, extraAttributes.delete(attributeName)), extraAttributes.delete(i));
+                        a: if (attributeName = domElement, serverDifferences$jscomp$0 = i, i = propKey, isAttributeNameSafe(serverDifferences$jscomp$0))
                           if (attributeName.hasAttribute(serverDifferences$jscomp$0))
                             attributeName = attributeName.getAttribute(
                               serverDifferences$jscomp$0
                             ), checkAttributeStringCoercion(
-                              i2,
+                              i,
                               serverDifferences$jscomp$0
-                            ), i2 = attributeName === "" + i2 ? i2 : attributeName;
+                            ), i = attributeName === "" + i ? i : attributeName;
                           else {
-                            switch (typeof i2) {
+                            switch (typeof i) {
                               case "function":
                               case "symbol":
                                 break a;
@@ -15096,12 +15096,12 @@
                                 if (attributeName = serverDifferences$jscomp$0.toLowerCase().slice(0, 5), "data-" !== attributeName && "aria-" !== attributeName)
                                   break a;
                             }
-                            i2 = void 0 === i2 ? void 0 : null;
+                            i = void 0 === i ? void 0 : null;
                           }
-                        else i2 = void 0;
+                        else i = void 0;
                         attributes || warnForPropDifference(
                           value,
-                          i2,
+                          i,
                           propKey,
                           serverDifferences
                         );
@@ -15348,8 +15348,8 @@
         }
         function describeHydratableInstanceForDevWarnings(instance) {
           if (1 === instance.nodeType) {
-            for (var JSCompiler_temp_const = instance.nodeName.toLowerCase(), serverDifferences = {}, attributes = instance.attributes, i2 = 0; i2 < attributes.length; i2++) {
-              var attr = attributes[i2];
+            for (var JSCompiler_temp_const = instance.nodeName.toLowerCase(), serverDifferences = {}, attributes = instance.attributes, i = 0; i < attributes.length; i++) {
+              var attr = attributes[i];
               serverDifferences[getPropNameFromAttributeName(attr.name)] = "style" === attr.name.toLowerCase() ? getStylesObjectFromElement(instance) : attr.value;
             }
             return { type: JSCompiler_temp_const, props: serverDifferences };
@@ -15645,8 +15645,8 @@
         function insertStylesheet(instance, precedence, root2) {
           for (var nodes = root2.querySelectorAll(
             'link[rel="stylesheet"][data-precedence],style[data-precedence]'
-          ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i2 = 0; i2 < nodes.length; i2++) {
-            var node = nodes[i2];
+          ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
             if (node.dataset.precedence === precedence) prior = node;
             else if (prior !== last) break;
           }
@@ -15714,19 +15714,19 @@
               if ("string" !== typeof props.rel || "string" !== typeof props.href || "" === props.href || props.onLoad || props.onError) {
                 if ("stylesheet" === props.rel && "string" === typeof props.precedence) {
                   type = props.href;
-                  var onError3 = props.onError, disabled = props.disabled;
+                  var onError = props.onError, disabled = props.disabled;
                   hostContext = [];
                   props.onLoad && hostContext.push("`onLoad`");
-                  onError3 && hostContext.push("`onError`");
+                  onError && hostContext.push("`onError`");
                   null != disabled && hostContext.push("`disabled`");
-                  onError3 = propNamesListJoin(hostContext, "and");
-                  onError3 += 1 === hostContext.length ? " prop" : " props";
-                  disabled = 1 === hostContext.length ? "an " + onError3 : "the " + onError3;
+                  onError = propNamesListJoin(hostContext, "and");
+                  onError += 1 === hostContext.length ? " prop" : " props";
+                  disabled = 1 === hostContext.length ? "an " + onError : "the " + onError;
                   hostContext.length && console.error(
                     'React encountered a <link rel="stylesheet" href="%s" ... /> with a `precedence` prop that also included %s. The presence of loading and error handlers indicates an intent to manage the stylesheet loading state from your from your Component code and React will not hoist or deduplicate this stylesheet. If your intent was to have React hoist and deduplciate this stylesheet using the `precedence` prop remove the %s, otherwise remove the `precedence` prop.',
                     type,
                     disabled,
-                    onError3
+                    onError
                   );
                 }
                 outsideHostContainerContext && ("string" !== typeof props.rel || "string" !== typeof props.href || "" === props.href ? console.error(
@@ -15856,8 +15856,8 @@
               precedencesByRoot.set(root2, precedences);
               for (var nodes = root2.querySelectorAll(
                 "link[data-precedence],style[data-precedence]"
-              ), i2 = 0; i2 < nodes.length; i2++) {
-                var node = nodes[i2];
+              ), i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
                 if ("LINK" === node.nodeName || "not all" !== node.getAttribute("media"))
                   precedences.set(node.dataset.precedence, node), last = node;
               }
@@ -15865,14 +15865,14 @@
             }
             nodes = resource.instance;
             node = nodes.getAttribute("data-precedence");
-            i2 = precedences.get(node) || last;
-            i2 === last && precedences.set(LAST_PRECEDENCE, nodes);
+            i = precedences.get(node) || last;
+            i === last && precedences.set(LAST_PRECEDENCE, nodes);
             precedences.set(node, nodes);
             this.count++;
             last = onUnsuspend.bind(this);
             nodes.addEventListener("load", last);
             nodes.addEventListener("error", last);
-            i2 ? i2.parentNode.insertBefore(nodes, i2.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
+            i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
             resource.state.loading |= Inserted;
           }
         }
@@ -15965,8 +15965,8 @@
         function markRetryLaneImpl(fiber, retryLane) {
           fiber = fiber.memoizedState;
           if (null !== fiber && null !== fiber.dehydrated) {
-            var a2 = fiber.retryLane;
-            fiber.retryLane = 0 !== a2 && a2 < retryLane ? a2 : retryLane;
+            var a = fiber.retryLane;
+            fiber.retryLane = 0 !== a && a < retryLane ? a : retryLane;
           }
         }
         function markRetryLaneIfNotHydrated(fiber, retryLane) {
@@ -16368,14 +16368,14 @@
             Scheduler.unstable_NormalPriority,
             function() {
               lastScheduledReplayQueue === formReplayingQueue && (lastScheduledReplayQueue = null);
-              for (var i2 = 0; i2 < formReplayingQueue.length; i2 += 3) {
-                var form = formReplayingQueue[i2], submitterOrAction = formReplayingQueue[i2 + 1], formData = formReplayingQueue[i2 + 2];
+              for (var i = 0; i < formReplayingQueue.length; i += 3) {
+                var form = formReplayingQueue[i], submitterOrAction = formReplayingQueue[i + 1], formData = formReplayingQueue[i + 2];
                 if ("function" !== typeof submitterOrAction)
                   if (null === findInstanceBlockingTarget(submitterOrAction || form))
                     continue;
                   else break;
                 var formInst = getInstanceFromNode(form);
-                null !== formInst && (formReplayingQueue.splice(i2, 3), i2 -= 3, form = {
+                null !== formInst && (formReplayingQueue.splice(i, 3), i -= 3, form = {
                   pending: true,
                   data: formData,
                   method: form.method,
@@ -16399,18 +16399,18 @@
           null !== queuedMouse && scheduleCallbackIfUnblocked(queuedMouse, unblocked);
           queuedPointers.forEach(unblock);
           queuedPointerCaptures.forEach(unblock);
-          for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length; i2++) {
-            var queuedTarget = queuedExplicitHydrationTargets[i2];
+          for (var i = 0; i < queuedExplicitHydrationTargets.length; i++) {
+            var queuedTarget = queuedExplicitHydrationTargets[i];
             queuedTarget.blockedOn === unblocked && (queuedTarget.blockedOn = null);
           }
-          for (; 0 < queuedExplicitHydrationTargets.length && (i2 = queuedExplicitHydrationTargets[0], null === i2.blockedOn); )
-            attemptExplicitHydrationTarget(i2), null === i2.blockedOn && queuedExplicitHydrationTargets.shift();
-          i2 = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
-          if (null != i2)
-            for (queuedTarget = 0; queuedTarget < i2.length; queuedTarget += 3) {
-              var form = i2[queuedTarget], submitterOrAction = i2[queuedTarget + 1], formProps = form[internalPropsKey] || null;
+          for (; 0 < queuedExplicitHydrationTargets.length && (i = queuedExplicitHydrationTargets[0], null === i.blockedOn); )
+            attemptExplicitHydrationTarget(i), null === i.blockedOn && queuedExplicitHydrationTargets.shift();
+          i = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
+          if (null != i)
+            for (queuedTarget = 0; queuedTarget < i.length; queuedTarget += 3) {
+              var form = i[queuedTarget], submitterOrAction = i[queuedTarget + 1], formProps = form[internalPropsKey] || null;
               if ("function" === typeof submitterOrAction)
-                formProps || scheduleReplayQueueIfNeeded(i2);
+                formProps || scheduleReplayQueueIfNeeded(i);
               else if (formProps) {
                 var action = null;
                 if (submitterOrAction && submitterOrAction.hasAttribute("formAction"))
@@ -16420,8 +16420,8 @@
                     if (null !== findInstanceBlockingTarget(form)) continue;
                   }
                 else action = formProps.action;
-                "function" === typeof action ? i2[queuedTarget + 1] = action : (i2.splice(queuedTarget, 3), queuedTarget -= 3);
-                scheduleReplayQueueIfNeeded(i2);
+                "function" === typeof action ? i[queuedTarget + 1] = action : (i.splice(queuedTarget, 3), queuedTarget -= 3);
+                scheduleReplayQueueIfNeeded(i);
               }
             }
         }
@@ -16439,14 +16439,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React28 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React2 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React28.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -17259,7 +17259,7 @@
             });
             window.addEventListener("test", options$jscomp$0, options$jscomp$0);
             window.removeEventListener("test", options$jscomp$0, options$jscomp$0);
-          } catch (e2) {
+          } catch (e) {
             passiveBrowserEventsSupported = false;
           }
         var root = null, startText = null, fallbackText = null, EventInterface = {
@@ -18843,8 +18843,8 @@
         var didWarnAboutUpdateInRenderForAnotherComponent = /* @__PURE__ */ new Set();
         var fakeActCallbackNode$1 = {}, firstScheduledRoot = null, lastScheduledRoot = null, didScheduleMicrotask = false, didScheduleMicrotask_act = false, mightHavePendingSyncWork = false, isFlushingWork = false, currentEventTransitionLane = 0, fakeActCallbackNode = {};
         (function() {
-          for (var i2 = 0; i2 < simpleEventPluginEvents.length; i2++) {
-            var eventName = simpleEventPluginEvents[i2], domEventName = eventName.toLowerCase();
+          for (var i = 0; i < simpleEventPluginEvents.length; i++) {
+            var eventName = simpleEventPluginEvents[i], domEventName = eventName.toLowerCase();
             eventName = eventName[0].toUpperCase() + eventName.slice(1);
             registerSimpleEvent(domEventName, "on" + eventName);
           }
@@ -19154,13 +19154,13 @@
           if (target) {
             var updatePriority = resolveUpdatePriority();
             target = { blockedOn: null, target, priority: updatePriority };
-            for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i2].priority; i2++) ;
-            queuedExplicitHydrationTargets.splice(i2, 0, target);
-            0 === i2 && attemptExplicitHydrationTarget(target);
+            for (var i = 0; i < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i].priority; i++) ;
+            queuedExplicitHydrationTargets.splice(i, 0, target);
+            0 === i && attemptExplicitHydrationTarget(target);
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React28.version;
+          var isomorphicReactPackageVersion = React2.version;
           if ("19.1.0" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.1.0\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -19300,7169 +19300,21 @@
     }
   });
 
-  // node_modules/react-is/cjs/react-is.development.js
-  var require_react_is_development = __commonJS({
-    "node_modules/react-is/cjs/react-is.development.js"(exports) {
-      "use strict";
-      if (true) {
-        (function() {
-          "use strict";
-          var hasSymbol = typeof Symbol === "function" && Symbol.for;
-          var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for("react.element") : 60103;
-          var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for("react.portal") : 60106;
-          var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for("react.fragment") : 60107;
-          var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for("react.strict_mode") : 60108;
-          var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for("react.profiler") : 60114;
-          var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for("react.provider") : 60109;
-          var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for("react.context") : 60110;
-          var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for("react.async_mode") : 60111;
-          var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for("react.concurrent_mode") : 60111;
-          var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for("react.forward_ref") : 60112;
-          var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for("react.suspense") : 60113;
-          var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for("react.suspense_list") : 60120;
-          var REACT_MEMO_TYPE = hasSymbol ? Symbol.for("react.memo") : 60115;
-          var REACT_LAZY_TYPE = hasSymbol ? Symbol.for("react.lazy") : 60116;
-          var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for("react.block") : 60121;
-          var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for("react.fundamental") : 60117;
-          var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for("react.responder") : 60118;
-          var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for("react.scope") : 60119;
-          function isValidElementType(type) {
-            return typeof type === "string" || typeof type === "function" || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-            type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-          }
-          function typeOf(object) {
-            if (typeof object === "object" && object !== null) {
-              var $$typeof = object.$$typeof;
-              switch ($$typeof) {
-                case REACT_ELEMENT_TYPE:
-                  var type = object.type;
-                  switch (type) {
-                    case REACT_ASYNC_MODE_TYPE:
-                    case REACT_CONCURRENT_MODE_TYPE:
-                    case REACT_FRAGMENT_TYPE:
-                    case REACT_PROFILER_TYPE:
-                    case REACT_STRICT_MODE_TYPE:
-                    case REACT_SUSPENSE_TYPE:
-                      return type;
-                    default:
-                      var $$typeofType = type && type.$$typeof;
-                      switch ($$typeofType) {
-                        case REACT_CONTEXT_TYPE:
-                        case REACT_FORWARD_REF_TYPE:
-                        case REACT_LAZY_TYPE:
-                        case REACT_MEMO_TYPE:
-                        case REACT_PROVIDER_TYPE:
-                          return $$typeofType;
-                        default:
-                          return $$typeof;
-                      }
-                  }
-                case REACT_PORTAL_TYPE:
-                  return $$typeof;
-              }
-            }
-            return void 0;
-          }
-          var AsyncMode = REACT_ASYNC_MODE_TYPE;
-          var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-          var ContextConsumer = REACT_CONTEXT_TYPE;
-          var ContextProvider = REACT_PROVIDER_TYPE;
-          var Element = REACT_ELEMENT_TYPE;
-          var ForwardRef = REACT_FORWARD_REF_TYPE;
-          var Fragment2 = REACT_FRAGMENT_TYPE;
-          var Lazy = REACT_LAZY_TYPE;
-          var Memo = REACT_MEMO_TYPE;
-          var Portal = REACT_PORTAL_TYPE;
-          var Profiler = REACT_PROFILER_TYPE;
-          var StrictMode = REACT_STRICT_MODE_TYPE;
-          var Suspense = REACT_SUSPENSE_TYPE;
-          var hasWarnedAboutDeprecatedIsAsyncMode = false;
-          function isAsyncMode(object) {
-            {
-              if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-                hasWarnedAboutDeprecatedIsAsyncMode = true;
-                console["warn"]("The ReactIs.isAsyncMode() alias has been deprecated, and will be removed in React 17+. Update your code to use ReactIs.isConcurrentMode() instead. It has the exact same API.");
-              }
-            }
-            return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-          }
-          function isConcurrentMode(object) {
-            return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-          }
-          function isContextConsumer(object) {
-            return typeOf(object) === REACT_CONTEXT_TYPE;
-          }
-          function isContextProvider(object) {
-            return typeOf(object) === REACT_PROVIDER_TYPE;
-          }
-          function isElement(object) {
-            return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-          }
-          function isForwardRef(object) {
-            return typeOf(object) === REACT_FORWARD_REF_TYPE;
-          }
-          function isFragment(object) {
-            return typeOf(object) === REACT_FRAGMENT_TYPE;
-          }
-          function isLazy(object) {
-            return typeOf(object) === REACT_LAZY_TYPE;
-          }
-          function isMemo(object) {
-            return typeOf(object) === REACT_MEMO_TYPE;
-          }
-          function isPortal(object) {
-            return typeOf(object) === REACT_PORTAL_TYPE;
-          }
-          function isProfiler(object) {
-            return typeOf(object) === REACT_PROFILER_TYPE;
-          }
-          function isStrictMode(object) {
-            return typeOf(object) === REACT_STRICT_MODE_TYPE;
-          }
-          function isSuspense(object) {
-            return typeOf(object) === REACT_SUSPENSE_TYPE;
-          }
-          exports.AsyncMode = AsyncMode;
-          exports.ConcurrentMode = ConcurrentMode;
-          exports.ContextConsumer = ContextConsumer;
-          exports.ContextProvider = ContextProvider;
-          exports.Element = Element;
-          exports.ForwardRef = ForwardRef;
-          exports.Fragment = Fragment2;
-          exports.Lazy = Lazy;
-          exports.Memo = Memo;
-          exports.Portal = Portal;
-          exports.Profiler = Profiler;
-          exports.StrictMode = StrictMode;
-          exports.Suspense = Suspense;
-          exports.isAsyncMode = isAsyncMode;
-          exports.isConcurrentMode = isConcurrentMode;
-          exports.isContextConsumer = isContextConsumer;
-          exports.isContextProvider = isContextProvider;
-          exports.isElement = isElement;
-          exports.isForwardRef = isForwardRef;
-          exports.isFragment = isFragment;
-          exports.isLazy = isLazy;
-          exports.isMemo = isMemo;
-          exports.isPortal = isPortal;
-          exports.isProfiler = isProfiler;
-          exports.isStrictMode = isStrictMode;
-          exports.isSuspense = isSuspense;
-          exports.isValidElementType = isValidElementType;
-          exports.typeOf = typeOf;
-        })();
-      }
-    }
-  });
-
-  // node_modules/react-is/index.js
-  var require_react_is = __commonJS({
-    "node_modules/react-is/index.js"(exports, module) {
-      "use strict";
-      if (false) {
-        module.exports = null;
-      } else {
-        module.exports = require_react_is_development();
-      }
-    }
-  });
-
-  // node_modules/object-assign/index.js
-  var require_object_assign = __commonJS({
-    "node_modules/object-assign/index.js"(exports, module) {
-      "use strict";
-      var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
-      var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-      function toObject(val) {
-        if (val === null || val === void 0) {
-          throw new TypeError("Object.assign cannot be called with null or undefined");
-        }
-        return Object(val);
-      }
-      function shouldUseNative() {
-        try {
-          if (!Object.assign) {
-            return false;
-          }
-          var test1 = new String("abc");
-          test1[5] = "de";
-          if (Object.getOwnPropertyNames(test1)[0] === "5") {
-            return false;
-          }
-          var test2 = {};
-          for (var i2 = 0; i2 < 10; i2++) {
-            test2["_" + String.fromCharCode(i2)] = i2;
-          }
-          var order2 = Object.getOwnPropertyNames(test2).map(function(n3) {
-            return test2[n3];
-          });
-          if (order2.join("") !== "0123456789") {
-            return false;
-          }
-          var test3 = {};
-          "abcdefghijklmnopqrst".split("").forEach(function(letter) {
-            test3[letter] = letter;
-          });
-          if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
-            return false;
-          }
-          return true;
-        } catch (err) {
-          return false;
-        }
-      }
-      module.exports = shouldUseNative() ? Object.assign : function(target, source) {
-        var from;
-        var to = toObject(target);
-        var symbols;
-        for (var s2 = 1; s2 < arguments.length; s2++) {
-          from = Object(arguments[s2]);
-          for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-              to[key] = from[key];
-            }
-          }
-          if (getOwnPropertySymbols) {
-            symbols = getOwnPropertySymbols(from);
-            for (var i2 = 0; i2 < symbols.length; i2++) {
-              if (propIsEnumerable.call(from, symbols[i2])) {
-                to[symbols[i2]] = from[symbols[i2]];
-              }
-            }
-          }
-        }
-        return to;
-      };
-    }
-  });
-
-  // node_modules/prop-types/lib/ReactPropTypesSecret.js
-  var require_ReactPropTypesSecret = __commonJS({
-    "node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module) {
-      "use strict";
-      var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
-      module.exports = ReactPropTypesSecret;
-    }
-  });
-
-  // node_modules/prop-types/lib/has.js
-  var require_has = __commonJS({
-    "node_modules/prop-types/lib/has.js"(exports, module) {
-      module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
-    }
-  });
-
-  // node_modules/prop-types/checkPropTypes.js
-  var require_checkPropTypes = __commonJS({
-    "node_modules/prop-types/checkPropTypes.js"(exports, module) {
-      "use strict";
-      var printWarning = function() {
-      };
-      if (true) {
-        ReactPropTypesSecret = require_ReactPropTypesSecret();
-        loggedTypeFailures = {};
-        has = require_has();
-        printWarning = function(text) {
-          var message = "Warning: " + text;
-          if (typeof console !== "undefined") {
-            console.error(message);
-          }
-          try {
-            throw new Error(message);
-          } catch (x2) {
-          }
-        };
-      }
-      var ReactPropTypesSecret;
-      var loggedTypeFailures;
-      var has;
-      function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-        if (true) {
-          for (var typeSpecName in typeSpecs) {
-            if (has(typeSpecs, typeSpecName)) {
-              var error;
-              try {
-                if (typeof typeSpecs[typeSpecName] !== "function") {
-                  var err = Error(
-                    (componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`."
-                  );
-                  err.name = "Invariant Violation";
-                  throw err;
-                }
-                error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-              } catch (ex) {
-                error = ex;
-              }
-              if (error && !(error instanceof Error)) {
-                printWarning(
-                  (componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."
-                );
-              }
-              if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-                loggedTypeFailures[error.message] = true;
-                var stack = getStack ? getStack() : "";
-                printWarning(
-                  "Failed " + location + " type: " + error.message + (stack != null ? stack : "")
-                );
-              }
-            }
-          }
-        }
-      }
-      checkPropTypes.resetWarningCache = function() {
-        if (true) {
-          loggedTypeFailures = {};
-        }
-      };
-      module.exports = checkPropTypes;
-    }
-  });
-
-  // node_modules/prop-types/factoryWithTypeCheckers.js
-  var require_factoryWithTypeCheckers = __commonJS({
-    "node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module) {
-      "use strict";
-      var ReactIs = require_react_is();
-      var assign = require_object_assign();
-      var ReactPropTypesSecret = require_ReactPropTypesSecret();
-      var has = require_has();
-      var checkPropTypes = require_checkPropTypes();
-      var printWarning = function() {
-      };
-      if (true) {
-        printWarning = function(text) {
-          var message = "Warning: " + text;
-          if (typeof console !== "undefined") {
-            console.error(message);
-          }
-          try {
-            throw new Error(message);
-          } catch (x2) {
-          }
-        };
-      }
-      function emptyFunctionThatReturnsNull() {
-        return null;
-      }
-      module.exports = function(isValidElement, throwOnDirectAccess) {
-        var ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
-        var FAUX_ITERATOR_SYMBOL = "@@iterator";
-        function getIteratorFn(maybeIterable) {
-          var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-          if (typeof iteratorFn === "function") {
-            return iteratorFn;
-          }
-        }
-        var ANONYMOUS = "<<anonymous>>";
-        var ReactPropTypes = {
-          array: createPrimitiveTypeChecker("array"),
-          bigint: createPrimitiveTypeChecker("bigint"),
-          bool: createPrimitiveTypeChecker("boolean"),
-          func: createPrimitiveTypeChecker("function"),
-          number: createPrimitiveTypeChecker("number"),
-          object: createPrimitiveTypeChecker("object"),
-          string: createPrimitiveTypeChecker("string"),
-          symbol: createPrimitiveTypeChecker("symbol"),
-          any: createAnyTypeChecker(),
-          arrayOf: createArrayOfTypeChecker,
-          element: createElementTypeChecker(),
-          elementType: createElementTypeTypeChecker(),
-          instanceOf: createInstanceTypeChecker,
-          node: createNodeChecker(),
-          objectOf: createObjectOfTypeChecker,
-          oneOf: createEnumTypeChecker,
-          oneOfType: createUnionTypeChecker,
-          shape: createShapeTypeChecker,
-          exact: createStrictShapeTypeChecker
-        };
-        function is(x2, y2) {
-          if (x2 === y2) {
-            return x2 !== 0 || 1 / x2 === 1 / y2;
-          } else {
-            return x2 !== x2 && y2 !== y2;
-          }
-        }
-        function PropTypeError(message, data) {
-          this.message = message;
-          this.data = data && typeof data === "object" ? data : {};
-          this.stack = "";
-        }
-        PropTypeError.prototype = Error.prototype;
-        function createChainableTypeChecker(validate) {
-          if (true) {
-            var manualPropTypeCallCache = {};
-            var manualPropTypeWarningCount = 0;
-          }
-          function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-            componentName = componentName || ANONYMOUS;
-            propFullName = propFullName || propName;
-            if (secret !== ReactPropTypesSecret) {
-              if (throwOnDirectAccess) {
-                var err = new Error(
-                  "Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types"
-                );
-                err.name = "Invariant Violation";
-                throw err;
-              } else if (typeof console !== "undefined") {
-                var cacheKey = componentName + ":" + propName;
-                if (!manualPropTypeCallCache[cacheKey] && // Avoid spamming the console because they are often not actionable except for lib authors
-                manualPropTypeWarningCount < 3) {
-                  printWarning(
-                    "You are manually calling a React.PropTypes validation function for the `" + propFullName + "` prop on `" + componentName + "`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."
-                  );
-                  manualPropTypeCallCache[cacheKey] = true;
-                  manualPropTypeWarningCount++;
-                }
-              }
-            }
-            if (props[propName] == null) {
-              if (isRequired) {
-                if (props[propName] === null) {
-                  return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required " + ("in `" + componentName + "`, but its value is `null`."));
-                }
-                return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required in " + ("`" + componentName + "`, but its value is `undefined`."));
-              }
-              return null;
-            } else {
-              return validate(props, propName, componentName, location, propFullName);
-            }
-          }
-          var chainedCheckType = checkType.bind(null, false);
-          chainedCheckType.isRequired = checkType.bind(null, true);
-          return chainedCheckType;
-        }
-        function createPrimitiveTypeChecker(expectedType) {
-          function validate(props, propName, componentName, location, propFullName, secret) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== expectedType) {
-              var preciseType = getPreciseType(propValue);
-              return new PropTypeError(
-                "Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."),
-                { expectedType }
-              );
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createAnyTypeChecker() {
-          return createChainableTypeChecker(emptyFunctionThatReturnsNull);
-        }
-        function createArrayOfTypeChecker(typeChecker) {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (typeof typeChecker !== "function") {
-              return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside arrayOf.");
-            }
-            var propValue = props[propName];
-            if (!Array.isArray(propValue)) {
-              var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
-            }
-            for (var i2 = 0; i2 < propValue.length; i2++) {
-              var error = typeChecker(propValue, i2, componentName, location, propFullName + "[" + i2 + "]", ReactPropTypesSecret);
-              if (error instanceof Error) {
-                return error;
-              }
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createElementTypeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            if (!isValidElement(propValue)) {
-              var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createElementTypeTypeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            if (!ReactIs.isValidElementType(propValue)) {
-              var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement type."));
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createInstanceTypeChecker(expectedClass) {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (!(props[propName] instanceof expectedClass)) {
-              var expectedClassName = expectedClass.name || ANONYMOUS;
-              var actualClassName = getClassName(props[propName]);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + actualClassName + "` supplied to `" + componentName + "`, expected ") + ("instance of `" + expectedClassName + "`."));
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createEnumTypeChecker(expectedValues) {
-          if (!Array.isArray(expectedValues)) {
-            if (true) {
-              if (arguments.length > 1) {
-                printWarning(
-                  "Invalid arguments supplied to oneOf, expected an array, got " + arguments.length + " arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z])."
-                );
-              } else {
-                printWarning("Invalid argument supplied to oneOf, expected an array.");
-              }
-            }
-            return emptyFunctionThatReturnsNull;
-          }
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            for (var i2 = 0; i2 < expectedValues.length; i2++) {
-              if (is(propValue, expectedValues[i2])) {
-                return null;
-              }
-            }
-            var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-              var type = getPreciseType(value);
-              if (type === "symbol") {
-                return String(value);
-              }
-              return value;
-            });
-            return new PropTypeError("Invalid " + location + " `" + propFullName + "` of value `" + String(propValue) + "` " + ("supplied to `" + componentName + "`, expected one of " + valuesString + "."));
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createObjectOfTypeChecker(typeChecker) {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (typeof typeChecker !== "function") {
-              return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside objectOf.");
-            }
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an object."));
-            }
-            for (var key in propValue) {
-              if (has(propValue, key)) {
-                var error = typeChecker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
-                if (error instanceof Error) {
-                  return error;
-                }
-              }
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createUnionTypeChecker(arrayOfTypeCheckers) {
-          if (!Array.isArray(arrayOfTypeCheckers)) {
-            true ? printWarning("Invalid argument supplied to oneOfType, expected an instance of array.") : void 0;
-            return emptyFunctionThatReturnsNull;
-          }
-          for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
-            var checker = arrayOfTypeCheckers[i2];
-            if (typeof checker !== "function") {
-              printWarning(
-                "Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i2 + "."
-              );
-              return emptyFunctionThatReturnsNull;
-            }
-          }
-          function validate(props, propName, componentName, location, propFullName) {
-            var expectedTypes = [];
-            for (var i3 = 0; i3 < arrayOfTypeCheckers.length; i3++) {
-              var checker2 = arrayOfTypeCheckers[i3];
-              var checkerResult = checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
-              if (checkerResult == null) {
-                return null;
-              }
-              if (checkerResult.data && has(checkerResult.data, "expectedType")) {
-                expectedTypes.push(checkerResult.data.expectedType);
-              }
-            }
-            var expectedTypesMessage = expectedTypes.length > 0 ? ", expected one of type [" + expectedTypes.join(", ") + "]" : "";
-            return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`" + expectedTypesMessage + "."));
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createNodeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (!isNode(props[propName])) {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`, expected a ReactNode."));
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function invalidValidatorError(componentName, location, propFullName, key, type) {
-          return new PropTypeError(
-            (componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`."
-          );
-        }
-        function createShapeTypeChecker(shapeTypes) {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
-            }
-            for (var key in shapeTypes) {
-              var checker = shapeTypes[key];
-              if (typeof checker !== "function") {
-                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-              }
-              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
-              if (error) {
-                return error;
-              }
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function createStrictShapeTypeChecker(shapeTypes) {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
-            }
-            var allKeys = assign({}, props[propName], shapeTypes);
-            for (var key in allKeys) {
-              var checker = shapeTypes[key];
-              if (has(shapeTypes, key) && typeof checker !== "function") {
-                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-              }
-              if (!checker) {
-                return new PropTypeError(
-                  "Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  ")
-                );
-              }
-              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
-              if (error) {
-                return error;
-              }
-            }
-            return null;
-          }
-          return createChainableTypeChecker(validate);
-        }
-        function isNode(propValue) {
-          switch (typeof propValue) {
-            case "number":
-            case "string":
-            case "undefined":
-              return true;
-            case "boolean":
-              return !propValue;
-            case "object":
-              if (Array.isArray(propValue)) {
-                return propValue.every(isNode);
-              }
-              if (propValue === null || isValidElement(propValue)) {
-                return true;
-              }
-              var iteratorFn = getIteratorFn(propValue);
-              if (iteratorFn) {
-                var iterator = iteratorFn.call(propValue);
-                var step;
-                if (iteratorFn !== propValue.entries) {
-                  while (!(step = iterator.next()).done) {
-                    if (!isNode(step.value)) {
-                      return false;
-                    }
-                  }
-                } else {
-                  while (!(step = iterator.next()).done) {
-                    var entry = step.value;
-                    if (entry) {
-                      if (!isNode(entry[1])) {
-                        return false;
-                      }
-                    }
-                  }
-                }
-              } else {
-                return false;
-              }
-              return true;
-            default:
-              return false;
-          }
-        }
-        function isSymbol(propType, propValue) {
-          if (propType === "symbol") {
-            return true;
-          }
-          if (!propValue) {
-            return false;
-          }
-          if (propValue["@@toStringTag"] === "Symbol") {
-            return true;
-          }
-          if (typeof Symbol === "function" && propValue instanceof Symbol) {
-            return true;
-          }
-          return false;
-        }
-        function getPropType(propValue) {
-          var propType = typeof propValue;
-          if (Array.isArray(propValue)) {
-            return "array";
-          }
-          if (propValue instanceof RegExp) {
-            return "object";
-          }
-          if (isSymbol(propType, propValue)) {
-            return "symbol";
-          }
-          return propType;
-        }
-        function getPreciseType(propValue) {
-          if (typeof propValue === "undefined" || propValue === null) {
-            return "" + propValue;
-          }
-          var propType = getPropType(propValue);
-          if (propType === "object") {
-            if (propValue instanceof Date) {
-              return "date";
-            } else if (propValue instanceof RegExp) {
-              return "regexp";
-            }
-          }
-          return propType;
-        }
-        function getPostfixForTypeWarning(value) {
-          var type = getPreciseType(value);
-          switch (type) {
-            case "array":
-            case "object":
-              return "an " + type;
-            case "boolean":
-            case "date":
-            case "regexp":
-              return "a " + type;
-            default:
-              return type;
-          }
-        }
-        function getClassName(propValue) {
-          if (!propValue.constructor || !propValue.constructor.name) {
-            return ANONYMOUS;
-          }
-          return propValue.constructor.name;
-        }
-        ReactPropTypes.checkPropTypes = checkPropTypes;
-        ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
-        ReactPropTypes.PropTypes = ReactPropTypes;
-        return ReactPropTypes;
-      };
-    }
-  });
-
-  // node_modules/prop-types/index.js
-  var require_prop_types = __commonJS({
-    "node_modules/prop-types/index.js"(exports, module) {
-      if (true) {
-        ReactIs = require_react_is();
-        throwOnDirectAccess = true;
-        module.exports = require_factoryWithTypeCheckers()(ReactIs.isElement, throwOnDirectAccess);
-      } else {
-        module.exports = null();
-      }
-      var ReactIs;
-      var throwOnDirectAccess;
-    }
-  });
-
-  // node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js
-  var require_react_stripe_umd = __commonJS({
-    "node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"(exports, module) {
-      (function(global, factory) {
-        typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react()) : typeof define === "function" && define.amd ? define(["exports", "react"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.ReactStripe = {}, global.React));
-      })(exports, (function(exports2, React28) {
-        "use strict";
-        function ownKeys(object, enumerableOnly) {
-          var keys = Object.keys(object);
-          if (Object.getOwnPropertySymbols) {
-            var symbols = Object.getOwnPropertySymbols(object);
-            if (enumerableOnly) {
-              symbols = symbols.filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-              });
-            }
-            keys.push.apply(keys, symbols);
-          }
-          return keys;
-        }
-        function _objectSpread2(target) {
-          for (var i2 = 1; i2 < arguments.length; i2++) {
-            var source = arguments[i2] != null ? arguments[i2] : {};
-            if (i2 % 2) {
-              ownKeys(Object(source), true).forEach(function(key) {
-                _defineProperty(target, key, source[key]);
-              });
-            } else if (Object.getOwnPropertyDescriptors) {
-              Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-            } else {
-              ownKeys(Object(source)).forEach(function(key) {
-                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-              });
-            }
-          }
-          return target;
-        }
-        function _typeof(obj) {
-          "@babel/helpers - typeof";
-          if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-            _typeof = function(obj2) {
-              return typeof obj2;
-            };
-          } else {
-            _typeof = function(obj2) {
-              return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-            };
-          }
-          return _typeof(obj);
-        }
-        function _defineProperty(obj, key, value) {
-          if (key in obj) {
-            Object.defineProperty(obj, key, {
-              value,
-              enumerable: true,
-              configurable: true,
-              writable: true
-            });
-          } else {
-            obj[key] = value;
-          }
-          return obj;
-        }
-        function _objectWithoutPropertiesLoose(source, excluded) {
-          if (source == null) return {};
-          var target = {};
-          var sourceKeys = Object.keys(source);
-          var key, i2;
-          for (i2 = 0; i2 < sourceKeys.length; i2++) {
-            key = sourceKeys[i2];
-            if (excluded.indexOf(key) >= 0) continue;
-            target[key] = source[key];
-          }
-          return target;
-        }
-        function _objectWithoutProperties(source, excluded) {
-          if (source == null) return {};
-          var target = _objectWithoutPropertiesLoose(source, excluded);
-          var key, i2;
-          if (Object.getOwnPropertySymbols) {
-            var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-            for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
-              key = sourceSymbolKeys[i2];
-              if (excluded.indexOf(key) >= 0) continue;
-              if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-              target[key] = source[key];
-            }
-          }
-          return target;
-        }
-        function _slicedToArray(arr, i2) {
-          return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i2) || _unsupportedIterableToArray(arr, i2) || _nonIterableRest();
-        }
-        function _arrayWithHoles(arr) {
-          if (Array.isArray(arr)) return arr;
-        }
-        function _iterableToArrayLimit(arr, i2) {
-          var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
-          if (_i == null) return;
-          var _arr = [];
-          var _n = true;
-          var _d = false;
-          var _s, _e;
-          try {
-            for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-              _arr.push(_s.value);
-              if (i2 && _arr.length === i2) break;
-            }
-          } catch (err) {
-            _d = true;
-            _e = err;
-          } finally {
-            try {
-              if (!_n && _i["return"] != null) _i["return"]();
-            } finally {
-              if (_d) throw _e;
-            }
-          }
-          return _arr;
-        }
-        function _unsupportedIterableToArray(o2, minLen) {
-          if (!o2) return;
-          if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
-          var n3 = Object.prototype.toString.call(o2).slice(8, -1);
-          if (n3 === "Object" && o2.constructor) n3 = o2.constructor.name;
-          if (n3 === "Map" || n3 === "Set") return Array.from(o2);
-          if (n3 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n3)) return _arrayLikeToArray(o2, minLen);
-        }
-        function _arrayLikeToArray(arr, len) {
-          if (len == null || len > arr.length) len = arr.length;
-          for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
-          return arr2;
-        }
-        function _nonIterableRest() {
-          throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-        }
-        function getDefaultExportFromCjs(x2) {
-          return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
-        }
-        var propTypes = { exports: {} };
-        var ReactPropTypesSecret_1;
-        var hasRequiredReactPropTypesSecret;
-        function requireReactPropTypesSecret() {
-          if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
-          hasRequiredReactPropTypesSecret = 1;
-          var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
-          ReactPropTypesSecret_1 = ReactPropTypesSecret;
-          return ReactPropTypesSecret_1;
-        }
-        var factoryWithThrowingShims;
-        var hasRequiredFactoryWithThrowingShims;
-        function requireFactoryWithThrowingShims() {
-          if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
-          hasRequiredFactoryWithThrowingShims = 1;
-          var ReactPropTypesSecret = requireReactPropTypesSecret();
-          function emptyFunction() {
-          }
-          function emptyFunctionWithReset() {
-          }
-          emptyFunctionWithReset.resetWarningCache = emptyFunction;
-          factoryWithThrowingShims = function() {
-            function shim(props, propName, componentName, location, propFullName, secret) {
-              if (secret === ReactPropTypesSecret) {
-                return;
-              }
-              var err = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");
-              err.name = "Invariant Violation";
-              throw err;
-            }
-            shim.isRequired = shim;
-            function getShim() {
-              return shim;
-            }
-            var ReactPropTypes = {
-              array: shim,
-              bool: shim,
-              func: shim,
-              number: shim,
-              object: shim,
-              string: shim,
-              symbol: shim,
-              any: shim,
-              arrayOf: getShim,
-              element: shim,
-              elementType: shim,
-              instanceOf: getShim,
-              node: shim,
-              objectOf: getShim,
-              oneOf: getShim,
-              oneOfType: getShim,
-              shape: getShim,
-              exact: getShim,
-              checkPropTypes: emptyFunctionWithReset,
-              resetWarningCache: emptyFunction
-            };
-            ReactPropTypes.PropTypes = ReactPropTypes;
-            return ReactPropTypes;
-          };
-          return factoryWithThrowingShims;
-        }
-        {
-          propTypes.exports = requireFactoryWithThrowingShims()();
-        }
-        var propTypesExports = propTypes.exports;
-        var PropTypes9 = /* @__PURE__ */ getDefaultExportFromCjs(propTypesExports);
-        var useAttachEvent = function useAttachEvent2(element, event, cb) {
-          var cbDefined = !!cb;
-          var cbRef = React28.useRef(cb);
-          React28.useEffect(function() {
-            cbRef.current = cb;
-          }, [cb]);
-          React28.useEffect(function() {
-            if (!cbDefined || !element) {
-              return function() {
-              };
-            }
-            var decoratedCb = function decoratedCb2() {
-              if (cbRef.current) {
-                cbRef.current.apply(cbRef, arguments);
-              }
-            };
-            element.on(event, decoratedCb);
-            return function() {
-              element.off(event, decoratedCb);
-            };
-          }, [cbDefined, event, element, cbRef]);
-        };
-        var usePrevious = function usePrevious2(value) {
-          var ref = React28.useRef(value);
-          React28.useEffect(function() {
-            ref.current = value;
-          }, [value]);
-          return ref.current;
-        };
-        var isUnknownObject = function isUnknownObject2(raw) {
-          return raw !== null && _typeof(raw) === "object";
-        };
-        var isPromise = function isPromise2(raw) {
-          return isUnknownObject(raw) && typeof raw.then === "function";
-        };
-        var isStripe = function isStripe2(raw) {
-          return isUnknownObject(raw) && typeof raw.elements === "function" && typeof raw.createToken === "function" && typeof raw.createPaymentMethod === "function" && typeof raw.confirmCardPayment === "function";
-        };
-        var PLAIN_OBJECT_STR = "[object Object]";
-        var isEqual = function isEqual2(left, right) {
-          if (!isUnknownObject(left) || !isUnknownObject(right)) {
-            return left === right;
-          }
-          var leftArray = Array.isArray(left);
-          var rightArray = Array.isArray(right);
-          if (leftArray !== rightArray) return false;
-          var leftPlainObject = Object.prototype.toString.call(left) === PLAIN_OBJECT_STR;
-          var rightPlainObject = Object.prototype.toString.call(right) === PLAIN_OBJECT_STR;
-          if (leftPlainObject !== rightPlainObject) return false;
-          if (!leftPlainObject && !leftArray) return left === right;
-          var leftKeys = Object.keys(left);
-          var rightKeys = Object.keys(right);
-          if (leftKeys.length !== rightKeys.length) return false;
-          var keySet = {};
-          for (var i2 = 0; i2 < leftKeys.length; i2 += 1) {
-            keySet[leftKeys[i2]] = true;
-          }
-          for (var _i = 0; _i < rightKeys.length; _i += 1) {
-            keySet[rightKeys[_i]] = true;
-          }
-          var allKeys = Object.keys(keySet);
-          if (allKeys.length !== leftKeys.length) {
-            return false;
-          }
-          var l2 = left;
-          var r = right;
-          var pred = function pred2(key) {
-            return isEqual2(l2[key], r[key]);
-          };
-          return allKeys.every(pred);
-        };
-        var extractAllowedOptionsUpdates = function extractAllowedOptionsUpdates2(options, prevOptions, immutableKeys) {
-          if (!isUnknownObject(options)) {
-            return null;
-          }
-          return Object.keys(options).reduce(function(newOptions, key) {
-            var isUpdated = !isUnknownObject(prevOptions) || !isEqual(options[key], prevOptions[key]);
-            if (immutableKeys.includes(key)) {
-              if (isUpdated) {
-                console.warn("Unsupported prop change: options.".concat(key, " is not a mutable property."));
-              }
-              return newOptions;
-            }
-            if (!isUpdated) {
-              return newOptions;
-            }
-            return _objectSpread2(_objectSpread2({}, newOptions || {}), {}, _defineProperty({}, key, options[key]));
-          }, null);
-        };
-        var INVALID_STRIPE_ERROR$2 = "Invalid prop `stripe` supplied to `Elements`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
-        var validateStripe = function validateStripe2(maybeStripe) {
-          var errorMsg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : INVALID_STRIPE_ERROR$2;
-          if (maybeStripe === null || isStripe(maybeStripe)) {
-            return maybeStripe;
-          }
-          throw new Error(errorMsg);
-        };
-        var parseStripeProp = function parseStripeProp2(raw) {
-          var errorMsg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : INVALID_STRIPE_ERROR$2;
-          if (isPromise(raw)) {
-            return {
-              tag: "async",
-              stripePromise: Promise.resolve(raw).then(function(result) {
-                return validateStripe(result, errorMsg);
-              })
-            };
-          }
-          var stripe = validateStripe(raw, errorMsg);
-          if (stripe === null) {
-            return {
-              tag: "empty"
-            };
-          }
-          return {
-            tag: "sync",
-            stripe
-          };
-        };
-        var registerWithStripeJs = function registerWithStripeJs2(stripe) {
-          if (!stripe || !stripe._registerWrapper || !stripe.registerAppInfo) {
-            return;
-          }
-          stripe._registerWrapper({
-            name: "react-stripe-js",
-            version: "3.9.0"
-          });
-          stripe.registerAppInfo({
-            name: "react-stripe-js",
-            version: "3.9.0",
-            url: "https://stripe.com/docs/stripe-js/react"
-          });
-        };
-        var ElementsContext = /* @__PURE__ */ React28.createContext(null);
-        ElementsContext.displayName = "ElementsContext";
-        var parseElementsContext = function parseElementsContext2(ctx, useCase) {
-          if (!ctx) {
-            throw new Error("Could not find Elements context; You need to wrap the part of your app that ".concat(useCase, " in an <Elements> provider."));
-          }
-          return ctx;
-        };
-        var Elements3 = function Elements4(_ref) {
-          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React28.useMemo(function() {
-            return parseStripeProp(rawStripeProp);
-          }, [rawStripeProp]);
-          var _React$useState = React28.useState(function() {
-            return {
-              stripe: parsed.tag === "sync" ? parsed.stripe : null,
-              elements: parsed.tag === "sync" ? parsed.stripe.elements(options) : null
-            };
-          }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
-          React28.useEffect(function() {
-            var isMounted = true;
-            var safeSetContext = function safeSetContext2(stripe) {
-              setContext(function(ctx2) {
-                if (ctx2.stripe) return ctx2;
-                return {
-                  stripe,
-                  elements: stripe.elements(options)
-                };
-              });
-            };
-            if (parsed.tag === "async" && !ctx.stripe) {
-              parsed.stripePromise.then(function(stripe) {
-                if (stripe && isMounted) {
-                  safeSetContext(stripe);
-                }
-              });
-            } else if (parsed.tag === "sync" && !ctx.stripe) {
-              safeSetContext(parsed.stripe);
-            }
-            return function() {
-              isMounted = false;
-            };
-          }, [parsed, ctx, options]);
-          var prevStripe = usePrevious(rawStripeProp);
-          React28.useEffect(function() {
-            if (prevStripe !== null && prevStripe !== rawStripeProp) {
-              console.warn("Unsupported prop change on Elements: You cannot change the `stripe` prop after setting it.");
-            }
-          }, [prevStripe, rawStripeProp]);
-          var prevOptions = usePrevious(options);
-          React28.useEffect(function() {
-            if (!ctx.elements) {
-              return;
-            }
-            var updates = extractAllowedOptionsUpdates(options, prevOptions, ["clientSecret", "fonts"]);
-            if (updates) {
-              ctx.elements.update(updates);
-            }
-          }, [options, prevOptions, ctx.elements]);
-          React28.useEffect(function() {
-            registerWithStripeJs(ctx.stripe);
-          }, [ctx.stripe]);
-          return /* @__PURE__ */ React28.createElement(ElementsContext.Provider, {
-            value: ctx
-          }, children);
-        };
-        Elements3.propTypes = {
-          stripe: PropTypes9.any,
-          options: PropTypes9.object
-        };
-        var useElementsContextWithUseCase = function useElementsContextWithUseCase2(useCaseMessage) {
-          var ctx = React28.useContext(ElementsContext);
-          return parseElementsContext(ctx, useCaseMessage);
-        };
-        var useElements3 = function useElements4() {
-          var _useElementsContextWi = useElementsContextWithUseCase("calls useElements()"), elements = _useElementsContextWi.elements;
-          return elements;
-        };
-        var ElementsConsumer = function ElementsConsumer2(_ref2) {
-          var children = _ref2.children;
-          var ctx = useElementsContextWithUseCase("mounts <ElementsConsumer>");
-          return children(ctx);
-        };
-        ElementsConsumer.propTypes = {
-          children: PropTypes9.func.isRequired
-        };
-        var _excluded$1 = ["on", "session"];
-        var CheckoutSdkContext = /* @__PURE__ */ React28.createContext(null);
-        CheckoutSdkContext.displayName = "CheckoutSdkContext";
-        var parseCheckoutSdkContext = function parseCheckoutSdkContext2(ctx, useCase) {
-          if (!ctx) {
-            throw new Error("Could not find CheckoutProvider context; You need to wrap the part of your app that ".concat(useCase, " in an <CheckoutProvider> provider."));
-          }
-          return ctx;
-        };
-        var CheckoutContext = /* @__PURE__ */ React28.createContext(null);
-        CheckoutContext.displayName = "CheckoutContext";
-        var extractCheckoutContextValue = function extractCheckoutContextValue2(checkoutSdk, sessionState) {
-          if (!checkoutSdk) {
-            return null;
-          }
-          checkoutSdk.on;
-          checkoutSdk.session;
-          var actions = _objectWithoutProperties(checkoutSdk, _excluded$1);
-          if (!sessionState) {
-            return Object.assign(checkoutSdk.session(), actions);
-          }
-          return Object.assign(sessionState, actions);
-        };
-        var INVALID_STRIPE_ERROR$1 = "Invalid prop `stripe` supplied to `CheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
-        var CheckoutProvider = function CheckoutProvider2(_ref) {
-          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React28.useMemo(function() {
-            return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR$1);
-          }, [rawStripeProp]);
-          var _React$useState = React28.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), session = _React$useState2[0], setSession = _React$useState2[1];
-          var _React$useState3 = React28.useState(function() {
-            return {
-              stripe: parsed.tag === "sync" ? parsed.stripe : null,
-              checkoutSdk: null
-            };
-          }), _React$useState4 = _slicedToArray(_React$useState3, 2), ctx = _React$useState4[0], setContext = _React$useState4[1];
-          var safeSetContext = function safeSetContext2(stripe, checkoutSdk) {
-            setContext(function(ctx2) {
-              if (ctx2.stripe && ctx2.checkoutSdk) {
-                return ctx2;
-              }
-              return {
-                stripe,
-                checkoutSdk
-              };
-            });
-          };
-          var initCheckoutCalledRef = React28.useRef(false);
-          React28.useEffect(function() {
-            var isMounted = true;
-            if (parsed.tag === "async" && !ctx.stripe) {
-              parsed.stripePromise.then(function(stripe) {
-                if (stripe && isMounted && !initCheckoutCalledRef.current) {
-                  initCheckoutCalledRef.current = true;
-                  stripe.initCheckout(options).then(function(checkoutSdk) {
-                    if (checkoutSdk) {
-                      safeSetContext(stripe, checkoutSdk);
-                      checkoutSdk.on("change", setSession);
-                    }
-                  });
-                }
-              });
-            } else if (parsed.tag === "sync" && parsed.stripe && !initCheckoutCalledRef.current) {
-              initCheckoutCalledRef.current = true;
-              parsed.stripe.initCheckout(options).then(function(checkoutSdk) {
-                if (checkoutSdk) {
-                  safeSetContext(parsed.stripe, checkoutSdk);
-                  checkoutSdk.on("change", setSession);
-                }
-              });
-            }
-            return function() {
-              isMounted = false;
-            };
-          }, [parsed, ctx, options, setSession]);
-          var prevStripe = usePrevious(rawStripeProp);
-          React28.useEffect(function() {
-            if (prevStripe !== null && prevStripe !== rawStripeProp) {
-              console.warn("Unsupported prop change on CheckoutProvider: You cannot change the `stripe` prop after setting it.");
-            }
-          }, [prevStripe, rawStripeProp]);
-          var prevOptions = usePrevious(options);
-          var prevCheckoutSdk = usePrevious(ctx.checkoutSdk);
-          React28.useEffect(function() {
-            var _prevOptions$elements, _options$elementsOpti, _prevOptions$elements2, _options$elementsOpti2;
-            if (!ctx.checkoutSdk) {
-              return;
-            }
-            var hasSdkLoaded = Boolean(!prevCheckoutSdk && ctx.checkoutSdk);
-            var previousAppearance = prevOptions === null || prevOptions === void 0 ? void 0 : (_prevOptions$elements = prevOptions.elementsOptions) === null || _prevOptions$elements === void 0 ? void 0 : _prevOptions$elements.appearance;
-            var currentAppearance = options === null || options === void 0 ? void 0 : (_options$elementsOpti = options.elementsOptions) === null || _options$elementsOpti === void 0 ? void 0 : _options$elementsOpti.appearance;
-            var hasAppearanceChanged = !isEqual(currentAppearance, previousAppearance);
-            if (currentAppearance && (hasAppearanceChanged || hasSdkLoaded)) {
-              ctx.checkoutSdk.changeAppearance(currentAppearance);
-            }
-            var previousFonts = prevOptions === null || prevOptions === void 0 ? void 0 : (_prevOptions$elements2 = prevOptions.elementsOptions) === null || _prevOptions$elements2 === void 0 ? void 0 : _prevOptions$elements2.fonts;
-            var currentFonts = options === null || options === void 0 ? void 0 : (_options$elementsOpti2 = options.elementsOptions) === null || _options$elementsOpti2 === void 0 ? void 0 : _options$elementsOpti2.fonts;
-            var hasFontsChanged = !isEqual(previousFonts, currentFonts);
-            if (currentFonts && (hasFontsChanged || hasSdkLoaded)) {
-              ctx.checkoutSdk.loadFonts(currentFonts);
-            }
-          }, [options, prevOptions, ctx.checkoutSdk, prevCheckoutSdk]);
-          React28.useEffect(function() {
-            registerWithStripeJs(ctx.stripe);
-          }, [ctx.stripe]);
-          var checkoutContextValue = React28.useMemo(function() {
-            return extractCheckoutContextValue(ctx.checkoutSdk, session);
-          }, [ctx.checkoutSdk, session]);
-          if (!ctx.checkoutSdk) {
-            return null;
-          }
-          return /* @__PURE__ */ React28.createElement(CheckoutSdkContext.Provider, {
-            value: ctx
-          }, /* @__PURE__ */ React28.createElement(CheckoutContext.Provider, {
-            value: checkoutContextValue
-          }, children));
-        };
-        CheckoutProvider.propTypes = {
-          stripe: PropTypes9.any,
-          options: PropTypes9.shape({
-            fetchClientSecret: PropTypes9.func.isRequired,
-            elementsOptions: PropTypes9.object
-          }).isRequired
-        };
-        var useCheckoutSdkContextWithUseCase = function useCheckoutSdkContextWithUseCase2(useCaseString) {
-          var ctx = React28.useContext(CheckoutSdkContext);
-          return parseCheckoutSdkContext(ctx, useCaseString);
-        };
-        var useElementsOrCheckoutSdkContextWithUseCase = function useElementsOrCheckoutSdkContextWithUseCase2(useCaseString) {
-          var checkoutSdkContext = React28.useContext(CheckoutSdkContext);
-          var elementsContext = React28.useContext(ElementsContext);
-          if (checkoutSdkContext && elementsContext) {
-            throw new Error("You cannot wrap the part of your app that ".concat(useCaseString, " in both <CheckoutProvider> and <Elements> providers."));
-          }
-          if (checkoutSdkContext) {
-            return parseCheckoutSdkContext(checkoutSdkContext, useCaseString);
-          }
-          return parseElementsContext(elementsContext, useCaseString);
-        };
-        var useCheckout = function useCheckout2() {
-          useCheckoutSdkContextWithUseCase("calls useCheckout()");
-          var ctx = React28.useContext(CheckoutContext);
-          if (!ctx) {
-            throw new Error("Could not find Checkout Context; You need to wrap the part of your app that calls useCheckout() in an <CheckoutProvider> provider.");
-          }
-          return ctx;
-        };
-        var _excluded = ["mode"];
-        var capitalized = function capitalized2(str) {
-          return str.charAt(0).toUpperCase() + str.slice(1);
-        };
-        var createElementComponent = function createElementComponent2(type, isServer2) {
-          var displayName = "".concat(capitalized(type), "Element");
-          var ClientElement = function ClientElement2(_ref) {
-            var id = _ref.id, className = _ref.className, _ref$options = _ref.options, options = _ref$options === void 0 ? {} : _ref$options, onBlur = _ref.onBlur, onFocus = _ref.onFocus, onReady = _ref.onReady, onChange = _ref.onChange, onEscape = _ref.onEscape, onClick = _ref.onClick, onLoadError = _ref.onLoadError, onLoaderStart = _ref.onLoaderStart, onNetworksChange = _ref.onNetworksChange, onConfirm = _ref.onConfirm, onCancel = _ref.onCancel, onShippingAddressChange = _ref.onShippingAddressChange, onShippingRateChange = _ref.onShippingRateChange;
-            var ctx = useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
-            var elements = "elements" in ctx ? ctx.elements : null;
-            var checkoutSdk = "checkoutSdk" in ctx ? ctx.checkoutSdk : null;
-            var _React$useState = React28.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), element = _React$useState2[0], setElement = _React$useState2[1];
-            var elementRef = React28.useRef(null);
-            var domNode = React28.useRef(null);
-            useAttachEvent(element, "blur", onBlur);
-            useAttachEvent(element, "focus", onFocus);
-            useAttachEvent(element, "escape", onEscape);
-            useAttachEvent(element, "click", onClick);
-            useAttachEvent(element, "loaderror", onLoadError);
-            useAttachEvent(element, "loaderstart", onLoaderStart);
-            useAttachEvent(element, "networkschange", onNetworksChange);
-            useAttachEvent(element, "confirm", onConfirm);
-            useAttachEvent(element, "cancel", onCancel);
-            useAttachEvent(element, "shippingaddresschange", onShippingAddressChange);
-            useAttachEvent(element, "shippingratechange", onShippingRateChange);
-            useAttachEvent(element, "change", onChange);
-            var readyCallback;
-            if (onReady) {
-              if (type === "expressCheckout") {
-                readyCallback = onReady;
-              } else {
-                readyCallback = function readyCallback2() {
-                  onReady(element);
-                };
-              }
-            }
-            useAttachEvent(element, "ready", readyCallback);
-            React28.useLayoutEffect(function() {
-              if (elementRef.current === null && domNode.current !== null && (elements || checkoutSdk)) {
-                var newElement = null;
-                if (checkoutSdk) {
-                  switch (type) {
-                    case "payment":
-                      newElement = checkoutSdk.createPaymentElement(options);
-                      break;
-                    case "address":
-                      if ("mode" in options) {
-                        var mode = options.mode, restOptions = _objectWithoutProperties(options, _excluded);
-                        if (mode === "shipping") {
-                          newElement = checkoutSdk.createShippingAddressElement(restOptions);
-                        } else if (mode === "billing") {
-                          newElement = checkoutSdk.createBillingAddressElement(restOptions);
-                        } else {
-                          throw new Error("Invalid options.mode. mode must be 'billing' or 'shipping'.");
-                        }
-                      } else {
-                        throw new Error("You must supply options.mode. mode must be 'billing' or 'shipping'.");
-                      }
-                      break;
-                    case "expressCheckout":
-                      newElement = checkoutSdk.createExpressCheckoutElement(options);
-                      break;
-                    case "currencySelector":
-                      newElement = checkoutSdk.createCurrencySelectorElement();
-                      break;
-                    case "taxId":
-                      newElement = checkoutSdk.createTaxIdElement(options);
-                      break;
-                    default:
-                      throw new Error("Invalid Element type ".concat(displayName, ". You must use either the <PaymentElement />, <AddressElement options={{mode: 'shipping'}} />, <AddressElement options={{mode: 'billing'}} />, or <ExpressCheckoutElement />."));
-                  }
-                } else if (elements) {
-                  newElement = elements.create(type, options);
-                }
-                elementRef.current = newElement;
-                setElement(newElement);
-                if (newElement) {
-                  newElement.mount(domNode.current);
-                }
-              }
-            }, [elements, checkoutSdk, options]);
-            var prevOptions = usePrevious(options);
-            React28.useEffect(function() {
-              if (!elementRef.current) {
-                return;
-              }
-              var updates = extractAllowedOptionsUpdates(options, prevOptions, ["paymentRequest"]);
-              if (updates && "update" in elementRef.current) {
-                elementRef.current.update(updates);
-              }
-            }, [options, prevOptions]);
-            React28.useLayoutEffect(function() {
-              return function() {
-                if (elementRef.current && typeof elementRef.current.destroy === "function") {
-                  try {
-                    elementRef.current.destroy();
-                    elementRef.current = null;
-                  } catch (error) {
-                  }
-                }
-              };
-            }, []);
-            return /* @__PURE__ */ React28.createElement("div", {
-              id,
-              className,
-              ref: domNode
-            });
-          };
-          var ServerElement = function ServerElement2(props) {
-            useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
-            var id = props.id, className = props.className;
-            return /* @__PURE__ */ React28.createElement("div", {
-              id,
-              className
-            });
-          };
-          var Element = isServer2 ? ServerElement : ClientElement;
-          Element.propTypes = {
-            id: PropTypes9.string,
-            className: PropTypes9.string,
-            onChange: PropTypes9.func,
-            onBlur: PropTypes9.func,
-            onFocus: PropTypes9.func,
-            onReady: PropTypes9.func,
-            onEscape: PropTypes9.func,
-            onClick: PropTypes9.func,
-            onLoadError: PropTypes9.func,
-            onLoaderStart: PropTypes9.func,
-            onNetworksChange: PropTypes9.func,
-            onConfirm: PropTypes9.func,
-            onCancel: PropTypes9.func,
-            onShippingAddressChange: PropTypes9.func,
-            onShippingRateChange: PropTypes9.func,
-            options: PropTypes9.object
-          };
-          Element.displayName = displayName;
-          Element.__elementType = type;
-          return Element;
-        };
-        var isServer = typeof window === "undefined";
-        var EmbeddedCheckoutContext = /* @__PURE__ */ React28.createContext(null);
-        EmbeddedCheckoutContext.displayName = "EmbeddedCheckoutProviderContext";
-        var useEmbeddedCheckoutContext = function useEmbeddedCheckoutContext2() {
-          var ctx = React28.useContext(EmbeddedCheckoutContext);
-          if (!ctx) {
-            throw new Error("<EmbeddedCheckout> must be used within <EmbeddedCheckoutProvider>");
-          }
-          return ctx;
-        };
-        var INVALID_STRIPE_ERROR = "Invalid prop `stripe` supplied to `EmbeddedCheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
-        var EmbeddedCheckoutProvider = function EmbeddedCheckoutProvider2(_ref) {
-          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React28.useMemo(function() {
-            return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR);
-          }, [rawStripeProp]);
-          var embeddedCheckoutPromise = React28.useRef(null);
-          var loadedStripe = React28.useRef(null);
-          var _React$useState = React28.useState({
-            embeddedCheckout: null
-          }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
-          React28.useEffect(function() {
-            if (loadedStripe.current || embeddedCheckoutPromise.current) {
-              return;
-            }
-            var setStripeAndInitEmbeddedCheckout = function setStripeAndInitEmbeddedCheckout2(stripe) {
-              if (loadedStripe.current || embeddedCheckoutPromise.current) return;
-              loadedStripe.current = stripe;
-              embeddedCheckoutPromise.current = loadedStripe.current.initEmbeddedCheckout(options).then(function(embeddedCheckout) {
-                setContext({
-                  embeddedCheckout
-                });
-              });
-            };
-            if (parsed.tag === "async" && !loadedStripe.current && (options.clientSecret || options.fetchClientSecret)) {
-              parsed.stripePromise.then(function(stripe) {
-                if (stripe) {
-                  setStripeAndInitEmbeddedCheckout(stripe);
-                }
-              });
-            } else if (parsed.tag === "sync" && !loadedStripe.current && (options.clientSecret || options.fetchClientSecret)) {
-              setStripeAndInitEmbeddedCheckout(parsed.stripe);
-            }
-          }, [parsed, options, ctx, loadedStripe]);
-          React28.useEffect(function() {
-            return function() {
-              if (ctx.embeddedCheckout) {
-                embeddedCheckoutPromise.current = null;
-                ctx.embeddedCheckout.destroy();
-              } else if (embeddedCheckoutPromise.current) {
-                embeddedCheckoutPromise.current.then(function() {
-                  embeddedCheckoutPromise.current = null;
-                  if (ctx.embeddedCheckout) {
-                    ctx.embeddedCheckout.destroy();
-                  }
-                });
-              }
-            };
-          }, [ctx.embeddedCheckout]);
-          React28.useEffect(function() {
-            registerWithStripeJs(loadedStripe);
-          }, [loadedStripe]);
-          var prevStripe = usePrevious(rawStripeProp);
-          React28.useEffect(function() {
-            if (prevStripe !== null && prevStripe !== rawStripeProp) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the `stripe` prop after setting it.");
-            }
-          }, [prevStripe, rawStripeProp]);
-          var prevOptions = usePrevious(options);
-          React28.useEffect(function() {
-            if (prevOptions == null) {
-              return;
-            }
-            if (options == null) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot unset options after setting them.");
-              return;
-            }
-            if (options.clientSecret === void 0 && options.fetchClientSecret === void 0) {
-              console.warn("Invalid props passed to EmbeddedCheckoutProvider: You must provide one of either `options.fetchClientSecret` or `options.clientSecret`.");
-            }
-            if (prevOptions.clientSecret != null && options.clientSecret !== prevOptions.clientSecret) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the client secret after setting it. Unmount and create a new instance of EmbeddedCheckoutProvider instead.");
-            }
-            if (prevOptions.fetchClientSecret != null && options.fetchClientSecret !== prevOptions.fetchClientSecret) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change fetchClientSecret after setting it. Unmount and create a new instance of EmbeddedCheckoutProvider instead.");
-            }
-            if (prevOptions.onComplete != null && options.onComplete !== prevOptions.onComplete) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onComplete option after setting it.");
-            }
-            if (prevOptions.onShippingDetailsChange != null && options.onShippingDetailsChange !== prevOptions.onShippingDetailsChange) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onShippingDetailsChange option after setting it.");
-            }
-            if (prevOptions.onLineItemsChange != null && options.onLineItemsChange !== prevOptions.onLineItemsChange) {
-              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onLineItemsChange option after setting it.");
-            }
-          }, [prevOptions, options]);
-          return /* @__PURE__ */ React28.createElement(EmbeddedCheckoutContext.Provider, {
-            value: ctx
-          }, children);
-        };
-        var EmbeddedCheckoutClientElement = function EmbeddedCheckoutClientElement2(_ref) {
-          var id = _ref.id, className = _ref.className;
-          var _useEmbeddedCheckoutC = useEmbeddedCheckoutContext(), embeddedCheckout = _useEmbeddedCheckoutC.embeddedCheckout;
-          var isMounted = React28.useRef(false);
-          var domNode = React28.useRef(null);
-          React28.useLayoutEffect(function() {
-            if (!isMounted.current && embeddedCheckout && domNode.current !== null) {
-              embeddedCheckout.mount(domNode.current);
-              isMounted.current = true;
-            }
-            return function() {
-              if (isMounted.current && embeddedCheckout) {
-                try {
-                  embeddedCheckout.unmount();
-                  isMounted.current = false;
-                } catch (e2) {
-                }
-              }
-            };
-          }, [embeddedCheckout]);
-          return /* @__PURE__ */ React28.createElement("div", {
-            ref: domNode,
-            id,
-            className
-          });
-        };
-        var EmbeddedCheckoutServerElement = function EmbeddedCheckoutServerElement2(_ref2) {
-          var id = _ref2.id, className = _ref2.className;
-          useEmbeddedCheckoutContext();
-          return /* @__PURE__ */ React28.createElement("div", {
-            id,
-            className
-          });
-        };
-        var EmbeddedCheckout = isServer ? EmbeddedCheckoutServerElement : EmbeddedCheckoutClientElement;
-        var useStripe3 = function useStripe4() {
-          var _useElementsOrCheckou = useElementsOrCheckoutSdkContextWithUseCase("calls useStripe()"), stripe = _useElementsOrCheckou.stripe;
-          return stripe;
-        };
-        var AuBankAccountElement = createElementComponent("auBankAccount", isServer);
-        var CardElement2 = createElementComponent("card", isServer);
-        var CardNumberElement = createElementComponent("cardNumber", isServer);
-        var CardExpiryElement = createElementComponent("cardExpiry", isServer);
-        var CardCvcElement = createElementComponent("cardCvc", isServer);
-        var FpxBankElement = createElementComponent("fpxBank", isServer);
-        var IbanElement = createElementComponent("iban", isServer);
-        var IdealBankElement = createElementComponent("idealBank", isServer);
-        var P24BankElement = createElementComponent("p24Bank", isServer);
-        var EpsBankElement = createElementComponent("epsBank", isServer);
-        var PaymentElement2 = createElementComponent("payment", isServer);
-        var ExpressCheckoutElement = createElementComponent("expressCheckout", isServer);
-        var CurrencySelectorElement = createElementComponent("currencySelector", isServer);
-        var PaymentRequestButtonElement = createElementComponent("paymentRequestButton", isServer);
-        var LinkAuthenticationElement = createElementComponent("linkAuthentication", isServer);
-        var AddressElement = createElementComponent("address", isServer);
-        var ShippingAddressElement = createElementComponent("shippingAddress", isServer);
-        var PaymentMethodMessagingElement = createElementComponent("paymentMethodMessaging", isServer);
-        var AffirmMessageElement = createElementComponent("affirmMessage", isServer);
-        var AfterpayClearpayMessageElement = createElementComponent("afterpayClearpayMessage", isServer);
-        var TaxIdElement = createElementComponent("taxId", isServer);
-        exports2.AddressElement = AddressElement;
-        exports2.AffirmMessageElement = AffirmMessageElement;
-        exports2.AfterpayClearpayMessageElement = AfterpayClearpayMessageElement;
-        exports2.AuBankAccountElement = AuBankAccountElement;
-        exports2.CardCvcElement = CardCvcElement;
-        exports2.CardElement = CardElement2;
-        exports2.CardExpiryElement = CardExpiryElement;
-        exports2.CardNumberElement = CardNumberElement;
-        exports2.CheckoutProvider = CheckoutProvider;
-        exports2.CurrencySelectorElement = CurrencySelectorElement;
-        exports2.Elements = Elements3;
-        exports2.ElementsConsumer = ElementsConsumer;
-        exports2.EmbeddedCheckout = EmbeddedCheckout;
-        exports2.EmbeddedCheckoutProvider = EmbeddedCheckoutProvider;
-        exports2.EpsBankElement = EpsBankElement;
-        exports2.ExpressCheckoutElement = ExpressCheckoutElement;
-        exports2.FpxBankElement = FpxBankElement;
-        exports2.IbanElement = IbanElement;
-        exports2.IdealBankElement = IdealBankElement;
-        exports2.LinkAuthenticationElement = LinkAuthenticationElement;
-        exports2.P24BankElement = P24BankElement;
-        exports2.PaymentElement = PaymentElement2;
-        exports2.PaymentMethodMessagingElement = PaymentMethodMessagingElement;
-        exports2.PaymentRequestButtonElement = PaymentRequestButtonElement;
-        exports2.ShippingAddressElement = ShippingAddressElement;
-        exports2.TaxIdElement = TaxIdElement;
-        exports2.useCheckout = useCheckout;
-        exports2.useElements = useElements3;
-        exports2.useStripe = useStripe3;
-      }));
-    }
-  });
-
   // src/main.js
-  var import_react31 = __toESM(require_react());
-  var import_client = __toESM(require_client());
-
-  // src/App.js
-  var import_react30 = __toESM(require_react());
-
-  // src/components/Header.js
-  var import_react3 = __toESM(require_react());
-  var import_prop_types = __toESM(require_prop_types());
-
-  // node_modules/lucide-react/dist/esm/createLucideIcon.js
-  var import_react2 = __toESM(require_react());
-
-  // node_modules/lucide-react/dist/esm/shared/src/utils.js
-  var toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-  var toCamelCase = (string) => string.replace(
-    /^([A-Z])|[\s-_]+(\w)/g,
-    (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
-  );
-  var toPascalCase = (string) => {
-    const camelCase = toCamelCase(string);
-    return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-  };
-  var mergeClasses = (...classes) => classes.filter((className, index, array) => {
-    return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
-  }).join(" ").trim();
-  var hasA11yProp = (props) => {
-    for (const prop in props) {
-      if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
-        return true;
-      }
-    }
-  };
-
-  // node_modules/lucide-react/dist/esm/Icon.js
   var import_react = __toESM(require_react());
-
-  // node_modules/lucide-react/dist/esm/defaultAttributes.js
-  var defaultAttributes = {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: 24,
-    height: 24,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 2,
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  };
-
-  // node_modules/lucide-react/dist/esm/Icon.js
-  var Icon = (0, import_react.forwardRef)(
-    ({
-      color = "currentColor",
-      size = 24,
-      strokeWidth = 2,
-      absoluteStrokeWidth,
-      className = "",
-      children,
-      iconNode,
-      ...rest
-    }, ref) => (0, import_react.createElement)(
-      "svg",
-      {
-        ref,
-        ...defaultAttributes,
-        width: size,
-        height: size,
-        stroke: color,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: mergeClasses("lucide", className),
-        ...!children && !hasA11yProp(rest) && { "aria-hidden": "true" },
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => (0, import_react.createElement)(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    )
-  );
-
-  // node_modules/lucide-react/dist/esm/createLucideIcon.js
-  var createLucideIcon = (iconName, iconNode) => {
-    const Component = (0, import_react2.forwardRef)(
-      ({ className, ...props }, ref) => (0, import_react2.createElement)(Icon, {
-        ref,
-        iconNode,
-        className: mergeClasses(
-          `lucide-${toKebabCase(toPascalCase(iconName))}`,
-          `lucide-${iconName}`,
-          className
-        ),
-        ...props
-      })
-    );
-    Component.displayName = toPascalCase(iconName);
-    return Component;
-  };
-
-  // node_modules/lucide-react/dist/esm/icons/calendar-check.js
-  var __iconNode = [
-    ["path", { d: "M8 2v4", key: "1cmpym" }],
-    ["path", { d: "M16 2v4", key: "4m81vk" }],
-    ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
-    ["path", { d: "M3 10h18", key: "8toen8" }],
-    ["path", { d: "m9 16 2 2 4-4", key: "19s6y9" }]
-  ];
-  var CalendarCheck = createLucideIcon("calendar-check", __iconNode);
-
-  // node_modules/lucide-react/dist/esm/icons/circle-check-big.js
-  var __iconNode2 = [
-    ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-    ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
-  ];
-  var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode2);
-
-  // node_modules/lucide-react/dist/esm/icons/circle-minus.js
-  var __iconNode3 = [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["path", { d: "M8 12h8", key: "1wcyev" }]
-  ];
-  var CircleMinus = createLucideIcon("circle-minus", __iconNode3);
-
-  // node_modules/lucide-react/dist/esm/icons/circle-plus.js
-  var __iconNode4 = [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["path", { d: "M8 12h8", key: "1wcyev" }],
-    ["path", { d: "M12 8v8", key: "napkw2" }]
-  ];
-  var CirclePlus = createLucideIcon("circle-plus", __iconNode4);
-
-  // node_modules/lucide-react/dist/esm/icons/circle-x.js
-  var __iconNode5 = [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-    ["path", { d: "m9 9 6 6", key: "z0biqf" }]
-  ];
-  var CircleX = createLucideIcon("circle-x", __iconNode5);
-
-  // node_modules/lucide-react/dist/esm/icons/cloud-upload.js
-  var __iconNode6 = [
-    ["path", { d: "M12 13v8", key: "1l5pq0" }],
-    ["path", { d: "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242", key: "1pljnt" }],
-    ["path", { d: "m8 17 4-4 4 4", key: "1quai1" }]
-  ];
-  var CloudUpload = createLucideIcon("cloud-upload", __iconNode6);
-
-  // node_modules/lucide-react/dist/esm/icons/credit-card.js
-  var __iconNode7 = [
-    ["rect", { width: "20", height: "14", x: "2", y: "5", rx: "2", key: "ynyp8z" }],
-    ["line", { x1: "2", x2: "22", y1: "10", y2: "10", key: "1b3vmo" }]
-  ];
-  var CreditCard = createLucideIcon("credit-card", __iconNode7);
-
-  // node_modules/lucide-react/dist/esm/icons/dollar-sign.js
-  var __iconNode8 = [
-    ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
-    ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
-  ];
-  var DollarSign = createLucideIcon("dollar-sign", __iconNode8);
-
-  // node_modules/lucide-react/dist/esm/icons/facebook.js
-  var __iconNode9 = [
-    [
-      "path",
-      { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
-    ]
-  ];
-  var Facebook = createLucideIcon("facebook", __iconNode9);
-
-  // node_modules/lucide-react/dist/esm/icons/house.js
-  var __iconNode10 = [
-    ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
-    [
-      "path",
-      {
-        d: "M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
-        key: "1d0kgt"
-      }
-    ]
-  ];
-  var House = createLucideIcon("house", __iconNode10);
-
-  // node_modules/lucide-react/dist/esm/icons/image.js
-  var __iconNode11 = [
-    ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-    ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-    ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
-  ];
-  var Image = createLucideIcon("image", __iconNode11);
-
-  // node_modules/lucide-react/dist/esm/icons/instagram.js
-  var __iconNode12 = [
-    ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5", key: "2e1cvw" }],
-    ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }],
-    ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
-  ];
-  var Instagram = createLucideIcon("instagram", __iconNode12);
-
-  // node_modules/lucide-react/dist/esm/icons/layout-dashboard.js
-  var __iconNode13 = [
-    ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
-    ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
-    ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
-    ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
-  ];
-  var LayoutDashboard = createLucideIcon("layout-dashboard", __iconNode13);
-
-  // node_modules/lucide-react/dist/esm/icons/log-in.js
-  var __iconNode14 = [
-    ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
-    ["path", { d: "M15 12H3", key: "6jk70r" }],
-    ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
-  ];
-  var LogIn = createLucideIcon("log-in", __iconNode14);
-
-  // node_modules/lucide-react/dist/esm/icons/log-out.js
-  var __iconNode15 = [
-    ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
-    ["path", { d: "M21 12H9", key: "dn1m92" }],
-    ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
-  ];
-  var LogOut = createLucideIcon("log-out", __iconNode15);
-
-  // node_modules/lucide-react/dist/esm/icons/menu.js
-  var __iconNode16 = [
-    ["path", { d: "M4 12h16", key: "1lakjw" }],
-    ["path", { d: "M4 18h16", key: "19g7jn" }],
-    ["path", { d: "M4 6h16", key: "1o0s65" }]
-  ];
-  var Menu = createLucideIcon("menu", __iconNode16);
-
-  // node_modules/lucide-react/dist/esm/icons/message-square.js
-  var __iconNode17 = [
-    [
-      "path",
-      {
-        d: "M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z",
-        key: "18887p"
-      }
-    ]
-  ];
-  var MessageSquare = createLucideIcon("message-square", __iconNode17);
-
-  // node_modules/lucide-react/dist/esm/icons/package-check.js
-  var __iconNode18 = [
-    ["path", { d: "m16 16 2 2 4-4", key: "gfu2re" }],
-    [
-      "path",
-      {
-        d: "M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14",
-        key: "e7tb2h"
-      }
-    ],
-    ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }],
-    ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
-    ["line", { x1: "12", x2: "12", y1: "22", y2: "12", key: "a4e8g8" }]
-  ];
-  var PackageCheck = createLucideIcon("package-check", __iconNode18);
-
-  // node_modules/lucide-react/dist/esm/icons/package.js
-  var __iconNode19 = [
-    [
-      "path",
-      {
-        d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
-        key: "1a0edw"
-      }
-    ],
-    ["path", { d: "M12 22V12", key: "d0xqtd" }],
-    ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
-    ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }]
-  ];
-  var Package = createLucideIcon("package", __iconNode19);
-
-  // node_modules/lucide-react/dist/esm/icons/shopping-cart.js
-  var __iconNode20 = [
-    ["circle", { cx: "8", cy: "21", r: "1", key: "jimo8o" }],
-    ["circle", { cx: "19", cy: "21", r: "1", key: "13723u" }],
-    [
-      "path",
-      {
-        d: "M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12",
-        key: "9zh506"
-      }
-    ]
-  ];
-  var ShoppingCart = createLucideIcon("shopping-cart", __iconNode20);
-
-  // node_modules/lucide-react/dist/esm/icons/twitter.js
-  var __iconNode21 = [
-    [
-      "path",
-      {
-        d: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z",
-        key: "pff0z6"
-      }
-    ]
-  ];
-  var Twitter = createLucideIcon("twitter", __iconNode21);
-
-  // node_modules/lucide-react/dist/esm/icons/user-plus.js
-  var __iconNode22 = [
-    ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
-    ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
-    ["line", { x1: "19", x2: "19", y1: "8", y2: "14", key: "1bvyxn" }],
-    ["line", { x1: "22", x2: "16", y1: "11", y2: "11", key: "1shjgl" }]
-  ];
-  var UserPlus = createLucideIcon("user-plus", __iconNode22);
-
-  // node_modules/lucide-react/dist/esm/icons/user.js
-  var __iconNode23 = [
-    ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
-    ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
-  ];
-  var User = createLucideIcon("user", __iconNode23);
-
-  // node_modules/lucide-react/dist/esm/icons/x.js
-  var __iconNode24 = [
-    ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-    ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-  ];
-  var X = createLucideIcon("x", __iconNode24);
-
-  // src/components/Header.js
-  var Header = ({ cartItemCount, currentUser, onAuthClick, onSignOut, onCartClick, setView: setView2 }) => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react3.useState)(false);
-    const toggleMobileMenu = () => {
-      setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
-    const handleNavigationClick = (viewName) => {
-      setView2(viewName);
-      setIsMobileMenuOpen(false);
-    };
-    return /* @__PURE__ */ import_react3.default.createElement("header", { className: "bg-white shadow-md p-4 sticky top-0 z-50 rounded-b-xl" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "container mx-auto flex justify-between items-center px-4" }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => handleNavigationClick("home"),
-        className: "text-3xl font-bold text-purple-700 cursor-pointer focus:outline-none",
-        "aria-label": "Go to home page"
-      },
-      "BUKIBLOOM"
-    ), /* @__PURE__ */ import_react3.default.createElement("nav", { className: "hidden md:flex space-x-6 items-center" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("home"), className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300" }, "Home"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("services"), className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300" }, "Services"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("products"), className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300" }, "Products"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("booking"), className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300" }, "Book Now"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("contact"), className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300" }, "Contact"), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("dashboard"), className: "text-gray-700 hover:text-purple-600 transition duration-300 flex items-center" }, /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-1" }), " Dashboard"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: onSignOut, className: "text-red-500 hover:text-red-600 transition duration-300 flex items-center" }, /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-1" }), " Sign Out")) : /* @__PURE__ */ import_react3.default.createElement("button", { onClick: onAuthClick, className: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 flex items-center" }, /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-1" }), " Sign In / Sign Up"), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: onCartClick,
-        className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
-        "aria-label": "View shopping cart"
-      },
-      /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 cursor-pointer hover:text-purple-700 transition duration-300" }),
-      cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
-    )), /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden flex items-center space-x-4" }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: onCartClick,
-        className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
-        "aria-label": "View shopping cart"
-      },
-      /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 cursor-pointer hover:text-purple-700 transition duration-300" }),
-      cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: toggleMobileMenu,
-        className: "text-gray-600 hover:text-purple-700 focus:outline-none",
-        "aria-label": "Toggle mobile menu"
-      },
-      isMobileMenuOpen ? /* @__PURE__ */ import_react3.default.createElement(X, { className: "w-6 h-6" }) : /* @__PURE__ */ import_react3.default.createElement(Menu, { className: "w-6 h-6" })
-    ))), isMobileMenuOpen && /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden absolute top-16 left-0 w-full bg-white shadow-lg py-4 animate-slide-down" }, /* @__PURE__ */ import_react3.default.createElement("nav", { className: "flex flex-col items-center space-y-4" }, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("home"), className: "w-full text-gray-600 hover:bg-gray-100 py-2" }, "Home"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("services"), className: "w-full text-gray-600 hover:bg-gray-100 py-2" }, "Services"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("products"), className: "w-full text-gray-600 hover:bg-gray-100 py-2" }, "Products"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("booking"), className: "w-full text-gray-600 hover:bg-gray-100 py-2" }, "Book Now"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("contact"), className: "w-full text-gray-600 hover:bg-gray-100 py-2" }, "Contact"), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => handleNavigationClick("dashboard"), className: "w-full text-gray-700 hover:bg-gray-100 py-2" }, /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-2 inline-block" }), " Dashboard"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: onSignOut, className: "w-full text-red-500 hover:bg-gray-100 py-2" }, /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-2 inline-block" }), " Sign Out")) : /* @__PURE__ */ import_react3.default.createElement("button", { onClick: onAuthClick, className: "w-full bg-purple-600 text-white py-2 px-4 rounded-full mt-2" }, /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-2 inline-block" }), " Sign In / Sign Up"))));
-  };
-  Header.propTypes = {
-    cartItemCount: import_prop_types.default.number.isRequired,
-    currentUser: import_prop_types.default.object,
-    onAuthClick: import_prop_types.default.func.isRequired,
-    onSignOut: import_prop_types.default.func.isRequired,
-    onCartClick: import_prop_types.default.func.isRequired,
-    setView: import_prop_types.default.func.isRequired
-  };
-  var Header_default = Header;
-
-  // src/components/HeroSection.js
-  var import_react4 = __toESM(require_react());
-  var import_prop_types2 = __toESM(require_prop_types());
-  var HeroSection = ({
-    heading,
-    subheading,
-    bookButtonText,
-    onBookClick,
-    shopButtonText,
-    onShopClick,
-    backgroundImage
-  }) => {
-    return /* @__PURE__ */ import_react4.default.createElement(
-      "div",
-      {
-        className: "relative text-center py-20 px-4 bg-cover bg-center rounded-lg shadow-xl mb-12 overflow-hidden",
-        style: { backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none" }
-      },
-      backgroundImage && /* @__PURE__ */ import_react4.default.createElement("div", { className: "absolute inset-0 bg-black opacity-50" }),
-      /* @__PURE__ */ import_react4.default.createElement("div", { className: "relative z-10 text-white" }, /* @__PURE__ */ import_react4.default.createElement("h1", { className: "text-5xl font-extrabold mb-4 tracking-tight md:text-6xl" }, heading), /* @__PURE__ */ import_react4.default.createElement("p", { className: "text-xl max-w-3xl mx-auto mb-8" }, subheading), /* @__PURE__ */ import_react4.default.createElement("div", { className: "flex justify-center space-x-4" }, /* @__PURE__ */ import_react4.default.createElement(
-        "button",
-        {
-          onClick: onBookClick,
-          className: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        bookButtonText
-      ), /* @__PURE__ */ import_react4.default.createElement(
-        "button",
-        {
-          onClick: onShopClick,
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        shopButtonText
-      )))
-    );
-  };
-  HeroSection.propTypes = {
-    heading: import_prop_types2.default.string.isRequired,
-    subheading: import_prop_types2.default.string.isRequired,
-    bookButtonText: import_prop_types2.default.string,
-    onBookClick: import_prop_types2.default.func,
-    shopButtonText: import_prop_types2.default.string,
-    onShopClick: import_prop_types2.default.func,
-    backgroundImage: import_prop_types2.default.string
-    // New prop for background image URL
-  };
-  HeroSection.defaultProps = {
-    bookButtonText: "Book Now",
-    shopButtonText: "Shop Products"
-  };
-  var HeroSection_default = HeroSection;
-
-  // src/components/Footer.js
-  var import_react5 = __toESM(require_react());
-  var Footer = () => {
-    const socialLinks = [
-      { name: "Facebook", href: "https://facebook.com/bukibloom", Icon: Facebook },
-      { name: "Instagram", href: "https://instagram.com/bukibloom", Icon: Instagram },
-      { name: "Twitter", href: "https://twitter.com/bukibloom", Icon: Twitter }
-    ];
-    return /* @__PURE__ */ import_react5.default.createElement("footer", { className: "bg-gray-800 text-white py-8 px-6 text-center mt-12 rounded-t-xl" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "container mx-auto" }, /* @__PURE__ */ import_react5.default.createElement("p", { className: "mb-4 text-lg font-semibold" }, "\xA9 ", (/* @__PURE__ */ new Date()).getFullYear(), " Bukibloom Salon. All rights reserved."), /* @__PURE__ */ import_react5.default.createElement("div", { className: "flex justify-center space-x-6 mb-4" }, socialLinks.map((link) => /* @__PURE__ */ import_react5.default.createElement(
-      "a",
-      {
-        key: link.name,
-        href: link.href,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        className: "text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 flex items-center space-x-2",
-        "aria-label": link.name
-      },
-      /* @__PURE__ */ import_react5.default.createElement(link.Icon, { size: 24 }),
-      " ",
-      /* @__PURE__ */ import_react5.default.createElement("span", { className: "sr-only" }, link.name),
-      " "
-    ))), /* @__PURE__ */ import_react5.default.createElement("p", { className: "text-gray-500 text-sm" }, "Designed with ", /* @__PURE__ */ import_react5.default.createElement("span", { className: "text-red-400" }, "\u2665"), " for your beauty needs.")));
-  };
-  var Footer_default = Footer;
-
-  // src/components/AuthModal.js
-  var import_react8 = __toESM(require_react());
-
-  // src/components/InputField.js
-  var import_react6 = __toESM(require_react());
-  var InputField = ({
-    id,
-    label,
-    type = "text",
-    value,
-    onChange,
-    placeholder = "",
-    error = "",
-    required = false,
-    disabled = false
-  }) => {
-    return /* @__PURE__ */ import_react6.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react6.default.createElement("label", { htmlFor: id, className: "block text-gray-700 text-sm font-bold mb-2" }, label, " ", required && /* @__PURE__ */ import_react6.default.createElement("span", { className: "text-red-500" }, "*")), /* @__PURE__ */ import_react6.default.createElement(
-      "input",
-      {
-        type,
-        id,
-        value,
-        onChange,
-        placeholder,
-        required,
-        disabled,
-        className: `shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 ease-in-out
-                    ${error ? "border-red-500" : "border-gray-300"}`
-      }
-    ), error && /* @__PURE__ */ import_react6.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, error));
-  };
-  var InputField_default = InputField;
-
-  // src/utils/showMessage.js
-  var showMessage = (message, type = "info") => {
-    let messageBox = document.getElementById("message-box");
-    if (!messageBox) {
-      messageBox = document.createElement("div");
-      messageBox.id = "message-box";
-      document.body.appendChild(messageBox);
-    }
-    messageBox.textContent = message;
-    messageBox.className = `fixed bottom-4 right-4 p-4 rounded-lg shadow-lg text-white z-50 transition-opacity duration-300 `;
-    if (type === "success") {
-      messageBox.classList.add("bg-green-500");
-    } else if (type === "error") {
-      messageBox.classList.add("bg-red-500");
-    } else {
-      messageBox.classList.add("bg-blue-500");
-    }
-    messageBox.classList.remove("opacity-0");
-    messageBox.classList.add("opacity-100");
-    setTimeout(() => {
-      messageBox.classList.remove("opacity-100");
-      messageBox.classList.add("opacity-0");
-    }, 3e3);
-  };
-  var showMessage_default = showMessage;
-
-  // src/context/AuthContext.js
-  var import_react7 = __toESM(require_react());
-  var import_prop_types3 = __toESM(require_prop_types());
-  var AuthContext = (0, import_react7.createContext)(null);
-  var useAppwrite = () => {
-    const [client, setClient] = (0, import_react7.useState)(null);
-    const [account, setAccount] = (0, import_react7.useState)(null);
-    const [database, setDatabase] = (0, import_react7.useState)(null);
-    const [storage2, setStorage] = (0, import_react7.useState)(null);
-    const [currentUser, setCurrentUser] = (0, import_react7.useState)(null);
-    const [isLoading, setIsLoading] = (0, import_react7.useState)(true);
-    const [error, setError] = (0, import_react7.useState)(null);
-    const APPWRITE_PROJECT_ID = process.env.REACT_APP_APPWRITE_PROJECT_ID;
-    const APPWRITE_ENDPOINT = process.env.REACT_APP_APPWRITE_ENDPOINT;
-    (0, import_react7.useEffect)(() => {
-      if (typeof window.Appwrite === "undefined" || !APPWRITE_PROJECT_ID || !APPWRITE_ENDPOINT) {
-        console.error("Appwrite SDK or environment variables are not set. Please ensure the Appwrite SDK is loaded via a script tag and check your .env file.");
-        setIsLoading(false);
-        return;
-      }
-      try {
-        const appwriteClient = new window.Appwrite.Client().setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT_ID);
-        const appwriteAccount = new window.Appwrite.Account(appwriteClient);
-        const appwriteDatabase = new window.Appwrite.Databases(appwriteClient);
-        const appwriteStorage = new window.Appwrite.Storage(appwriteClient);
-        setClient(appwriteClient);
-        setAccount(appwriteAccount);
-        setDatabase(appwriteDatabase);
-        setStorage(appwriteStorage);
-        const checkUserSession = async () => {
-          try {
-            const loggedInUser = await appwriteAccount.get();
-            setCurrentUser(loggedInUser);
-          } catch (err) {
-            console.log("No active Appwrite session:", err.message);
-            setCurrentUser(null);
-          } finally {
-            setIsLoading(false);
-          }
-        };
-        checkUserSession();
-      } catch (err) {
-        console.error("Error initializing Appwrite services:", err);
-        setIsLoading(false);
-      }
-    }, [APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID]);
-    const handleAuthAction = (0, import_react7.useCallback)(async (action) => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        const result = await action();
-        setIsLoading(false);
-        return result;
-      } catch (err) {
-        console.error("Appwrite auth error:", err);
-        setError(err.message || "An unknown error occurred.");
-        setIsLoading(false);
-        throw err;
-      }
-    }, []);
-    const signUp = (0, import_react7.useCallback)(async (email, password, name) => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        const user = await account.create(window.Appwrite.ID.unique(), email, password, name);
-        await account.createEmailSession(email, password);
-        const loggedInUser = await account.get();
-        setCurrentUser(loggedInUser);
-        return loggedInUser;
-      });
-    }, [account, handleAuthAction]);
-    const signIn = (0, import_react7.useCallback)(async (email, password) => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        await account.createEmailSession(email, password);
-        const loggedInUser = await account.get();
-        setCurrentUser(loggedInUser);
-        return loggedInUser;
-      });
-    }, [account, handleAuthAction]);
-    const signOut = (0, import_react7.useCallback)(async () => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        await account.deleteSession("current");
-        setCurrentUser(null);
-      });
-    }, [account, handleAuthAction]);
-    const value = (0, import_react7.useMemo)(() => ({
-      client,
-      account,
-      database,
-      storage: storage2,
-      currentUser,
-      userId: currentUser ? currentUser.$id : null,
-      isLoading,
-      error,
-      signIn,
-      signUp,
-      signOut,
-      ID: window.Appwrite.ID,
-      // userRole would need to be fetched separately, for now it's a placeholder
-      userRole: null
-    }), [client, account, database, storage2, currentUser, isLoading, error, signIn, signUp, signOut]);
-    return value;
-  };
-  var AuthProvider = ({ children }) => {
-    const {
-      currentUser,
-      userId,
-      isLoading,
-      error,
-      signIn,
-      signUp,
-      signOut,
-      userRole
-    } = useAppwrite();
-    const contextValue = (0, import_react7.useMemo)(() => ({
-      currentUser,
-      userId,
-      isLoading,
-      error,
-      signIn,
-      signUp,
-      signOut,
-      userRole,
-      // Helper for role-based access control
-      isAdmin: userRole === "admin"
-    }), [currentUser, userId, isLoading, error, signIn, signUp, signOut, userRole]);
-    return /* @__PURE__ */ import_react7.default.createElement(AuthContext.Provider, { value: contextValue }, children);
-  };
-  AuthProvider.propTypes = {
-    children: import_prop_types3.default.node.isRequired
-  };
-  var useAuth = () => {
-    const context = (0, import_react7.useContext)(AuthContext);
-    if (context === void 0) {
-      throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
-  };
-
-  // src/components/AuthModal.js
-  var AuthModal = ({ isOpen, onClose }) => {
-    const { signIn, signUp, currentUser, isAuthReady } = useAuth();
-    const [isLogin, setIsLogin] = (0, import_react8.useState)(true);
-    const [formState, setFormState] = (0, import_react8.useState)({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
-    });
-    const [errors2, setErrors] = (0, import_react8.useState)({});
-    const [isLoading, setIsLoading] = (0, import_react8.useState)(false);
-    const modalRef = (0, import_react8.useRef)(null);
-    const handleChange = (e2) => {
-      const { name, value } = e2.target;
-      setFormState((prevState) => ({ ...prevState, [name]: value }));
-      setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-    };
-    const resetForm = () => {
-      setFormState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-      setErrors({});
-      setIsLogin(true);
-      setIsLoading(false);
-    };
-    (0, import_react8.useEffect)(() => {
-      if (isAuthReady && currentUser && isOpen) {
-        onClose();
-        resetForm();
-        showMessage_default(`Welcome, ${currentUser.name || currentUser.email}!`, "success");
-      }
-    }, [currentUser, isAuthReady, isOpen, onClose]);
-    (0, import_react8.useEffect)(() => {
-      if (isOpen && modalRef.current) {
-        modalRef.current.focus();
-        const handleKeyDown = (event) => {
-          if (event.key === "Tab") {
-            const focusableElements = modalRef.current.querySelectorAll(
-              'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-            if (event.shiftKey) {
-              if (document.activeElement === firstElement) {
-                lastElement.focus();
-                event.preventDefault();
-              }
-            } else {
-              if (document.activeElement === lastElement) {
-                firstElement.focus();
-                event.preventDefault();
-              }
-            }
-          }
-        };
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-      }
-    }, [isOpen]);
-    const validateForm = () => {
-      const { name, email, password, confirmPassword } = formState;
-      let newErrors = {};
-      let isValid = true;
-      if (!email.trim()) {
-        newErrors.email = "Email is required.";
-        isValid = false;
-      } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = "Email address is invalid.";
-        isValid = false;
-      }
-      if (!password.trim()) {
-        newErrors.password = "Password is required.";
-        isValid = false;
-      } else if (password.length < 6) {
-        newErrors.password = "Password must be at least 6 characters long.";
-        isValid = false;
-      }
-      if (!isLogin) {
-        if (!name.trim()) {
-          newErrors.name = "Name is required.";
-          isValid = false;
-        }
-        if (password !== confirmPassword) {
-          newErrors.confirmPassword = "Passwords do not match.";
-          isValid = false;
-        }
-      }
-      setErrors(newErrors);
-      return isValid;
-    };
-    const handleSubmit = async (e2) => {
-      e2.preventDefault();
-      if (!validateForm()) {
-        showMessage_default("Please correct the errors in the form.", "error");
-        return;
-      }
-      setIsLoading(true);
-      try {
-        if (isLogin) {
-          await signIn(formState.email, formState.password);
-        } else {
-          await signUp(formState.email, formState.password, formState.name);
-        }
-      } catch (error) {
-        console.error("Auth error:", error);
-        showMessage_default(error.message || "An authentication error occurred.", "error");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (!isOpen) return null;
-    return /* @__PURE__ */ import_react8.default.createElement(
-      "div",
-      {
-        className: "fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 animate-fade-in",
-        "aria-labelledby": "auth-modal-title",
-        role: "dialog",
-        "aria-modal": "true",
-        onClick: onClose
-      },
-      /* @__PURE__ */ import_react8.default.createElement(
-        "div",
-        {
-          ref: modalRef,
-          className: "bg-white rounded-lg shadow-2xl p-8 w-full max-w-md mx-4 transform transition-all duration-300 scale-100 opacity-100",
-          onClick: (e2) => e2.stopPropagation(),
-          tabIndex: "-1"
-        },
-        /* @__PURE__ */ import_react8.default.createElement("div", { className: "flex justify-between items-center mb-6" }, /* @__PURE__ */ import_react8.default.createElement("h2", { id: "auth-modal-title", className: "text-3xl font-bold text-gray-800" }, isLogin ? "Login" : "Sign Up"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: onClose, className: "text-gray-500 hover:text-gray-700 transition duration-200", "aria-label": "Close modal" }, /* @__PURE__ */ import_react8.default.createElement(X, { className: "w-7 h-7" }))),
-        /* @__PURE__ */ import_react8.default.createElement("form", { onSubmit: handleSubmit }, !isLogin && /* @__PURE__ */ import_react8.default.createElement(
-          InputField_default,
-          {
-            id: "name",
-            name: "name",
-            label: "Full Name",
-            type: "text",
-            value: formState.name,
-            onChange: handleChange,
-            error: errors2.name,
-            required: true,
-            disabled: isLoading
-          }
-        ), /* @__PURE__ */ import_react8.default.createElement(
-          InputField_default,
-          {
-            id: "email",
-            name: "email",
-            label: "Email",
-            type: "email",
-            value: formState.email,
-            onChange: handleChange,
-            error: errors2.email,
-            required: true,
-            disabled: isLoading
-          }
-        ), /* @__PURE__ */ import_react8.default.createElement(
-          InputField_default,
-          {
-            id: "password",
-            name: "password",
-            label: "Password",
-            type: "password",
-            value: formState.password,
-            onChange: handleChange,
-            error: errors2.password,
-            required: true,
-            disabled: isLoading
-          }
-        ), !isLogin && /* @__PURE__ */ import_react8.default.createElement(
-          InputField_default,
-          {
-            id: "confirmPassword",
-            name: "confirmPassword",
-            label: "Confirm Password",
-            type: "password",
-            value: formState.confirmPassword,
-            onChange: handleChange,
-            error: errors2.confirmPassword,
-            required: true,
-            disabled: isLoading
-          }
-        ), /* @__PURE__ */ import_react8.default.createElement(
-          "button",
-          {
-            type: "submit",
-            className: `w-full flex items-center justify-center mt-6 py-3 px-4 rounded-lg font-bold text-white transition duration-300 transform hover:scale-105
-                            ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-purple-600 hover:bg-purple-700"}`,
-            disabled: isLoading
-          },
-          isLoading ? /* @__PURE__ */ import_react8.default.createElement("svg", { className: "animate-spin h-5 w-5 text-white mr-3", viewBox: "0 0 24 24" }, /* @__PURE__ */ import_react8.default.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }), /* @__PURE__ */ import_react8.default.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })) : isLogin ? /* @__PURE__ */ import_react8.default.createElement(LogIn, { className: "mr-2", size: 20 }) : /* @__PURE__ */ import_react8.default.createElement(UserPlus, { className: "mr-2", size: 20 }),
-          isLoading ? "Processing..." : isLogin ? "Login" : "Sign Up"
-        )),
-        /* @__PURE__ */ import_react8.default.createElement("p", { className: "text-center text-gray-600 text-sm mt-6" }, isLogin ? "Don't have an account?" : "Already have an account?", /* @__PURE__ */ import_react8.default.createElement(
-          "button",
-          {
-            onClick: () => setIsLogin(!isLogin),
-            className: "text-purple-600 hover:text-purple-800 font-semibold ml-1 transition duration-200",
-            disabled: isLoading
-          },
-          isLogin ? "Sign Up" : "Login"
-        ))
-      )
-    );
-  };
-  var AuthModal_default = AuthModal;
-
-  // src/views/ProductsView.js
-  var import_react11 = __toESM(require_react());
-
-  // src/context/CartContext.js
-  var import_react9 = __toESM(require_react());
-  var import_prop_types4 = __toESM(require_prop_types());
-  var CartContext = (0, import_react9.createContext)();
-  var CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = (0, import_react9.useState)([]);
-    const [error, setError] = (0, import_react9.useState)(null);
-    const handleCartError = (0, import_react9.useCallback)((message) => {
-      setError(message);
-      showMessage_default(message, "error");
-    }, []);
-    const handleAddToCart = (0, import_react9.useCallback)((product) => {
-      try {
-        setCartItems((prevItems) => {
-          const existingItem = prevItems.find((item) => item.id === product.id);
-          if (existingItem) {
-            return prevItems.map(
-              (item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-            );
-          } else {
-            return [...prevItems, { ...product, quantity: 1 }];
-          }
-        });
-        showMessage_default(`${product.name} added to cart!`, "success");
-      } catch (err) {
-        handleCartError(err.message);
-      }
-    }, [handleCartError]);
-    const handleRemoveFromCart = (0, import_react9.useCallback)((productId) => {
-      setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-      showMessage_default("Item removed from cart.", "info");
-    }, []);
-    const handleUpdateQuantity = (0, import_react9.useCallback)((productId, quantity) => {
-      setCartItems(
-        (prevItems) => prevItems.map(
-          (item) => item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
-        )
-      );
-    }, []);
-    const clearCart = (0, import_react9.useCallback)(() => {
-      setCartItems([]);
-      showMessage_default("Cart cleared.", "info");
-    }, []);
-    const handleCheckout = (0, import_react9.useCallback)(() => {
-      showMessage_default("Proceeding to checkout!", "info");
-      clearCart();
-    }, [clearCart]);
-    const getTotalPrice = (0, import_react9.useCallback)(() => {
-      return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    }, [cartItems]);
-    const contextValue = (0, import_react9.useMemo)(() => ({
-      cartItems,
-      cartItemCount: cartItems.reduce((total, item) => total + item.quantity, 0),
-      cartTotal: getTotalPrice(),
-      handleAddToCart,
-      handleRemoveFromCart,
-      handleUpdateQuantity,
-      handleCheckout,
-      clearCart,
-      getTotalPrice,
-      error
-    }), [
-      cartItems,
-      handleAddToCart,
-      handleRemoveFromCart,
-      handleUpdateQuantity,
-      handleCheckout,
-      clearCart,
-      getTotalPrice,
-      error
-    ]);
-    return /* @__PURE__ */ import_react9.default.createElement(CartContext.Provider, { value: contextValue }, children);
-  };
-  CartProvider.propTypes = {
-    children: import_prop_types4.default.node.isRequired
-  };
-  var useCart = () => {
-    const context = (0, import_react9.useContext)(CartContext);
-    if (context === void 0) {
-      throw new Error("useCart must be used within a CartProvider");
-    }
-    return context;
-  };
-
-  // src/hooks/useAppwrite.js
-  var import_react10 = __toESM(require_react());
-  var AppwriteContext = (0, import_react10.createContext)(null);
-  var useAppwrite2 = () => {
-    const [client, setClient] = (0, import_react10.useState)(null);
-    const [account, setAccount] = (0, import_react10.useState)(null);
-    const [database, setDatabase] = (0, import_react10.useState)(null);
-    const [storage2, setStorage] = (0, import_react10.useState)(null);
-    const [currentUser, setCurrentUser] = (0, import_react10.useState)(null);
-    const [isLoading, setIsLoading] = (0, import_react10.useState)(true);
-    const [error, setError] = (0, import_react10.useState)(null);
-    const APPWRITE_PROJECT_ID = process.env.REACT_APP_APPWRITE_PROJECT_ID;
-    const APPWRITE_ENDPOINT = process.env.REACT_APP_APPWRITE_ENDPOINT;
-    (0, import_react10.useEffect)(() => {
-      if (typeof window.Appwrite === "undefined" || !APPWRITE_PROJECT_ID || !APPWRITE_ENDPOINT) {
-        console.error("Appwrite SDK or environment variables are not set. Please ensure the Appwrite SDK is loaded via a script tag and check your .env file.");
-        setIsLoading(false);
-        return;
-      }
-      try {
-        const appwriteClient = new window.Appwrite.Client().setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT_ID);
-        const appwriteAccount = new window.Appwrite.Account(appwriteClient);
-        const appwriteDatabase = new window.Appwrite.Databases(appwriteClient);
-        const appwriteStorage = new window.Appwrite.Storage(appwriteClient);
-        setClient(appwriteClient);
-        setAccount(appwriteAccount);
-        setDatabase(appwriteDatabase);
-        setStorage(appwriteStorage);
-        const checkUserSession = async () => {
-          try {
-            const loggedInUser = await appwriteAccount.get();
-            setCurrentUser(loggedInUser);
-          } catch (err) {
-            console.log("No active Appwrite session:", err.message);
-            setCurrentUser(null);
-          } finally {
-            setIsLoading(false);
-          }
-        };
-        checkUserSession();
-      } catch (err) {
-        console.error("Error initializing Appwrite services:", err);
-        setIsLoading(false);
-      }
-    }, [APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID]);
-    const handleAuthAction = (0, import_react10.useCallback)(async (action) => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        const result = await action();
-        setIsLoading(false);
-        return result;
-      } catch (err) {
-        console.error("Appwrite auth error:", err);
-        setError(err.message || "An unknown error occurred.");
-        setIsLoading(false);
-        throw err;
-      }
-    }, []);
-    const signUp = (0, import_react10.useCallback)(async (email, password, name) => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        const user = await account.create(window.Appwrite.ID.unique(), email, password, name);
-        await account.createEmailSession(email, password);
-        const loggedInUser = await account.get();
-        setCurrentUser(loggedInUser);
-        return loggedInUser;
-      });
-    }, [account, handleAuthAction]);
-    const signIn = (0, import_react10.useCallback)(async (email, password) => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        await account.createEmailSession(email, password);
-        const loggedInUser = await account.get();
-        setCurrentUser(loggedInUser);
-        return loggedInUser;
-      });
-    }, [account, handleAuthAction]);
-    const signOut = (0, import_react10.useCallback)(async () => {
-      if (!account) {
-        throw new Error("Appwrite Account not initialized.");
-      }
-      return handleAuthAction(async () => {
-        await account.deleteSession("current");
-        setCurrentUser(null);
-      });
-    }, [account, handleAuthAction]);
-    const value = (0, import_react10.useMemo)(() => ({
-      client,
-      account,
-      database,
-      storage: storage2,
-      currentUser,
-      userId: currentUser ? currentUser.$id : null,
-      isLoading,
-      error,
-      signIn,
-      signUp,
-      signOut,
-      ID: window.Appwrite.ID
-    }), [client, account, database, storage2, currentUser, isLoading, error, signIn, signUp, signOut]);
-    return value;
-  };
-  var AppwriteProvider = ({ children }) => {
-    const appwrite = useAppwrite2();
-    return /* @__PURE__ */ import_react10.default.createElement(AppwriteContext.Provider, { value: appwrite }, children);
-  };
-  var useAppwriteContext = () => {
-    const context = (0, import_react10.useContext)(AppwriteContext);
-    if (context === void 0) {
-      throw new Error("useAppwriteContext must be used within an AppwriteProvider");
-    }
-    return context;
-  };
-
-  // node_modules/appwrite/dist/esm/sdk.js
-  function __awaiter(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e2) {
-          reject(e2);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  }
-  function __classPrivateFieldGet(receiver, state, kind, f3) {
-    if (kind === "a" && !f3) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f3 : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f3 : kind === "a" ? f3.call(receiver) : f3 ? f3.value : state.get(receiver);
-  }
-  var Query = class {
-    /**
-     * Constructor for Query class.
-     *
-     * @param {string} method
-     * @param {AttributesTypes} attribute
-     * @param {QueryTypes} values
-     */
-    constructor(method, attribute, values) {
-      this.method = method;
-      this.attribute = attribute;
-      if (values !== void 0) {
-        if (Array.isArray(values)) {
-          this.values = values;
-        } else {
-          this.values = [values];
-        }
-      }
-    }
-    /**
-     * Convert the query object to a JSON string.
-     *
-     * @returns {string}
-     */
-    toString() {
-      return JSON.stringify({
-        method: this.method,
-        attribute: this.attribute,
-        values: this.values
-      });
-    }
-  };
-  Query.equal = (attribute, value) => new Query("equal", attribute, value).toString();
-  Query.notEqual = (attribute, value) => new Query("notEqual", attribute, value).toString();
-  Query.lessThan = (attribute, value) => new Query("lessThan", attribute, value).toString();
-  Query.lessThanEqual = (attribute, value) => new Query("lessThanEqual", attribute, value).toString();
-  Query.greaterThan = (attribute, value) => new Query("greaterThan", attribute, value).toString();
-  Query.greaterThanEqual = (attribute, value) => new Query("greaterThanEqual", attribute, value).toString();
-  Query.isNull = (attribute) => new Query("isNull", attribute).toString();
-  Query.isNotNull = (attribute) => new Query("isNotNull", attribute).toString();
-  Query.between = (attribute, start, end) => new Query("between", attribute, [start, end]).toString();
-  Query.startsWith = (attribute, value) => new Query("startsWith", attribute, value).toString();
-  Query.endsWith = (attribute, value) => new Query("endsWith", attribute, value).toString();
-  Query.select = (attributes) => new Query("select", void 0, attributes).toString();
-  Query.search = (attribute, value) => new Query("search", attribute, value).toString();
-  Query.orderDesc = (attribute) => new Query("orderDesc", attribute).toString();
-  Query.orderAsc = (attribute) => new Query("orderAsc", attribute).toString();
-  Query.cursorAfter = (documentId) => new Query("cursorAfter", void 0, documentId).toString();
-  Query.cursorBefore = (documentId) => new Query("cursorBefore", void 0, documentId).toString();
-  Query.limit = (limit) => new Query("limit", void 0, limit).toString();
-  Query.offset = (offset) => new Query("offset", void 0, offset).toString();
-  Query.contains = (attribute, value) => new Query("contains", attribute, value).toString();
-  Query.or = (queries) => new Query("or", void 0, queries.map((query) => JSON.parse(query))).toString();
-  Query.and = (queries) => new Query("and", void 0, queries.map((query) => JSON.parse(query))).toString();
-  var AppwriteException = class extends Error {
-    /**
-     * Initializes a Appwrite Exception.
-     *
-     * @param {string} message - The error message.
-     * @param {number} code - The error code. Default is 0.
-     * @param {string} type - The error type. Default is an empty string.
-     * @param {string} response - The response string. Default is an empty string.
-     */
-    constructor(message, code = 0, type = "", response = "") {
-      super(message);
-      this.name = "AppwriteException";
-      this.message = message;
-      this.code = code;
-      this.type = type;
-      this.response = response;
-    }
-  };
-  var Client = class _Client {
-    constructor() {
-      this.config = {
-        endpoint: "https://cloud.appwrite.io/v1",
-        endpointRealtime: "",
-        project: "",
-        jwt: "",
-        locale: "",
-        session: "",
-        devkey: ""
-      };
-      this.headers = {
-        "x-sdk-name": "Web",
-        "x-sdk-platform": "client",
-        "x-sdk-language": "web",
-        "x-sdk-version": "18.1.1",
-        "X-Appwrite-Response-Format": "1.7.0"
-      };
-      this.realtime = {
-        socket: void 0,
-        timeout: void 0,
-        heartbeat: void 0,
-        url: "",
-        channels: /* @__PURE__ */ new Set(),
-        subscriptions: /* @__PURE__ */ new Map(),
-        subscriptionsCounter: 0,
-        reconnect: true,
-        reconnectAttempts: 0,
-        lastMessage: void 0,
-        connect: () => {
-          clearTimeout(this.realtime.timeout);
-          this.realtime.timeout = window === null || window === void 0 ? void 0 : window.setTimeout(() => {
-            this.realtime.createSocket();
-          }, 50);
-        },
-        getTimeout: () => {
-          switch (true) {
-            case this.realtime.reconnectAttempts < 5:
-              return 1e3;
-            case this.realtime.reconnectAttempts < 15:
-              return 5e3;
-            case this.realtime.reconnectAttempts < 100:
-              return 1e4;
-            default:
-              return 6e4;
-          }
-        },
-        createHeartbeat: () => {
-          if (this.realtime.heartbeat) {
-            clearTimeout(this.realtime.heartbeat);
-          }
-          this.realtime.heartbeat = window === null || window === void 0 ? void 0 : window.setInterval(() => {
-            var _a2;
-            (_a2 = this.realtime.socket) === null || _a2 === void 0 ? void 0 : _a2.send(JSON.stringify({
-              type: "ping"
-            }));
-          }, 2e4);
-        },
-        createSocket: () => {
-          var _a2, _b, _c;
-          if (this.realtime.channels.size < 1) {
-            this.realtime.reconnect = false;
-            (_a2 = this.realtime.socket) === null || _a2 === void 0 ? void 0 : _a2.close();
-            return;
-          }
-          const channels = new URLSearchParams();
-          channels.set("project", this.config.project);
-          this.realtime.channels.forEach((channel) => {
-            channels.append("channels[]", channel);
-          });
-          const url = this.config.endpointRealtime + "/realtime?" + channels.toString();
-          if (url !== this.realtime.url || // Check if URL is present
-          !this.realtime.socket || // Check if WebSocket has not been created
-          ((_b = this.realtime.socket) === null || _b === void 0 ? void 0 : _b.readyState) > WebSocket.OPEN) {
-            if (this.realtime.socket && ((_c = this.realtime.socket) === null || _c === void 0 ? void 0 : _c.readyState) < WebSocket.CLOSING) {
-              this.realtime.reconnect = false;
-              this.realtime.socket.close();
-            }
-            this.realtime.url = url;
-            this.realtime.socket = new WebSocket(url);
-            this.realtime.socket.addEventListener("message", this.realtime.onMessage);
-            this.realtime.socket.addEventListener("open", (_event) => {
-              this.realtime.reconnectAttempts = 0;
-              this.realtime.createHeartbeat();
-            });
-            this.realtime.socket.addEventListener("close", (event) => {
-              var _a3, _b2, _c2;
-              if (!this.realtime.reconnect || ((_b2 = (_a3 = this.realtime) === null || _a3 === void 0 ? void 0 : _a3.lastMessage) === null || _b2 === void 0 ? void 0 : _b2.type) === "error" && // Check if last message was of type error
-              ((_c2 = this.realtime) === null || _c2 === void 0 ? void 0 : _c2.lastMessage.data).code === 1008) {
-                this.realtime.reconnect = true;
-                return;
-              }
-              const timeout = this.realtime.getTimeout();
-              console.error(`Realtime got disconnected. Reconnect will be attempted in ${timeout / 1e3} seconds.`, event.reason);
-              setTimeout(() => {
-                this.realtime.reconnectAttempts++;
-                this.realtime.createSocket();
-              }, timeout);
-            });
-          }
-        },
-        onMessage: (event) => {
-          var _a2, _b;
-          try {
-            const message = JSON.parse(event.data);
-            this.realtime.lastMessage = message;
-            switch (message.type) {
-              case "connected":
-                const cookie = JSON.parse((_a2 = window.localStorage.getItem("cookieFallback")) !== null && _a2 !== void 0 ? _a2 : "{}");
-                const session = cookie === null || cookie === void 0 ? void 0 : cookie[`a_session_${this.config.project}`];
-                const messageData = message.data;
-                if (session && !messageData.user) {
-                  (_b = this.realtime.socket) === null || _b === void 0 ? void 0 : _b.send(JSON.stringify({
-                    type: "authentication",
-                    data: {
-                      session
-                    }
-                  }));
-                }
-                break;
-              case "event":
-                let data = message.data;
-                if (data === null || data === void 0 ? void 0 : data.channels) {
-                  const isSubscribed = data.channels.some((channel) => this.realtime.channels.has(channel));
-                  if (!isSubscribed)
-                    return;
-                  this.realtime.subscriptions.forEach((subscription) => {
-                    if (data.channels.some((channel) => subscription.channels.includes(channel))) {
-                      setTimeout(() => subscription.callback(data));
-                    }
-                  });
-                }
-                break;
-              case "pong":
-                break;
-              // Handle pong response if needed
-              case "error":
-                throw message.data;
-              default:
-                break;
-            }
-          } catch (e2) {
-            console.error(e2);
-          }
-        },
-        cleanUp: (channels) => {
-          this.realtime.channels.forEach((channel) => {
-            if (channels.includes(channel)) {
-              let found = Array.from(this.realtime.subscriptions).some(([_key, subscription]) => {
-                return subscription.channels.includes(channel);
-              });
-              if (!found) {
-                this.realtime.channels.delete(channel);
-              }
-            }
-          });
-        }
-      };
-    }
-    /**
-     * Set Endpoint
-     *
-     * Your project endpoint
-     *
-     * @param {string} endpoint
-     *
-     * @returns {this}
-     */
-    setEndpoint(endpoint) {
-      if (!endpoint.startsWith("http://") && !endpoint.startsWith("https://")) {
-        throw new AppwriteException("Invalid endpoint URL: " + endpoint);
-      }
-      this.config.endpoint = endpoint;
-      this.config.endpointRealtime = endpoint.replace("https://", "wss://").replace("http://", "ws://");
-      return this;
-    }
-    /**
-     * Set Realtime Endpoint
-     *
-     * @param {string} endpointRealtime
-     *
-     * @returns {this}
-     */
-    setEndpointRealtime(endpointRealtime) {
-      if (!endpointRealtime.startsWith("ws://") && !endpointRealtime.startsWith("wss://")) {
-        throw new AppwriteException("Invalid realtime endpoint URL: " + endpointRealtime);
-      }
-      this.config.endpointRealtime = endpointRealtime;
-      return this;
-    }
-    /**
-     * Set Project
-     *
-     * Your project ID
-     *
-     * @param value string
-     *
-     * @return {this}
-     */
-    setProject(value) {
-      this.headers["X-Appwrite-Project"] = value;
-      this.config.project = value;
-      return this;
-    }
-    /**
-     * Set JWT
-     *
-     * Your secret JSON Web Token
-     *
-     * @param value string
-     *
-     * @return {this}
-     */
-    setJWT(value) {
-      this.headers["X-Appwrite-JWT"] = value;
-      this.config.jwt = value;
-      return this;
-    }
-    /**
-     * Set Locale
-     *
-     * @param value string
-     *
-     * @return {this}
-     */
-    setLocale(value) {
-      this.headers["X-Appwrite-Locale"] = value;
-      this.config.locale = value;
-      return this;
-    }
-    /**
-     * Set Session
-     *
-     * The user session to authenticate with
-     *
-     * @param value string
-     *
-     * @return {this}
-     */
-    setSession(value) {
-      this.headers["X-Appwrite-Session"] = value;
-      this.config.session = value;
-      return this;
-    }
-    /**
-     * Set DevKey
-     *
-     * Your secret dev API key
-     *
-     * @param value string
-     *
-     * @return {this}
-     */
-    setDevKey(value) {
-      this.headers["X-Appwrite-Dev-Key"] = value;
-      this.config.devkey = value;
-      return this;
-    }
-    /**
-     * Subscribes to Appwrite events and passes you the payload in realtime.
-     *
-     * @param {string|string[]} channels
-     * Channel to subscribe - pass a single channel as a string or multiple with an array of strings.
-     *
-     * Possible channels are:
-     * - account
-     * - collections
-     * - collections.[ID]
-     * - collections.[ID].documents
-     * - documents
-     * - documents.[ID]
-     * - files
-     * - files.[ID]
-     * - executions
-     * - executions.[ID]
-     * - functions.[ID]
-     * - teams
-     * - teams.[ID]
-     * - memberships
-     * - memberships.[ID]
-     * @param {(payload: RealtimeMessage) => void} callback Is called on every realtime update.
-     * @returns {() => void} Unsubscribes from events.
-     */
-    subscribe(channels, callback) {
-      let channelArray = typeof channels === "string" ? [channels] : channels;
-      channelArray.forEach((channel) => this.realtime.channels.add(channel));
-      const counter = this.realtime.subscriptionsCounter++;
-      this.realtime.subscriptions.set(counter, {
-        channels: channelArray,
-        callback
-      });
-      this.realtime.connect();
-      return () => {
-        this.realtime.subscriptions.delete(counter);
-        this.realtime.cleanUp(channelArray);
-        this.realtime.connect();
-      };
-    }
-    prepareRequest(method, url, headers = {}, params = {}) {
-      method = method.toUpperCase();
-      headers = Object.assign({}, this.headers, headers);
-      if (typeof window !== "undefined" && window.localStorage) {
-        const cookieFallback = window.localStorage.getItem("cookieFallback");
-        if (cookieFallback) {
-          headers["X-Fallback-Cookies"] = cookieFallback;
-        }
-      }
-      let options = {
-        method,
-        headers
-      };
-      if (headers["X-Appwrite-Dev-Key"] === void 0) {
-        options.credentials = "include";
-      }
-      if (method === "GET") {
-        for (const [key, value] of Object.entries(_Client.flatten(params))) {
-          url.searchParams.append(key, value);
-        }
-      } else {
-        switch (headers["content-type"]) {
-          case "application/json":
-            options.body = JSON.stringify(params);
-            break;
-          case "multipart/form-data":
-            const formData = new FormData();
-            for (const [key, value] of Object.entries(params)) {
-              if (value instanceof File) {
-                formData.append(key, value, value.name);
-              } else if (Array.isArray(value)) {
-                for (const nestedValue of value) {
-                  formData.append(`${key}[]`, nestedValue);
-                }
-              } else {
-                formData.append(key, value);
-              }
-            }
-            options.body = formData;
-            delete headers["content-type"];
-            break;
-        }
-      }
-      return { uri: url.toString(), options };
-    }
-    chunkedUpload(method, url, headers = {}, originalPayload = {}, onProgress) {
-      return __awaiter(this, void 0, void 0, function* () {
-        const file = Object.values(originalPayload).find((value) => value instanceof File);
-        if (!file) {
-          throw new Error("File not found in payload");
-        }
-        if (file.size <= _Client.CHUNK_SIZE) {
-          return yield this.call(method, url, headers, originalPayload);
-        }
-        let start = 0;
-        let response = null;
-        while (start < file.size) {
-          let end = start + _Client.CHUNK_SIZE;
-          if (end >= file.size) {
-            end = file.size;
-          }
-          headers["content-range"] = `bytes ${start}-${end - 1}/${file.size}`;
-          const chunk = file.slice(start, end);
-          let payload = Object.assign(Object.assign({}, originalPayload), { file: new File([chunk], file.name) });
-          response = yield this.call(method, url, headers, payload);
-          if (onProgress && typeof onProgress === "function") {
-            onProgress({
-              $id: response.$id,
-              progress: Math.round(end / file.size * 100),
-              sizeUploaded: end,
-              chunksTotal: Math.ceil(file.size / _Client.CHUNK_SIZE),
-              chunksUploaded: Math.ceil(end / _Client.CHUNK_SIZE)
-            });
-          }
-          if (response && response.$id) {
-            headers["x-appwrite-id"] = response.$id;
-          }
-          start = end;
-        }
-        return response;
-      });
-    }
-    ping() {
-      return __awaiter(this, void 0, void 0, function* () {
-        return this.call("GET", new URL(this.config.endpoint + "/ping"));
-      });
-    }
-    call(method, url, headers = {}, params = {}, responseType = "json") {
-      var _a2, _b;
-      return __awaiter(this, void 0, void 0, function* () {
-        const { uri, options } = this.prepareRequest(method, url, headers, params);
-        let data = null;
-        const response = yield fetch(uri, options);
-        if (response.type === "opaque") {
-          throw new AppwriteException(`Invalid Origin. Register your new client (${window.location.host}) as a new Web platform on your project console dashboard`, 403, "forbidden", "");
-        }
-        const warnings = response.headers.get("x-appwrite-warning");
-        if (warnings) {
-          warnings.split(";").forEach((warning) => console.warn("Warning: " + warning));
-        }
-        if ((_a2 = response.headers.get("content-type")) === null || _a2 === void 0 ? void 0 : _a2.includes("application/json")) {
-          data = yield response.json();
-        } else if (responseType === "arrayBuffer") {
-          data = yield response.arrayBuffer();
-        } else {
-          data = {
-            message: yield response.text()
-          };
-        }
-        if (400 <= response.status) {
-          let responseText = "";
-          if (((_b = response.headers.get("content-type")) === null || _b === void 0 ? void 0 : _b.includes("application/json")) || responseType === "arrayBuffer") {
-            responseText = JSON.stringify(data);
-          } else {
-            responseText = data === null || data === void 0 ? void 0 : data.message;
-          }
-          throw new AppwriteException(data === null || data === void 0 ? void 0 : data.message, response.status, data === null || data === void 0 ? void 0 : data.type, responseText);
-        }
-        const cookieFallback = response.headers.get("X-Fallback-Cookies");
-        if (typeof window !== "undefined" && window.localStorage && cookieFallback) {
-          window.console.warn("Appwrite is using localStorage for session management. Increase your security by adding a custom domain as your API endpoint.");
-          window.localStorage.setItem("cookieFallback", cookieFallback);
-        }
-        return data;
-      });
-    }
-    static flatten(data, prefix = "") {
-      let output = {};
-      for (const [key, value] of Object.entries(data)) {
-        let finalKey = prefix ? prefix + "[" + key + "]" : key;
-        if (Array.isArray(value)) {
-          output = Object.assign(Object.assign({}, output), _Client.flatten(value, finalKey));
-        } else {
-          output[finalKey] = value;
-        }
-      }
-      return output;
-    }
-  };
-  Client.CHUNK_SIZE = 1024 * 1024 * 5;
-  var Service = class _Service {
-    constructor(client) {
-      this.client = client;
-    }
-    static flatten(data, prefix = "") {
-      let output = {};
-      for (const [key, value] of Object.entries(data)) {
-        let finalKey = prefix ? prefix + "[" + key + "]" : key;
-        if (Array.isArray(value)) {
-          output = Object.assign(Object.assign({}, output), _Service.flatten(value, finalKey));
-        } else {
-          output[finalKey] = value;
-        }
-      }
-      return output;
-    }
-  };
-  Service.CHUNK_SIZE = 5 * 1024 * 1024;
-  var Permission = class {
-  };
-  Permission.read = (role) => {
-    return `read("${role}")`;
-  };
-  Permission.write = (role) => {
-    return `write("${role}")`;
-  };
-  Permission.create = (role) => {
-    return `create("${role}")`;
-  };
-  Permission.update = (role) => {
-    return `update("${role}")`;
-  };
-  Permission.delete = (role) => {
-    return `delete("${role}")`;
-  };
-  var Role = class {
-    /**
-     * Grants access to anyone.
-     *
-     * This includes authenticated and unauthenticated users.
-     *
-     * @returns {string}
-     */
-    static any() {
-      return "any";
-    }
-    /**
-     * Grants access to a specific user by user ID.
-     *
-     * You can optionally pass verified or unverified for
-     * `status` to target specific types of users.
-     *
-     * @param {string} id
-     * @param {string} status
-     * @returns {string}
-     */
-    static user(id, status = "") {
-      if (status === "") {
-        return `user:${id}`;
-      }
-      return `user:${id}/${status}`;
-    }
-    /**
-     * Grants access to any authenticated or anonymous user.
-     *
-     * You can optionally pass verified or unverified for
-     * `status` to target specific types of users.
-     *
-     * @param {string} status
-     * @returns {string}
-     */
-    static users(status = "") {
-      if (status === "") {
-        return "users";
-      }
-      return `users/${status}`;
-    }
-    /**
-     * Grants access to any guest user without a session.
-     *
-     * Authenticated users don't have access to this role.
-     *
-     * @returns {string}
-     */
-    static guests() {
-      return "guests";
-    }
-    /**
-     * Grants access to a team by team ID.
-     *
-     * You can optionally pass a role for `role` to target
-     * team members with the specified role.
-     *
-     * @param {string} id
-     * @param {string} role
-     * @returns {string}
-     */
-    static team(id, role = "") {
-      if (role === "") {
-        return `team:${id}`;
-      }
-      return `team:${id}/${role}`;
-    }
-    /**
-     * Grants access to a specific member of a team.
-     *
-     * When the member is removed from the team, they will
-     * no longer have access.
-     *
-     * @param {string} id
-     * @returns {string}
-     */
-    static member(id) {
-      return `member:${id}`;
-    }
-    /**
-     * Grants access to a user with the specified label.
-     *
-     * @param {string} name
-     * @returns  {string}
-     */
-    static label(name) {
-      return `label:${name}`;
-    }
-  };
-  var _a;
-  var _ID_hexTimestamp;
-  var ID2 = class _ID {
-    /**
-     * Uses the provided ID as the ID for the resource.
-     *
-     * @param {string} id
-     * @returns {string}
-     */
-    static custom(id) {
-      return id;
-    }
-    /**
-     * Have Appwrite generate a unique ID for you.
-     *
-     * @param {number} padding. Default is 7.
-     * @returns {string}
-     */
-    static unique(padding = 7) {
-      const baseId = __classPrivateFieldGet(_ID, _a, "m", _ID_hexTimestamp).call(_ID);
-      let randomPadding = "";
-      for (let i2 = 0; i2 < padding; i2++) {
-        const randomHexDigit = Math.floor(Math.random() * 16).toString(16);
-        randomPadding += randomHexDigit;
-      }
-      return baseId + randomPadding;
-    }
-  };
-  _a = ID2, _ID_hexTimestamp = function _ID_hexTimestamp2() {
-    const now = /* @__PURE__ */ new Date();
-    const sec = Math.floor(now.getTime() / 1e3);
-    const msec = now.getMilliseconds();
-    const hexTimestamp = sec.toString(16) + msec.toString(16).padStart(5, "0");
-    return hexTimestamp;
-  };
-  var AuthenticatorType;
-  (function(AuthenticatorType2) {
-    AuthenticatorType2["Totp"] = "totp";
-  })(AuthenticatorType || (AuthenticatorType = {}));
-  var AuthenticationFactor;
-  (function(AuthenticationFactor2) {
-    AuthenticationFactor2["Email"] = "email";
-    AuthenticationFactor2["Phone"] = "phone";
-    AuthenticationFactor2["Totp"] = "totp";
-    AuthenticationFactor2["Recoverycode"] = "recoverycode";
-  })(AuthenticationFactor || (AuthenticationFactor = {}));
-  var OAuthProvider;
-  (function(OAuthProvider2) {
-    OAuthProvider2["Amazon"] = "amazon";
-    OAuthProvider2["Apple"] = "apple";
-    OAuthProvider2["Auth0"] = "auth0";
-    OAuthProvider2["Authentik"] = "authentik";
-    OAuthProvider2["Autodesk"] = "autodesk";
-    OAuthProvider2["Bitbucket"] = "bitbucket";
-    OAuthProvider2["Bitly"] = "bitly";
-    OAuthProvider2["Box"] = "box";
-    OAuthProvider2["Dailymotion"] = "dailymotion";
-    OAuthProvider2["Discord"] = "discord";
-    OAuthProvider2["Disqus"] = "disqus";
-    OAuthProvider2["Dropbox"] = "dropbox";
-    OAuthProvider2["Etsy"] = "etsy";
-    OAuthProvider2["Facebook"] = "facebook";
-    OAuthProvider2["Figma"] = "figma";
-    OAuthProvider2["Github"] = "github";
-    OAuthProvider2["Gitlab"] = "gitlab";
-    OAuthProvider2["Google"] = "google";
-    OAuthProvider2["Linkedin"] = "linkedin";
-    OAuthProvider2["Microsoft"] = "microsoft";
-    OAuthProvider2["Notion"] = "notion";
-    OAuthProvider2["Oidc"] = "oidc";
-    OAuthProvider2["Okta"] = "okta";
-    OAuthProvider2["Paypal"] = "paypal";
-    OAuthProvider2["PaypalSandbox"] = "paypalSandbox";
-    OAuthProvider2["Podio"] = "podio";
-    OAuthProvider2["Salesforce"] = "salesforce";
-    OAuthProvider2["Slack"] = "slack";
-    OAuthProvider2["Spotify"] = "spotify";
-    OAuthProvider2["Stripe"] = "stripe";
-    OAuthProvider2["Tradeshift"] = "tradeshift";
-    OAuthProvider2["TradeshiftBox"] = "tradeshiftBox";
-    OAuthProvider2["Twitch"] = "twitch";
-    OAuthProvider2["Wordpress"] = "wordpress";
-    OAuthProvider2["Yahoo"] = "yahoo";
-    OAuthProvider2["Yammer"] = "yammer";
-    OAuthProvider2["Yandex"] = "yandex";
-    OAuthProvider2["Zoho"] = "zoho";
-    OAuthProvider2["Zoom"] = "zoom";
-    OAuthProvider2["Mock"] = "mock";
-  })(OAuthProvider || (OAuthProvider = {}));
-  var Browser;
-  (function(Browser2) {
-    Browser2["AvantBrowser"] = "aa";
-    Browser2["AndroidWebViewBeta"] = "an";
-    Browser2["GoogleChrome"] = "ch";
-    Browser2["GoogleChromeIOS"] = "ci";
-    Browser2["GoogleChromeMobile"] = "cm";
-    Browser2["Chromium"] = "cr";
-    Browser2["MozillaFirefox"] = "ff";
-    Browser2["Safari"] = "sf";
-    Browser2["MobileSafari"] = "mf";
-    Browser2["MicrosoftEdge"] = "ps";
-    Browser2["MicrosoftEdgeIOS"] = "oi";
-    Browser2["OperaMini"] = "om";
-    Browser2["Opera"] = "op";
-    Browser2["OperaNext"] = "on";
-  })(Browser || (Browser = {}));
-  var CreditCard2;
-  (function(CreditCard3) {
-    CreditCard3["AmericanExpress"] = "amex";
-    CreditCard3["Argencard"] = "argencard";
-    CreditCard3["Cabal"] = "cabal";
-    CreditCard3["Cencosud"] = "cencosud";
-    CreditCard3["DinersClub"] = "diners";
-    CreditCard3["Discover"] = "discover";
-    CreditCard3["Elo"] = "elo";
-    CreditCard3["Hipercard"] = "hipercard";
-    CreditCard3["JCB"] = "jcb";
-    CreditCard3["Mastercard"] = "mastercard";
-    CreditCard3["Naranja"] = "naranja";
-    CreditCard3["TarjetaShopping"] = "targeta-shopping";
-    CreditCard3["UnionChinaPay"] = "union-china-pay";
-    CreditCard3["Visa"] = "visa";
-    CreditCard3["MIR"] = "mir";
-    CreditCard3["Maestro"] = "maestro";
-    CreditCard3["Rupay"] = "rupay";
-  })(CreditCard2 || (CreditCard2 = {}));
-  var Flag;
-  (function(Flag2) {
-    Flag2["Afghanistan"] = "af";
-    Flag2["Angola"] = "ao";
-    Flag2["Albania"] = "al";
-    Flag2["Andorra"] = "ad";
-    Flag2["UnitedArabEmirates"] = "ae";
-    Flag2["Argentina"] = "ar";
-    Flag2["Armenia"] = "am";
-    Flag2["AntiguaAndBarbuda"] = "ag";
-    Flag2["Australia"] = "au";
-    Flag2["Austria"] = "at";
-    Flag2["Azerbaijan"] = "az";
-    Flag2["Burundi"] = "bi";
-    Flag2["Belgium"] = "be";
-    Flag2["Benin"] = "bj";
-    Flag2["BurkinaFaso"] = "bf";
-    Flag2["Bangladesh"] = "bd";
-    Flag2["Bulgaria"] = "bg";
-    Flag2["Bahrain"] = "bh";
-    Flag2["Bahamas"] = "bs";
-    Flag2["BosniaAndHerzegovina"] = "ba";
-    Flag2["Belarus"] = "by";
-    Flag2["Belize"] = "bz";
-    Flag2["Bolivia"] = "bo";
-    Flag2["Brazil"] = "br";
-    Flag2["Barbados"] = "bb";
-    Flag2["BruneiDarussalam"] = "bn";
-    Flag2["Bhutan"] = "bt";
-    Flag2["Botswana"] = "bw";
-    Flag2["CentralAfricanRepublic"] = "cf";
-    Flag2["Canada"] = "ca";
-    Flag2["Switzerland"] = "ch";
-    Flag2["Chile"] = "cl";
-    Flag2["China"] = "cn";
-    Flag2["CoteDIvoire"] = "ci";
-    Flag2["Cameroon"] = "cm";
-    Flag2["DemocraticRepublicOfTheCongo"] = "cd";
-    Flag2["RepublicOfTheCongo"] = "cg";
-    Flag2["Colombia"] = "co";
-    Flag2["Comoros"] = "km";
-    Flag2["CapeVerde"] = "cv";
-    Flag2["CostaRica"] = "cr";
-    Flag2["Cuba"] = "cu";
-    Flag2["Cyprus"] = "cy";
-    Flag2["CzechRepublic"] = "cz";
-    Flag2["Germany"] = "de";
-    Flag2["Djibouti"] = "dj";
-    Flag2["Dominica"] = "dm";
-    Flag2["Denmark"] = "dk";
-    Flag2["DominicanRepublic"] = "do";
-    Flag2["Algeria"] = "dz";
-    Flag2["Ecuador"] = "ec";
-    Flag2["Egypt"] = "eg";
-    Flag2["Eritrea"] = "er";
-    Flag2["Spain"] = "es";
-    Flag2["Estonia"] = "ee";
-    Flag2["Ethiopia"] = "et";
-    Flag2["Finland"] = "fi";
-    Flag2["Fiji"] = "fj";
-    Flag2["France"] = "fr";
-    Flag2["MicronesiaFederatedStatesOf"] = "fm";
-    Flag2["Gabon"] = "ga";
-    Flag2["UnitedKingdom"] = "gb";
-    Flag2["Georgia"] = "ge";
-    Flag2["Ghana"] = "gh";
-    Flag2["Guinea"] = "gn";
-    Flag2["Gambia"] = "gm";
-    Flag2["GuineaBissau"] = "gw";
-    Flag2["EquatorialGuinea"] = "gq";
-    Flag2["Greece"] = "gr";
-    Flag2["Grenada"] = "gd";
-    Flag2["Guatemala"] = "gt";
-    Flag2["Guyana"] = "gy";
-    Flag2["Honduras"] = "hn";
-    Flag2["Croatia"] = "hr";
-    Flag2["Haiti"] = "ht";
-    Flag2["Hungary"] = "hu";
-    Flag2["Indonesia"] = "id";
-    Flag2["India"] = "in";
-    Flag2["Ireland"] = "ie";
-    Flag2["IranIslamicRepublicOf"] = "ir";
-    Flag2["Iraq"] = "iq";
-    Flag2["Iceland"] = "is";
-    Flag2["Israel"] = "il";
-    Flag2["Italy"] = "it";
-    Flag2["Jamaica"] = "jm";
-    Flag2["Jordan"] = "jo";
-    Flag2["Japan"] = "jp";
-    Flag2["Kazakhstan"] = "kz";
-    Flag2["Kenya"] = "ke";
-    Flag2["Kyrgyzstan"] = "kg";
-    Flag2["Cambodia"] = "kh";
-    Flag2["Kiribati"] = "ki";
-    Flag2["SaintKittsAndNevis"] = "kn";
-    Flag2["SouthKorea"] = "kr";
-    Flag2["Kuwait"] = "kw";
-    Flag2["LaoPeopleSDemocraticRepublic"] = "la";
-    Flag2["Lebanon"] = "lb";
-    Flag2["Liberia"] = "lr";
-    Flag2["Libya"] = "ly";
-    Flag2["SaintLucia"] = "lc";
-    Flag2["Liechtenstein"] = "li";
-    Flag2["SriLanka"] = "lk";
-    Flag2["Lesotho"] = "ls";
-    Flag2["Lithuania"] = "lt";
-    Flag2["Luxembourg"] = "lu";
-    Flag2["Latvia"] = "lv";
-    Flag2["Morocco"] = "ma";
-    Flag2["Monaco"] = "mc";
-    Flag2["Moldova"] = "md";
-    Flag2["Madagascar"] = "mg";
-    Flag2["Maldives"] = "mv";
-    Flag2["Mexico"] = "mx";
-    Flag2["MarshallIslands"] = "mh";
-    Flag2["NorthMacedonia"] = "mk";
-    Flag2["Mali"] = "ml";
-    Flag2["Malta"] = "mt";
-    Flag2["Myanmar"] = "mm";
-    Flag2["Montenegro"] = "me";
-    Flag2["Mongolia"] = "mn";
-    Flag2["Mozambique"] = "mz";
-    Flag2["Mauritania"] = "mr";
-    Flag2["Mauritius"] = "mu";
-    Flag2["Malawi"] = "mw";
-    Flag2["Malaysia"] = "my";
-    Flag2["Namibia"] = "na";
-    Flag2["Niger"] = "ne";
-    Flag2["Nigeria"] = "ng";
-    Flag2["Nicaragua"] = "ni";
-    Flag2["Netherlands"] = "nl";
-    Flag2["Norway"] = "no";
-    Flag2["Nepal"] = "np";
-    Flag2["Nauru"] = "nr";
-    Flag2["NewZealand"] = "nz";
-    Flag2["Oman"] = "om";
-    Flag2["Pakistan"] = "pk";
-    Flag2["Panama"] = "pa";
-    Flag2["Peru"] = "pe";
-    Flag2["Philippines"] = "ph";
-    Flag2["Palau"] = "pw";
-    Flag2["PapuaNewGuinea"] = "pg";
-    Flag2["Poland"] = "pl";
-    Flag2["FrenchPolynesia"] = "pf";
-    Flag2["NorthKorea"] = "kp";
-    Flag2["Portugal"] = "pt";
-    Flag2["Paraguay"] = "py";
-    Flag2["Qatar"] = "qa";
-    Flag2["Romania"] = "ro";
-    Flag2["Russia"] = "ru";
-    Flag2["Rwanda"] = "rw";
-    Flag2["SaudiArabia"] = "sa";
-    Flag2["Sudan"] = "sd";
-    Flag2["Senegal"] = "sn";
-    Flag2["Singapore"] = "sg";
-    Flag2["SolomonIslands"] = "sb";
-    Flag2["SierraLeone"] = "sl";
-    Flag2["ElSalvador"] = "sv";
-    Flag2["SanMarino"] = "sm";
-    Flag2["Somalia"] = "so";
-    Flag2["Serbia"] = "rs";
-    Flag2["SouthSudan"] = "ss";
-    Flag2["SaoTomeAndPrincipe"] = "st";
-    Flag2["Suriname"] = "sr";
-    Flag2["Slovakia"] = "sk";
-    Flag2["Slovenia"] = "si";
-    Flag2["Sweden"] = "se";
-    Flag2["Eswatini"] = "sz";
-    Flag2["Seychelles"] = "sc";
-    Flag2["Syria"] = "sy";
-    Flag2["Chad"] = "td";
-    Flag2["Togo"] = "tg";
-    Flag2["Thailand"] = "th";
-    Flag2["Tajikistan"] = "tj";
-    Flag2["Turkmenistan"] = "tm";
-    Flag2["TimorLeste"] = "tl";
-    Flag2["Tonga"] = "to";
-    Flag2["TrinidadAndTobago"] = "tt";
-    Flag2["Tunisia"] = "tn";
-    Flag2["Turkey"] = "tr";
-    Flag2["Tuvalu"] = "tv";
-    Flag2["Tanzania"] = "tz";
-    Flag2["Uganda"] = "ug";
-    Flag2["Ukraine"] = "ua";
-    Flag2["Uruguay"] = "uy";
-    Flag2["UnitedStates"] = "us";
-    Flag2["Uzbekistan"] = "uz";
-    Flag2["VaticanCity"] = "va";
-    Flag2["SaintVincentAndTheGrenadines"] = "vc";
-    Flag2["Venezuela"] = "ve";
-    Flag2["Vietnam"] = "vn";
-    Flag2["Vanuatu"] = "vu";
-    Flag2["Samoa"] = "ws";
-    Flag2["Yemen"] = "ye";
-    Flag2["SouthAfrica"] = "za";
-    Flag2["Zambia"] = "zm";
-    Flag2["Zimbabwe"] = "zw";
-  })(Flag || (Flag = {}));
-  var ExecutionMethod;
-  (function(ExecutionMethod2) {
-    ExecutionMethod2["GET"] = "GET";
-    ExecutionMethod2["POST"] = "POST";
-    ExecutionMethod2["PUT"] = "PUT";
-    ExecutionMethod2["PATCH"] = "PATCH";
-    ExecutionMethod2["DELETE"] = "DELETE";
-    ExecutionMethod2["OPTIONS"] = "OPTIONS";
-  })(ExecutionMethod || (ExecutionMethod = {}));
-  var ImageGravity;
-  (function(ImageGravity2) {
-    ImageGravity2["Center"] = "center";
-    ImageGravity2["Topleft"] = "top-left";
-    ImageGravity2["Top"] = "top";
-    ImageGravity2["Topright"] = "top-right";
-    ImageGravity2["Left"] = "left";
-    ImageGravity2["Right"] = "right";
-    ImageGravity2["Bottomleft"] = "bottom-left";
-    ImageGravity2["Bottom"] = "bottom";
-    ImageGravity2["Bottomright"] = "bottom-right";
-  })(ImageGravity || (ImageGravity = {}));
-  var ImageFormat;
-  (function(ImageFormat2) {
-    ImageFormat2["Jpg"] = "jpg";
-    ImageFormat2["Jpeg"] = "jpeg";
-    ImageFormat2["Png"] = "png";
-    ImageFormat2["Webp"] = "webp";
-    ImageFormat2["Heic"] = "heic";
-    ImageFormat2["Avif"] = "avif";
-  })(ImageFormat || (ImageFormat = {}));
-
-  // src/views/ProductsView.js
-  var ProductsView = ({ setView: setView2 }) => {
-    const { handleAddToCart } = useCart();
-    const { database, isAuthReady } = useAppwriteContext();
-    const APPWRITE_DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
-    const APPWRITE_PRODUCTS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_PRODUCTS_COLLECTION_ID;
-    const [products, setProducts] = (0, import_react11.useState)([]);
-    const [isLoadingProducts, setIsLoadingProducts] = (0, import_react11.useState)(true);
-    const [error, setError] = (0, import_react11.useState)(null);
-    (0, import_react11.useEffect)(() => {
-      const fetchProducts = async () => {
-        if (!database || !isAuthReady || !APPWRITE_PRODUCTS_COLLECTION_ID) {
-          console.log("ProductsView: Products collection ID not configured or DB not ready. Cannot fetch products.");
-          setIsLoadingProducts(false);
-          return;
-        }
-        setIsLoadingProducts(true);
-        setError(null);
-        try {
-          const response = await database.listDocuments(
-            APPWRITE_DATABASE_ID,
-            APPWRITE_PRODUCTS_COLLECTION_ID,
-            [Query.orderAsc("name")]
-          );
-          setProducts(response.documents.map((doc) => ({
-            id: doc.$id,
-            name: doc.name,
-            price: doc.price,
-            imageUrl: doc.imageUrl,
-            description: doc.description,
-            inventory: doc.inventory,
-            ...doc
-          })));
-          console.log("Fetched products:", response.documents);
-        } catch (err) {
-          console.error("Error fetching products:", err);
-          setError("Failed to load products. Please try again later.");
-        } finally {
-          setIsLoadingProducts(false);
-        }
-      };
-      fetchProducts();
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_PRODUCTS_COLLECTION_ID]);
-    return /* @__PURE__ */ import_react11.default.createElement("section", { id: "products", className: "bg-purple-50 py-16 px-4 rounded-xl m-4 shadow-lg" }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "container mx-auto text-center" }, /* @__PURE__ */ import_react11.default.createElement("h2", { className: "text-4xl font-bold text-purple-800 mb-8" }, "Our Premium Products"), /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-lg text-gray-700 mb-8 max-w-3xl mx-auto" }, "Discover our exclusive range of salon-quality products designed to maintain and enhance your beauty at home."), isLoadingProducts ? /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-center text-gray-500" }, "Loading products...") : error ? /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-center text-red-500" }, error) : products.length === 0 ? /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-center text-gray-600" }, "No products available at the moment.") : /* @__PURE__ */ import_react11.default.createElement("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" }, products.map((product) => /* @__PURE__ */ import_react11.default.createElement("div", { key: product.id, className: "bg-white p-4 rounded-xl shadow-md animate-fade-in-up transform hover:-translate-y-1 transition duration-300" }, /* @__PURE__ */ import_react11.default.createElement(
-      "img",
-      {
-        src: product.imageUrl || `https://placehold.co/300x200/e0cffc/6a0dad?text=${product.name.replace(/\s/g, "+")}`,
-        alt: product.name,
-        onError: (e2) => {
-          e2.target.onerror = null;
-          e2.target.src = `https://placehold.co/300x200/e0cffc/6a0dad?text=${product.name.replace(/\s/g, "+")}`;
-        },
-        className: "w-full h-48 object-cover rounded-lg mb-4"
-      }
-    ), /* @__PURE__ */ import_react11.default.createElement("h3", { className: "text-xl font-semibold text-purple-700 mb-2" }, product.name), /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-gray-600 mb-3" }, product.description || "High-quality ingredients for professional results."), /* @__PURE__ */ import_react11.default.createElement("span", { className: "text-lg font-bold text-pink-600" }, "$", product.price?.toFixed(2)), /* @__PURE__ */ import_react11.default.createElement(
-      "button",
-      {
-        onClick: () => handleAddToCart(product),
-        className: "mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
-      },
-      "Add to Cart"
-    ))))));
-  };
-  var ProductsView_default = ProductsView;
-
-  // src/views/ServicesView.js
-  var import_react13 = __toESM(require_react());
-
-  // src/context/BookingContext.js
-  var import_react12 = __toESM(require_react());
-  var import_prop_types5 = __toESM(require_prop_types());
-  var BookingContext = (0, import_react12.createContext)();
-  var BookingProvider = ({ children }) => {
-    const { database, client, isAuthReady } = useAppwriteContext();
-    const { currentUser, isAuthReady: isAuthReadyAuth } = useAuth();
-    const APPWRITE_DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
-    const APPWRITE_BOOKINGS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_BOOKINGS_COLLECTION_ID;
-    const APPWRITE_SERVICES_COLLECTION_ID = process.env.REACT_APP_APPWRITE_SERVICES_COLLECTION_ID;
-    const APPWRITE_STAFF_COLLECTION_ID = process.env.REACT_APP_APPWRITE_STAFF_COLLECTION_ID;
-    const [services, setServices] = (0, import_react12.useState)([]);
-    const [staff, setStaff] = (0, import_react12.useState)([]);
-    const [bookings, setBookings] = (0, import_react12.useState)([]);
-    const [error, setError] = (0, import_react12.useState)(null);
-    const [isFetchingBookings, setIsFetchingBookings] = (0, import_react12.useState)(false);
-    const [isFetchingServices, setIsFetchingServices] = (0, import_react12.useState)(false);
-    const [isFetchingStaff, setIsFetchingStaff] = (0, import_react12.useState)(false);
-    const [isBookingService, setIsBookingService] = (0, import_react12.useState)(false);
-    const [isCancellingBooking, setIsCancellingBooking] = (0, import_react12.useState)(false);
-    const handleBookingError = (err, message) => {
-      console.error(message, err);
-      setError(`Failed to complete action: ${err.message || "An unknown error occurred."}`);
-    };
-    const mapBookingDocument = (0, import_react12.useCallback)((doc) => {
-      const service = services.find((s2) => s2.id === doc.serviceId);
-      const staffMember = staff.find((s2) => s2.id === doc.staffId);
-      return {
-        id: doc.$id,
-        ...doc,
-        serviceName: service ? service.name : "Unknown Service",
-        staffName: staffMember ? staffMember.name : "Unknown Staff",
-        clientName: doc.clientName,
-        clientEmail: doc.clientEmail,
-        bookingDate: doc.bookingDate
-      };
-    }, [services, staff]);
-    const fetchServices = (0, import_react12.useCallback)(async () => {
-      if (!database || !isAuthReady) return;
-      setIsFetchingServices(true);
-      setError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_SERVICES_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setServices(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-      } catch (err) {
-        handleBookingError(err, "Error fetching services:");
-      } finally {
-        setIsFetchingServices(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID]);
-    const fetchStaff = (0, import_react12.useCallback)(async () => {
-      if (!database || !isAuthReady) return;
-      setIsFetchingStaff(true);
-      setError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_STAFF_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setStaff(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-      } catch (err) {
-        handleBookingError(err, "Error fetching staff:");
-      } finally {
-        setIsFetchingStaff(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID]);
-    const fetchBookings = (0, import_react12.useCallback)(async () => {
-      if (!database || !isAuthReady || !currentUser) return;
-      setIsFetchingBookings(true);
-      setError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_BOOKINGS_COLLECTION_ID,
-          [
-            Query.equal("userId", currentUser.$id),
-            Query.orderDesc("bookingDate"),
-            Query.limit(100)
-          ]
-        );
-        setBookings(response.documents.map((doc) => mapBookingDocument(doc)));
-      } catch (err) {
-        handleBookingError(err, "Error fetching user bookings:");
-      } finally {
-        setIsFetchingBookings(false);
-      }
-    }, [database, isAuthReady, currentUser, mapBookingDocument, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]);
-    const bookService = (0, import_react12.useCallback)(
-      async (serviceId, staffId, bookingDate) => {
-        if (!database || !isAuthReady || !currentUser) {
-          setError("Appwrite not ready or user not logged in.");
-          return false;
-        }
-        setIsBookingService(true);
-        setError(null);
-        try {
-          const payload = {
-            serviceId,
-            staffId,
-            bookingDate,
-            userId: currentUser.$id,
-            clientName: currentUser.name,
-            clientEmail: currentUser.email,
-            status: "pending"
-          };
-          await database.createDocument(
-            APPWRITE_DATABASE_ID,
-            APPWRITE_BOOKINGS_COLLECTION_ID,
-            ID2.unique(),
-            payload
-          );
-          return true;
-        } catch (err) {
-          handleBookingError(err, "Error booking service:");
-          return false;
-        } finally {
-          setIsBookingService(false);
-        }
-      },
-      [database, isAuthReady, currentUser, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]
-    );
-    const cancelBooking = (0, import_react12.useCallback)(
-      async (bookingId) => {
-        if (!database || !isAuthReady) {
-          setError("Appwrite not ready.");
-          return false;
-        }
-        setIsCancellingBooking(true);
-        setError(null);
-        try {
-          await database.deleteDocument(
-            APPWRITE_DATABASE_ID,
-            APPWRITE_BOOKINGS_COLLECTION_ID,
-            bookingId
-          );
-          return true;
-        } catch (err) {
-          handleBookingError(err, "Error cancelling booking:");
-          return false;
-        } finally {
-          setIsCancellingBooking(false);
-        }
-      },
-      [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]
-    );
-    (0, import_react12.useEffect)(() => {
-      if (isAuthReady && isAuthReadyAuth) {
-        fetchServices();
-        fetchStaff();
-        if (currentUser) {
-          fetchBookings();
-        }
-        const unsubscribeServices = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_SERVICES_COLLECTION_ID}.documents`,
-          () => fetchServices()
-        );
-        const unsubscribeStaff = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_STAFF_COLLECTION_ID}.documents`,
-          () => fetchStaff()
-        );
-        const unsubscribeBookings = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_BOOKINGS_COLLECTION_ID}.documents`,
-          () => {
-            if (currentUser) {
-              fetchBookings();
-            }
-          }
-        );
-        return () => {
-          unsubscribeServices();
-          unsubscribeStaff();
-          unsubscribeBookings();
-        };
-      }
-    }, [
-      isAuthReady,
-      isAuthReadyAuth,
-      currentUser,
-      client,
-      fetchServices,
-      fetchStaff,
-      fetchBookings,
-      APPWRITE_DATABASE_ID,
-      APPWRITE_SERVICES_COLLECTION_ID,
-      APPWRITE_STAFF_COLLECTION_ID,
-      APPWRITE_BOOKINGS_COLLECTION_ID
-    ]);
-    const contextValue = (0, import_react12.useMemo)(
-      () => ({
-        services,
-        staff,
-        bookings,
-        error,
-        fetchServices,
-        fetchStaff,
-        fetchBookings,
-        bookService,
-        cancelBooking,
-        isFetchingBookings,
-        isFetchingServices,
-        isFetchingStaff,
-        isBookingService,
-        isCancellingBooking,
-        isLoading: isFetchingBookings || isFetchingServices || isFetchingStaff || isBookingService || isCancellingBooking
-      }),
-      [
-        services,
-        staff,
-        bookings,
-        error,
-        fetchServices,
-        fetchStaff,
-        fetchBookings,
-        bookService,
-        cancelBooking,
-        isFetchingBookings,
-        isFetchingServices,
-        isFetchingStaff,
-        isBookingService,
-        isCancellingBooking
-      ]
-    );
-    return /* @__PURE__ */ import_react12.default.createElement(BookingContext.Provider, { value: contextValue }, children);
-  };
-  BookingProvider.propTypes = {
-    children: import_prop_types5.default.node.isRequired
-  };
-  var useBooking = () => {
-    const context = (0, import_react12.useContext)(BookingContext);
-    if (context === void 0) {
-      throw new Error("useBooking must be used within a BookingProvider");
-    }
-    return context;
-  };
-
-  // src/views/ServicesView.js
-  var ServicesView = ({ setView: setView2 }) => {
-    const { services, setSelectedService } = useBooking();
-    return /* @__PURE__ */ import_react13.default.createElement("section", { id: "services", className: "container mx-auto py-16 px-4" }, /* @__PURE__ */ import_react13.default.createElement("h2", { className: "text-4xl font-bold text-center text-purple-800 mb-12" }, "Our Services"), /* @__PURE__ */ import_react13.default.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" }, services.length === 0 ? /* @__PURE__ */ import_react13.default.createElement("p", { className: "col-span-full text-center text-gray-500" }, "Loading services...") : services.map((service) => (
-      // Iterate over the 'services' array from context
-      /* @__PURE__ */ import_react13.default.createElement("div", { key: service.id, className: "bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 animate-fade-in-up" }, /* @__PURE__ */ import_react13.default.createElement("h3", { className: "text-2xl font-semibold text-purple-700 mb-3" }, service.name), " ", /* @__PURE__ */ import_react13.default.createElement("p", { className: "text-gray-600 mb-4" }, service.description || (service.name === "Haircut" && "Achieve your perfect look with our expert stylists, specializing in modern cuts and classic styles." || service.name === "Coloring" && "Vibrant colors, stunning highlights, and balayage tailored to enhance your natural beauty." || service.name === "Manicure" && "Indulge in luxurious nail care, including gel, acrylic, and classic manicures." || "A professional beauty service tailored to your needs."), /* @__PURE__ */ import_react13.default.createElement("br", null), /* @__PURE__ */ import_react13.default.createElement("span", { className: "font-bold text-pink-600" }, "Price: $", service.price?.toFixed(2)), /* @__PURE__ */ import_react13.default.createElement("br", null), /* @__PURE__ */ import_react13.default.createElement("span", { className: "text-sm text-gray-500" }, "Duration: ", service.duration, " minutes")), /* @__PURE__ */ import_react13.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            setSelectedService(service.id);
-            setView2("booking");
-          },
-          className: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105"
-        },
-        "Learn More & Book"
-      ))
-    ))));
-  };
-  var ServicesView_default = ServicesView;
-
-  // src/views/BookingView.js
-  var import_react18 = __toESM(require_react());
-
-  // src/context/MessageContext.js
-  var import_react16 = __toESM(require_react());
-  var import_react_dom = __toESM(require_react_dom());
-
-  // src/components/MessageContainer.js
-  var import_react15 = __toESM(require_react());
-
-  // src/components/MessageItem.js
-  var import_react14 = __toESM(require_react());
-
-  // src/context/MessageContext.js
-  var MessageContext = (0, import_react16.createContext)();
-  var useMessage = () => {
-    const context = (0, import_react16.useContext)(MessageContext);
-    if (!context) {
-      throw new Error("useMessage must be used within a MessageProvider");
-    }
-    return context;
-  };
-
-  // src/components/icons/CalendarCheck.js
-  var import_react17 = __toESM(require_react());
-  var CalendarCheck2 = (props) => /* @__PURE__ */ import_react17.default.createElement(
-    "svg",
-    {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "24",
-      height: "24",
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      ...props
-    },
-    /* @__PURE__ */ import_react17.default.createElement("rect", { x: "3", y: "4", width: "18", height: "18", rx: "2", ry: "2" }),
-    /* @__PURE__ */ import_react17.default.createElement("line", { x1: "16", y1: "2", x2: "16", y2: "6" }),
-    /* @__PURE__ */ import_react17.default.createElement("line", { x1: "8", y1: "2", x2: "8", y2: "6" }),
-    /* @__PURE__ */ import_react17.default.createElement("line", { x1: "3", y1: "10", x2: "21", y2: "10" }),
-    /* @__PURE__ */ import_react17.default.createElement("polyline", { points: "9 14 12 17 19 10" })
-  );
-  var CalendarCheck_default = CalendarCheck2;
-
-  // src/views/BookingView.js
-  var BookingView = ({ setView: setView2 }) => {
-    const { userId } = useAuth();
-    const { showMessage: showMessage2 } = useMessage();
-    const {
-      services,
-      staffMembers,
-      bookings,
-      selectedService,
-      setSelectedService,
-      selectedStaff,
-      setSelectedStaff: setSelectedStaff2,
-      selectedDate,
-      setSelectedDate: setSelectedDate2,
-      selectedTime,
-      setSelectedTime: setSelectedTime2,
-      isFetchingBookings,
-      isBookingService,
-      isCancellingBooking,
-      getMinDate,
-      getStaffForService,
-      generateAvailableTimeSlots,
-      bookService,
-      cancelBooking
-    } = useBooking();
-    const [serviceError, setServiceError] = (0, import_react18.useState)("");
-    const [staffError, setStaffError] = (0, import_react18.useState)("");
-    const [dateError, setDateError] = (0, import_react18.useState)("");
-    const [timeError, setTimeError] = (0, import_react18.useState)("");
-    const [isCancelModalOpen, setIsCancelModalOpen] = (0, import_react18.useState)(false);
-    const [bookingToCancelId, setBookingToCancelId] = (0, import_react18.useState)(null);
-    const selectedServiceObj = services.find((s2) => s2.id === selectedService);
-    const selectedStaffObj = staffMembers.find((s2) => s2.id === selectedStaff);
-    const availableStaff = selectedService ? getStaffForService(staffMembers, selectedService) : [];
-    const availableTimeSlots = selectedServiceObj && selectedStaffObj && selectedDate ? generateAvailableTimeSlots(selectedDate, selectedServiceObj, selectedStaffObj, bookings) : [];
-    (0, import_react18.useEffect)(() => {
-      if (selectedTime && !availableTimeSlots.includes(selectedTime)) {
-        setSelectedTime2("");
-      }
-    }, [selectedDate, selectedStaff, availableTimeSlots, selectedTime, setSelectedTime2]);
-    const validateBookingForm = () => {
-      let isValid = true;
-      setServiceError("");
-      setStaffError("");
-      setDateError("");
-      setTimeError("");
-      if (!selectedService) {
-        setServiceError("Please select a service.");
-        isValid = false;
-      }
-      if (!selectedStaff) {
-        setStaffError("Please select a staff member.");
-        isValid = false;
-      }
-      if (!selectedDate) {
-        setDateError("Please select a date.");
-        isValid = false;
-      }
-      if (!selectedTime) {
-        setTimeError("Please select a time.");
-        isValid = false;
-      } else if (!availableTimeSlots.includes(selectedTime)) {
-        setTimeError("Selected time is not available.");
-        isValid = false;
-      }
-      return isValid;
-    };
-    const handleProceedToPayment = () => {
-      if (!userId) {
-        showMessage2("You must be logged in to book a service.", "error");
-        return;
-      }
-      if (validateBookingForm()) {
-        if (selectedServiceObj) {
-          const calculatedDeposit = selectedServiceObj.price * 0.1;
-          handlePaymentSuccessAndFinalizeBooking();
-        } else {
-          showMessage2("Selected service not found.", "error");
-        }
-      }
-    };
-    const handlePaymentSuccessAndFinalizeBooking = async () => {
-      const dateTime = /* @__PURE__ */ new Date(`${selectedDate}T${selectedTime}`);
-      const success = await bookService(selectedService, selectedStaff, dateTime);
-      if (success) {
-        setSelectedService("");
-        setSelectedStaff2("");
-        setSelectedDate2("");
-        setSelectedTime2("");
-        setView2("dashboard");
-        showMessage2("Your service has been successfully booked!", "success");
-      } else {
-        showMessage2("Payment was successful but booking could not be finalized. Please contact support.", "error");
-      }
-    };
-    const handleCancelBooking = (bookingId) => {
-      setBookingToCancelId(bookingId);
-      setIsCancelModalOpen(true);
-    };
-    const handleConfirmCancel = async () => {
-      setIsCancelModalOpen(false);
-      if (bookingToCancelId) {
-        const success = await cancelBooking(bookingToCancelId);
-        if (success) {
-          showMessage2("Booking successfully cancelled.", "success");
-        } else {
-          showMessage2("Failed to cancel booking. Please try again.", "error");
-        }
-        setBookingToCancelId(null);
-      }
-    };
-    const handleCloseCancelModal = () => {
-      setIsCancelModalOpen(false);
-      setBookingToCancelId(null);
-    };
-    return /* @__PURE__ */ import_react18.default.createElement("section", { id: "booking", className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react18.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Book Your Service"), /* @__PURE__ */ import_react18.default.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8" }, /* @__PURE__ */ import_react18.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react18.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6" }, "New Appointment"), /* @__PURE__ */ import_react18.default.createElement("form", { onSubmit: (e2) => {
-      e2.preventDefault();
-      handleProceedToPayment();
-    } }, /* @__PURE__ */ import_react18.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react18.default.createElement("label", { htmlFor: "service-select", className: "block text-gray-700 text-sm font-bold mb-2" }, "Select Service ", /* @__PURE__ */ import_react18.default.createElement("span", { className: "text-red-500" }, "*")), /* @__PURE__ */ import_react18.default.createElement(
-      "select",
-      {
-        id: "service-select",
-        value: selectedService,
-        onChange: (e2) => {
-          setSelectedService(e2.target.value);
-          setSelectedStaff2("");
-          setServiceError("");
-        },
-        className: `shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${serviceError ? "border-red-500" : ""}`,
-        required: true
-      },
-      /* @__PURE__ */ import_react18.default.createElement("option", { value: "" }, "-- Choose a Service --"),
-      services.length === 0 ? /* @__PURE__ */ import_react18.default.createElement("option", { value: "", disabled: true }, "Loading services...") : services.map((service) => /* @__PURE__ */ import_react18.default.createElement("option", { key: service.id, value: service.id }, service.name, " ($", service.price?.toFixed(2), ")"))
-    ), serviceError && /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, serviceError)), /* @__PURE__ */ import_react18.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react18.default.createElement("label", { htmlFor: "staff-select", className: "block text-gray-700 text-sm font-bold mb-2" }, "Select Staff Member ", /* @__PURE__ */ import_react18.default.createElement("span", { className: "text-red-500" }, "*")), /* @__PURE__ */ import_react18.default.createElement(
-      "select",
-      {
-        id: "staff-select",
-        value: selectedStaff,
-        onChange: (e2) => {
-          setSelectedStaff2(e2.target.value);
-          setSelectedDate2("");
-          setStaffError("");
-        },
-        className: `shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${staffError ? "border-red-500" : ""}`,
-        required: true,
-        disabled: !selectedService || availableStaff.length === 0
-      },
-      /* @__PURE__ */ import_react18.default.createElement("option", { value: "" }, "-- Choose a Staff Member --"),
-      availableStaff.length === 0 && selectedService ? /* @__PURE__ */ import_react18.default.createElement("option", { value: "", disabled: true }, "No staff available for this service") : availableStaff.map((staff) => /* @__PURE__ */ import_react18.default.createElement("option", { key: staff.id, value: staff.id }, staff.name, " (", staff.specialty, ")"))
-    ), staffError && /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, staffError)), /* @__PURE__ */ import_react18.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react18.default.createElement("label", { htmlFor: "booking-date", className: "block text-gray-700 text-sm font-bold mb-2" }, "Select Date ", /* @__PURE__ */ import_react18.default.createElement("span", { className: "text-red-500" }, "*")), /* @__PURE__ */ import_react18.default.createElement(
-      "input",
-      {
-        type: "date",
-        id: "booking-date",
-        value: selectedDate,
-        onChange: (e2) => {
-          setSelectedDate2(e2.target.value);
-          setSelectedTime2("");
-          setDateError("");
-        },
-        min: getMinDate(),
-        className: `shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${dateError ? "border-red-500" : ""}`,
-        required: true,
-        disabled: !selectedStaff
-      }
-    ), dateError && /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, dateError)), /* @__PURE__ */ import_react18.default.createElement("div", { className: "mb-6" }, /* @__PURE__ */ import_react18.default.createElement("label", { htmlFor: "booking-time", className: "block text-gray-700 text-sm font-bold mb-2" }, "Select Time ", /* @__PURE__ */ import_react18.default.createElement("span", { className: "text-red-500" }, "*")), /* @__PURE__ */ import_react18.default.createElement(
-      "select",
-      {
-        id: "booking-time",
-        value: selectedTime,
-        onChange: (e2) => {
-          setSelectedTime2(e2.target.value);
-          setTimeError("");
-        },
-        className: `shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${timeError ? "border-red-500" : ""}`,
-        required: true,
-        disabled: availableTimeSlots.length === 0 || !selectedDate
-      },
-      /* @__PURE__ */ import_react18.default.createElement("option", { value: "" }, "-- Choose a Time --"),
-      availableTimeSlots.length > 0 ? availableTimeSlots.map((time) => /* @__PURE__ */ import_react18.default.createElement("option", { key: time, value: time }, time)) : /* @__PURE__ */ import_react18.default.createElement("option", { value: "", disabled: true }, "No slots available for this staff/date")
-    ), timeError && /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, timeError)), /* @__PURE__ */ import_react18.default.createElement(
-      "button",
-      {
-        type: "submit",
-        className: "w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105",
-        disabled: isBookingService || !selectedService || !selectedStaff || !selectedDate || !selectedTime
-      },
-      isBookingService ? /* @__PURE__ */ import_react18.default.createElement("svg", { className: "animate-spin h-5 w-5 text-white mx-auto", viewBox: "0 0 24 24" }, /* @__PURE__ */ import_react18.default.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }), /* @__PURE__ */ import_react18.default.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })) : "Proceed to Payment"
-    ))), /* @__PURE__ */ import_react18.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react18.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react18.default.createElement(CalendarCheck_default, { className: "mr-3 text-pink-500" }), " My Bookings"), isFetchingBookings ? /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-center text-gray-500" }, "Loading bookings...") : bookings.length === 0 ? /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-gray-600 text-center" }, "You have no upcoming bookings.") : /* @__PURE__ */ import_react18.default.createElement("div", { className: "divide-y divide-gray-200" }, bookings.map((booking) => {
-      const { date, time } = formatDateTime(booking.dateTime);
-      return /* @__PURE__ */ import_react18.default.createElement("div", { key: booking.id, className: "py-4" }, /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-lg font-semibold text-gray-800" }, booking.serviceName), /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-gray-600" }, "Staff: ", booking.staffName), /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-gray-600" }, "Date: ", date), /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-gray-600" }, "Time: ", time), /* @__PURE__ */ import_react18.default.createElement("p", { className: `font-semibold ${booking.status === "confirmed" ? "text-green-600" : booking.status === "pending" ? "text-orange-500" : "text-red-600"}` }, "Status: ", booking.status.charAt(0).toUpperCase() + booking.status.slice(1)), /* @__PURE__ */ import_react18.default.createElement(
-        "button",
-        {
-          onClick: () => handleCancelBooking(booking.id),
-          className: "mt-2 bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-lg transition duration-300",
-          disabled: isCancellingBooking
-        },
-        isCancellingBooking && bookingToCancelId === booking.id ? "Cancelling..." : "Cancel Booking"
-      ));
-    })))), isCancelModalOpen && /* @__PURE__ */ import_react18.default.createElement("div", { className: "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" }, /* @__PURE__ */ import_react18.default.createElement("div", { className: "bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full" }, /* @__PURE__ */ import_react18.default.createElement("h3", { className: "text-xl font-bold mb-4 text-gray-800" }, "Confirm Cancellation"), /* @__PURE__ */ import_react18.default.createElement("p", { className: "text-gray-600 mb-6" }, "Are you sure you want to cancel this booking? This action cannot be undone."), /* @__PURE__ */ import_react18.default.createElement("div", { className: "flex justify-around" }, /* @__PURE__ */ import_react18.default.createElement(
-      "button",
-      {
-        onClick: handleCloseCancelModal,
-        className: "bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline",
-        disabled: isCancellingBooking
-      },
-      "No, Keep Booking"
-    ), /* @__PURE__ */ import_react18.default.createElement(
-      "button",
-      {
-        onClick: handleConfirmCancel,
-        className: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline",
-        disabled: isCancellingBooking
-      },
-      isCancellingBooking ? "Cancelling..." : "Yes, Cancel"
-    )))));
-  };
-  var BookingView_default = BookingView;
-
-  // src/views/OrderConfirmationView.js
-  var import_react19 = __toESM(require_react());
-  var import_prop_types6 = __toESM(require_prop_types());
-  var OrderConfirmationView = ({ setView: setView2, transactionDetails }) => {
-    if (!transactionDetails || !transactionDetails.orderDetails) {
-      return /* @__PURE__ */ import_react19.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react19.default.createElement("p", { className: "text-gray-600 text-lg mb-4" }, "No order details found. This page is typically displayed after a successful checkout."), /* @__PURE__ */ import_react19.default.createElement(
-        "button",
-        {
-          onClick: () => setView2("home"),
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 hover:scale-105 flex items-center justify-center mx-auto"
-        },
-        /* @__PURE__ */ import_react19.default.createElement(House, { className: "mr-2", size: 20 }),
-        " Back to Home"
-      ));
-    }
-    const { orderDetails, transactionId, paymentStatus } = transactionDetails;
-    const { orderId, items, amount, shippingInfo, email, paymentGateway } = orderDetails;
-    return /* @__PURE__ */ import_react19.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react19.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto my-8" }, /* @__PURE__ */ import_react19.default.createElement("div", { className: "text-center mb-8" }, /* @__PURE__ */ import_react19.default.createElement(CircleCheckBig, { className: "w-20 h-20 text-green-500 mx-auto mb-4" }), /* @__PURE__ */ import_react19.default.createElement("h2", { className: "text-4xl font-bold text-gray-800 mb-2" }, "Order Confirmed!"), /* @__PURE__ */ import_react19.default.createElement("p", { className: "text-gray-600 text-lg" }, "Thank you for your purchase!")), /* @__PURE__ */ import_react19.default.createElement("div", { className: "mb-8 p-6 bg-green-50 bg-opacity-70 rounded-md border border-green-200" }, /* @__PURE__ */ import_react19.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Order Details Summary"), /* @__PURE__ */ import_react19.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react19.default.createElement("strong", null, "Order ID:"), " ", /* @__PURE__ */ import_react19.default.createElement("span", { className: "font-mono text-purple-700" }, orderId)), /* @__PURE__ */ import_react19.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react19.default.createElement("strong", null, "Total Amount:"), " ", /* @__PURE__ */ import_react19.default.createElement("span", { className: "font-bold text-pink-600" }, "$", amount.toFixed(2))), /* @__PURE__ */ import_react19.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react19.default.createElement("strong", null, "Payment Status:"), " ", /* @__PURE__ */ import_react19.default.createElement("span", { className: "capitalize text-green-700" }, paymentStatus)), /* @__PURE__ */ import_react19.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react19.default.createElement("strong", null, "Payment Method:"), " ", /* @__PURE__ */ import_react19.default.createElement("span", { className: "capitalize" }, paymentGateway)), email && /* @__PURE__ */ import_react19.default.createElement("p", null, /* @__PURE__ */ import_react19.default.createElement("strong", null, "Confirmation sent to:"), " ", email)), /* @__PURE__ */ import_react19.default.createElement("div", { className: "mb-8 p-6 bg-blue-50 bg-opacity-70 rounded-md border border-blue-200" }, /* @__PURE__ */ import_react19.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Shipping Information"), /* @__PURE__ */ import_react19.default.createElement("p", null, shippingInfo.fullName), /* @__PURE__ */ import_react19.default.createElement("p", null, shippingInfo.addressLine1), shippingInfo.addressLine2 && /* @__PURE__ */ import_react19.default.createElement("p", null, shippingInfo.addressLine2), /* @__PURE__ */ import_react19.default.createElement("p", null, shippingInfo.city, ", ", shippingInfo.state, " ", shippingInfo.zipCode), /* @__PURE__ */ import_react19.default.createElement("p", null, shippingInfo.country)), /* @__PURE__ */ import_react19.default.createElement("div", { className: "mb-8 p-6 bg-gray-50 bg-opacity-70 rounded-md border border-gray-200" }, /* @__PURE__ */ import_react19.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Items Ordered"), /* @__PURE__ */ import_react19.default.createElement("ul", { className: "list-disc list-inside space-y-2" }, items.map((item) => /* @__PURE__ */ import_react19.default.createElement("li", { key: item.id, className: "text-gray-700" }, item.name, " (x", item.quantity, ") - $", item.price.toFixed(2), " each")))), /* @__PURE__ */ import_react19.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react19.default.createElement(
-      "button",
-      {
-        onClick: () => setView2("products"),
-        className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 hover:scale-105 flex items-center justify-center mx-auto"
-      },
-      /* @__PURE__ */ import_react19.default.createElement(House, { className: "mr-2", size: 20 }),
-      " Continue Shopping"
-    ), /* @__PURE__ */ import_react19.default.createElement("p", { className: "text-gray-500 text-sm mt-4" }, "A detailed receipt has been sent to your email address."))));
-  };
-  OrderConfirmationView.propTypes = {
-    setView: import_prop_types6.default.func.isRequired,
-    transactionDetails: import_prop_types6.default.shape({
-      transactionId: import_prop_types6.default.string.isRequired,
-      paymentStatus: import_prop_types6.default.string.isRequired,
-      orderDetails: import_prop_types6.default.shape({
-        orderId: import_prop_types6.default.string.isRequired,
-        items: import_prop_types6.default.arrayOf(import_prop_types6.default.shape({
-          id: import_prop_types6.default.string,
-          name: import_prop_types6.default.string.isRequired,
-          quantity: import_prop_types6.default.number.isRequired,
-          price: import_prop_types6.default.number.isRequired
-        })).isRequired,
-        amount: import_prop_types6.default.number.isRequired,
-        shippingInfo: import_prop_types6.default.shape({
-          fullName: import_prop_types6.default.string.isRequired,
-          addressLine1: import_prop_types6.default.string.isRequired,
-          addressLine2: import_prop_types6.default.string,
-          city: import_prop_types6.default.string.isRequired,
-          state: import_prop_types6.default.string.isRequired,
-          zipCode: import_prop_types6.default.string.isRequired,
-          country: import_prop_types6.default.string.isRequired
-        }).isRequired,
-        paymentGateway: import_prop_types6.default.string.isRequired,
-        email: import_prop_types6.default.string
-      }).isRequired
-    })
-  };
-
-  // src/components/CartView.js
-  var import_react22 = __toESM(require_react());
-  var import_prop_types7 = __toESM(require_prop_types());
-
-  // node_modules/react-hot-toast/dist/index.mjs
-  var import_react20 = __toESM(require_react(), 1);
-  var import_react21 = __toESM(require_react(), 1);
-  var y = __toESM(require_react(), 1);
-
-  // node_modules/goober/dist/goober.modern.js
-  var e = { data: "" };
-  var t = (t2) => "object" == typeof window ? ((t2 ? t2.querySelector("#_goober") : window._goober) || Object.assign((t2 || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : t2 || e;
-  var l = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g;
-  var a = /\/\*[^]*?\*\/|  +/g;
-  var n = /\n+/g;
-  var o = (e2, t2) => {
-    let r = "", l2 = "", a2 = "";
-    for (let n3 in e2) {
-      let c2 = e2[n3];
-      "@" == n3[0] ? "i" == n3[1] ? r = n3 + " " + c2 + ";" : l2 += "f" == n3[1] ? o(c2, n3) : n3 + "{" + o(c2, "k" == n3[1] ? "" : t2) + "}" : "object" == typeof c2 ? l2 += o(c2, t2 ? t2.replace(/([^,])+/g, (e3) => n3.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (t3) => /&/.test(t3) ? t3.replace(/&/g, e3) : e3 ? e3 + " " + t3 : t3)) : n3) : null != c2 && (n3 = /^--/.test(n3) ? n3 : n3.replace(/[A-Z]/g, "-$&").toLowerCase(), a2 += o.p ? o.p(n3, c2) : n3 + ":" + c2 + ";");
-    }
-    return r + (t2 && a2 ? t2 + "{" + a2 + "}" : a2) + l2;
-  };
-  var c = {};
-  var s = (e2) => {
-    if ("object" == typeof e2) {
-      let t2 = "";
-      for (let r in e2) t2 += r + s(e2[r]);
-      return t2;
-    }
-    return e2;
-  };
-  var i = (e2, t2, r, i2, p2) => {
-    let u2 = s(e2), d2 = c[u2] || (c[u2] = ((e3) => {
-      let t3 = 0, r2 = 11;
-      for (; t3 < e3.length; ) r2 = 101 * r2 + e3.charCodeAt(t3++) >>> 0;
-      return "go" + r2;
-    })(u2));
-    if (!c[d2]) {
-      let t3 = u2 !== e2 ? e2 : ((e3) => {
-        let t4, r2, o2 = [{}];
-        for (; t4 = l.exec(e3.replace(a, "")); ) t4[4] ? o2.shift() : t4[3] ? (r2 = t4[3].replace(n, " ").trim(), o2.unshift(o2[0][r2] = o2[0][r2] || {})) : o2[0][t4[1]] = t4[2].replace(n, " ").trim();
-        return o2[0];
-      })(e2);
-      c[d2] = o(p2 ? { ["@keyframes " + d2]: t3 } : t3, r ? "" : "." + d2);
-    }
-    let f3 = r && c.g ? c.g : null;
-    return r && (c.g = c[d2]), ((e3, t3, r2, l2) => {
-      l2 ? t3.data = t3.data.replace(l2, e3) : -1 === t3.data.indexOf(e3) && (t3.data = r2 ? e3 + t3.data : t3.data + e3);
-    })(c[d2], t2, i2, f3), d2;
-  };
-  var p = (e2, t2, r) => e2.reduce((e3, l2, a2) => {
-    let n3 = t2[a2];
-    if (n3 && n3.call) {
-      let e4 = n3(r), t3 = e4 && e4.props && e4.props.className || /^go/.test(e4) && e4;
-      n3 = t3 ? "." + t3 : e4 && "object" == typeof e4 ? e4.props ? "" : o(e4, "") : false === e4 ? "" : e4;
-    }
-    return e3 + l2 + (null == n3 ? "" : n3);
-  }, "");
-  function u(e2) {
-    let r = this || {}, l2 = e2.call ? e2(r.p) : e2;
-    return i(l2.unshift ? l2.raw ? p(l2, [].slice.call(arguments, 1), r.p) : l2.reduce((e3, t2) => Object.assign(e3, t2 && t2.call ? t2(r.p) : t2), {}) : l2, t(r.target), r.g, r.o, r.k);
-  }
-  var d;
-  var f;
-  var g;
-  var b = u.bind({ g: 1 });
-  var h = u.bind({ k: 1 });
-  function m(e2, t2, r, l2) {
-    o.p = t2, d = e2, f = r, g = l2;
-  }
-  function j(e2, t2) {
-    let r = this || {};
-    return function() {
-      let l2 = arguments;
-      function a2(n3, o2) {
-        let c2 = Object.assign({}, n3), s2 = c2.className || a2.className;
-        r.p = Object.assign({ theme: f && f() }, c2), r.o = / *go\d+/.test(s2), c2.className = u.apply(r, l2) + (s2 ? " " + s2 : ""), t2 && (c2.ref = o2);
-        let i2 = e2;
-        return e2[0] && (i2 = c2.as || e2, delete c2.as), g && i2[0] && g(c2), d(i2, c2);
-      }
-      return t2 ? t2(a2) : a2;
-    };
-  }
-
-  // node_modules/react-hot-toast/dist/index.mjs
-  var b2 = __toESM(require_react(), 1);
-  var x = __toESM(require_react(), 1);
-  var Z = (e2) => typeof e2 == "function";
-  var h2 = (e2, t2) => Z(e2) ? e2(t2) : e2;
-  var W = /* @__PURE__ */ (() => {
-    let e2 = 0;
-    return () => (++e2).toString();
-  })();
-  var E = /* @__PURE__ */ (() => {
-    let e2;
-    return () => {
-      if (e2 === void 0 && typeof window < "u") {
-        let t2 = matchMedia("(prefers-reduced-motion: reduce)");
-        e2 = !t2 || t2.matches;
-      }
-      return e2;
-    };
-  })();
-  var re = 20;
-  var k = "default";
-  var H = (e2, t2) => {
-    let { toastLimit: o2 } = e2.settings;
-    switch (t2.type) {
-      case 0:
-        return { ...e2, toasts: [t2.toast, ...e2.toasts].slice(0, o2) };
-      case 1:
-        return { ...e2, toasts: e2.toasts.map((r) => r.id === t2.toast.id ? { ...r, ...t2.toast } : r) };
-      case 2:
-        let { toast: s2 } = t2;
-        return H(e2, { type: e2.toasts.find((r) => r.id === s2.id) ? 1 : 0, toast: s2 });
-      case 3:
-        let { toastId: a2 } = t2;
-        return { ...e2, toasts: e2.toasts.map((r) => r.id === a2 || a2 === void 0 ? { ...r, dismissed: true, visible: false } : r) };
-      case 4:
-        return t2.toastId === void 0 ? { ...e2, toasts: [] } : { ...e2, toasts: e2.toasts.filter((r) => r.id !== t2.toastId) };
-      case 5:
-        return { ...e2, pausedAt: t2.time };
-      case 6:
-        let i2 = t2.time - (e2.pausedAt || 0);
-        return { ...e2, pausedAt: void 0, toasts: e2.toasts.map((r) => ({ ...r, pauseDuration: r.pauseDuration + i2 })) };
-    }
-  };
-  var v = [];
-  var j2 = { toasts: [], pausedAt: void 0, settings: { toastLimit: re } };
-  var f2 = {};
-  var Y = (e2, t2 = k) => {
-    f2[t2] = H(f2[t2] || j2, e2), v.forEach(([o2, s2]) => {
-      o2 === t2 && s2(f2[t2]);
-    });
-  };
-  var _ = (e2) => Object.keys(f2).forEach((t2) => Y(e2, t2));
-  var Q = (e2) => Object.keys(f2).find((t2) => f2[t2].toasts.some((o2) => o2.id === e2));
-  var S = (e2 = k) => (t2) => {
-    Y(t2, e2);
-  };
-  var se = { blank: 4e3, error: 4e3, success: 2e3, loading: 1 / 0, custom: 4e3 };
-  var ie = (e2, t2 = "blank", o2) => ({ createdAt: Date.now(), visible: true, dismissed: false, type: t2, ariaProps: { role: "status", "aria-live": "polite" }, message: e2, pauseDuration: 0, ...o2, id: (o2 == null ? void 0 : o2.id) || W() });
-  var P = (e2) => (t2, o2) => {
-    let s2 = ie(t2, e2, o2);
-    return S(s2.toasterId || Q(s2.id))({ type: 2, toast: s2 }), s2.id;
-  };
-  var n2 = (e2, t2) => P("blank")(e2, t2);
-  n2.error = P("error");
-  n2.success = P("success");
-  n2.loading = P("loading");
-  n2.custom = P("custom");
-  n2.dismiss = (e2, t2) => {
-    let o2 = { type: 3, toastId: e2 };
-    t2 ? S(t2)(o2) : _(o2);
-  };
-  n2.dismissAll = (e2) => n2.dismiss(void 0, e2);
-  n2.remove = (e2, t2) => {
-    let o2 = { type: 4, toastId: e2 };
-    t2 ? S(t2)(o2) : _(o2);
-  };
-  n2.removeAll = (e2) => n2.remove(void 0, e2);
-  n2.promise = (e2, t2, o2) => {
-    let s2 = n2.loading(t2.loading, { ...o2, ...o2 == null ? void 0 : o2.loading });
-    return typeof e2 == "function" && (e2 = e2()), e2.then((a2) => {
-      let i2 = t2.success ? h2(t2.success, a2) : void 0;
-      return i2 ? n2.success(i2, { id: s2, ...o2, ...o2 == null ? void 0 : o2.success }) : n2.dismiss(s2), a2;
-    }).catch((a2) => {
-      let i2 = t2.error ? h2(t2.error, a2) : void 0;
-      i2 ? n2.error(i2, { id: s2, ...o2, ...o2 == null ? void 0 : o2.error }) : n2.dismiss(s2);
-    }), e2;
-  };
-  var de = h`
-from {
-  transform: scale(0) rotate(45deg);
-	opacity: 0;
-}
-to {
- transform: scale(1) rotate(45deg);
-  opacity: 1;
-}`;
-  var me = h`
-from {
-  transform: scale(0);
-  opacity: 0;
-}
-to {
-  transform: scale(1);
-  opacity: 1;
-}`;
-  var le = h`
-from {
-  transform: scale(0) rotate(90deg);
-	opacity: 0;
-}
-to {
-  transform: scale(1) rotate(90deg);
-	opacity: 1;
-}`;
-  var C = j("div")`
-  width: 20px;
-  opacity: 0;
-  height: 20px;
-  border-radius: 10px;
-  background: ${(e2) => e2.primary || "#ff4b4b"};
-  position: relative;
-  transform: rotate(45deg);
-
-  animation: ${de} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    forwards;
-  animation-delay: 100ms;
-
-  &:after,
-  &:before {
-    content: '';
-    animation: ${me} 0.15s ease-out forwards;
-    animation-delay: 150ms;
-    position: absolute;
-    border-radius: 3px;
-    opacity: 0;
-    background: ${(e2) => e2.secondary || "#fff"};
-    bottom: 9px;
-    left: 4px;
-    height: 2px;
-    width: 12px;
-  }
-
-  &:before {
-    animation: ${le} 0.15s ease-out forwards;
-    animation-delay: 180ms;
-    transform: rotate(90deg);
-  }
-`;
-  var Te = h`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-  var F = j("div")`
-  width: 12px;
-  height: 12px;
-  box-sizing: border-box;
-  border: 2px solid;
-  border-radius: 100%;
-  border-color: ${(e2) => e2.secondary || "#e0e0e0"};
-  border-right-color: ${(e2) => e2.primary || "#616161"};
-  animation: ${Te} 1s linear infinite;
-`;
-  var ge = h`
-from {
-  transform: scale(0) rotate(45deg);
-	opacity: 0;
-}
-to {
-  transform: scale(1) rotate(45deg);
-	opacity: 1;
-}`;
-  var he = h`
-0% {
-	height: 0;
-	width: 0;
-	opacity: 0;
-}
-40% {
-  height: 0;
-	width: 6px;
-	opacity: 1;
-}
-100% {
-  opacity: 1;
-  height: 10px;
-}`;
-  var L = j("div")`
-  width: 20px;
-  opacity: 0;
-  height: 20px;
-  border-radius: 10px;
-  background: ${(e2) => e2.primary || "#61d345"};
-  position: relative;
-  transform: rotate(45deg);
-
-  animation: ${ge} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    forwards;
-  animation-delay: 100ms;
-  &:after {
-    content: '';
-    box-sizing: border-box;
-    animation: ${he} 0.2s ease-out forwards;
-    opacity: 0;
-    animation-delay: 200ms;
-    position: absolute;
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    border-color: ${(e2) => e2.secondary || "#fff"};
-    bottom: 6px;
-    left: 6px;
-    height: 10px;
-    width: 6px;
-  }
-`;
-  var be = j("div")`
-  position: absolute;
-`;
-  var Se = j("div")`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 20px;
-  min-height: 20px;
-`;
-  var Ae = h`
-from {
-  transform: scale(0.6);
-  opacity: 0.4;
-}
-to {
-  transform: scale(1);
-  opacity: 1;
-}`;
-  var Pe = j("div")`
-  position: relative;
-  transform: scale(0.6);
-  opacity: 0.4;
-  min-width: 20px;
-  animation: ${Ae} 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    forwards;
-`;
-  var $ = ({ toast: e2 }) => {
-    let { icon: t2, type: o2, iconTheme: s2 } = e2;
-    return t2 !== void 0 ? typeof t2 == "string" ? b2.createElement(Pe, null, t2) : t2 : o2 === "blank" ? null : b2.createElement(Se, null, b2.createElement(F, { ...s2 }), o2 !== "loading" && b2.createElement(be, null, o2 === "error" ? b2.createElement(C, { ...s2 }) : b2.createElement(L, { ...s2 })));
-  };
-  var Re = (e2) => `
-0% {transform: translate3d(0,${e2 * -200}%,0) scale(.6); opacity:.5;}
-100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
-`;
-  var Ee = (e2) => `
-0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
-100% {transform: translate3d(0,${e2 * -150}%,-1px) scale(.6); opacity:0;}
-`;
-  var ve = "0%{opacity:0;} 100%{opacity:1;}";
-  var De = "0%{opacity:1;} 100%{opacity:0;}";
-  var Oe = j("div")`
-  display: flex;
-  align-items: center;
-  background: #fff;
-  color: #363636;
-  line-height: 1.3;
-  will-change: transform;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
-  max-width: 350px;
-  pointer-events: auto;
-  padding: 8px 10px;
-  border-radius: 8px;
-`;
-  var Ie = j("div")`
-  display: flex;
-  justify-content: center;
-  margin: 4px 10px;
-  color: inherit;
-  flex: 1 1 auto;
-  white-space: pre-line;
-`;
-  var ke = (e2, t2) => {
-    let s2 = e2.includes("top") ? 1 : -1, [a2, i2] = E() ? [ve, De] : [Re(s2), Ee(s2)];
-    return { animation: t2 ? `${h(a2)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${h(i2)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
-  };
-  var N = y.memo(({ toast: e2, position: t2, style: o2, children: s2 }) => {
-    let a2 = e2.height ? ke(e2.position || t2 || "top-center", e2.visible) : { opacity: 0 }, i2 = y.createElement($, { toast: e2 }), r = y.createElement(Ie, { ...e2.ariaProps }, h2(e2.message, e2));
-    return y.createElement(Oe, { className: e2.className, style: { ...a2, ...o2, ...e2.style } }, typeof s2 == "function" ? s2({ icon: i2, message: r }) : y.createElement(y.Fragment, null, i2, r));
-  });
-  m(x.createElement);
-  var Ce = u`
-  z-index: 9999;
-  > * {
-    pointer-events: auto;
-  }
-`;
-  var zt = n2;
-
-  // src/components/CartView.js
-  var CartView = ({ setView: setView2 }) => {
-    const { cartItems, updateCartItemQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
-    const [isLoading, setIsLoading] = (0, import_react22.useState)(false);
-    const handleCheckout = async () => {
-      setIsLoading(true);
-      try {
-        const userToken = "your-auth-token";
-        const checkoutData = {
-          items: cartItems.map((item) => ({ id: item.id, quantity: item.quantity, price: item.price })),
-          total: getTotalPrice()
-        };
-        const response = await fetch("/api/checkout", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Pass the user token for authentication and user-specific logic
-            "Authorization": `Bearer ${userToken}`
-          },
-          body: JSON.stringify(checkoutData)
-        });
-        const responseData = await response.json();
-        if (!response.ok) {
-          console.error("Checkout API Error:", responseData);
-          throw new Error(responseData.message || "An unknown error occurred during checkout.");
-        }
-        console.log("Checkout API success:", responseData);
-        zt.success("Proceeding to checkout...");
-        setView2("checkout");
-      } catch (error) {
-        console.error("Checkout failed:", error);
-        zt.error(`Checkout failed: ${error.message}`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (cartItems.length === 0) {
-      return /* @__PURE__ */ import_react22.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react22.default.createElement(ShoppingCart, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react22.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Your Cart is Empty"), /* @__PURE__ */ import_react22.default.createElement("p", { className: "text-gray-600 mb-6" }, "Looks like you haven't added anything to your cart yet."), /* @__PURE__ */ import_react22.default.createElement(
-        "button",
-        {
-          onClick: () => setView2("products"),
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        "Start Shopping"
-      ));
-    }
-    return /* @__PURE__ */ import_react22.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react22.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Your Shopping Cart"), /* @__PURE__ */ import_react22.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react22.default.createElement("div", { className: "divide-y divide-gray-200" }, cartItems.map((item) => /* @__PURE__ */ import_react22.default.createElement("div", { key: item.id, className: "flex items-center py-4" }, /* @__PURE__ */ import_react22.default.createElement(
-      "img",
-      {
-        src: item.imageUrl || `https://placehold.co/100x100/E0FFFF/333333?text=${item.name.replace(/\s/g, "+")}`,
-        alt: item.name,
-        onError: (e2) => {
-          e2.target.onerror = null;
-          e2.target.src = `https://placehold.co/100x100/E0FFFF/333333?text=${item.name.replace(/\s/g, "+")}`;
-        },
-        className: "w-24 h-24 object-cover rounded-lg mr-6 shadow-md"
-      }
-    ), /* @__PURE__ */ import_react22.default.createElement("div", { className: "flex-grow" }, /* @__PURE__ */ import_react22.default.createElement("h3", { className: "text-xl font-semibold text-gray-800" }, item.name), /* @__PURE__ */ import_react22.default.createElement("p", { className: "text-gray-600" }, "$", item.price?.toFixed(2))), /* @__PURE__ */ import_react22.default.createElement("div", { className: "flex items-center space-x-3" }, /* @__PURE__ */ import_react22.default.createElement(
-      "button",
-      {
-        onClick: () => updateCartItemQuantity(item.id, item.quantity - 1),
-        disabled: item.quantity <= 1,
-        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-full transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-      },
-      /* @__PURE__ */ import_react22.default.createElement(CircleMinus, { className: "w-5 h-5" })
-    ), /* @__PURE__ */ import_react22.default.createElement("span", { className: "text-lg font-semibold text-gray-800" }, item.quantity), /* @__PURE__ */ import_react22.default.createElement(
-      "button",
-      {
-        onClick: () => updateCartItemQuantity(item.id, item.quantity + 1),
-        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-full transition duration-200"
-      },
-      /* @__PURE__ */ import_react22.default.createElement(CirclePlus, { className: "w-5 h-5" })
-    )), /* @__PURE__ */ import_react22.default.createElement(
-      "button",
-      {
-        onClick: () => removeFromCart(item.id),
-        className: "ml-8 text-red-500 hover:text-red-700 transition duration-200"
-      },
-      /* @__PURE__ */ import_react22.default.createElement(CircleX, { className: "w-6 h-6" })
-    )))), /* @__PURE__ */ import_react22.default.createElement("div", { className: "flex justify-between items-center border-t border-gray-200 pt-6 mt-6" }, /* @__PURE__ */ import_react22.default.createElement("span", { className: "text-2xl font-bold text-gray-800" }, "Total:"), /* @__PURE__ */ import_react22.default.createElement("span", { className: "text-3xl font-bold text-pink-600" }, "$", getTotalPrice()?.toFixed(2))), /* @__PURE__ */ import_react22.default.createElement("div", { className: "mt-8 flex justify-end space-x-4" }, /* @__PURE__ */ import_react22.default.createElement(
-      "button",
-      {
-        onClick: clearCart,
-        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-lg transition duration-300"
-      },
-      "Clear Cart"
-    ), /* @__PURE__ */ import_react22.default.createElement(
-      "button",
-      {
-        onClick: handleCheckout,
-        disabled: isLoading,
-        className: `bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`
-      },
-      isLoading ? "Processing..." : "Proceed to Checkout"
-    ))));
-  };
-  CartView.propTypes = {
-    setView: import_prop_types7.default.func.isRequired
-  };
-  var CartView_default = CartView;
-
-  // src/components/Checkout.js
-  var import_react24 = __toESM(require_react());
-
-  // node_modules/@stripe/stripe-js/dist/index.mjs
-  var RELEASE_TRAIN = "basil";
-  var runtimeVersionToUrlVersion = function runtimeVersionToUrlVersion2(version) {
-    return version === 3 ? "v3" : version;
-  };
-  var ORIGIN = "https://js.stripe.com";
-  var STRIPE_JS_URL = "".concat(ORIGIN, "/").concat(RELEASE_TRAIN, "/stripe.js");
-  var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
-  var STRIPE_JS_URL_REGEX = /^https:\/\/js\.stripe\.com\/(v3|[a-z]+)\/stripe\.js(\?.*)?$/;
-  var EXISTING_SCRIPT_MESSAGE = "loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used";
-  var isStripeJSURL = function isStripeJSURL2(url) {
-    return V3_URL_REGEX.test(url) || STRIPE_JS_URL_REGEX.test(url);
-  };
-  var findScript = function findScript2() {
-    var scripts = document.querySelectorAll('script[src^="'.concat(ORIGIN, '"]'));
-    for (var i2 = 0; i2 < scripts.length; i2++) {
-      var script = scripts[i2];
-      if (!isStripeJSURL(script.src)) {
-        continue;
-      }
-      return script;
-    }
-    return null;
-  };
-  var injectScript = function injectScript2(params) {
-    var queryString = params && !params.advancedFraudSignals ? "?advancedFraudSignals=false" : "";
-    var script = document.createElement("script");
-    script.src = "".concat(STRIPE_JS_URL).concat(queryString);
-    var headOrBody = document.head || document.body;
-    if (!headOrBody) {
-      throw new Error("Expected document.body not to be null. Stripe.js requires a <body> element.");
-    }
-    headOrBody.appendChild(script);
-    return script;
-  };
-  var registerWrapper = function registerWrapper2(stripe, startTime) {
-    if (!stripe || !stripe._registerWrapper) {
-      return;
-    }
-    stripe._registerWrapper({
-      name: "stripe-js",
-      version: "7.8.0",
-      startTime
-    });
-  };
-  var stripePromise$1 = null;
-  var onErrorListener = null;
-  var onLoadListener = null;
-  var onError = function onError2(reject) {
-    return function(cause) {
-      reject(new Error("Failed to load Stripe.js", {
-        cause
-      }));
-    };
-  };
-  var onLoad = function onLoad2(resolve, reject) {
-    return function() {
-      if (window.Stripe) {
-        resolve(window.Stripe);
-      } else {
-        reject(new Error("Stripe.js not available"));
-      }
-    };
-  };
-  var loadScript = function loadScript2(params) {
-    if (stripePromise$1 !== null) {
-      return stripePromise$1;
-    }
-    stripePromise$1 = new Promise(function(resolve, reject) {
-      if (typeof window === "undefined" || typeof document === "undefined") {
-        resolve(null);
-        return;
-      }
-      if (window.Stripe && params) {
-        console.warn(EXISTING_SCRIPT_MESSAGE);
-      }
-      if (window.Stripe) {
-        resolve(window.Stripe);
-        return;
-      }
-      try {
-        var script = findScript();
-        if (script && params) {
-          console.warn(EXISTING_SCRIPT_MESSAGE);
-        } else if (!script) {
-          script = injectScript(params);
-        } else if (script && onLoadListener !== null && onErrorListener !== null) {
-          var _script$parentNode;
-          script.removeEventListener("load", onLoadListener);
-          script.removeEventListener("error", onErrorListener);
-          (_script$parentNode = script.parentNode) === null || _script$parentNode === void 0 ? void 0 : _script$parentNode.removeChild(script);
-          script = injectScript(params);
-        }
-        onLoadListener = onLoad(resolve, reject);
-        onErrorListener = onError(reject);
-        script.addEventListener("load", onLoadListener);
-        script.addEventListener("error", onErrorListener);
-      } catch (error) {
-        reject(error);
-        return;
-      }
-    });
-    return stripePromise$1["catch"](function(error) {
-      stripePromise$1 = null;
-      return Promise.reject(error);
-    });
-  };
-  var initStripe = function initStripe2(maybeStripe, args, startTime) {
-    if (maybeStripe === null) {
-      return null;
-    }
-    var pk = args[0];
-    var isTestKey = pk.match(/^pk_test/);
-    var version = runtimeVersionToUrlVersion(maybeStripe.version);
-    var expectedVersion = RELEASE_TRAIN;
-    if (isTestKey && version !== expectedVersion) {
-      console.warn("Stripe.js@".concat(version, " was loaded on the page, but @stripe/stripe-js@").concat("7.8.0", " expected Stripe.js@").concat(expectedVersion, ". This may result in unexpected behavior. For more information, see https://docs.stripe.com/sdks/stripejs-versioning"));
-    }
-    var stripe = maybeStripe.apply(void 0, args);
-    registerWrapper(stripe, startTime);
-    return stripe;
-  };
-  var stripePromise;
-  var loadCalled = false;
-  var getStripePromise = function getStripePromise2() {
-    if (stripePromise) {
-      return stripePromise;
-    }
-    stripePromise = loadScript(null)["catch"](function(error) {
-      stripePromise = null;
-      return Promise.reject(error);
-    });
-    return stripePromise;
-  };
-  Promise.resolve().then(function() {
-    return getStripePromise();
-  })["catch"](function(error) {
-    if (!loadCalled) {
-      console.warn(error);
-    }
-  });
-  var loadStripe = function loadStripe2() {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    loadCalled = true;
-    var startTime = Date.now();
-    return getStripePromise().then(function(maybeStripe) {
-      return initStripe(maybeStripe, args, startTime);
-    });
-  };
-
-  // src/components/Checkout.js
-  var import_react_stripe_js = __toESM(require_react_stripe_umd());
-
-  // node_modules/@paypal/react-paypal-js/dist/esm/react-paypal-js.js
-  var import_react23 = __toESM(require_react());
-  var SCRIPT_LOADING_STATE;
-  (function(SCRIPT_LOADING_STATE2) {
-    SCRIPT_LOADING_STATE2["INITIAL"] = "initial";
-    SCRIPT_LOADING_STATE2["PENDING"] = "pending";
-    SCRIPT_LOADING_STATE2["REJECTED"] = "rejected";
-    SCRIPT_LOADING_STATE2["RESOLVED"] = "resolved";
-  })(SCRIPT_LOADING_STATE || (SCRIPT_LOADING_STATE = {}));
-  var DISPATCH_ACTION;
-  (function(DISPATCH_ACTION2) {
-    DISPATCH_ACTION2["LOADING_STATUS"] = "setLoadingStatus";
-    DISPATCH_ACTION2["RESET_OPTIONS"] = "resetOptions";
-    DISPATCH_ACTION2["SET_BRAINTREE_INSTANCE"] = "braintreeInstance";
-  })(DISPATCH_ACTION || (DISPATCH_ACTION = {}));
-  var PAYPAL_HOSTED_FIELDS_TYPES;
-  (function(PAYPAL_HOSTED_FIELDS_TYPES2) {
-    PAYPAL_HOSTED_FIELDS_TYPES2["NUMBER"] = "number";
-    PAYPAL_HOSTED_FIELDS_TYPES2["CVV"] = "cvv";
-    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_DATE"] = "expirationDate";
-    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_MONTH"] = "expirationMonth";
-    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_YEAR"] = "expirationYear";
-    PAYPAL_HOSTED_FIELDS_TYPES2["POSTAL_CODE"] = "postalCode";
-  })(PAYPAL_HOSTED_FIELDS_TYPES || (PAYPAL_HOSTED_FIELDS_TYPES = {}));
-  var __assign = function() {
-    __assign = Object.assign || function __assign2(t2) {
-      for (var s2, i2 = 1, n3 = arguments.length; i2 < n3; i2++) {
-        s2 = arguments[i2];
-        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2)) t2[p2] = s2[p2];
-      }
-      return t2;
-    };
-    return __assign.apply(this, arguments);
-  };
-  function __rest$1(s2, e2) {
-    var t2 = {};
-    for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0) t2[p2] = s2[p2];
-    if (s2 != null && typeof Object.getOwnPropertySymbols === "function") for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
-      if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2])) t2[p2[i2]] = s2[p2[i2]];
-    }
-    return t2;
-  }
-  function __spreadArray(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
-      if (ar || !(i2 in from)) {
-        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
-        ar[i2] = from[i2];
-      }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  }
-  var SCRIPT_ID = "data-react-paypal-script-id";
-  var SDK_SETTINGS = {
-    DATA_CLIENT_TOKEN: "dataClientToken",
-    DATA_JS_SDK_LIBRARY: "dataJsSdkLibrary",
-    DATA_LIBRARY_VALUE: "react-paypal-js",
-    DATA_NAMESPACE: "dataNamespace",
-    DATA_SDK_INTEGRATION_SOURCE: "dataSdkIntegrationSource",
-    DATA_USER_ID_TOKEN: "dataUserIdToken"
-  };
-  var LOAD_SCRIPT_ERROR = "Failed to load the PayPal JS SDK script.";
-  var braintreeVersion = "3.117.0";
-  var BRAINTREE_SOURCE = "https://js.braintreegateway.com/web/".concat(braintreeVersion, "/js/client.min.js");
-  var BRAINTREE_PAYPAL_CHECKOUT_SOURCE = "https://js.braintreegateway.com/web/".concat(braintreeVersion, "/js/paypal-checkout.min.js");
-  var DEFAULT_PAYPAL_NAMESPACE = "paypal";
-  var SCRIPT_PROVIDER_REDUCER_ERROR = "usePayPalScriptReducer must be used within a PayPalScriptProvider";
-  function getPayPalWindowNamespace$1(namespace) {
-    if (namespace === void 0) {
-      namespace = DEFAULT_PAYPAL_NAMESPACE;
-    }
-    return window[namespace];
-  }
-  function hashStr(str) {
-    var hash = "";
-    for (var i2 = 0; i2 < str.length; i2++) {
-      var total = str[i2].charCodeAt(0) * i2;
-      if (str[i2 + 1]) {
-        total += str[i2 + 1].charCodeAt(0) * (i2 - 1);
-      }
-      hash += String.fromCharCode(97 + Math.abs(total) % 26);
-    }
-    return hash;
-  }
-  function generateErrorMessage(_a2) {
-    var reactComponentName = _a2.reactComponentName, sdkComponentKey = _a2.sdkComponentKey, _b = _a2.sdkRequestedComponents, sdkRequestedComponents = _b === void 0 ? "" : _b, _c = _a2.sdkDataNamespace, sdkDataNamespace = _c === void 0 ? DEFAULT_PAYPAL_NAMESPACE : _c;
-    var requiredOptionCapitalized = sdkComponentKey.charAt(0).toUpperCase().concat(sdkComponentKey.substring(1));
-    var errorMessage = "Unable to render <".concat(reactComponentName, " /> because window.").concat(sdkDataNamespace, ".").concat(requiredOptionCapitalized, " is undefined.");
-    var requestedComponents = typeof sdkRequestedComponents === "string" ? sdkRequestedComponents : sdkRequestedComponents.join(",");
-    if (!requestedComponents.includes(sdkComponentKey)) {
-      var expectedComponents = [requestedComponents, sdkComponentKey].filter(Boolean).join();
-      errorMessage += "\nTo fix the issue, add '".concat(sdkComponentKey, "' to the list of components passed to the parent PayPalScriptProvider:") + "\n`<PayPalScriptProvider options={{ components: '".concat(expectedComponents, "'}}>`.");
-    }
-    return errorMessage;
-  }
-  function getScriptID(options) {
-    var _a2 = options, _b = SCRIPT_ID;
-    _a2[_b];
-    var paypalScriptOptions = __rest$1(_a2, [_b + ""]);
-    return "react-paypal-js-".concat(hashStr(JSON.stringify(paypalScriptOptions)));
-  }
-  function destroySDKScript(reactPayPalScriptID) {
-    var scriptNode = self.document.querySelector("script[".concat(SCRIPT_ID, '="').concat(reactPayPalScriptID, '"]'));
-    if (scriptNode === null || scriptNode === void 0 ? void 0 : scriptNode.parentNode) {
-      scriptNode.parentNode.removeChild(scriptNode);
-    }
-  }
-  function scriptReducer(state, action) {
-    var _a2, _b;
-    switch (action.type) {
-      case DISPATCH_ACTION.LOADING_STATUS:
-        if (typeof action.value === "object") {
-          return __assign(__assign({}, state), {
-            loadingStatus: action.value.state,
-            loadingStatusErrorMessage: action.value.message
-          });
-        }
-        return __assign(__assign({}, state), {
-          loadingStatus: action.value
-        });
-      case DISPATCH_ACTION.RESET_OPTIONS:
-        destroySDKScript(state.options[SCRIPT_ID]);
-        return __assign(__assign({}, state), {
-          loadingStatus: SCRIPT_LOADING_STATE.PENDING,
-          options: __assign(__assign((_a2 = {}, _a2[SDK_SETTINGS.DATA_SDK_INTEGRATION_SOURCE] = SDK_SETTINGS.DATA_LIBRARY_VALUE, _a2), action.value), (_b = {}, _b[SCRIPT_ID] = "".concat(getScriptID(action.value)), _b))
-        });
-      case DISPATCH_ACTION.SET_BRAINTREE_INSTANCE:
-        return __assign(__assign({}, state), {
-          braintreePayPalCheckoutInstance: action.value
-        });
-      default: {
-        return state;
-      }
-    }
-  }
-  var ScriptContext = (0, import_react23.createContext)(null);
-  function validateReducer(scriptContext) {
-    if (typeof (scriptContext === null || scriptContext === void 0 ? void 0 : scriptContext.dispatch) === "function" && scriptContext.dispatch.length !== 0) {
-      return scriptContext;
-    }
-    throw new Error(SCRIPT_PROVIDER_REDUCER_ERROR);
-  }
-  function usePayPalScriptReducer() {
-    var scriptContext = validateReducer((0, import_react23.useContext)(ScriptContext));
-    var derivedStatusContext = __assign(__assign({}, scriptContext), {
-      isInitial: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.INITIAL,
-      isPending: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.PENDING,
-      isResolved: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.RESOLVED,
-      isRejected: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.REJECTED
-    });
-    return [derivedStatusContext, scriptContext.dispatch];
-  }
-  var PayPalHostedFieldsContext = (0, import_react23.createContext)({});
-  function useProxyProps(props) {
-    var proxyRef = (0, import_react23.useRef)(new Proxy({}, {
-      get: function(target, prop, receiver) {
-        if (typeof target[prop] === "function") {
-          return function() {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-              args[_i] = arguments[_i];
-            }
-            return target[prop].apply(target, args);
-          };
-        }
-        return Reflect.get(target, prop, receiver);
-      }
-    }));
-    proxyRef.current = Object.assign(proxyRef.current, props);
-    return proxyRef.current;
-  }
-  var PayPalButtons = function(_a2) {
-    var _b;
-    var _c = _a2.className, className = _c === void 0 ? "" : _c, _d = _a2.disabled, disabled = _d === void 0 ? false : _d, children = _a2.children, _e = _a2.forceReRender, forceReRender = _e === void 0 ? [] : _e, buttonProps = __rest$1(_a2, ["className", "disabled", "children", "forceReRender"]);
-    var isDisabledStyle = disabled ? {
-      opacity: 0.38
-    } : {};
-    var classNames = "".concat(className, " ").concat(disabled ? "paypal-buttons-disabled" : "").trim();
-    var buttonsContainerRef = (0, import_react23.useRef)(null);
-    var buttons = (0, import_react23.useRef)(null);
-    var proxyProps = useProxyProps(buttonProps);
-    var _f = usePayPalScriptReducer()[0], isResolved = _f.isResolved, options = _f.options;
-    var _g = (0, import_react23.useState)(null), initActions = _g[0], setInitActions = _g[1];
-    var _h = (0, import_react23.useState)(true), isEligible = _h[0], setIsEligible = _h[1];
-    var _j = (0, import_react23.useState)(null), setErrorState = _j[1];
-    function closeButtonsComponent() {
-      if (buttons.current !== null) {
-        buttons.current.close().catch(function() {
-        });
-      }
-    }
-    if ((_b = buttons.current) === null || _b === void 0 ? void 0 : _b.updateProps) {
-      buttons.current.updateProps({
-        message: buttonProps.message
-      });
-    }
-    (0, import_react23.useEffect)(function() {
-      if (isResolved === false) {
-        return closeButtonsComponent;
-      }
-      var paypalWindowNamespace = getPayPalWindowNamespace$1(options.dataNamespace);
-      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Buttons === void 0) {
-        setErrorState(function() {
-          throw new Error(generateErrorMessage({
-            reactComponentName: PayPalButtons.displayName,
-            sdkComponentKey: "buttons",
-            sdkRequestedComponents: options.components,
-            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
-          }));
-        });
-        return closeButtonsComponent;
-      }
-      var decoratedOnInit = function(data, actions) {
-        setInitActions(actions);
-        if (typeof buttonProps.onInit === "function") {
-          buttonProps.onInit(data, actions);
-        }
-      };
-      try {
-        buttons.current = paypalWindowNamespace.Buttons(__assign(__assign({}, proxyProps), {
-          onInit: decoratedOnInit
-        }));
-      } catch (err) {
-        return setErrorState(function() {
-          throw new Error("Failed to render <PayPalButtons /> component. Failed to initialize:  ".concat(err));
-        });
-      }
-      if (buttons.current.isEligible() === false) {
-        setIsEligible(false);
-        return closeButtonsComponent;
-      }
-      if (!buttonsContainerRef.current) {
-        return closeButtonsComponent;
-      }
-      buttons.current.render(buttonsContainerRef.current).catch(function(err) {
-        if (buttonsContainerRef.current === null || buttonsContainerRef.current.children.length === 0) {
-          return;
-        }
-        setErrorState(function() {
-          throw new Error("Failed to render <PayPalButtons /> component. ".concat(err));
-        });
-      });
-      return closeButtonsComponent;
-    }, __spreadArray(__spreadArray([isResolved], forceReRender, true), [buttonProps.fundingSource], false));
-    (0, import_react23.useEffect)(function() {
-      if (initActions === null) {
-        return;
-      }
-      if (disabled === true) {
-        initActions.disable().catch(function() {
-        });
-      } else {
-        initActions.enable().catch(function() {
-        });
-      }
-    }, [disabled, initActions]);
-    return import_react23.default.createElement(import_react23.default.Fragment, null, isEligible ? import_react23.default.createElement("div", {
-      ref: buttonsContainerRef,
-      style: isDisabledStyle,
-      className: classNames
-    }) : children);
-  };
-  PayPalButtons.displayName = "PayPalButtons";
-  function __rest(s2, e2) {
-    var t2 = {};
-    for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0) t2[p2] = s2[p2];
-    if (s2 != null && typeof Object.getOwnPropertySymbols === "function") for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
-      if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2])) t2[p2[i2]] = s2[p2[i2]];
-    }
-    return t2;
-  }
-  function findScript3(url, attributes) {
-    var currentScript = document.querySelector('script[src="'.concat(url, '"]'));
-    if (currentScript === null) return null;
-    var nextScript = createScriptElement(url, attributes);
-    var currentScriptClone = currentScript.cloneNode();
-    delete currentScriptClone.dataset.uidAuto;
-    if (Object.keys(currentScriptClone.dataset).length !== Object.keys(nextScript.dataset).length) {
-      return null;
-    }
-    var isExactMatch = true;
-    Object.keys(currentScriptClone.dataset).forEach(function(key) {
-      if (currentScriptClone.dataset[key] !== nextScript.dataset[key]) {
-        isExactMatch = false;
-      }
-    });
-    return isExactMatch ? currentScript : null;
-  }
-  function insertScriptElement(_a2) {
-    var url = _a2.url, attributes = _a2.attributes, onSuccess = _a2.onSuccess, onError3 = _a2.onError;
-    var newScript = createScriptElement(url, attributes);
-    newScript.onerror = onError3;
-    newScript.onload = onSuccess;
-    document.head.insertBefore(newScript, document.head.firstElementChild);
-  }
-  function processOptions(_a2) {
-    var customSdkBaseUrl = _a2.sdkBaseUrl, environment = _a2.environment, options = __rest(_a2, ["sdkBaseUrl", "environment"]);
-    var sdkBaseUrl = customSdkBaseUrl || processSdkBaseUrl(environment);
-    var optionsWithStringIndex = options;
-    var _b = Object.keys(optionsWithStringIndex).filter(function(key) {
-      return typeof optionsWithStringIndex[key] !== "undefined" && optionsWithStringIndex[key] !== null && optionsWithStringIndex[key] !== "";
-    }).reduce(function(accumulator, key) {
-      var value = optionsWithStringIndex[key].toString();
-      key = camelCaseToKebabCase(key);
-      if (key.substring(0, 4) === "data" || key === "crossorigin") {
-        accumulator.attributes[key] = value;
-      } else {
-        accumulator.queryParams[key] = value;
-      }
-      return accumulator;
-    }, {
-      queryParams: {},
-      attributes: {}
-    }), queryParams = _b.queryParams, attributes = _b.attributes;
-    if (queryParams["merchant-id"] && queryParams["merchant-id"].indexOf(",") !== -1) {
-      attributes["data-merchant-id"] = queryParams["merchant-id"];
-      queryParams["merchant-id"] = "*";
-    }
-    return {
-      url: "".concat(sdkBaseUrl, "?").concat(objectToQueryString(queryParams)),
-      attributes
-    };
-  }
-  function camelCaseToKebabCase(str) {
-    var replacer = function(match, indexOfMatch) {
-      return (indexOfMatch ? "-" : "") + match.toLowerCase();
-    };
-    return str.replace(/[A-Z]+(?![a-z])|[A-Z]/g, replacer);
-  }
-  function objectToQueryString(params) {
-    var queryString = "";
-    Object.keys(params).forEach(function(key) {
-      if (queryString.length !== 0) queryString += "&";
-      queryString += key + "=" + params[key];
-    });
-    return queryString;
-  }
-  function processSdkBaseUrl(environment) {
-    return environment === "sandbox" ? "https://www.sandbox.paypal.com/sdk/js" : "https://www.paypal.com/sdk/js";
-  }
-  function createScriptElement(url, attributes) {
-    if (attributes === void 0) {
-      attributes = {};
-    }
-    var newScript = document.createElement("script");
-    newScript.src = url;
-    Object.keys(attributes).forEach(function(key) {
-      newScript.setAttribute(key, attributes[key]);
-      if (key === "data-csp-nonce") {
-        newScript.setAttribute("nonce", attributes["data-csp-nonce"]);
-      }
-    });
-    return newScript;
-  }
-  function loadScript3(options, PromisePonyfill) {
-    if (PromisePonyfill === void 0) {
-      PromisePonyfill = Promise;
-    }
-    validateArguments(options, PromisePonyfill);
-    if (typeof document === "undefined") return PromisePonyfill.resolve(null);
-    var _a2 = processOptions(options), url = _a2.url, attributes = _a2.attributes;
-    var namespace = attributes["data-namespace"] || "paypal";
-    var existingWindowNamespace = getPayPalWindowNamespace(namespace);
-    if (!attributes["data-js-sdk-library"]) {
-      attributes["data-js-sdk-library"] = "paypal-js";
-    }
-    if (findScript3(url, attributes) && existingWindowNamespace) {
-      return PromisePonyfill.resolve(existingWindowNamespace);
-    }
-    return loadCustomScript({
-      url,
-      attributes
-    }, PromisePonyfill).then(function() {
-      var newWindowNamespace = getPayPalWindowNamespace(namespace);
-      if (newWindowNamespace) {
-        return newWindowNamespace;
-      }
-      throw new Error("The window.".concat(namespace, " global variable is not available."));
-    });
-  }
-  function loadCustomScript(options, PromisePonyfill) {
-    if (PromisePonyfill === void 0) {
-      PromisePonyfill = Promise;
-    }
-    validateArguments(options, PromisePonyfill);
-    var url = options.url, attributes = options.attributes;
-    if (typeof url !== "string" || url.length === 0) {
-      throw new Error("Invalid url.");
-    }
-    if (typeof attributes !== "undefined" && typeof attributes !== "object") {
-      throw new Error("Expected attributes to be an object.");
-    }
-    return new PromisePonyfill(function(resolve, reject) {
-      if (typeof document === "undefined") return resolve();
-      insertScriptElement({
-        url,
-        attributes,
-        onSuccess: function() {
-          return resolve();
-        },
-        onError: function() {
-          var defaultError = new Error('The script "'.concat(url, '" failed to load. Check the HTTP status code and response body in DevTools to learn more.'));
-          return reject(defaultError);
-        }
-      });
-    });
-  }
-  function getPayPalWindowNamespace(namespace) {
-    return window[namespace];
-  }
-  function validateArguments(options, PromisePonyfill) {
-    if (typeof options !== "object" || options === null) {
-      throw new Error("Expected an options object.");
-    }
-    var environment = options.environment;
-    if (environment && environment !== "production" && environment !== "sandbox") {
-      throw new Error('The `environment` option must be either "production" or "sandbox".');
-    }
-    if (typeof PromisePonyfill !== "undefined" && typeof PromisePonyfill !== "function") {
-      throw new Error("Expected PromisePonyfill to be a function.");
-    }
-  }
-  var PayPalMarks = function(_a2) {
-    var _b = _a2.className, className = _b === void 0 ? "" : _b, children = _a2.children, markProps = __rest$1(_a2, ["className", "children"]);
-    var _c = usePayPalScriptReducer()[0], isResolved = _c.isResolved, options = _c.options;
-    var markContainerRef = (0, import_react23.useRef)(null);
-    var _d = (0, import_react23.useState)(true), isEligible = _d[0], setIsEligible = _d[1];
-    var _e = (0, import_react23.useState)(null), setErrorState = _e[1];
-    var renderPayPalMark = function(mark) {
-      var current = markContainerRef.current;
-      if (!current || !mark.isEligible()) {
-        return setIsEligible(false);
-      }
-      if (current.firstChild) {
-        current.removeChild(current.firstChild);
-      }
-      mark.render(current).catch(function(err) {
-        if (current === null || current.children.length === 0) {
-          return;
-        }
-        setErrorState(function() {
-          throw new Error("Failed to render <PayPalMarks /> component. ".concat(err));
-        });
-      });
-    };
-    (0, import_react23.useEffect)(function() {
-      if (isResolved === false) {
-        return;
-      }
-      var paypalWindowNamespace = getPayPalWindowNamespace$1(options[SDK_SETTINGS.DATA_NAMESPACE]);
-      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Marks === void 0) {
-        return setErrorState(function() {
-          throw new Error(generateErrorMessage({
-            reactComponentName: PayPalMarks.displayName,
-            sdkComponentKey: "marks",
-            sdkRequestedComponents: options.components,
-            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
-          }));
-        });
-      }
-      renderPayPalMark(paypalWindowNamespace.Marks(__assign({}, markProps)));
-    }, [isResolved, markProps.fundingSource]);
-    return import_react23.default.createElement(import_react23.default.Fragment, null, isEligible ? import_react23.default.createElement("div", {
-      ref: markContainerRef,
-      className
-    }) : children);
-  };
-  PayPalMarks.displayName = "PayPalMarks";
-  var PayPalMessages = function(_a2) {
-    var _b = _a2.className, className = _b === void 0 ? "" : _b, _c = _a2.forceReRender, forceReRender = _c === void 0 ? [] : _c, messageProps = __rest$1(_a2, ["className", "forceReRender"]);
-    var _d = usePayPalScriptReducer()[0], isResolved = _d.isResolved, options = _d.options;
-    var messagesContainerRef = (0, import_react23.useRef)(null);
-    var messages = (0, import_react23.useRef)(null);
-    var _e = (0, import_react23.useState)(null), setErrorState = _e[1];
-    (0, import_react23.useEffect)(function() {
-      if (isResolved === false) {
-        return;
-      }
-      var paypalWindowNamespace = getPayPalWindowNamespace$1(options[SDK_SETTINGS.DATA_NAMESPACE]);
-      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Messages === void 0) {
-        return setErrorState(function() {
-          throw new Error(generateErrorMessage({
-            reactComponentName: PayPalMessages.displayName,
-            sdkComponentKey: "messages",
-            sdkRequestedComponents: options.components,
-            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
-          }));
-        });
-      }
-      messages.current = paypalWindowNamespace.Messages(__assign({}, messageProps));
-      messages.current.render(messagesContainerRef.current).catch(function(err) {
-        if (messagesContainerRef.current === null || messagesContainerRef.current.children.length === 0) {
-          return;
-        }
-        setErrorState(function() {
-          throw new Error("Failed to render <PayPalMessages /> component. ".concat(err));
-        });
-      });
-    }, __spreadArray([isResolved], forceReRender, true));
-    return import_react23.default.createElement("div", {
-      ref: messagesContainerRef,
-      className
-    });
-  };
-  PayPalMessages.displayName = "PayPalMessages";
-  var PayPalScriptProvider = function(_a2) {
-    var _b;
-    var _c = _a2.options, options = _c === void 0 ? {
-      clientId: "test"
-    } : _c, children = _a2.children, _d = _a2.deferLoading, deferLoading = _d === void 0 ? false : _d;
-    var _e = (0, import_react23.useReducer)(scriptReducer, {
-      options: __assign(__assign({}, options), (_b = {}, _b[SDK_SETTINGS.DATA_JS_SDK_LIBRARY] = SDK_SETTINGS.DATA_LIBRARY_VALUE, _b[SDK_SETTINGS.DATA_SDK_INTEGRATION_SOURCE] = SDK_SETTINGS.DATA_LIBRARY_VALUE, _b[SCRIPT_ID] = "".concat(getScriptID(options)), _b)),
-      loadingStatus: deferLoading ? SCRIPT_LOADING_STATE.INITIAL : SCRIPT_LOADING_STATE.PENDING
-    }), state = _e[0], dispatch = _e[1];
-    (0, import_react23.useEffect)(function() {
-      if (deferLoading === false && state.loadingStatus === SCRIPT_LOADING_STATE.INITIAL) {
-        return dispatch({
-          type: DISPATCH_ACTION.LOADING_STATUS,
-          value: SCRIPT_LOADING_STATE.PENDING
-        });
-      }
-      if (state.loadingStatus !== SCRIPT_LOADING_STATE.PENDING) {
-        return;
-      }
-      var isSubscribed = true;
-      loadScript3(state.options).then(function() {
-        if (isSubscribed) {
-          dispatch({
-            type: DISPATCH_ACTION.LOADING_STATUS,
-            value: SCRIPT_LOADING_STATE.RESOLVED
-          });
-        }
-      }).catch(function(err) {
-        console.error("".concat(LOAD_SCRIPT_ERROR, " ").concat(err));
-        if (isSubscribed) {
-          dispatch({
-            type: DISPATCH_ACTION.LOADING_STATUS,
-            value: {
-              state: SCRIPT_LOADING_STATE.REJECTED,
-              message: String(err)
-            }
-          });
-        }
-      });
-      return function() {
-        isSubscribed = false;
-      };
-    }, [state.options, deferLoading, state.loadingStatus]);
-    return import_react23.default.createElement(ScriptContext.Provider, {
-      value: __assign(__assign({}, state), {
-        dispatch
-      })
-    }, children);
-  };
-  function ignore() {
-    return;
-  }
-  var PayPalCardFieldsContext = (0, import_react23.createContext)({
-    cardFieldsForm: null,
-    fields: {},
-    registerField: ignore,
-    unregisterField: ignore
-    // implementation is inside hook and passed through the provider
-  });
-  var FUNDING$1 = {
-    PAYPAL: "paypal",
-    VENMO: "venmo",
-    APPLEPAY: "applepay",
-    ITAU: "itau",
-    CREDIT: "credit",
-    PAYLATER: "paylater",
-    CARD: "card",
-    IDEAL: "ideal",
-    SEPA: "sepa",
-    BANCONTACT: "bancontact",
-    GIROPAY: "giropay",
-    SOFORT: "sofort",
-    EPS: "eps",
-    MYBANK: "mybank",
-    P24: "p24",
-    PAYU: "payu",
-    BLIK: "blik",
-    TRUSTLY: "trustly",
-    OXXO: "oxxo",
-    BOLETO: "boleto",
-    BOLETOBANCARIO: "boletobancario",
-    WECHATPAY: "wechatpay",
-    MERCADOPAGO: "mercadopago",
-    MULTIBANCO: "multibanco",
-    SATISPAY: "satispay",
-    PAIDY: "paidy",
-    ZIMPLER: "zimpler",
-    MAXIMA: "maxima"
-  };
-  [FUNDING$1.IDEAL, FUNDING$1.BANCONTACT, FUNDING$1.GIROPAY, FUNDING$1.SOFORT, FUNDING$1.EPS, FUNDING$1.MYBANK, FUNDING$1.P24, FUNDING$1.PAYU, FUNDING$1.BLIK, FUNDING$1.TRUSTLY, FUNDING$1.OXXO, FUNDING$1.BOLETO, FUNDING$1.BOLETOBANCARIO, FUNDING$1.WECHATPAY, FUNDING$1.MERCADOPAGO, FUNDING$1.MULTIBANCO, FUNDING$1.SATISPAY, FUNDING$1.PAIDY, FUNDING$1.MAXIMA, FUNDING$1.ZIMPLER];
-
-  // src/components/Checkout.js
-  var stripePromise2 = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-  var PaymentSection = ({ orderDetails, onPaymentSuccess, onPaymentError }) => {
-    const stripe = (0, import_react_stripe_js.useStripe)();
-    const elements = (0, import_react_stripe_js.useElements)();
-    const [errorMessage, setErrorMessage] = (0, import_react24.useState)(null);
-    const [isLoading, setIsLoading] = (0, import_react24.useState)(false);
-    const [paymentGateway, setPaymentGateway] = (0, import_react24.useState)("stripe");
-    const paypalInitialOptions = {
-      clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID,
-      currency: "USD",
-      intent: "capture"
-    };
-    const handleStripeSubmit = async (event) => {
-      event.preventDefault();
-      setIsLoading(true);
-      setErrorMessage(null);
-      if (!stripe || !elements) {
-        setErrorMessage("Stripe payment system not loaded. Please try again.");
-        setIsLoading(false);
-        return;
-      }
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        setErrorMessage(submitError.message);
-        setIsLoading(false);
-        return;
-      }
-      const { paymentMethod: stripePaymentMethod, error: createError } = await stripe.createPaymentMethod({
-        elements,
-        params: {}
-      });
-      if (createError) {
-        setErrorMessage(createError.message);
-        setIsLoading(false);
-        return;
-      }
-      const paymentMethod = stripePaymentMethod;
-      const finalOrderDetails = { ...orderDetails, paymentGateway: "stripe" };
-      try {
-        const response = await fetch(process.env.REACT_APP_APPWRITE_FUNCTION_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            paymentGateway: "stripe",
-            paymentMethod: { id: paymentMethod.id },
-            amount: orderDetails.amount,
-            orderDetails: finalOrderDetails
-          })
-        });
-        const data = await response.json();
-        if (!response.ok || !data.success) {
-          const message = data.message || `HTTP error! Status: ${response.status}. Payment processing failed on server.`;
-          throw new Error(message);
-        }
-        onPaymentSuccess({
-          transactionId: data.transactionId,
-          paymentStatus: data.paymentStatus,
-          orderDetails: finalOrderDetails
-        });
-      } catch (error) {
-        setErrorMessage(`Payment failed: ${error.message}`);
-        onPaymentError(`Payment failed: ${error.message}`);
-        console.error("Fetch error during Stripe payment processing:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    const createPayPalOrder = (data, actions) => {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: orderDetails.amount.toFixed(2),
-            currency_code: "USD"
-          }
-        }]
-      });
-    };
-    const onApprovePayPalOrder = async (data, actions) => {
-      setIsLoading(true);
-      setErrorMessage(null);
-      try {
-        const finalOrderDetails = { ...orderDetails, paymentGateway: "paypal" };
-        const response = await fetch(process.env.REACT_APP_APPWRITE_FUNCTION_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            paymentGateway: "paypal",
-            paymentMethod: { orderID: data.orderID },
-            amount: orderDetails.amount,
-            orderDetails: finalOrderDetails
-          })
-        });
-        const backendData = await response.json();
-        if (!response.ok || !backendData.success) {
-          const message = backendData.message || `HTTP error! Status: ${response.status}. PayPal capture failed on server.`;
-          throw new Error(message);
-        }
-        onPaymentSuccess({
-          transactionId: backendData.transactionId,
-          paymentStatus: backendData.paymentStatus,
-          orderDetails: finalOrderDetails
-        });
-      } catch (error) {
-        setErrorMessage(`Payment failed: ${error.message}`);
-        onPaymentError(`Payment failed: ${error.message}`);
-        console.error("Fetch error during PayPal capture:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    return /* @__PURE__ */ import_react24.default.createElement("div", { className: "p-4 bg-white rounded-lg shadow-md" }, /* @__PURE__ */ import_react24.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react24.default.createElement(CreditCard, { className: "mr-3 text-green-500" }), " Payment Details"), /* @__PURE__ */ import_react24.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react24.default.createElement("label", { htmlFor: "gateway-select", className: "block text-gray-700 text-sm font-bold mb-2" }, "Select Payment Method:"), /* @__PURE__ */ import_react24.default.createElement(
-      "select",
-      {
-        id: "gateway-select",
-        value: paymentGateway,
-        onChange: (e2) => {
-          setPaymentGateway(e2.target.value);
-          setErrorMessage(null);
-        },
-        className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      },
-      /* @__PURE__ */ import_react24.default.createElement("option", { value: "stripe" }, "Credit/Debit Card (Stripe)"),
-      /* @__PURE__ */ import_react24.default.createElement("option", { value: "paypal" }, "PayPal")
-    )), paymentGateway === "stripe" && /* @__PURE__ */ import_react24.default.createElement("form", { onSubmit: handleStripeSubmit }, /* @__PURE__ */ import_react24.default.createElement("div", { className: "mb-6" }, /* @__PURE__ */ import_react24.default.createElement("label", { className: "block text-gray-700 text-sm font-bold mb-2" }, "Card Information:"), /* @__PURE__ */ import_react24.default.createElement(import_react_stripe_js.PaymentElement, { options: { layout: "tabs" } })), errorMessage && /* @__PURE__ */ import_react24.default.createElement("div", { className: "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4", role: "alert" }, /* @__PURE__ */ import_react24.default.createElement("p", { className: "font-bold" }, "Error!"), /* @__PURE__ */ import_react24.default.createElement("p", { className: "text-sm" }, errorMessage)), /* @__PURE__ */ import_react24.default.createElement(
-      "button",
-      {
-        type: "submit",
-        disabled: isLoading || !stripe || !elements,
-        className: "w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105"
-      },
-      isLoading ? "Processing..." : `Pay $${orderDetails.amount.toFixed(2)} with Card`
-    )), paymentGateway === "paypal" && /* @__PURE__ */ import_react24.default.createElement("div", { className: "mb-6 text-center" }, /* @__PURE__ */ import_react24.default.createElement("p", { className: "text-gray-600 mb-4" }, "Click the PayPal button below to complete your order."), errorMessage && /* @__PURE__ */ import_react24.default.createElement("div", { className: "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4", role: "alert" }, /* @__PURE__ */ import_react24.default.createElement("p", { className: "font-bold" }, "Error!"), /* @__PURE__ */ import_react24.default.createElement("p", { className: "text-sm" }, errorMessage)), /* @__PURE__ */ import_react24.default.createElement(PayPalScriptProvider, { options: paypalInitialOptions }, /* @__PURE__ */ import_react24.default.createElement(
-      PayPalButtons,
-      {
-        style: { layout: "vertical", color: "blue", shape: "pill", label: "pay" },
-        createOrder: createPayPalOrder,
-        onApprove: onApprovePayPalOrder,
-        onError: (err) => {
-          console.error("PayPal Buttons Error:", err);
-          setErrorMessage("An error occurred with PayPal. Please try again.");
-          setIsLoading(false);
-          onPaymentError("An error occurred with PayPal buttons.");
-        },
-        onCancel: () => {
-          setErrorMessage("PayPal payment was cancelled.");
-          setIsLoading(false);
-          onPaymentError("PayPal payment cancelled by user.");
-        },
-        forceReRender: [orderDetails.amount]
-      }
-    ), isLoading && /* @__PURE__ */ import_react24.default.createElement("div", { className: "flex items-center justify-center mt-4" }, /* @__PURE__ */ import_react24.default.createElement("svg", { className: "animate-spin h-5 w-5 text-gray-600 mr-3", viewBox: "0 0 24 24" }, /* @__PURE__ */ import_react24.default.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }), /* @__PURE__ */ import_react24.default.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })), /* @__PURE__ */ import_react24.default.createElement("span", { className: "text-gray-600" }, "Processing PayPal...")))));
-  };
-  var Checkout = ({ setView: setView2 }) => {
-    const { cartItems, getTotalPrice, clearCart } = useCart();
-    const { currentUser } = useAuth();
-    const [shippingInfo, setShippingInfo] = (0, import_react24.useState)({
-      fullName: currentUser?.displayName || "",
-      addressLine1: "",
-      addressLine2: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "USA"
-    });
-    const [errors2, setErrors] = (0, import_react24.useState)({});
-    const [showPaymentSection, setShowPaymentSection] = (0, import_react24.useState)(false);
-    const [paymentStatusMessage, setPaymentStatusMessage] = (0, import_react24.useState)("");
-    const [transactionDetails, setTransactionDetails] = (0, import_react24.useState)(null);
-    const [orderId, setOrderId] = (0, import_react24.useState)(null);
-    (0, import_react24.useEffect)(() => {
-      if (currentUser) {
-        setShippingInfo((prev) => ({
-          ...prev,
-          fullName: currentUser.displayName || prev.fullName
-        }));
-      }
-    }, [currentUser]);
-    const handleInputChange = (e2) => {
-      const { id, value } = e2.target;
-      setShippingInfo((prev) => ({ ...prev, [id]: value }));
-      if (errors2[id]) {
-        setErrors((prev) => ({ ...prev, [id]: "" }));
-      }
-    };
-    const validateForm = () => {
-      let newErrors = {};
-      let isValid = true;
-      if (!shippingInfo.fullName.trim()) {
-        newErrors.fullName = "Full Name is required.";
-        isValid = false;
-      }
-      if (!shippingInfo.addressLine1.trim()) {
-        newErrors.addressLine1 = "Address Line 1 is required.";
-        isValid = false;
-      }
-      if (!shippingInfo.city.trim()) {
-        newErrors.city = "City is required.";
-        isValid = false;
-      }
-      if (!shippingInfo.state.trim()) {
-        newErrors.state = "State/Province/Region is required.";
-        isValid = false;
-      }
-      if (!shippingInfo.zipCode.trim()) {
-        newErrors.zipCode = "Zip Code is required.";
-        isValid = false;
-      } else if (!/^\d{5}(-\d{4})?$/.test(shippingInfo.zipCode)) {
-        newErrors.zipCode = "Invalid Zip Code format (e.g., 12345 or 12345-6789).";
-        isValid = false;
-      }
-      if (!shippingInfo.country.trim()) {
-        newErrors.country = "Country is required.";
-        isValid = false;
-      }
-      setErrors(newErrors);
-      return isValid;
-    };
-    const handleProceedToPayment = () => {
-      if (validateForm()) {
-        if (cartItems.length === 0) {
-          showMessage_default("Your cart is empty. Please add products before checking out.", "error");
-          setView2("products");
-          return;
-        }
-        setOrderId(ID.unique());
-        setShowPaymentSection(true);
-        setPaymentStatusMessage("");
-        setTransactionDetails(null);
-        showMessage_default("Shipping information validated. Proceed to payment.", "success");
-      } else {
-        showMessage_default("Please correct the errors in your shipping information.", "error");
-      }
-    };
-    const handlePaymentSuccess = async (data) => {
-      setPaymentStatusMessage("Payment Successful! \u{1F389}");
-      setTransactionDetails(data);
-      console.log("Payment Success:", data);
-      try {
-        const orderData = {
-          orderId,
-          userId: currentUser?.$id || "guest",
-          items: JSON.stringify(cartItems.map((item) => ({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }))),
-          shippingInfo: JSON.stringify(shippingInfo),
-          totalAmount: parseFloat(getTotalPrice().toFixed(2)),
-          paymentGateway: data.orderDetails.paymentGateway,
-          transactionId: data.transactionId,
-          paymentStatus: data.paymentStatus,
-          status: "processing",
-          orderDate: (/* @__PURE__ */ new Date()).toISOString()
-        };
-        const DATABASE_ID2 = process.env.REACT_APP_APPWRITE_DATABASE_ID;
-        const ORDERS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_ORDERS_COLLECTION_ID;
-        await databases.createDocument(
-          DATABASE_ID2,
-          ORDERS_COLLECTION_ID,
-          orderId,
-          orderData
-        );
-        await clearCart();
-        showMessage_default("Your order has been placed successfully!", "success");
-        setView2("order-confirmation");
-      } catch (error) {
-        console.error("Error saving order to Appwrite database after payment:", error);
-        showMessage_default("Payment was successful, but there was an issue recording your order. Please contact support.", "error");
-      }
-    };
-    const handlePaymentError = (message) => {
-      setPaymentStatusMessage(`Payment Failed: ${message} \u{1F614}`);
-      setTransactionDetails(null);
-      console.error("Payment Error:", message);
-      showMessage_default(`Payment Failed: ${message}`, "error");
-    };
-    const totalPrice = getTotalPrice();
-    if (cartItems.length === 0) {
-      return /* @__PURE__ */ import_react24.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react24.default.createElement(ShoppingCart, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react24.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Your Cart is Empty"), /* @__PURE__ */ import_react24.default.createElement("p", { className: "text-gray-600 mb-6" }, "Looks like you haven't added anything to your cart yet."), /* @__PURE__ */ import_react24.default.createElement(
-        "button",
-        {
-          onClick: () => setView2("products"),
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        "Start Shopping"
-      ));
-    }
-    const currentOrderId = orderId || ID.unique();
-    const comprehensiveOrderDetails = {
-      userId: currentUser?.$id || "guest",
-      orderId: currentOrderId,
-      items: cartItems.map((item) => ({ id: item.id, name: item.name, price: item.price, quantity: item.quantity })),
-      amount: totalPrice,
-      currency: "USD",
-      shippingInfo,
-      email: currentUser?.email
-    };
-    return /* @__PURE__ */ import_react24.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react24.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Checkout"), /* @__PURE__ */ import_react24.default.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8" }, /* @__PURE__ */ import_react24.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6 h-fit" }, /* @__PURE__ */ import_react24.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react24.default.createElement(PackageCheck, { className: "mr-3 text-pink-500" }), " Order Summary"), /* @__PURE__ */ import_react24.default.createElement("div", { className: "divide-y divide-gray-200" }, cartItems.map((item) => /* @__PURE__ */ import_react24.default.createElement("div", { key: item.id, className: "flex justify-between items-center py-3" }, /* @__PURE__ */ import_react24.default.createElement("span", { className: "text-gray-700" }, item.name, " (x", item.quantity, ")"), /* @__PURE__ */ import_react24.default.createElement("span", { className: "font-semibold" }, "$", (item.price * item.quantity).toFixed(2))))), /* @__PURE__ */ import_react24.default.createElement("div", { className: "flex justify-between items-center border-t border-gray-200 pt-4 mt-4" }, /* @__PURE__ */ import_react24.default.createElement("span", { className: "text-xl font-bold text-gray-800" }, "Total:"), /* @__PURE__ */ import_react24.default.createElement("span", { className: "text-2xl font-bold text-pink-600" }, "$", totalPrice.toFixed(2)))), /* @__PURE__ */ import_react24.default.createElement("div", null, !showPaymentSection ? /* @__PURE__ */ import_react24.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react24.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react24.default.createElement(CreditCard, { className: "mr-3 text-purple-500" }), " Shipping Information"), /* @__PURE__ */ import_react24.default.createElement("form", { onSubmit: (e2) => {
-      e2.preventDefault();
-      handleProceedToPayment();
-    } }, /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "fullName", label: "Full Name", value: shippingInfo.fullName, onChange: handleInputChange, error: errors2.fullName, required: true }), /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "addressLine1", label: "Address Line 1", value: shippingInfo.addressLine1, onChange: handleInputChange, placeholder: "Street address, P.O. Box", error: errors2.addressLine1, required: true }), /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "addressLine2", label: "Address Line 2 (Optional)", value: shippingInfo.addressLine2, onChange: handleInputChange, placeholder: "Apartment, suite, unit, building, floor, etc." }), /* @__PURE__ */ import_react24.default.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4" }, /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "city", label: "City", value: shippingInfo.city, onChange: handleInputChange, error: errors2.city, required: true }), /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "state", label: "State/Province/Region", value: shippingInfo.state, onChange: handleInputChange, error: errors2.state, required: true })), /* @__PURE__ */ import_react24.default.createElement("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4" }, /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "zipCode", label: "Zip/Postal Code", value: shippingInfo.zipCode, onChange: handleInputChange, error: errors2.zipCode, required: true }), /* @__PURE__ */ import_react24.default.createElement(InputField_default, { id: "country", label: "Country", value: shippingInfo.country, onChange: handleInputChange, error: errors2.country, required: true })), /* @__PURE__ */ import_react24.default.createElement("p", { className: "text-gray-600 text-sm mt-6 mb-4 font-semibold" }, "* Payment processing will be handled securely after shipping details."), /* @__PURE__ */ import_react24.default.createElement(
-      "button",
-      {
-        type: "submit",
-        className: "w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105"
-      },
-      "Proceed to Payment"
-    ))) : /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, stripePromise2 && /* @__PURE__ */ import_react24.default.createElement(import_react_stripe_js.Elements, { stripe: stripePromise2 }, /* @__PURE__ */ import_react24.default.createElement(
-      PaymentSection,
-      {
-        orderDetails: comprehensiveOrderDetails,
-        onPaymentSuccess: handlePaymentSuccess,
-        onPaymentError: handlePaymentError
-      }
-    )), paymentStatusMessage && /* @__PURE__ */ import_react24.default.createElement("div", { className: "mt-8 p-6 bg-white rounded-lg shadow-md text-center" }, /* @__PURE__ */ import_react24.default.createElement("p", { className: `text-xl font-semibold ${paymentStatusMessage.includes("Successful") ? "text-green-600" : "text-red-600"}` }, paymentStatusMessage), transactionDetails && /* @__PURE__ */ import_react24.default.createElement("div", { className: "mt-4 text-left inline-block" }, /* @__PURE__ */ import_react24.default.createElement("h3", { className: "text-lg font-medium text-gray-700 mb-2" }, "Transaction Details:"), /* @__PURE__ */ import_react24.default.createElement("p", null, /* @__PURE__ */ import_react24.default.createElement("strong", null, "Transaction ID:"), " ", transactionDetails.transactionId), /* @__PURE__ */ import_react24.default.createElement("p", null, /* @__PURE__ */ import_react24.default.createElement("strong", null, "Status:"), " ", transactionDetails.paymentStatus), /* @__PURE__ */ import_react24.default.createElement("p", null, /* @__PURE__ */ import_react24.default.createElement("strong", null, "Order ID:"), " ", transactionDetails.orderDetails.orderId)), /* @__PURE__ */ import_react24.default.createElement(
-      "button",
-      {
-        onClick: () => setView2("home"),
-        className: "mt-6 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 hover:scale-105"
-      },
-      "Back to Home"
-    ))))));
-  };
-  var Checkout_default = Checkout;
-
-  // src/components/ContactSection.js
-  var import_react25 = __toESM(require_react());
-  var DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
-  var CONTACT_COLLECTION_ID = process.env.REACT_APP_APPWRITE_CONTACT_COLLECTION_ID;
-  var GALLERY_COLLECTION_ID = process.env.REACT_APP_APPWRITE_GALLERY_COLLECTION_ID;
-  var BUCKET_ID = process.env.REACT_APP_APPWRITE_BUCKET_ID;
-  var ImageUploadModal = ({ onClose, onUploadSuccess }) => {
-    const { currentUser } = useAuth();
-    const [file, setFile] = (0, import_react25.useState)(null);
-    const [uploading, setUploading] = (0, import_react25.useState)(false);
-    const [progress, setProgress] = (0, import_react25.useState)(0);
-    const [error, setError] = (0, import_react25.useState)("");
-    const handleFileChange = (e2) => {
-      if (e2.target.files && e2.target.files[0]) {
-        setFile(e2.target.files[0]);
-        setError("");
-      }
-    };
-    const handleUpload = async () => {
-      if (!file) {
-        setError("Please select a file to upload.");
-        return;
-      }
-      if (!currentUser) {
-        setError("You must be logged in to upload a photo.");
-        return;
-      }
-      setUploading(true);
-      setError("");
-      try {
-        const uploadedFile = await storage.createFile(
-          BUCKET_ID,
-          ID2.unique(),
-          file,
-          [
-            Permission.read(Role.any()),
-            // Public read access for the file
-            Permission.update(Role.user(currentUser.$id)),
-            Permission.delete(Role.user(currentUser.$id))
-          ]
-        );
-        const newImageMetadata = {
-          imageId: uploadedFile.$id,
-          userId: currentUser.$id,
-          userName: currentUser.name,
-          status: "pending"
-          // Status is 'pending' by default, waiting for moderator approval
-        };
-        await databases.createDocument(
-          DATABASE_ID,
-          GALLERY_COLLECTION_ID,
-          ID2.unique(),
-          newImageMetadata,
-          [
-            Permission.read(Role.team("admins")),
-            // Only admins can read this metadata
-            Permission.write(Role.team("admins"))
-            // Only admins can update this metadata
-          ]
-        );
-        showMessage_default("Image uploaded successfully! It will appear in the gallery after a quick review.", "success");
-        onUploadSuccess();
-        onClose();
-      } catch (error2) {
-        console.error("Appwrite Upload Error:", error2);
-        const appwriteError = error2.response?.message || "Failed to upload image. Please try again.";
-        setError(appwriteError);
-      } finally {
-        setUploading(false);
-        setProgress(0);
-      }
-    };
-    return /* @__PURE__ */ import_react25.default.createElement("div", { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" }, /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-white p-8 rounded-xl shadow-lg w-full max-w-md relative" }, /* @__PURE__ */ import_react25.default.createElement("button", { onClick: onClose, className: "absolute top-4 right-4 text-gray-500 hover:text-gray-800" }, /* @__PURE__ */ import_react25.default.createElement(X, { size: 24 })), /* @__PURE__ */ import_react25.default.createElement("h3", { className: "text-2xl font-bold text-purple-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react25.default.createElement(CloudUpload, { className: "mr-2" }), " Upload Your Photo"), /* @__PURE__ */ import_react25.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react25.default.createElement(
-      "input",
-      {
-        type: "file",
-        accept: "image/*",
-        onChange: handleFileChange,
-        className: "w-full text-gray-700 border rounded py-2 px-3 focus:outline-none focus:shadow-outline"
-      }
-    )), file && !uploading && /* @__PURE__ */ import_react25.default.createElement("div", { className: "mb-4 text-gray-600" }, "Selected: ", file.name), uploading && /* @__PURE__ */ import_react25.default.createElement("div", { className: "w-full bg-gray-200 rounded-full h-2.5 mb-4" }, /* @__PURE__ */ import_react25.default.createElement(
-      "div",
-      {
-        className: "bg-purple-600 h-2.5 rounded-full",
-        style: { width: `${progress}%` }
-      }
-    )), error && /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4", role: "alert" }, /* @__PURE__ */ import_react25.default.createElement("span", { className: "block sm:inline" }, error)), /* @__PURE__ */ import_react25.default.createElement(
-      "button",
-      {
-        onClick: handleUpload,
-        disabled: uploading || !file || !currentUser,
-        className: "w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 disabled:bg-gray-400"
-      },
-      uploading ? "Uploading..." : "Submit Photo"
-    ), !currentUser && /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-sm text-center text-gray-500 mt-2" }, "You must be logged in to upload.")));
-  };
-  var ContactForm = () => {
-    const [formData, setFormData] = (0, import_react25.useState)({ name: "", email: "", message: "" });
-    const [loading, setLoading] = (0, import_react25.useState)(false);
-    const [error, setError] = (0, import_react25.useState)("");
-    const handleChange = (e2) => {
-      const { id, value } = e2.target;
-      setFormData((prev) => ({ ...prev, [id]: value }));
-      setError("");
-    };
-    const handleSubmit = async (e2) => {
-      e2.preventDefault();
-      setLoading(true);
-      setError("");
-      try {
-        await databases.createDocument(
-          DATABASE_ID,
-          CONTACT_COLLECTION_ID,
-          ID2.unique(),
-          {
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            timestamp: (/* @__PURE__ */ new Date()).toISOString()
-          },
-          [
-            Permission.read(Role.team("admins")),
-            Permission.write(Role.team("admins"))
-          ]
-        );
-        showMessage_default("Message sent successfully!", "success");
-        setFormData({ name: "", email: "", message: "" });
-      } catch (error2) {
-        console.error("Appwrite Database Error:", error2);
-        const appwriteError = error2.response?.message || "Failed to send message. Please try again.";
-        setError(appwriteError);
-      } finally {
-        setLoading(false);
-      }
-    };
-    return /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md w-full md:w-1/2 lg:w-2/5 animate-fade-in-up delay-200" }, /* @__PURE__ */ import_react25.default.createElement("h3", { className: "text-2xl font-semibold text-purple-700 mb-3 flex items-center" }, /* @__PURE__ */ import_react25.default.createElement(MessageSquare, { className: "mr-2" }), " Send Us a Message"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-gray-600 mb-4" }, "We'll get back to you as soon as possible."), /* @__PURE__ */ import_react25.default.createElement("form", { onSubmit: handleSubmit }, /* @__PURE__ */ import_react25.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react25.default.createElement("label", { className: "block text-gray-700 text-sm font-bold mb-2", htmlFor: "name" }, "Name"), /* @__PURE__ */ import_react25.default.createElement(
-      "input",
-      {
-        className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-        id: "name",
-        type: "text",
-        value: formData.name,
-        onChange: handleChange,
-        required: true
-      }
-    )), /* @__PURE__ */ import_react25.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react25.default.createElement("label", { className: "block text-gray-700 text-sm font-bold mb-2", htmlFor: "email" }, "Email"), /* @__PURE__ */ import_react25.default.createElement(
-      "input",
-      {
-        className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-        id: "email",
-        type: "email",
-        value: formData.email,
-        onChange: handleChange,
-        required: true
-      }
-    )), /* @__PURE__ */ import_react25.default.createElement("div", { className: "mb-6" }, /* @__PURE__ */ import_react25.default.createElement("label", { className: "block text-gray-700 text-sm font-bold mb-2", htmlFor: "message" }, "Message"), /* @__PURE__ */ import_react25.default.createElement(
-      "textarea",
-      {
-        className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-none",
-        id: "message",
-        value: formData.message,
-        onChange: handleChange,
-        required: true
-      }
-    )), error && /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4", role: "alert" }, /* @__PURE__ */ import_react25.default.createElement("span", { className: "block sm:inline" }, error)), /* @__PURE__ */ import_react25.default.createElement(
-      "button",
-      {
-        type: "submit",
-        className: "w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 disabled:bg-gray-400",
-        disabled: loading
-      },
-      loading ? "Sending..." : "Send Message"
-    )));
-  };
-  var ContactSection = () => {
-    const [isModalOpen, setIsModalOpen] = (0, import_react25.useState)(false);
-    const [images, setImages] = (0, import_react25.useState)([]);
-    const [loadingImages, setLoadingImages] = (0, import_react25.useState)(true);
-    const fetchImages = async () => {
-      setLoadingImages(true);
-      try {
-        const response = await databases.listDocuments(
-          DATABASE_ID,
-          GALLERY_COLLECTION_ID,
-          [Query.equal("status", "approved")]
-        );
-        const galleryImages = response.documents.map((doc) => ({
-          id: doc.imageId,
-          userName: doc.userName,
-          url: storage.getFilePreview(BUCKET_ID, doc.imageId, 0, 0, 100, 100, "webp").href
-          // Optimized preview
-        }));
-        setImages(galleryImages);
-      } catch (error) {
-        console.error("Failed to fetch images from gallery:", error);
-        showMessage_default("Failed to load images from the gallery.", "error");
-      } finally {
-        setLoadingImages(false);
-      }
-    };
-    (0, import_react25.useEffect)(() => {
-      fetchImages();
-    }, []);
-    const handleUploadSuccess = () => {
-      fetchImages();
-    };
-    return /* @__PURE__ */ import_react25.default.createElement("section", { id: "contact", className: "bg-pink-50 py-16 px-4 rounded-xl m-4 shadow-lg" }, /* @__PURE__ */ import_react25.default.createElement("div", { className: "container mx-auto text-center" }, /* @__PURE__ */ import_react25.default.createElement("h2", { className: "text-4xl font-bold text-purple-800 mb-8" }, "Get in Touch"), /* @__PURE__ */ import_react25.default.createElement("div", { className: "flex flex-col md:flex-row justify-center items-start gap-8" }, /* @__PURE__ */ import_react25.default.createElement(ContactForm, null), /* @__PURE__ */ import_react25.default.createElement("div", { className: "flex flex-col gap-8 w-full md:w-1/2 lg:w-2/5" }, /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md animate-fade-in-up delay-100" }, /* @__PURE__ */ import_react25.default.createElement("h3", { className: "text-2xl font-semibold text-purple-700 mb-3" }, "Location"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-gray-600" }, "123 Beauty Blvd, Salon City, ST 12345")), /* @__PURE__ */ import_react25.default.createElement("div", { className: "bg-white p-6 rounded-xl shadow-md animate-fade-in-up delay-100" }, /* @__PURE__ */ import_react25.default.createElement("h3", { className: "text-2xl font-semibold text-purple-700 mb-3" }, "Hours"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-gray-600" }, "Mon - Fri: 9:00 AM - 7:00 PM"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-gray-600" }, "Sat: 10:00 AM - 5:00 PM"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-gray-600" }, "Sun: Closed")))), /* @__PURE__ */ import_react25.default.createElement("div", { className: "mt-16 bg-white p-8 rounded-xl shadow-lg animate-fade-in-up delay-400" }, /* @__PURE__ */ import_react25.default.createElement("h2", { className: "text-4xl font-bold text-purple-800 mb-8 flex items-center justify-center" }, /* @__PURE__ */ import_react25.default.createElement(Image, { className: "mr-2" }), " Bukibloom Gallery"), /* @__PURE__ */ import_react25.default.createElement("p", { className: "text-lg text-gray-700 mb-6 max-w-2xl mx-auto" }, "Share your beautiful transformations with our community!"), /* @__PURE__ */ import_react25.default.createElement(
-      "button",
-      {
-        onClick: () => setIsModalOpen(true),
-        className: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 mb-8"
-      },
-      "Upload Your Photo"
-    ), loadingImages ? /* @__PURE__ */ import_react25.default.createElement("div", { className: "flex items-center justify-center text-gray-500" }, "Loading gallery...") : images.length > 0 ? /* @__PURE__ */ import_react25.default.createElement("div", { className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" }, images.map((image) => /* @__PURE__ */ import_react25.default.createElement("div", { key: image.id, className: "relative" }, /* @__PURE__ */ import_react25.default.createElement(
-      "img",
-      {
-        src: image.url,
-        alt: `Gallery photo uploaded by ${image.userName}`,
-        className: "w-full h-48 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-200"
-      }
-    ), /* @__PURE__ */ import_react25.default.createElement("p", { className: "absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded-full flex items-center" }, /* @__PURE__ */ import_react25.default.createElement(User, { size: 12, className: "mr-1" }), image.userName)))) : /* @__PURE__ */ import_react25.default.createElement("div", { className: "text-center text-gray-500" }, "No photos in the gallery yet. Be the first to upload one!")), isModalOpen && /* @__PURE__ */ import_react25.default.createElement(ImageUploadModal, { onClose: () => setIsModalOpen(false), onUploadSuccess: handleUploadSuccess })));
-  };
-  var ContactSection_default = ContactSection;
-
-  // src/views/UserDashboardView.js
-  var import_react26 = __toESM(require_react());
-  var import_prop_types8 = __toESM(require_prop_types());
-  var formatDateTime2 = (isoString) => {
-    const date = new Date(isoString);
-    return {
-      date: date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
-      time: date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
-    };
-  };
-  var UserDashboardView = ({ setView: setView2 }) => {
-    const { currentUser, userId } = useAuth();
-    const { bookings, cancelBooking, isLoading, bookingMessage } = useBooking();
-    const handleCancelBooking = async (bookingId) => {
-      if (window.confirm("Are you sure you want to cancel this booking?")) {
-        await cancelBooking(bookingId);
-      }
-    };
-    if (!currentUser) {
-      return /* @__PURE__ */ import_react26.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react26.default.createElement(User, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react26.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Access Denied"), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600 mb-6" }, "Please log in to view your dashboard."), /* @__PURE__ */ import_react26.default.createElement(
-        "button",
-        {
-          onClick: () => setView2("login"),
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        "Log In"
-      ));
-    }
-    return /* @__PURE__ */ import_react26.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react26.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Your Dashboard"), /* @__PURE__ */ import_react26.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6 mb-8 flex items-center space-x-6" }, /* @__PURE__ */ import_react26.default.createElement("div", { className: "w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react26.default.createElement(User, { className: "w-10 h-10 text-purple-500" })), /* @__PURE__ */ import_react26.default.createElement("div", null, /* @__PURE__ */ import_react26.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-2" }, "Welcome, ", currentUser.name || currentUser.email.split("@")[0], "!"), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600" }, "Email: ", /* @__PURE__ */ import_react26.default.createElement("span", { className: "font-semibold" }, currentUser.email)), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600" }, "User ID: ", /* @__PURE__ */ import_react26.default.createElement("span", { className: "font-mono text-sm" }, userId)), /* @__PURE__ */ import_react26.default.createElement("button", { className: "mt-4 bg-purple-100 text-purple-700 py-2 px-4 rounded-full hover:bg-purple-200 transition duration-300" }, "Edit Profile"))), /* @__PURE__ */ import_react26.default.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8" }, /* @__PURE__ */ import_react26.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react26.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react26.default.createElement(CalendarCheck, { className: "mr-3 text-pink-500" }), " My Bookings"), isLoading ? /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-center text-gray-500" }, "Loading bookings...") : bookings.length === 0 ? /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600 text-center" }, "You have no upcoming bookings.") : /* @__PURE__ */ import_react26.default.createElement("div", { className: "divide-y divide-gray-200" }, bookings.map((booking) => {
-      const { date, time } = formatDateTime2(booking.dateTime);
-      return /* @__PURE__ */ import_react26.default.createElement("div", { key: booking.id, className: "py-4" }, /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-lg font-semibold text-gray-800" }, booking.serviceName), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600" }, "Staff: ", booking.staffName), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600" }, "Date: ", date), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600" }, "Time: ", time), /* @__PURE__ */ import_react26.default.createElement("p", { className: `font-semibold ${booking.status === "confirmed" ? "text-green-600" : booking.status === "pending" ? "text-orange-500" : "text-red-600"}` }, "Status: ", booking.status.charAt(0).toUpperCase() + booking.status.slice(1)), /* @__PURE__ */ import_react26.default.createElement(
-        "button",
-        {
-          onClick: () => handleCancelBooking(booking.id),
-          className: "mt-2 bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-lg transition duration-300",
-          disabled: isLoading
-        },
-        isLoading ? "Cancelling..." : "Cancel Booking"
-      ));
-    })), bookingMessage && /* @__PURE__ */ import_react26.default.createElement("p", { className: `mt-4 text-center ${bookingMessage.includes("successful") ? "text-green-600" : "text-red-600"} font-semibold` }, bookingMessage)), /* @__PURE__ */ import_react26.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react26.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react26.default.createElement(Package, { className: "mr-3 text-blue-500" }), " My Orders"), /* @__PURE__ */ import_react26.default.createElement("p", { className: "text-gray-600 text-center mb-4" }, "This section will display your past product orders.", /* @__PURE__ */ import_react26.default.createElement("br", null), " (Feature coming soon!)"), /* @__PURE__ */ import_react26.default.createElement(
-      "button",
-      {
-        onClick: () => setView2("products"),
-        className: "w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
-      },
-      "Browse Products"
-    ))));
-  };
-  UserDashboardView.propTypes = {
-    setView: import_prop_types8.default.func.isRequired
-  };
-  var UserDashboardView_default = UserDashboardView;
-
-  // src/components/PaymentView.js
-  var import_react27 = __toESM(require_react());
-  var import_react_stripe_js2 = __toESM(require_react_stripe_umd());
-  var stripePromise3 = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-  var PayPalPaymentButtons = ({ depositAmount, onPaymentSuccess, setPaymentProcessing, showMessage: showMessage2, serviceToBook }) => {
-    const initialOptions = {
-      "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
-      // Your PayPal client ID (NOT secret)
-      currency: "USD",
-      intent: "capture"
-    };
-    const createOrder = async (data, actions) => {
-      setPaymentProcessing(true);
-      showMessage2("Creating PayPal order...", "info");
-      try {
-        const order = await actions.order.create({
-          purchase_units: [
-            {
-              amount: {
-                currency_code: "USD",
-                value: depositAmount.toFixed(2)
-                // Amount for PayPal
-              },
-              description: `Deposit for ${serviceToBook.name}`
-            }
-          ]
-        });
-        return order;
-      } catch (error) {
-        console.error("Error creating PayPal order:", error);
-        showMessage2("Failed to create PayPal order.", "error");
-        setPaymentProcessing(false);
-        throw error;
-      }
-    };
-    const onApprove = async (data, actions) => {
-      showMessage2("Confirming PayPal payment...", "info");
-      try {
-        const response = await fetch("/v1/functions/YOUR_APPWRITE_FUNCTION_ID/executions", {
-          // Replace with your Appwrite Function endpoint
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            paymentGateway: "paypal",
-            paymentMethod: { orderID: data.orderID },
-            // Send PayPal's order ID
-            amount: depositAmount,
-            orderDetails: {
-              serviceId: serviceToBook.id,
-              serviceName: serviceToBook.name,
-              depositAmount
-              // Add other necessary order details for your backend
-            }
-          })
-        });
-        const result = await response.json();
-        if (result.success) {
-          showMessage2("PayPal payment successful! Your booking is confirmed.", "success");
-          onPaymentSuccess();
-        } else {
-          showMessage2(result.message || "PayPal payment failed. Please try again.", "error");
-        }
-      } catch (error) {
-        console.error("Error capturing PayPal payment:", error);
-        showMessage2("An error occurred during PayPal payment. Please try again.", "error");
-      } finally {
-        setPaymentProcessing(false);
-      }
-    };
-    const onError3 = (err) => {
-      console.error("PayPal error:", err);
-      showMessage2("PayPal payment encountered an error.", "error");
-      setPaymentProcessing(false);
-    };
-    const onCancel = (data) => {
-      showMessage2("PayPal payment cancelled.", "info");
-      setPaymentProcessing(false);
-    };
-    return /* @__PURE__ */ import_react27.default.createElement(PayPalScriptProvider, { options: initialOptions }, /* @__PURE__ */ import_react27.default.createElement(
-      PayPalButtons,
-      {
-        style: { layout: "vertical", color: "blue", shape: "pill", label: "pay" },
-        createOrder,
-        onApprove,
-        onError: onError3,
-        onCancel
-      }
-    ));
-  };
-  var StripeCheckoutForm = ({ serviceToBook, depositAmount, onPaymentSuccess, setPaymentProcessing, setErrors, showMessage: showMessage2 }) => {
-    const stripe = (0, import_react_stripe_js2.useStripe)();
-    const elements = (0, import_react_stripe_js2.useElements)();
-    const [cardName, setCardName] = (0, import_react27.useState)("");
-    const [isLoading, setIsLoading] = (0, import_react27.useState)(false);
-    const validateForm = () => {
-      let newErrors = {};
-      let isValid = true;
-      if (!cardName.trim()) {
-        newErrors.cardName = "Name on card is required.";
-        isValid = false;
-      }
-      setErrors(newErrors);
-      return isValid;
-    };
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      setErrors({});
-      setPaymentProcessing(true);
-      setIsLoading(true);
-      if (!stripe || !elements) {
-        showMessage2("Payment system not ready. Please try again.", "error");
-        setPaymentProcessing(false);
-        setIsLoading(false);
-        return;
-      }
-      if (!validateForm()) {
-        showMessage2("Please correct the payment information.", "error");
-        setPaymentProcessing(false);
-        setIsLoading(false);
-        return;
-      }
-      showMessage2("Initiating payment...", "info");
-      try {
-        const cardElement = elements.getElement(import_react_stripe_js2.CardElement);
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-          billing_details: {
-            name: cardName
-          }
-        });
-        if (error) {
-          console.error("[Stripe error]", error);
-          setErrors({ general: error.message });
-          showMessage2(error.message, "error");
-          setPaymentProcessing(false);
-          setIsLoading(false);
-          return;
-        }
-        showMessage2("Sending payment details to server...", "info");
-        const response = await fetch("/v1/functions/YOUR_APPWRITE_FUNCTION_ID/executions", {
-          // Replace with your Appwrite Function endpoint
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            paymentGateway: "stripe",
-            paymentMethod: { id: paymentMethod.id },
-            amount: depositAmount,
-            orderDetails: {
-              serviceId: serviceToBook.id,
-              serviceName: serviceToBook.name,
-              depositAmount
-              // Add other necessary order details for your backend
-            }
-          })
-        });
-        const data = await response.json();
-        if (data.success) {
-          showMessage2("Stripe payment successful! Your booking is confirmed.", "success");
-          onPaymentSuccess();
-        } else {
-          setErrors({ general: data.message || "Stripe payment failed. Please try again." });
-          showMessage2(data.message || "Stripe payment failed. Please try again.", "error");
-        }
-      } catch (error) {
-        console.error("Error during Stripe payment submission:", error);
-        setErrors({ general: error.message || "An unexpected error occurred." });
-        showMessage2("An unexpected error occurred during Stripe payment. Please try again.", "error");
-      } finally {
-        setPaymentProcessing(false);
-        setIsLoading(false);
-      }
-    };
-    return /* @__PURE__ */ import_react27.default.createElement("form", { onSubmit: handleSubmit, className: "space-y-4" }, /* @__PURE__ */ import_react27.default.createElement(
-      InputField_default,
-      {
-        id: "cardName",
-        label: "Name on Card",
-        value: cardName,
-        onChange: (e2) => setCardName(e2.target.value),
-        placeholder: "John Doe",
-        error: errors.cardName,
-        required: true
-      }
-    ), /* @__PURE__ */ import_react27.default.createElement("div", { className: "mb-4" }, /* @__PURE__ */ import_react27.default.createElement("label", { htmlFor: "card-element", className: "block text-gray-700 text-sm font-bold mb-2" }, "Card Details"), /* @__PURE__ */ import_react27.default.createElement("div", { className: "shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 ease-in-out" }, /* @__PURE__ */ import_react27.default.createElement(
-      import_react_stripe_js2.CardElement,
-      {
-        id: "card-element",
-        options: {
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4"
-              }
-            },
-            invalid: {
-              color: "#9e2146"
-            }
-          }
-        }
-      }
-    )), errors.general && /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-red-500 text-xs italic mt-1" }, errors.general)), /* @__PURE__ */ import_react27.default.createElement(
-      "button",
-      {
-        type: "submit",
-        className: "w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105 mt-6",
-        disabled: !stripe || !elements || isLoading
-      },
-      isLoading ? /* @__PURE__ */ import_react27.default.createElement("span", { className: "flex items-center justify-center" }, /* @__PURE__ */ import_react27.default.createElement("svg", { className: "animate-spin -ml-1 mr-3 h-5 w-5 text-white", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24" }, /* @__PURE__ */ import_react27.default.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }), /* @__PURE__ */ import_react27.default.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })), "Processing...") : /* @__PURE__ */ import_react27.default.createElement("span", { className: "flex items-center justify-center" }, /* @__PURE__ */ import_react27.default.createElement(CreditCard, { className: "mr-2", size: 20 }), " Pay with Card ($", depositAmount?.toFixed(2), ")")
-    ), /* @__PURE__ */ import_react27.default.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => setView("booking"),
-        className: "w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg mt-3 transition duration-300",
-        disabled: isLoading
-      },
-      "Cancel"
-    ));
-  };
-  var PaymentView = ({ setView: setView2, serviceToBook, depositAmount, onPaymentSuccess }) => {
-    const [paymentMethod, setPaymentMethod] = (0, import_react27.useState)("stripe");
-    const [paymentProcessing, setPaymentProcessing] = (0, import_react27.useState)(false);
-    const [errors2, setErrors] = (0, import_react27.useState)({});
-    (0, import_react27.useEffect)(() => {
-      if (!serviceToBook || !depositAmount) {
-        showMessage_default("No service selected for payment. Redirecting to services.", "error");
-        setView2("services");
-      }
-    }, [serviceToBook, depositAmount, setView2]);
-    if (!serviceToBook) {
-      return /* @__PURE__ */ import_react27.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react27.default.createElement(DollarSign, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react27.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Payment Required"), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600 mb-6" }, "Please select a service to proceed with payment."), /* @__PURE__ */ import_react27.default.createElement(
-        "button",
-        {
-          onClick: () => setView2("services"),
-          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-        },
-        "View Services"
-      ));
-    }
-    return /* @__PURE__ */ import_react27.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react27.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Confirm Booking & Pay Deposit"), /* @__PURE__ */ import_react27.default.createElement("div", { className: "max-w-md mx-auto bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react27.default.createElement("div", { className: "text-center mb-6" }, /* @__PURE__ */ import_react27.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-2" }, serviceToBook.name), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600 mb-1" }, "Total Service Price: ", /* @__PURE__ */ import_react27.default.createElement("span", { className: "font-semibold" }, "$", serviceToBook.price?.toFixed(2))), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-lg font-bold text-pink-600" }, "Deposit Required: ", /* @__PURE__ */ import_react27.default.createElement("span", { className: "text-3xl" }, "$", depositAmount?.toFixed(2))), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-sm text-gray-500 mt-2" }, "This 10% deposit is non-refundable if the client doesn't show up.")), /* @__PURE__ */ import_react27.default.createElement("div", { className: "mb-6 flex justify-center space-x-4" }, /* @__PURE__ */ import_react27.default.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => setPaymentMethod("stripe"),
-        className: `py-2 px-4 rounded-full font-bold transition duration-300 ${paymentMethod === "stripe" ? "bg-purple-600 text-white shadow-md" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`,
-        disabled: paymentProcessing
-      },
-      /* @__PURE__ */ import_react27.default.createElement(CreditCard, { className: "inline-block mr-2", size: 18 }),
-      " Pay with Card"
-    ), /* @__PURE__ */ import_react27.default.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => setPaymentMethod("paypal"),
-        className: `py-2 px-4 rounded-full font-bold transition duration-300 ${paymentMethod === "paypal" ? "bg-blue-600 text-white shadow-md" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`,
-        disabled: paymentProcessing
-      },
-      /* @__PURE__ */ import_react27.default.createElement(Paypal, { className: "inline-block mr-2", size: 18 }),
-      " Pay with PayPal"
-    )), paymentMethod === "stripe" && /* @__PURE__ */ import_react27.default.createElement(import_react_stripe_js2.Elements, { stripe: stripePromise3 }, /* @__PURE__ */ import_react27.default.createElement(
-      StripeCheckoutForm,
-      {
-        serviceToBook,
-        depositAmount,
-        onPaymentSuccess,
-        setPaymentProcessing,
-        setErrors,
-        showMessage: showMessage_default
-      }
-    )), paymentMethod === "paypal" && /* @__PURE__ */ import_react27.default.createElement(
-      PayPalPaymentButtons,
-      {
-        depositAmount,
-        onPaymentSuccess,
-        setPaymentProcessing,
-        showMessage: showMessage_default,
-        serviceToBook
-      }
-    )));
-  };
-  var PaymentView_default = PaymentView;
-
-  // src/components/ServiceCard.js
-  var import_react28 = __toESM(require_react());
-
-  // src/context/AdminContext.js
-  var import_react29 = __toESM(require_react());
-  var AdminContext = (0, import_react29.createContext)();
-  var AdminProvider = ({ children }) => {
-    const { database, client, isAuthReady } = useAppwriteContext();
-    const APPWRITE_DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
-    const APPWRITE_BOOKINGS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_BOOKINGS_COLLECTION_ID;
-    const APPWRITE_PRODUCTS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_PRODUCTS_COLLECTION_ID;
-    const APPWRITE_SERVICES_COLLECTION_ID = process.env.REACT_APP_APPWRITE_SERVICES_COLLECTION_ID;
-    const APPWRITE_STAFF_COLLECTION_ID = process.env.REACT_APP_APPWRITE_STAFF_COLLECTION_ID;
-    const APPWRITE_USERS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_USERS_COLLECTION_ID;
-    const APPWRITE_ORDERS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_ORDERS_COLLECTION_ID;
-    const [allBookings, setAllBookings] = (0, import_react29.useState)([]);
-    const [allProducts, setAllProducts] = (0, import_react29.useState)([]);
-    const [allOrders, setAllOrders] = (0, import_react29.useState)([]);
-    const [allServices, setAllServices] = (0, import_react29.useState)([]);
-    const [allStaff, setAllStaff] = (0, import_react29.useState)([]);
-    const [allUsers, setAllUsers] = (0, import_react29.useState)([]);
-    const [adminLoading, setAdminLoading] = (0, import_react29.useState)(false);
-    const [adminError, setAdminError] = (0, import_react29.useState)(null);
-    const handleAppwriteError = (error, message) => {
-      console.error(message, error);
-      setAdminError(`Failed to complete action: ${error.message || "An unknown error occurred."}`);
-    };
-    const mapBookingDocument = (doc) => {
-      const service = allServices.find((s2) => s2.id === doc.service);
-      const staffMember = allStaff.find((s2) => s2.id === doc.staffId);
-      return {
-        id: doc.$id,
-        serviceId: doc.service,
-        serviceName: service ? service.name : "Unknown Service",
-        staffId: doc.staffId,
-        staffName: staffMember ? staffMember.name : "Unknown Staff",
-        dateTime: doc.bookingDate,
-        status: doc.status || "pending",
-        clientName: doc.clientName,
-        clientEmail: doc.clientEmail,
-        clientPhone: doc.clientPhone,
-        userId: doc.userId,
-        ...doc
-      };
-    };
-    const fetchAllBookings = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_BOOKINGS_COLLECTION_ID) {
-        console.warn("AdminContext: Bookings collection ID not configured or DB not ready. Cannot fetch bookings.");
-        setAllBookings([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_BOOKINGS_COLLECTION_ID,
-          [Query.orderDesc("bookingDate"), Query.limit(100)]
-        );
-        setAllBookings(response.documents.map(mapBookingDocument));
-        console.log("Fetched all bookings for admin:", response.documents);
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching all bookings for admin (check Appwrite security rules):");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID, allServices, allStaff]);
-    const fetchAllProducts = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_PRODUCTS_COLLECTION_ID) {
-        console.warn("AdminContext: Products collection ID not configured or DB not ready. Cannot fetch products.");
-        setAllProducts([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_PRODUCTS_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setAllProducts(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching all products for admin:");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_PRODUCTS_COLLECTION_ID]);
-    const fetchAllServices = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_SERVICES_COLLECTION_ID) {
-        console.warn("AdminContext: Services collection ID not configured or DB not ready. Cannot fetch services.");
-        setAllServices([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_SERVICES_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setAllServices(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching all services for admin:");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID]);
-    const fetchAllStaff = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_STAFF_COLLECTION_ID) {
-        console.warn("AdminContext: Staff collection ID not configured or DB not ready. Cannot fetch staff.");
-        setAllStaff([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_STAFF_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setAllStaff(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching all staff for admin:");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID]);
-    const fetchAllUsers = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_USERS_COLLECTION_ID) {
-        console.warn("AdminContext: Users collection ID not set or is default. Cannot fetch user profiles from custom collection.");
-        setAllUsers([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_USERS_COLLECTION_ID,
-          [Query.limit(100)]
-        );
-        setAllUsers(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-        console.log("Fetched users for admin:", response.documents);
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching users for admin:");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_USERS_COLLECTION_ID]);
-    const fetchAllOrders = (0, import_react29.useCallback)(async () => {
-      if (!database || !isAuthReady || !APPWRITE_ORDERS_COLLECTION_ID) {
-        console.warn("AdminContext: Orders collection ID not configured or DB not ready. Cannot fetch orders.");
-        setAllOrders([]);
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        const response = await database.listDocuments(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_ORDERS_COLLECTION_ID,
-          [Query.orderDesc("$createdAt"), Query.limit(100)]
-        );
-        setAllOrders(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
-        console.log("Fetched all orders for admin:", response.documents);
-      } catch (error) {
-        handleAppwriteError(error, "Error fetching all orders for admin:");
-      } finally {
-        setAdminLoading(false);
-      }
-    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_ORDERS_COLLECTION_ID]);
-    const updateBookingStatus = async (bookingId, newStatus) => {
-      if (!database || !isAuthReady || !APPWRITE_BOOKINGS_COLLECTION_ID) {
-        setAdminError("Application not ready or Booking collection not configured.");
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.updateDocument(APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID, bookingId, { status: newStatus });
-        console.log(`Booking ${bookingId} updated to status: ${newStatus}`);
-      } catch (error) {
-        handleAppwriteError(error, "Error updating booking status:");
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const deleteBooking = async (bookingId) => {
-      if (!database || !isAuthReady || !APPWRITE_BOOKINGS_COLLECTION_ID) {
-        setAdminError("Application not ready or Booking collection not configured.");
-        return;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.deleteDocument(APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID, bookingId);
-        console.log(`Booking ${bookingId} deleted.`);
-      } catch (error) {
-        handleAppwriteError(error, "Error deleting booking:");
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const addProduct = async (productData) => {
-      if (!database || !isAuthReady || !APPWRITE_PRODUCTS_COLLECTION_ID) {
-        setAdminError("Products collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.createDocument(APPWRITE_DATABASE_ID, APPWRITE_PRODUCTS_COLLECTION_ID, ID2.unique(), productData);
-        console.log("Product added successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error adding product:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const updateProduct = async (productId, productData) => {
-      if (!database || !isAuthReady || !APPWRITE_PRODUCTS_COLLECTION_ID) {
-        setAdminError("Products collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.updateDocument(APPWRITE_DATABASE_ID, APPWRITE_PRODUCTS_COLLECTION_ID, productId, productData);
-        console.log("Product updated successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error updating product:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const deleteProduct = async (productId) => {
-      if (!database || !isAuthReady || !APPWRITE_PRODUCTS_COLLECTION_ID) {
-        setAdminError("Products collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.deleteDocument(APPWRITE_DATABASE_ID, APPWRITE_PRODUCTS_COLLECTION_ID, productId);
-        console.log("Product deleted successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error deleting product:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const addService = async (serviceData) => {
-      if (!database || !isAuthReady || !APPWRITE_SERVICES_COLLECTION_ID) {
-        setAdminError("Services collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.createDocument(APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID, ID2.unique(), serviceData);
-        console.log("Service added successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error adding service:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const updateService = async (serviceId, serviceData) => {
-      if (!database || !isAuthReady || !APPWRITE_SERVICES_COLLECTION_ID) {
-        setAdminError("Services collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.updateDocument(APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID, serviceId, serviceData);
-        console.log("Service updated successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error updating service:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const deleteService = async (serviceId) => {
-      if (!database || !isAuthReady || !APPWRITE_SERVICES_COLLECTION_ID) {
-        setAdminError("Services collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.deleteDocument(APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID, serviceId);
-        console.log("Service deleted successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error deleting service:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const addStaff = async (staffData) => {
-      if (!database || !isAuthReady || !APPWRITE_STAFF_COLLECTION_ID) {
-        setAdminError("Staff collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.createDocument(APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID, ID2.unique(), staffData);
-        console.log("Staff member added successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error adding staff:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const updateStaff = async (staffId, staffData) => {
-      if (!database || !isAuthReady || !APPWRITE_STAFF_COLLECTION_ID) {
-        setAdminError("Staff collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.updateDocument(APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID, staffId, staffData);
-        console.log("Staff member updated successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error updating staff:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    const deleteStaff = async (staffId) => {
-      if (!database || !isAuthReady || !APPWRITE_STAFF_COLLECTION_ID) {
-        setAdminError("Staff collection not configured.");
-        return false;
-      }
-      setAdminLoading(true);
-      setAdminError(null);
-      try {
-        await database.deleteDocument(APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID, staffId);
-        console.log("Staff member deleted successfully!");
-        return true;
-      } catch (error) {
-        handleAppwriteError(error, "Error deleting staff:");
-        return false;
-      } finally {
-        setAdminLoading(false);
-      }
-    };
-    (0, import_react29.useEffect)(() => {
-      if (isAuthReady && database && client) {
-        fetchAllServices();
-        fetchAllStaff();
-        fetchAllBookings();
-        fetchAllProducts();
-        fetchAllUsers();
-        fetchAllOrders();
-        const unsubscribeBookings = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_BOOKINGS_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_BOOKINGS_COLLECTION_ID}.documents.`))) {
-              fetchAllBookings();
-            }
-          }
-        );
-        const unsubscribeProducts = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_PRODUCTS_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_PRODUCTS_COLLECTION_ID}.documents.`))) {
-              fetchAllProducts();
-            }
-          }
-        );
-        const unsubscribeServices = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_SERVICES_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_SERVICES_COLLECTION_ID}.documents.`))) {
-              fetchAllServices();
-            }
-          }
-        );
-        const unsubscribeStaff = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_STAFF_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_STAFF_COLLECTION_ID}.documents.`))) {
-              fetchAllStaff();
-            }
-          }
-        );
-        const unsubscribeUsers = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_USERS_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_USERS_COLLECTION_ID}.documents.`))) {
-              fetchAllUsers();
-            }
-          }
-        );
-        const unsubscribeOrders = client.subscribe(
-          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_ORDERS_COLLECTION_ID}.documents`,
-          (response) => {
-            if (response.events.some((event) => event.startsWith(`databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_ORDERS_COLLECTION_ID}.documents.`))) {
-              fetchAllOrders();
-            }
-          }
-        );
-        return () => {
-          unsubscribeBookings();
-          unsubscribeProducts();
-          unsubscribeServices();
-          unsubscribeStaff();
-          unsubscribeUsers();
-          unsubscribeOrders();
-        };
-      }
-    }, [
-      isAuthReady,
-      database,
-      client,
-      fetchAllBookings,
-      fetchAllProducts,
-      fetchAllServices,
-      fetchAllStaff,
-      fetchAllUsers,
-      fetchAllOrders,
-      APPWRITE_BOOKINGS_COLLECTION_ID,
-      APPWRITE_PRODUCTS_COLLECTION_ID,
-      APPWRITE_SERVICES_COLLECTION_ID,
-      APPWRITE_STAFF_COLLECTION_ID,
-      APPWRITE_USERS_COLLECTION_ID,
-      APPWRITE_ORDERS_COLLECTION_ID,
-      APPWRITE_DATABASE_ID
-    ]);
-    const contextValue = {
-      allBookings,
-      allProducts,
-      allServices,
-      allStaff,
-      allUsers,
-      allOrders,
-      // NEW: Include orders in context
-      adminLoading,
-      adminError,
-      fetchAllBookings,
-      fetchAllProducts,
-      fetchAllServices,
-      fetchAllStaff,
-      fetchAllUsers,
-      fetchAllOrders,
-      // NEW: Include fetch function
-      updateBookingStatus,
-      deleteBooking,
-      addProduct,
-      updateProduct,
-      deleteProduct,
-      addService,
-      updateService,
-      deleteService,
-      addStaff,
-      updateStaff,
-      deleteStaff
-    };
-    return /* @__PURE__ */ import_react29.default.createElement(AdminContext.Provider, { value: contextValue }, children);
-  };
-
-  // src/App.js
-  var AppContent = () => {
-    const { currentUser, isAuthReady } = useAuth();
-    const { cartItemCount, showCartModal, setShowCartModal } = useCart();
-    const { services, selectedService, setSelectedService, selectedStaff, selectedDate, selectedTime, bookService } = useBooking();
-    const [view, setView2] = (0, import_react30.useState)("home");
-    const [showAuthModal, setShowAuthModal] = (0, import_react30.useState)(false);
-    const [serviceToPayDeposit, setServiceToPayDeposit] = (0, import_react30.useState)(null);
-    const [depositAmount, setDepositAmount] = (0, import_react30.useState)(0);
-    const handleSignOut = async () => {
-      try {
-        showMessage_default("Logged out successfully.", "success");
-        setView2("home");
-      } catch (error) {
-        console.error("Error signing out:", error);
-        showMessage_default("Failed to log out.", "error");
-      }
-    };
-    const handlePaymentSuccessAndFinalizeBooking = async () => {
-      if (!selectedService || !selectedStaff || !selectedDate || !selectedTime) {
-        showMessage_default("Booking details missing. Cannot finalize booking.", "error");
-        setView2("booking");
-        return;
-      }
-      const dateTime = /* @__PURE__ */ new Date(`${selectedDate}T${selectedTime}`);
-      const success = await bookService(selectedService, selectedStaff, dateTime);
-      if (success) {
-        setSelectedService("");
-        setSelectedStaff("");
-        setSelectedDate("");
-        setSelectedTime("");
-        setServiceToPayDeposit(null);
-        setDepositAmount(0);
-        setView2("dashboard");
-      } else {
-        showMessage_default("Booking could not be finalized after payment. Please contact support.", "error");
-      }
-    };
-    const renderView = () => {
-      switch (view) {
-        case "home":
-          return /* @__PURE__ */ import_react30.default.createElement(HeroSection_default, { setView: setView2 });
-        // HeroSection needs setView to navigate
-        case "services":
-          return /* @__PURE__ */ import_react30.default.createElement(ServicesView_default, { setView: setView2 });
-        case "products":
-          return /* @__PURE__ */ import_react30.default.createElement(ProductsView_default, { setView: setView2 });
-        case "booking":
-          return /* @__PURE__ */ import_react30.default.createElement(BookingView_default, { setView: setView2 });
-        case "cart":
-          return /* @__PURE__ */ import_react30.default.createElement(CartView_default, { setView: setView2 });
-        case "checkout":
-          return /* @__PURE__ */ import_react30.default.createElement(Checkout_default, { setView: setView2 });
-        case "dashboard":
-          return /* @__PURE__ */ import_react30.default.createElement(UserDashboardView_default, { setView: setView2 });
-        case "payment":
-          return /* @__PURE__ */ import_react30.default.createElement(
-            PaymentView_default,
-            {
-              setView: setView2,
-              serviceToBook: services.find((s2) => s2.id === selectedService),
-              depositAmount: selectedService ? services.find((s2) => s2.id === selectedService)?.price * 0.1 : 0,
-              onPaymentSuccess: handlePaymentSuccessAndFinalizeBooking
-            }
-          );
-        case "contact":
-          return /* @__PURE__ */ import_react30.default.createElement(ContactSection_default, null);
-        default:
-          return /* @__PURE__ */ import_react30.default.createElement("p", null, "Page Not Found");
-      }
-    };
-    (0, import_react30.useEffect)(() => {
-      if (isAuthReady && currentUser) {
-        setShowAuthModal(false);
-      }
-    }, [currentUser, isAuthReady]);
-    (0, import_react30.useEffect)(() => {
-      if (isAuthReady && !currentUser && (view === "dashboard" || view === "checkout" || view === "payment")) {
-        showMessage_default("Please log in to access this page.", "info");
-        setView2("home");
-      }
-    }, [view, currentUser, isAuthReady, setView2]);
-    return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(
-      Header_default,
-      {
-        cartItemCount,
-        currentUser,
-        onAuthClick: () => setShowAuthModal(true),
-        onSignOut: handleSignOut,
-        onCartClick: () => setView2("cart"),
-        setView: setView2
-      }
-    ), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, renderView()), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null), showAuthModal && /* @__PURE__ */ import_react30.default.createElement(
-      AuthModal_default,
-      {
-        onClose: () => setShowAuthModal(false),
-        onRegisterSuccess: () => {
-          setView2("home");
-          setShowAuthModal(false);
-          showMessage_default("Registration successful! You are now logged in.", "success");
-        },
-        onLoginSuccess: () => {
-          setView2("home");
-          setShowAuthModal(false);
-          showMessage_default("Login successful!", "success");
-        }
-      }
-    ));
-  };
+  var import_client = __toESM(require_client());
   var App = () => {
-    return /* @__PURE__ */ import_react30.default.createElement(AppwriteProvider, null, /* @__PURE__ */ import_react30.default.createElement(AuthProvider, null, /* @__PURE__ */ import_react30.default.createElement(BookingProvider, null, /* @__PURE__ */ import_react30.default.createElement(CartProvider, null, /* @__PURE__ */ import_react30.default.createElement(AdminProvider, null, /* @__PURE__ */ import_react30.default.createElement(AppContent, null))))));
+    return /* @__PURE__ */ import_react.default.createElement("div", { className: "flex items-center justify-center min-h-screen bg-gray-100" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "p-8 bg-white rounded-lg shadow-xl text-center" }, /* @__PURE__ */ import_react.default.createElement("h1", { className: "text-3xl font-bold text-gray-800 mb-2" }, "Hello, Bukibloom!"), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-gray-600" }, "This React app is now running and populating the `root` div."), /* @__PURE__ */ import_react.default.createElement("p", { className: "text-sm mt-4 text-gray-500" }, "The JavaScript bundle is loaded and the app is functional.")));
   };
-  var App_default = App;
-
-  // src/main.js
   var rootElement = document.getElementById("root");
   if (rootElement) {
-    import_client.default.createRoot(rootElement).render(
-      /* @__PURE__ */ import_react31.default.createElement(import_react31.default.StrictMode, null, /* @__PURE__ */ import_react31.default.createElement(App_default, null))
+    (0, import_client.createRoot)(rootElement).render(
+      /* @__PURE__ */ import_react.default.createElement(import_react.default.StrictMode, null, /* @__PURE__ */ import_react.default.createElement(App, null))
     );
   } else {
     console.error('Root element with ID "root" not found in the document.');
   }
+  var main_default = App;
 })();
 /*! Bundled license information:
 
@@ -26508,76 +19360,5 @@ react-dom/cjs/react-dom-client.development.js:
    *
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
-   *)
-
-react-is/cjs/react-is.development.js:
-  (** @license React v16.13.1
-   * react-is.development.js
-   *
-   * Copyright (c) Facebook, Inc. and its affiliates.
-   *
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   *)
-
-object-assign/index.js:
-  (*
-  object-assign
-  (c) Sindre Sorhus
-  @license MIT
-  *)
-
-lucide-react/dist/esm/shared/src/utils.js:
-lucide-react/dist/esm/defaultAttributes.js:
-lucide-react/dist/esm/Icon.js:
-lucide-react/dist/esm/createLucideIcon.js:
-lucide-react/dist/esm/icons/calendar-check.js:
-lucide-react/dist/esm/icons/circle-check-big.js:
-lucide-react/dist/esm/icons/circle-minus.js:
-lucide-react/dist/esm/icons/circle-plus.js:
-lucide-react/dist/esm/icons/circle-x.js:
-lucide-react/dist/esm/icons/cloud-upload.js:
-lucide-react/dist/esm/icons/credit-card.js:
-lucide-react/dist/esm/icons/dollar-sign.js:
-lucide-react/dist/esm/icons/facebook.js:
-lucide-react/dist/esm/icons/house.js:
-lucide-react/dist/esm/icons/image.js:
-lucide-react/dist/esm/icons/instagram.js:
-lucide-react/dist/esm/icons/layout-dashboard.js:
-lucide-react/dist/esm/icons/log-in.js:
-lucide-react/dist/esm/icons/log-out.js:
-lucide-react/dist/esm/icons/menu.js:
-lucide-react/dist/esm/icons/message-square.js:
-lucide-react/dist/esm/icons/package-check.js:
-lucide-react/dist/esm/icons/package.js:
-lucide-react/dist/esm/icons/shopping-cart.js:
-lucide-react/dist/esm/icons/twitter.js:
-lucide-react/dist/esm/icons/user-plus.js:
-lucide-react/dist/esm/icons/user.js:
-lucide-react/dist/esm/icons/x.js:
-lucide-react/dist/esm/lucide-react.js:
-  (**
-   * @license lucide-react v0.542.0 - ISC
-   *
-   * This source code is licensed under the ISC license.
-   * See the LICENSE file in the root directory of this source tree.
-   *)
-
-@paypal/react-paypal-js/dist/esm/react-paypal-js.js:
-  (*!
-   * react-paypal-js v8.8.3 (2025-04-11T19:50:46.506Z)
-   * Copyright 2020-present, PayPal, Inc. All rights reserved.
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * https://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
    *)
 */
