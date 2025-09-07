@@ -77,7 +77,7 @@
           try {
             testStringCoercion(value);
             var JSCompiler_inline_result = false;
-          } catch (e) {
+          } catch (e2) {
             JSCompiler_inline_result = true;
           }
           if (JSCompiler_inline_result) {
@@ -133,7 +133,7 @@
                 type = type._init;
                 try {
                   return getComponentNameFromType(type(innerType));
-                } catch (x) {
+                } catch (x2) {
                 }
             }
           return null;
@@ -145,7 +145,7 @@
           try {
             var name = getComponentNameFromType(type);
             return name ? "<" + name + ">" : "<...>";
-          } catch (x) {
+          } catch (x2) {
             return "<...>";
           }
         }
@@ -184,8 +184,8 @@
           componentName = this.props.ref;
           return void 0 !== componentName ? componentName : null;
         }
-        function ReactElement(type, key, self, source, owner, props, debugStack, debugTask) {
-          self = props.ref;
+        function ReactElement(type, key, self2, source, owner, props, debugStack, debugTask) {
+          self2 = props.ref;
           type = {
             $$typeof: REACT_ELEMENT_TYPE,
             type,
@@ -193,7 +193,7 @@
             props,
             _owner: owner
           };
-          null !== (void 0 !== self ? self : null) ? Object.defineProperty(type, "ref", {
+          null !== (void 0 !== self2 ? self2 : null) ? Object.defineProperty(type, "ref", {
             enumerable: false,
             get: elementRefGetterWithDeprecationWarning
           }) : Object.defineProperty(type, "ref", { enumerable: false, value: null });
@@ -308,8 +308,8 @@
             invokeCallback = children;
             callback = callback(invokeCallback);
             var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
-            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
-              return c;
+            isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c2) {
+              return c2;
             })) : null != callback && (isValidElement2(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(
               callback,
               escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(
@@ -322,19 +322,19 @@
           invokeCallback = 0;
           childKey = "" === nameSoFar ? "." : nameSoFar + ":";
           if (isArrayImpl(children))
-            for (var i = 0; i < children.length; i++)
-              nameSoFar = children[i], type = childKey + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(
+            for (var i2 = 0; i2 < children.length; i2++)
+              nameSoFar = children[i2], type = childKey + getElementKey(nameSoFar, i2), invokeCallback += mapIntoArray(
                 nameSoFar,
                 array,
                 escapedPrefix,
                 type,
                 callback
               );
-          else if (i = getIteratorFn(children), "function" === typeof i)
-            for (i === children.entries && (didWarnAboutMaps || console.warn(
+          else if (i2 = getIteratorFn(children), "function" === typeof i2)
+            for (i2 === children.entries && (didWarnAboutMaps || console.warn(
               "Using Maps as children is not supported. Use an array of keyed ReactElements instead."
-            ), didWarnAboutMaps = true), children = i.call(children), i = 0; !(nameSoFar = children.next()).done; )
-              nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(
+            ), didWarnAboutMaps = true), children = i2.call(children), i2 = 0; !(nameSoFar = children.next()).done; )
+              nameSoFar = nameSoFar.value, type = childKey + getElementKey(nameSoFar, i2++), invokeCallback += mapIntoArray(
                 nameSoFar,
                 array,
                 escapedPrefix,
@@ -420,8 +420,8 @@
             }
           return enqueueTaskImpl(task);
         }
-        function aggregateErrors(errors) {
-          return 1 < errors.length && "function" === typeof AggregateError ? new AggregateError(errors) : errors[0];
+        function aggregateErrors(errors2) {
+          return 1 < errors2.length && "function" === typeof AggregateError ? new AggregateError(errors2) : errors2[0];
         }
         function popActScope(prevActQueue, prevActScopeDepth) {
           prevActScopeDepth !== actScopeDepth - 1 && console.error(
@@ -448,17 +448,17 @@
         function flushActQueue(queue) {
           if (!isFlushing) {
             isFlushing = true;
-            var i = 0;
+            var i2 = 0;
             try {
-              for (; i < queue.length; i++) {
-                var callback = queue[i];
+              for (; i2 < queue.length; i2++) {
+                var callback = queue[i2];
                 do {
                   ReactSharedInternals.didUsePromise = false;
                   var continuation = callback(false);
                   if (null !== continuation) {
                     if (ReactSharedInternals.didUsePromise) {
-                      queue[i] = callback;
-                      queue.splice(0, i);
+                      queue[i2] = callback;
+                      queue.splice(0, i2);
                       return;
                     }
                     callback = continuation;
@@ -467,7 +467,7 @@
               }
               queue.length = 0;
             } catch (error) {
-              queue.splice(0, i + 1), ReactSharedInternals.thrownErrors.push(error);
+              queue.splice(0, i2 + 1), ReactSharedInternals.thrownErrors.push(error);
             } finally {
               isFlushing = false;
             }
@@ -581,11 +581,11 @@
             );
           },
           count: function(children) {
-            var n = 0;
+            var n3 = 0;
             mapChildren(children, function() {
-              n++;
+              n3++;
             });
-            return n;
+            return n3;
           },
           toArray: function(children) {
             return mapChildren(children, function(child) {
@@ -721,8 +721,8 @@
           if (1 === propName) props.children = children;
           else if (1 < propName) {
             JSCompiler_inline_result = Array(propName);
-            for (var i = 0; i < propName; i++)
-              JSCompiler_inline_result[i] = arguments[i + 2];
+            for (var i2 = 0; i2 < propName; i2++)
+              JSCompiler_inline_result[i2] = arguments[i2 + 2];
             props.children = JSCompiler_inline_result;
           }
           props = ReactElement(
@@ -758,30 +758,30 @@
           return defaultValue;
         };
         exports.createElement = function(type, config, children) {
-          for (var i = 2; i < arguments.length; i++) {
-            var node = arguments[i];
+          for (var i2 = 2; i2 < arguments.length; i2++) {
+            var node = arguments[i2];
             isValidElement2(node) && node._store && (node._store.validated = 1);
           }
-          i = {};
+          i2 = {};
           node = null;
           if (null != config)
             for (propName in didWarnAboutOldJSXRuntime || !("__self" in config) || "key" in config || (didWarnAboutOldJSXRuntime = true, console.warn(
               "Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform"
             )), hasValidKey(config) && (checkKeyStringCoercion(config.key), node = "" + config.key), config)
-              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i[propName] = config[propName]);
+              hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (i2[propName] = config[propName]);
           var childrenLength = arguments.length - 2;
-          if (1 === childrenLength) i.children = children;
+          if (1 === childrenLength) i2.children = children;
           else if (1 < childrenLength) {
             for (var childArray = Array(childrenLength), _i = 0; _i < childrenLength; _i++)
               childArray[_i] = arguments[_i + 2];
             Object.freeze && Object.freeze(childArray);
-            i.children = childArray;
+            i2.children = childArray;
           }
           if (type && type.defaultProps)
             for (propName in childrenLength = type.defaultProps, childrenLength)
-              void 0 === i[propName] && (i[propName] = childrenLength[propName]);
+              void 0 === i2[propName] && (i2[propName] = childrenLength[propName]);
           node && defineKeyPropWarningGetter(
-            i,
+            i2,
             "function" === typeof type ? type.displayName || type.name || "Unknown" : type
           );
           var propName = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
@@ -791,7 +791,7 @@
             void 0,
             void 0,
             getOwner(),
-            i,
+            i2,
             propName ? Error("react-stack-top-frame") : unknownOwnerDebugStack,
             propName ? createTask(getTaskName(type)) : unknownOwnerDebugTask
           );
@@ -1067,9 +1067,9 @@
           }
           return first;
         }
-        function compare(a, b) {
-          var diff = a.sortIndex - b.sortIndex;
-          return 0 !== diff ? diff : a.id - b.id;
+        function compare(a2, b3) {
+          var diff = a2.sortIndex - b3.sortIndex;
+          return 0 !== diff ? diff : a2.id - b3.id;
         }
         function advanceTimers(currentTime) {
           for (var timer = peek(timerQueue); null !== timer; ) {
@@ -1263,7 +1263,7 @@
           try {
             testStringCoercion(key);
             var JSCompiler_inline_result = false;
-          } catch (e) {
+          } catch (e2) {
             JSCompiler_inline_result = true;
           }
           JSCompiler_inline_result && (console.error(
@@ -1297,7 +1297,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React13 = require_react(), Internals = {
+        var React38 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1315,7 +1315,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React13.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React38.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -1477,8 +1477,8 @@
         exports.requestFormReset = function(form) {
           Internals.d.r(form);
         };
-        exports.unstable_batchedUpdates = function(fn, a) {
-          return fn(a);
+        exports.unstable_batchedUpdates = function(fn, a2) {
+          return fn(a2);
         };
         exports.useFormState = function(action, initialState, permalink) {
           return resolveDispatcher().useFormState(action, initialState, permalink);
@@ -1525,8 +1525,8 @@
           if (oldPath.length !== newPath.length)
             console.warn("copyWithRename() expects paths of the same length");
           else {
-            for (var i = 0; i < newPath.length - 1; i++)
-              if (oldPath[i] !== newPath[i]) {
+            for (var i2 = 0; i2 < newPath.length - 1; i2++)
+              if (oldPath[i2] !== newPath[i2]) {
                 console.warn(
                   "copyWithRename() expects paths to be the same except for the deepest key"
                 );
@@ -1635,55 +1635,55 @@
               throw Error("Unable to find node on an unmounted component.");
             return alternate !== fiber ? null : fiber;
           }
-          for (var a = fiber, b = alternate; ; ) {
-            var parentA = a.return;
+          for (var a2 = fiber, b3 = alternate; ; ) {
+            var parentA = a2.return;
             if (null === parentA) break;
             var parentB = parentA.alternate;
             if (null === parentB) {
-              b = parentA.return;
-              if (null !== b) {
-                a = b;
+              b3 = parentA.return;
+              if (null !== b3) {
+                a2 = b3;
                 continue;
               }
               break;
             }
             if (parentA.child === parentB.child) {
               for (parentB = parentA.child; parentB; ) {
-                if (parentB === a) return assertIsMounted(parentA), fiber;
-                if (parentB === b) return assertIsMounted(parentA), alternate;
+                if (parentB === a2) return assertIsMounted(parentA), fiber;
+                if (parentB === b3) return assertIsMounted(parentA), alternate;
                 parentB = parentB.sibling;
               }
               throw Error("Unable to find node on an unmounted component.");
             }
-            if (a.return !== b.return) a = parentA, b = parentB;
+            if (a2.return !== b3.return) a2 = parentA, b3 = parentB;
             else {
               for (var didFindChild = false, _child = parentA.child; _child; ) {
-                if (_child === a) {
+                if (_child === a2) {
                   didFindChild = true;
-                  a = parentA;
-                  b = parentB;
+                  a2 = parentA;
+                  b3 = parentB;
                   break;
                 }
-                if (_child === b) {
+                if (_child === b3) {
                   didFindChild = true;
-                  b = parentA;
-                  a = parentB;
+                  b3 = parentA;
+                  a2 = parentB;
                   break;
                 }
                 _child = _child.sibling;
               }
               if (!didFindChild) {
                 for (_child = parentB.child; _child; ) {
-                  if (_child === a) {
+                  if (_child === a2) {
                     didFindChild = true;
-                    a = parentB;
-                    b = parentA;
+                    a2 = parentB;
+                    b3 = parentA;
                     break;
                   }
-                  if (_child === b) {
+                  if (_child === b3) {
                     didFindChild = true;
-                    b = parentB;
-                    a = parentA;
+                    b3 = parentB;
+                    a2 = parentA;
                     break;
                   }
                   _child = _child.sibling;
@@ -1694,14 +1694,14 @@
                   );
               }
             }
-            if (a.alternate !== b)
+            if (a2.alternate !== b3)
               throw Error(
                 "Return fibers should always be each others' alternates. This error is likely caused by a bug in React. Please file an issue."
               );
           }
-          if (3 !== a.tag)
+          if (3 !== a2.tag)
             throw Error("Unable to find node on an unmounted component.");
-          return a.stateNode.current === a ? fiber : alternate;
+          return a2.stateNode.current === a2 ? fiber : alternate;
         }
         function findCurrentHostFiberImpl(node) {
           var tag = node.tag;
@@ -1760,7 +1760,7 @@
                 type = type._init;
                 try {
                   return getComponentNameFromType(type(innerType));
-                } catch (x) {
+                } catch (x2) {
                 }
             }
           return null;
@@ -1822,8 +1822,8 @@
             case 29:
               type = fiber._debugInfo;
               if (null != type) {
-                for (var i = type.length - 1; 0 <= i; i--)
-                  if ("string" === typeof type[i].name) return type[i].name;
+                for (var i2 = type.length - 1; 0 <= i2; i2--)
+                  if ("string" === typeof type[i2].name) return type[i2].name;
               }
               if (null !== fiber.return)
                 return getComponentNameFromFiber(fiber.return);
@@ -1842,11 +1842,11 @@
           fiberStack[index$jscomp$0] = fiber;
           cursor.current = value;
         }
-        function requiredContext(c) {
-          null === c && console.error(
+        function requiredContext(c2) {
+          null === c2 && console.error(
             "Expected host context to exist. This error is likely caused by a bug in React. Please file an issue."
           );
-          return c;
+          return c2;
         }
         function pushHostContainer(fiber, nextRootInstance) {
           push(rootInstanceStackCursor, nextRootInstance, fiber);
@@ -1913,7 +1913,7 @@
         function willCoercionThrow(value) {
           try {
             return testStringCoercion(value), false;
-          } catch (e) {
+          } catch (e2) {
             return true;
           }
         }
@@ -1991,9 +1991,9 @@
         function markStateUpdateScheduled(fiber, lane) {
           null !== injectedProfilingHooks && "function" === typeof injectedProfilingHooks.markStateUpdateScheduled && injectedProfilingHooks.markStateUpdateScheduled(fiber, lane);
         }
-        function clz32Fallback(x) {
-          x >>>= 0;
-          return 0 === x ? 32 : 31 - (log(x) / LN2 | 0) | 0;
+        function clz32Fallback(x2) {
+          x2 >>>= 0;
+          return 0 === x2 ? 32 : 31 - (log(x2) / LN2 | 0) | 0;
         }
         function getLabelForLane(lane) {
           if (lane & 1) return "SyncHydrationLane";
@@ -2135,7 +2135,7 @@
           return lane;
         }
         function createLaneMap(initial) {
-          for (var laneMap = [], i = 0; 31 > i; i++) laneMap.push(initial);
+          for (var laneMap = [], i2 = 0; 31 > i2; i2++) laneMap.push(initial);
           return laneMap;
         }
         function markRootUpdated$1(root2, updateLane) {
@@ -2468,10 +2468,10 @@
           if (void 0 === prefix)
             try {
               throw Error();
-            } catch (x) {
-              var match = x.stack.trim().match(/\n( *(at )?)/);
+            } catch (x2) {
+              var match = x2.stack.trim().match(/\n( *(at )?)/);
               prefix = match && match[1] || "";
-              suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
+              suffix = -1 < x2.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x2.stack.indexOf("@") ? "@unknown:0:0" : "";
             }
           return "\n" + prefix + name + suffix;
         }
@@ -2502,8 +2502,8 @@
                     if ("object" === typeof Reflect && Reflect.construct) {
                       try {
                         Reflect.construct(Fake, []);
-                      } catch (x) {
-                        var control = x;
+                      } catch (x2) {
+                        var control = x2;
                       }
                       Reflect.construct(fn, [], Fake);
                     } else {
@@ -2629,8 +2629,8 @@
               info += describeFiber(workInProgress2);
               var debugInfo = workInProgress2._debugInfo;
               if (debugInfo)
-                for (var i = debugInfo.length - 1; 0 <= i; i--) {
-                  var entry = debugInfo[i];
+                for (var i2 = debugInfo.length - 1; 0 <= i2; i2--) {
+                  var entry = debugInfo[i2];
                   if ("string" === typeof entry.name) {
                     var JSCompiler_temp_const = info, env = entry.env;
                     var JSCompiler_inline_result = describeBuiltInComponentFrame(
@@ -2642,8 +2642,8 @@
               workInProgress2 = workInProgress2.return;
             } while (workInProgress2);
             return info;
-          } catch (x) {
-            return "\nError generating stack: " + x.message + "\n" + x.stack;
+          } catch (x2) {
+            return "\nError generating stack: " + x2.message + "\n" + x2.stack;
           }
         }
         function describeFunctionComponentFrameWithoutLineNumber(fn) {
@@ -2699,8 +2699,8 @@
                 (workInProgress2 = workInProgress2.owner) && ownerStack && (info += "\n" + formatOwnerStack(ownerStack));
               } else break;
             var JSCompiler_inline_result = info;
-          } catch (x) {
-            JSCompiler_inline_result = "\nError generating stack: " + x.message + "\n" + x.stack;
+          } catch (x2) {
+            JSCompiler_inline_result = "\nError generating stack: " + x2.message + "\n" + x2.stack;
           }
           return JSCompiler_inline_result;
         }
@@ -2797,7 +2797,7 @@
           if ("undefined" === typeof doc) return null;
           try {
             return doc.activeElement || doc.body;
-          } catch (e) {
+          } catch (e2) {
             return doc.body;
           }
         }
@@ -2857,7 +2857,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React13.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React38.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -2876,20 +2876,20 @@
           node = node.options;
           if (multiple) {
             multiple = {};
-            for (var i = 0; i < propValue.length; i++)
-              multiple["$" + propValue[i]] = true;
+            for (var i2 = 0; i2 < propValue.length; i2++)
+              multiple["$" + propValue[i2]] = true;
             for (propValue = 0; propValue < node.length; propValue++)
-              i = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i && (node[propValue].selected = i), i && setDefaultSelected && (node[propValue].defaultSelected = true);
+              i2 = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i2 && (node[propValue].selected = i2), i2 && setDefaultSelected && (node[propValue].defaultSelected = true);
           } else {
             propValue = "" + getToStringValue(propValue);
             multiple = null;
-            for (i = 0; i < node.length; i++) {
-              if (node[i].value === propValue) {
-                node[i].selected = true;
-                setDefaultSelected && (node[i].defaultSelected = true);
+            for (i2 = 0; i2 < node.length; i2++) {
+              if (node[i2].value === propValue) {
+                node[i2].selected = true;
+                setDefaultSelected && (node[i2].defaultSelected = true);
                 return;
               }
-              null !== multiple || node[i].disabled || (multiple = node[i]);
+              null !== multiple || node[i2].disabled || (multiple = node[i2]);
             }
             null !== multiple && (multiple.selected = true);
           }
@@ -3002,7 +3002,7 @@
           return indentation(indent) + describeTextNode(clientText, maxLength) + "\n";
         }
         function objectName(object) {
-          return Object.prototype.toString.call(object).replace(/^\[object (.*)\]$/, function(m, p0) {
+          return Object.prototype.toString.call(object).replace(/^\[object (.*)\]$/, function(m2, p0) {
             return p0;
           });
         }
@@ -3148,21 +3148,21 @@
           skipToNode = "";
           var debugInfo = node.fiber._debugInfo;
           if (debugInfo)
-            for (var i = 0; i < debugInfo.length; i++) {
-              var serverComponentName = debugInfo[i].name;
+            for (var i2 = 0; i2 < debugInfo.length; i2++) {
+              var serverComponentName = debugInfo[i2].name;
               "string" === typeof serverComponentName && (skipToNode += indentation(indent) + "<" + serverComponentName + ">\n", indent++);
             }
           debugInfo = "";
-          i = node.fiber.pendingProps;
+          i2 = node.fiber.pendingProps;
           if (6 === node.fiber.tag)
-            debugInfo = describeTextDiff(i, node.serverProps, indent), indent++;
+            debugInfo = describeTextDiff(i2, node.serverProps, indent), indent++;
           else if (serverComponentName = describeFiberType(node.fiber), null !== serverComponentName)
             if (void 0 === node.serverProps) {
               debugInfo = indent;
               var maxLength = 120 - 2 * debugInfo - serverComponentName.length - 2, content = "";
-              for (propName in i)
-                if (i.hasOwnProperty(propName) && "children" !== propName) {
-                  var propValue = describePropValue(i[propName], 15);
+              for (propName in i2)
+                if (i2.hasOwnProperty(propName) && "children" !== propName) {
+                  var propValue = describePropValue(i2[propName], 15);
                   maxLength -= propName.length + propValue.length + 2;
                   if (0 > maxLength) {
                     content += " ...";
@@ -3175,25 +3175,25 @@
             } else
               null === node.serverProps ? (debugInfo = describeExpandedElement(
                 serverComponentName,
-                i,
+                i2,
                 added(indent)
               ), indent++) : "string" === typeof node.serverProps ? console.error(
                 "Should not have matched a non HostText fiber to a Text node. This is a bug in React."
               ) : (debugInfo = describeElementDiff(
                 serverComponentName,
-                i,
+                i2,
                 node.serverProps,
                 indent
               ), indent++);
           var propName = "";
-          i = node.fiber.child;
-          for (serverComponentName = 0; i && serverComponentName < node.children.length; )
-            maxLength = node.children[serverComponentName], maxLength.fiber === i ? (propName += describeNode(maxLength, indent), serverComponentName++) : propName += describeSiblingFiber(i, indent), i = i.sibling;
-          i && 0 < node.children.length && (propName += indentation(indent) + "...\n");
-          i = node.serverTail;
+          i2 = node.fiber.child;
+          for (serverComponentName = 0; i2 && serverComponentName < node.children.length; )
+            maxLength = node.children[serverComponentName], maxLength.fiber === i2 ? (propName += describeNode(maxLength, indent), serverComponentName++) : propName += describeSiblingFiber(i2, indent), i2 = i2.sibling;
+          i2 && 0 < node.children.length && (propName += indentation(indent) + "...\n");
+          i2 = node.serverTail;
           null === node.serverProps && indent--;
-          for (node = 0; node < i.length; node++)
-            serverComponentName = i[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\n") : propName + describeExpandedElement(
+          for (node = 0; node < i2.length; node++)
+            serverComponentName = i2[node], propName = "string" === typeof serverComponentName ? propName + (removed(indent) + describeTextNode(serverComponentName, 120 - 2 * indent) + "\n") : propName + describeExpandedElement(
               serverComponentName.type,
               serverComponentName.props,
               removed(indent)
@@ -3203,7 +3203,7 @@
         function describeDiff(rootNode) {
           try {
             return "\n\n" + describeNode(rootNode, 0);
-          } catch (x) {
+          } catch (x2) {
             return "";
           }
         }
@@ -3432,7 +3432,7 @@
           node.textContent = text;
         }
         function camelize(string) {
-          return string.replace(hyphenPattern, function(_, character) {
+          return string.replace(hyphenPattern, function(_2, character) {
             return character.toUpperCase();
           });
         }
@@ -3472,8 +3472,8 @@
               if (prevStyles) {
                 for (var key in prevStyles)
                   if (prevStyles.hasOwnProperty(key) && !styles.hasOwnProperty(key))
-                    for (var longhands = shorthandToLonghand[key] || [key], i = 0; i < longhands.length; i++)
-                      expandedUpdates[longhands[i]] = key;
+                    for (var longhands = shorthandToLonghand[key] || [key], i2 = 0; i2 < longhands.length; i2++)
+                      expandedUpdates[longhands[i2]] = key;
               }
               for (var _key in styles)
                 if (styles.hasOwnProperty(_key) && (!prevStyles || prevStyles[_key] !== styles[_key]))
@@ -3485,12 +3485,12 @@
                   _key[key[longhands]] = key$jscomp$0;
               key$jscomp$0 = {};
               for (var _key2 in expandedUpdates)
-                if (key = expandedUpdates[_key2], (longhands = _key[_key2]) && key !== longhands && (i = key + "," + longhands, !key$jscomp$0[i])) {
-                  key$jscomp$0[i] = true;
-                  i = console;
+                if (key = expandedUpdates[_key2], (longhands = _key[_key2]) && key !== longhands && (i2 = key + "," + longhands, !key$jscomp$0[i2])) {
+                  key$jscomp$0[i2] = true;
+                  i2 = console;
                   var value = styles[key];
-                  i.error.call(
-                    i,
+                  i2.error.call(
+                    i2,
                     "%s a style property during rerender (%s) when a conflicting property is set (%s) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.",
                     null == value || "boolean" === typeof value || "" === value ? "Removing" : "Updating",
                     key,
@@ -3847,16 +3847,16 @@
             }
           }
         }
-        function batchedUpdates$1(fn, a, b) {
-          if (isInsideEventHandler) return fn(a, b);
+        function batchedUpdates$1(fn, a2, b3) {
+          if (isInsideEventHandler) return fn(a2, b3);
           isInsideEventHandler = true;
           try {
-            var JSCompiler_inline_result = fn(a);
+            var JSCompiler_inline_result = fn(a2);
             return JSCompiler_inline_result;
           } finally {
             if (isInsideEventHandler = false, null !== restoreTarget || null !== restoreQueue) {
-              if (flushSyncWork$1(), restoreTarget && (a = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a), fn))
-                for (a = 0; a < fn.length; a++) restoreStateOfTarget(fn[a]);
+              if (flushSyncWork$1(), restoreTarget && (a2 = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a2), fn))
+                for (a2 = 0; a2 < fn.length; a2++) restoreStateOfTarget(fn[a2]);
             }
           }
         }
@@ -4061,8 +4061,8 @@
           if ("input" === domEventName || "change" === domEventName)
             return getInstIfValueChanged(targetInst);
         }
-        function is(x, y) {
-          return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+        function is(x2, y2) {
+          return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         function shallowEqual(objA, objB) {
           if (objectIs(objA, objB)) return true;
@@ -4179,15 +4179,15 @@
           };
         }
         function finishQueueingConcurrentUpdates() {
-          for (var endIndex = concurrentQueuesIndex, i = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i < endIndex; ) {
-            var fiber = concurrentQueues[i];
-            concurrentQueues[i++] = null;
-            var queue = concurrentQueues[i];
-            concurrentQueues[i++] = null;
-            var update = concurrentQueues[i];
-            concurrentQueues[i++] = null;
-            var lane = concurrentQueues[i];
-            concurrentQueues[i++] = null;
+          for (var endIndex = concurrentQueuesIndex, i2 = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i2 < endIndex; ) {
+            var fiber = concurrentQueues[i2];
+            concurrentQueues[i2++] = null;
+            var queue = concurrentQueues[i2];
+            concurrentQueues[i2++] = null;
+            var update = concurrentQueues[i2];
+            concurrentQueues[i2++] = null;
+            var lane = concurrentQueues[i2];
+            concurrentQueues[i2++] = null;
             if (null !== queue && null !== update) {
               var pending = queue.pending;
               null === pending ? update.next = update : (update.next = pending.next, pending.next = update);
@@ -4772,8 +4772,8 @@
               a: for (; null !== list; ) {
                 var dependency = list;
                 list = fiber;
-                for (var i = 0; i < contexts.length; i++)
-                  if (dependency.context === contexts[i]) {
+                for (var i2 = 0; i2 < contexts.length; i2++)
+                  if (dependency.context === contexts[i2]) {
                     list.lanes |= renderLanes2;
                     dependency = list.alternate;
                     null !== dependency && (dependency.lanes |= renderLanes2);
@@ -4992,7 +4992,7 @@
             currentEntangledListeners = null;
             currentEntangledLane = 0;
             currentEntangledActionThenable = null;
-            for (var i = 0; i < listeners.length; i++) (0, listeners[i])();
+            for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])();
           }
         }
         function chainThenableValue(thenable, result) {
@@ -5008,7 +5008,7 @@
             function() {
               thenableWithOverride.status = "fulfilled";
               thenableWithOverride.value = result;
-              for (var i = 0; i < listeners.length; i++) (0, listeners[i])(result);
+              for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])(result);
             },
             function(error) {
               thenableWithOverride.status = "rejected";
@@ -5362,9 +5362,9 @@
           if (null !== hookTypesDev && (hookTypesUpdateIndexDev++, hookTypesDev[hookTypesUpdateIndexDev] !== hookName)) {
             var componentName2 = getComponentNameFromFiber(currentlyRenderingFiber);
             if (!didWarnAboutMismatchedHooksForComponent.has(componentName2) && (didWarnAboutMismatchedHooksForComponent.add(componentName2), null !== hookTypesDev)) {
-              for (var table = "", i = 0; i <= hookTypesUpdateIndexDev; i++) {
-                var oldHookName = hookTypesDev[i], newHookName = i === hookTypesUpdateIndexDev ? hookName : oldHookName;
-                for (oldHookName = i + 1 + ". " + oldHookName; 30 > oldHookName.length; )
+              for (var table = "", i2 = 0; i2 <= hookTypesUpdateIndexDev; i2++) {
+                var oldHookName = hookTypesDev[i2], newHookName = i2 === hookTypesUpdateIndexDev ? hookName : oldHookName;
+                for (oldHookName = i2 + 1 + ". " + oldHookName; 30 > oldHookName.length; )
                   oldHookName += " ";
                 oldHookName += newHookName + "\n";
                 table += oldHookName;
@@ -5409,8 +5409,8 @@
             "[" + prevDeps.join(", ") + "]",
             "[" + nextDeps.join(", ") + "]"
           );
-          for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++)
-            if (!objectIs(nextDeps[i], prevDeps[i])) return false;
+          for (var i2 = 0; i2 < prevDeps.length && i2 < nextDeps.length; i2++)
+            if (!objectIs(nextDeps[i2], prevDeps[i2])) return false;
           return true;
         }
         function renderWithHooks(current2, workInProgress2, Component4, props, secondArg, nextRenderLanes) {
@@ -6029,7 +6029,7 @@
         }
         function notifyActionListeners(actionNode) {
           actionNode = actionNode.listeners;
-          for (var i = 0; i < actionNode.length; i++) (0, actionNode[i])();
+          for (var i2 = 0; i2 < actionNode.length; i2++) (0, actionNode[i2])();
         }
         function actionStateReducer(oldState, newState) {
           return newState;
@@ -6131,9 +6131,9 @@
           if ("object" === typeof currentStateHook && null !== currentStateHook && "function" === typeof currentStateHook.then)
             try {
               var state = useThenable(currentStateHook);
-            } catch (x) {
-              if (x === SuspenseException) throw SuspenseActionException;
-              throw x;
+            } catch (x2) {
+              if (x2 === SuspenseException) throw SuspenseActionException;
+              throw x2;
             }
           else state = currentStateHook;
           currentStateHook = updateWorkInProgressHook();
@@ -6629,8 +6629,8 @@
           return previousDebugInfo;
         }
         function validateFragmentProps(element, fiber, returnFiber) {
-          for (var keys = Object.keys(element.props), i = 0; i < keys.length; i++) {
-            var key = keys[i];
+          for (var keys = Object.keys(element.props), i2 = 0; i2 < keys.length; i2++) {
+            var key = keys[i2];
             if ("children" !== key && "key" !== key) {
               null === fiber && (fiber = createFiberFromElement(element, returnFiber.mode, 0), fiber._debugInfo = currentDebugInfo, fiber.return = returnFiber);
               runWithFiberInDEV(
@@ -7292,19 +7292,19 @@
               );
               thenableState = null;
               return firstChildFiber;
-            } catch (x) {
-              if (x === SuspenseException || x === SuspenseActionException) throw x;
-              var fiber = createFiber(29, x, null, returnFiber.mode);
+            } catch (x2) {
+              if (x2 === SuspenseException || x2 === SuspenseActionException) throw x2;
+              var fiber = createFiber(29, x2, null, returnFiber.mode);
               fiber.lanes = lanes;
               fiber.return = returnFiber;
               var debugInfo = fiber._debugInfo = currentDebugInfo;
               fiber._debugOwner = returnFiber._debugOwner;
               fiber._debugTask = returnFiber._debugTask;
               if (null != debugInfo) {
-                for (var i = debugInfo.length - 1; 0 <= i; i--)
-                  if ("string" === typeof debugInfo[i].stack) {
-                    fiber._debugOwner = debugInfo[i];
-                    fiber._debugTask = debugInfo[i].debugTask;
+                for (var i2 = debugInfo.length - 1; 0 <= i2; i2--)
+                  if ("string" === typeof debugInfo[i2].stack) {
+                    fiber._debugOwner = debugInfo[i2];
+                    fiber._debugTask = debugInfo[i2].debugTask;
                     break;
                   }
               }
@@ -8548,12 +8548,12 @@
           )));
           a: if (("forwards" === revealOrder || "backwards" === revealOrder) && void 0 !== nextProps && null !== nextProps && false !== nextProps)
             if (isArrayImpl(nextProps))
-              for (var i = 0; i < nextProps.length; i++) {
-                if (!validateSuspenseListNestedChild(nextProps[i], i)) break a;
+              for (var i2 = 0; i2 < nextProps.length; i2++) {
+                if (!validateSuspenseListNestedChild(nextProps[i2], i2)) break a;
               }
-            else if (i = getIteratorFn(nextProps), "function" === typeof i) {
-              if (i = i.call(nextProps))
-                for (var step = i.next(), _i = 0; !step.done; step = i.next()) {
+            else if (i2 = getIteratorFn(nextProps), "function" === typeof i2) {
+              if (i2 = i2.call(nextProps))
+                for (var step = i2.next(), _i = 0; !step.done; step = i2.next()) {
                   if (!validateSuspenseListNestedChild(step.value, _i)) break a;
                   _i++;
                 }
@@ -9694,11 +9694,11 @@
                   addendum = null === lastEffect ? " You returned null. If your effect does not require clean up, return undefined (or nothing)." : "function" === typeof lastEffect.then ? "\n\nIt looks like you wrote " + hookName + "(async () => ...) or returned a Promise. Instead, write the async function inside your effect and call it immediately:\n\n" + hookName + "(() => {\n  async function fetchData() {\n    // You can await here\n    const response = await MyAPI.getData(someId);\n    // ...\n  }\n  fetchData();\n}, [someId]); // Or [] if effect doesn't need props or state\n\nLearn more about data fetching with Hooks: https://react.dev/link/hooks-data-fetching" : " You returned: " + lastEffect;
                   runWithFiberInDEV(
                     finishedWork,
-                    function(n, a) {
+                    function(n3, a2) {
                       console.error(
                         "%s must not return anything besides a function, which is used for clean-up.%s",
-                        n,
-                        a
+                        n3,
+                        a2
                       );
                     },
                     hookName,
@@ -10551,8 +10551,8 @@
         function recursivelyTraverseMutationEffects(root$jscomp$0, parentFiber) {
           var deletions = parentFiber.deletions;
           if (null !== deletions)
-            for (var i = 0; i < deletions.length; i++) {
-              var root2 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i], parent = returnFiber;
+            for (var i2 = 0; i2 < deletions.length; i2++) {
+              var root2 = root$jscomp$0, returnFiber = parentFiber, deletedFiber = deletions[i2], parent = returnFiber;
               a: for (; null !== parent; ) {
                 switch (parent.tag) {
                   case 27:
@@ -10648,9 +10648,9 @@
                               root2
                             ).get(flags + (current2.href || ""));
                             if (maybeNodes) {
-                              for (var i = 0; i < maybeNodes.length; i++)
-                                if (hoistableRoot = maybeNodes[i], hoistableRoot.getAttribute("href") === (null == current2.href || "" === current2.href ? null : current2.href) && hoistableRoot.getAttribute("rel") === (null == current2.rel ? null : current2.rel) && hoistableRoot.getAttribute("title") === (null == current2.title ? null : current2.title) && hoistableRoot.getAttribute("crossorigin") === (null == current2.crossOrigin ? null : current2.crossOrigin)) {
-                                  maybeNodes.splice(i, 1);
+                              for (var i2 = 0; i2 < maybeNodes.length; i2++)
+                                if (hoistableRoot = maybeNodes[i2], hoistableRoot.getAttribute("href") === (null == current2.href || "" === current2.href ? null : current2.href) && hoistableRoot.getAttribute("rel") === (null == current2.rel ? null : current2.rel) && hoistableRoot.getAttribute("title") === (null == current2.title ? null : current2.title) && hoistableRoot.getAttribute("crossorigin") === (null == current2.crossOrigin ? null : current2.crossOrigin)) {
+                                  maybeNodes.splice(i2, 1);
                                   break b;
                                 }
                             }
@@ -10664,12 +10664,12 @@
                               "content",
                               root2
                             ).get(flags + (current2.content || ""))) {
-                              for (i = 0; i < maybeNodes.length; i++)
-                                if (hoistableRoot = maybeNodes[i], checkAttributeStringCoercion(
+                              for (i2 = 0; i2 < maybeNodes.length; i2++)
+                                if (hoistableRoot = maybeNodes[i2], checkAttributeStringCoercion(
                                   current2.content,
                                   "content"
                                 ), hoistableRoot.getAttribute("content") === (null == current2.content ? null : "" + current2.content) && hoistableRoot.getAttribute("name") === (null == current2.name ? null : current2.name) && hoistableRoot.getAttribute("property") === (null == current2.property ? null : current2.property) && hoistableRoot.getAttribute("http-equiv") === (null == current2.httpEquiv ? null : current2.httpEquiv) && hoistableRoot.getAttribute("charset") === (null == current2.charSet ? null : current2.charSet)) {
-                                  maybeNodes.splice(i, 1);
+                                  maybeNodes.splice(i2, 1);
                                   break b;
                                 }
                             }
@@ -10840,10 +10840,10 @@
                     if (null === current2) {
                       wasHidden = root2;
                       try {
-                        i = wasHidden.stateNode, hoistableRoot ? runWithFiberInDEV(wasHidden, hideTextInstance, i) : runWithFiberInDEV(
+                        i2 = wasHidden.stateNode, hoistableRoot ? runWithFiberInDEV(wasHidden, hideTextInstance, i2) : runWithFiberInDEV(
                           wasHidden,
                           unhideTextInstance,
-                          i,
+                          i2,
                           wasHidden.memoizedProps
                         );
                       } catch (error) {
@@ -11367,8 +11367,8 @@
           var deletions = parentFiber.deletions;
           if (0 !== (parentFiber.flags & 16)) {
             if (null !== deletions)
-              for (var i = 0; i < deletions.length; i++) {
-                var childToDelete = deletions[i];
+              for (var i2 = 0; i2 < deletions.length; i2++) {
+                var childToDelete = deletions[i2];
                 nextEffect = childToDelete;
                 commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
                   childToDelete,
@@ -11415,8 +11415,8 @@
           var deletions = parentFiber.deletions;
           if (0 !== (parentFiber.flags & 16)) {
             if (null !== deletions)
-              for (var i = 0; i < deletions.length; i++) {
-                var childToDelete = deletions[i];
+              for (var i2 = 0; i2 < deletions.length; i2++) {
+                var childToDelete = deletions[i2];
                 nextEffect = childToDelete;
                 commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
                   childToDelete,
@@ -11751,8 +11751,8 @@
           for (var node = finishedWork; ; ) {
             var tag = node.tag;
             if ((0 === tag || 11 === tag || 15 === tag) && node.flags & 16384 && (tag = node.updateQueue, null !== tag && (tag = tag.stores, null !== tag)))
-              for (var i = 0; i < tag.length; i++) {
-                var check = tag[i], getSnapshot = check.getSnapshot;
+              for (var i2 = 0; i2 < tag.length; i2++) {
+                var check = tag[i2], getSnapshot = check.getSnapshot;
                 check = check.value;
                 try {
                   if (!objectIs(getSnapshot(), check)) return false;
@@ -12967,8 +12967,8 @@
         }
         function processDispatchQueue(dispatchQueue, eventSystemFlags) {
           eventSystemFlags = 0 !== (eventSystemFlags & 4);
-          for (var i = 0; i < dispatchQueue.length; i++) {
-            var _dispatchQueue$i = dispatchQueue[i];
+          for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
+            var _dispatchQueue$i = dispatchQueue[i2];
             a: {
               var previousInstance = void 0, event = _dispatchQueue$i.event;
               _dispatchQueue$i = _dispatchQueue$i.listeners;
@@ -14418,8 +14418,8 @@
         function getStylesObjectFromElement(domElement) {
           var serverValueInObjectForm = {};
           domElement = domElement.style;
-          for (var i = 0; i < domElement.length; i++) {
-            var styleName = domElement[i];
+          for (var i2 = 0; i2 < domElement.length; i2++) {
+            var styleName = domElement[i2];
             serverValueInObjectForm[styleName] = domElement.getPropertyValue(styleName);
           }
           return serverValueInObjectForm;
@@ -14555,8 +14555,8 @@
           warnForPropDifference(propKey, domElement, value, serverDifferences);
         }
         function diffHydratedProperties(domElement, tag, props, hostContext) {
-          for (var serverDifferences = {}, extraAttributes = /* @__PURE__ */ new Set(), attributes = domElement.attributes, i = 0; i < attributes.length; i++)
-            switch (attributes[i].name.toLowerCase()) {
+          for (var serverDifferences = {}, extraAttributes = /* @__PURE__ */ new Set(), attributes = domElement.attributes, i2 = 0; i2 < attributes.length; i2++)
+            switch (attributes[i2].name.toLowerCase()) {
               case "value":
                 break;
               case "checked":
@@ -14564,7 +14564,7 @@
               case "selected":
                 break;
               default:
-                extraAttributes.add(attributes[i].name);
+                extraAttributes.add(attributes[i2].name);
             }
           if (isCustomElement(tag))
             for (var propKey in props) {
@@ -14867,11 +14867,11 @@
                     case "capture":
                     case "download":
                       a: {
-                        i = domElement;
+                        i2 = domElement;
                         var attributeName = attributes = value, serverDifferences$jscomp$0 = serverDifferences;
                         extraAttributes.delete(attributeName);
-                        i = i.getAttribute(attributeName);
-                        if (null === i)
+                        i2 = i2.getAttribute(attributeName);
+                        if (null === i2)
                           switch (typeof propKey) {
                             case "undefined":
                             case "function":
@@ -14886,15 +14886,15 @@
                             case "symbol":
                               break;
                             case "boolean":
-                              if (true === propKey && "" === i) break a;
+                              if (true === propKey && "" === i2) break a;
                               break;
                             default:
-                              if (checkAttributeStringCoercion(propKey, attributes), i === "" + propKey)
+                              if (checkAttributeStringCoercion(propKey, attributes), i2 === "" + propKey)
                                 break a;
                           }
                         warnForPropDifference(
                           attributes,
-                          i,
+                          i2,
                           propKey,
                           serverDifferences$jscomp$0
                         );
@@ -14905,12 +14905,12 @@
                     case "size":
                     case "span":
                       a: {
-                        i = domElement;
+                        i2 = domElement;
                         attributeName = attributes = value;
                         serverDifferences$jscomp$0 = serverDifferences;
                         extraAttributes.delete(attributeName);
-                        i = i.getAttribute(attributeName);
-                        if (null === i)
+                        i2 = i2.getAttribute(attributeName);
+                        if (null === i2)
                           switch (typeof propKey) {
                             case "undefined":
                             case "function":
@@ -14927,12 +14927,12 @@
                             case "boolean":
                               break;
                             default:
-                              if (!(isNaN(propKey) || 1 > propKey) && (checkAttributeStringCoercion(propKey, attributes), i === "" + propKey))
+                              if (!(isNaN(propKey) || 1 > propKey) && (checkAttributeStringCoercion(propKey, attributes), i2 === "" + propKey))
                                 break a;
                           }
                         warnForPropDifference(
                           attributes,
-                          i,
+                          i2,
                           propKey,
                           serverDifferences$jscomp$0
                         );
@@ -15074,21 +15074,21 @@
                       continue;
                     default:
                       if (!(2 < value.length) || "o" !== value[0] && "O" !== value[0] || "n" !== value[1] && "N" !== value[1]) {
-                        i = getAttributeAlias(value);
+                        i2 = getAttributeAlias(value);
                         attributes = false;
-                        hostContext.context === HostContextNamespaceNone && "svg" !== tag && "math" !== tag ? extraAttributes.delete(i.toLowerCase()) : (attributeName = value.toLowerCase(), attributeName = possibleStandardNames.hasOwnProperty(
+                        hostContext.context === HostContextNamespaceNone && "svg" !== tag && "math" !== tag ? extraAttributes.delete(i2.toLowerCase()) : (attributeName = value.toLowerCase(), attributeName = possibleStandardNames.hasOwnProperty(
                           attributeName
-                        ) ? possibleStandardNames[attributeName] || null : null, null !== attributeName && attributeName !== value && (attributes = true, extraAttributes.delete(attributeName)), extraAttributes.delete(i));
-                        a: if (attributeName = domElement, serverDifferences$jscomp$0 = i, i = propKey, isAttributeNameSafe(serverDifferences$jscomp$0))
+                        ) ? possibleStandardNames[attributeName] || null : null, null !== attributeName && attributeName !== value && (attributes = true, extraAttributes.delete(attributeName)), extraAttributes.delete(i2));
+                        a: if (attributeName = domElement, serverDifferences$jscomp$0 = i2, i2 = propKey, isAttributeNameSafe(serverDifferences$jscomp$0))
                           if (attributeName.hasAttribute(serverDifferences$jscomp$0))
                             attributeName = attributeName.getAttribute(
                               serverDifferences$jscomp$0
                             ), checkAttributeStringCoercion(
-                              i,
+                              i2,
                               serverDifferences$jscomp$0
-                            ), i = attributeName === "" + i ? i : attributeName;
+                            ), i2 = attributeName === "" + i2 ? i2 : attributeName;
                           else {
-                            switch (typeof i) {
+                            switch (typeof i2) {
                               case "function":
                               case "symbol":
                                 break a;
@@ -15096,12 +15096,12 @@
                                 if (attributeName = serverDifferences$jscomp$0.toLowerCase().slice(0, 5), "data-" !== attributeName && "aria-" !== attributeName)
                                   break a;
                             }
-                            i = void 0 === i ? void 0 : null;
+                            i2 = void 0 === i2 ? void 0 : null;
                           }
-                        else i = void 0;
+                        else i2 = void 0;
                         attributes || warnForPropDifference(
                           value,
-                          i,
+                          i2,
                           propKey,
                           serverDifferences
                         );
@@ -15348,8 +15348,8 @@
         }
         function describeHydratableInstanceForDevWarnings(instance) {
           if (1 === instance.nodeType) {
-            for (var JSCompiler_temp_const = instance.nodeName.toLowerCase(), serverDifferences = {}, attributes = instance.attributes, i = 0; i < attributes.length; i++) {
-              var attr = attributes[i];
+            for (var JSCompiler_temp_const = instance.nodeName.toLowerCase(), serverDifferences = {}, attributes = instance.attributes, i2 = 0; i2 < attributes.length; i2++) {
+              var attr = attributes[i2];
               serverDifferences[getPropNameFromAttributeName(attr.name)] = "style" === attr.name.toLowerCase() ? getStylesObjectFromElement(instance) : attr.value;
             }
             return { type: JSCompiler_temp_const, props: serverDifferences };
@@ -15645,8 +15645,8 @@
         function insertStylesheet(instance, precedence, root2) {
           for (var nodes = root2.querySelectorAll(
             'link[rel="stylesheet"][data-precedence],style[data-precedence]'
-          ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
+          ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i2 = 0; i2 < nodes.length; i2++) {
+            var node = nodes[i2];
             if (node.dataset.precedence === precedence) prior = node;
             else if (prior !== last) break;
           }
@@ -15714,19 +15714,19 @@
               if ("string" !== typeof props.rel || "string" !== typeof props.href || "" === props.href || props.onLoad || props.onError) {
                 if ("stylesheet" === props.rel && "string" === typeof props.precedence) {
                   type = props.href;
-                  var onError = props.onError, disabled = props.disabled;
+                  var onError3 = props.onError, disabled = props.disabled;
                   hostContext = [];
                   props.onLoad && hostContext.push("`onLoad`");
-                  onError && hostContext.push("`onError`");
+                  onError3 && hostContext.push("`onError`");
                   null != disabled && hostContext.push("`disabled`");
-                  onError = propNamesListJoin(hostContext, "and");
-                  onError += 1 === hostContext.length ? " prop" : " props";
-                  disabled = 1 === hostContext.length ? "an " + onError : "the " + onError;
+                  onError3 = propNamesListJoin(hostContext, "and");
+                  onError3 += 1 === hostContext.length ? " prop" : " props";
+                  disabled = 1 === hostContext.length ? "an " + onError3 : "the " + onError3;
                   hostContext.length && console.error(
                     'React encountered a <link rel="stylesheet" href="%s" ... /> with a `precedence` prop that also included %s. The presence of loading and error handlers indicates an intent to manage the stylesheet loading state from your from your Component code and React will not hoist or deduplicate this stylesheet. If your intent was to have React hoist and deduplciate this stylesheet using the `precedence` prop remove the %s, otherwise remove the `precedence` prop.',
                     type,
                     disabled,
-                    onError
+                    onError3
                   );
                 }
                 outsideHostContainerContext && ("string" !== typeof props.rel || "string" !== typeof props.href || "" === props.href ? console.error(
@@ -15856,8 +15856,8 @@
               precedencesByRoot.set(root2, precedences);
               for (var nodes = root2.querySelectorAll(
                 "link[data-precedence],style[data-precedence]"
-              ), i = 0; i < nodes.length; i++) {
-                var node = nodes[i];
+              ), i2 = 0; i2 < nodes.length; i2++) {
+                var node = nodes[i2];
                 if ("LINK" === node.nodeName || "not all" !== node.getAttribute("media"))
                   precedences.set(node.dataset.precedence, node), last = node;
               }
@@ -15865,14 +15865,14 @@
             }
             nodes = resource.instance;
             node = nodes.getAttribute("data-precedence");
-            i = precedences.get(node) || last;
-            i === last && precedences.set(LAST_PRECEDENCE, nodes);
+            i2 = precedences.get(node) || last;
+            i2 === last && precedences.set(LAST_PRECEDENCE, nodes);
             precedences.set(node, nodes);
             this.count++;
             last = onUnsuspend.bind(this);
             nodes.addEventListener("load", last);
             nodes.addEventListener("error", last);
-            i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
+            i2 ? i2.parentNode.insertBefore(nodes, i2.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
             resource.state.loading |= Inserted;
           }
         }
@@ -15965,8 +15965,8 @@
         function markRetryLaneImpl(fiber, retryLane) {
           fiber = fiber.memoizedState;
           if (null !== fiber && null !== fiber.dehydrated) {
-            var a = fiber.retryLane;
-            fiber.retryLane = 0 !== a && a < retryLane ? a : retryLane;
+            var a2 = fiber.retryLane;
+            fiber.retryLane = 0 !== a2 && a2 < retryLane ? a2 : retryLane;
           }
         }
         function markRetryLaneIfNotHydrated(fiber, retryLane) {
@@ -16368,14 +16368,14 @@
             Scheduler.unstable_NormalPriority,
             function() {
               lastScheduledReplayQueue === formReplayingQueue && (lastScheduledReplayQueue = null);
-              for (var i = 0; i < formReplayingQueue.length; i += 3) {
-                var form = formReplayingQueue[i], submitterOrAction = formReplayingQueue[i + 1], formData = formReplayingQueue[i + 2];
+              for (var i2 = 0; i2 < formReplayingQueue.length; i2 += 3) {
+                var form = formReplayingQueue[i2], submitterOrAction = formReplayingQueue[i2 + 1], formData = formReplayingQueue[i2 + 2];
                 if ("function" !== typeof submitterOrAction)
                   if (null === findInstanceBlockingTarget(submitterOrAction || form))
                     continue;
                   else break;
                 var formInst = getInstanceFromNode(form);
-                null !== formInst && (formReplayingQueue.splice(i, 3), i -= 3, form = {
+                null !== formInst && (formReplayingQueue.splice(i2, 3), i2 -= 3, form = {
                   pending: true,
                   data: formData,
                   method: form.method,
@@ -16399,18 +16399,18 @@
           null !== queuedMouse && scheduleCallbackIfUnblocked(queuedMouse, unblocked);
           queuedPointers.forEach(unblock);
           queuedPointerCaptures.forEach(unblock);
-          for (var i = 0; i < queuedExplicitHydrationTargets.length; i++) {
-            var queuedTarget = queuedExplicitHydrationTargets[i];
+          for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length; i2++) {
+            var queuedTarget = queuedExplicitHydrationTargets[i2];
             queuedTarget.blockedOn === unblocked && (queuedTarget.blockedOn = null);
           }
-          for (; 0 < queuedExplicitHydrationTargets.length && (i = queuedExplicitHydrationTargets[0], null === i.blockedOn); )
-            attemptExplicitHydrationTarget(i), null === i.blockedOn && queuedExplicitHydrationTargets.shift();
-          i = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
-          if (null != i)
-            for (queuedTarget = 0; queuedTarget < i.length; queuedTarget += 3) {
-              var form = i[queuedTarget], submitterOrAction = i[queuedTarget + 1], formProps = form[internalPropsKey] || null;
+          for (; 0 < queuedExplicitHydrationTargets.length && (i2 = queuedExplicitHydrationTargets[0], null === i2.blockedOn); )
+            attemptExplicitHydrationTarget(i2), null === i2.blockedOn && queuedExplicitHydrationTargets.shift();
+          i2 = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
+          if (null != i2)
+            for (queuedTarget = 0; queuedTarget < i2.length; queuedTarget += 3) {
+              var form = i2[queuedTarget], submitterOrAction = i2[queuedTarget + 1], formProps = form[internalPropsKey] || null;
               if ("function" === typeof submitterOrAction)
-                formProps || scheduleReplayQueueIfNeeded(i);
+                formProps || scheduleReplayQueueIfNeeded(i2);
               else if (formProps) {
                 var action = null;
                 if (submitterOrAction && submitterOrAction.hasAttribute("formAction"))
@@ -16420,8 +16420,8 @@
                     if (null !== findInstanceBlockingTarget(form)) continue;
                   }
                 else action = formProps.action;
-                "function" === typeof action ? i[queuedTarget + 1] = action : (i.splice(queuedTarget, 3), queuedTarget -= 3);
-                scheduleReplayQueueIfNeeded(i);
+                "function" === typeof action ? i2[queuedTarget + 1] = action : (i2.splice(queuedTarget, 3), queuedTarget -= 3);
+                scheduleReplayQueueIfNeeded(i2);
               }
             }
         }
@@ -16439,14 +16439,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React13 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React38 = require_react(), ReactDOM2 = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React13.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React38.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM2.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -17259,7 +17259,7 @@
             });
             window.addEventListener("test", options$jscomp$0, options$jscomp$0);
             window.removeEventListener("test", options$jscomp$0, options$jscomp$0);
-          } catch (e) {
+          } catch (e2) {
             passiveBrowserEventsSupported = false;
           }
         var root = null, startText = null, fallbackText = null, EventInterface = {
@@ -18843,8 +18843,8 @@
         var didWarnAboutUpdateInRenderForAnotherComponent = /* @__PURE__ */ new Set();
         var fakeActCallbackNode$1 = {}, firstScheduledRoot = null, lastScheduledRoot = null, didScheduleMicrotask = false, didScheduleMicrotask_act = false, mightHavePendingSyncWork = false, isFlushingWork = false, currentEventTransitionLane = 0, fakeActCallbackNode = {};
         (function() {
-          for (var i = 0; i < simpleEventPluginEvents.length; i++) {
-            var eventName = simpleEventPluginEvents[i], domEventName = eventName.toLowerCase();
+          for (var i2 = 0; i2 < simpleEventPluginEvents.length; i2++) {
+            var eventName = simpleEventPluginEvents[i2], domEventName = eventName.toLowerCase();
             eventName = eventName[0].toUpperCase() + eventName.slice(1);
             registerSimpleEvent(domEventName, "on" + eventName);
           }
@@ -19154,13 +19154,13 @@
           if (target) {
             var updatePriority = resolveUpdatePriority();
             target = { blockedOn: null, target, priority: updatePriority };
-            for (var i = 0; i < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i].priority; i++) ;
-            queuedExplicitHydrationTargets.splice(i, 0, target);
-            0 === i && attemptExplicitHydrationTarget(target);
+            for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i2].priority; i2++) ;
+            queuedExplicitHydrationTargets.splice(i2, 0, target);
+            0 === i2 && attemptExplicitHydrationTarget(target);
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React13.version;
+          var isomorphicReactPackageVersion = React38.version;
           if ("19.1.0" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.1.0\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -19369,7 +19369,7 @@
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element = REACT_ELEMENT_TYPE;
           var ForwardRef = REACT_FORWARD_REF_TYPE;
-          var Fragment7 = REACT_FRAGMENT_TYPE;
+          var Fragment8 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
           var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
@@ -19428,7 +19428,7 @@
           exports.ContextProvider = ContextProvider;
           exports.Element = Element;
           exports.ForwardRef = ForwardRef;
-          exports.Fragment = Fragment7;
+          exports.Fragment = Fragment8;
           exports.Lazy = Lazy;
           exports.Memo = Memo;
           exports.Portal = Portal;
@@ -19491,11 +19491,11 @@
             return false;
           }
           var test2 = {};
-          for (var i = 0; i < 10; i++) {
-            test2["_" + String.fromCharCode(i)] = i;
+          for (var i2 = 0; i2 < 10; i2++) {
+            test2["_" + String.fromCharCode(i2)] = i2;
           }
-          var order2 = Object.getOwnPropertyNames(test2).map(function(n) {
-            return test2[n];
+          var order2 = Object.getOwnPropertyNames(test2).map(function(n3) {
+            return test2[n3];
           });
           if (order2.join("") !== "0123456789") {
             return false;
@@ -19516,8 +19516,8 @@
         var from;
         var to = toObject(target);
         var symbols;
-        for (var s = 1; s < arguments.length; s++) {
-          from = Object(arguments[s]);
+        for (var s2 = 1; s2 < arguments.length; s2++) {
+          from = Object(arguments[s2]);
           for (var key in from) {
             if (hasOwnProperty.call(from, key)) {
               to[key] = from[key];
@@ -19525,9 +19525,9 @@
           }
           if (getOwnPropertySymbols) {
             symbols = getOwnPropertySymbols(from);
-            for (var i = 0; i < symbols.length; i++) {
-              if (propIsEnumerable.call(from, symbols[i])) {
-                to[symbols[i]] = from[symbols[i]];
+            for (var i2 = 0; i2 < symbols.length; i2++) {
+              if (propIsEnumerable.call(from, symbols[i2])) {
+                to[symbols[i2]] = from[symbols[i2]];
               }
             }
           }
@@ -19570,7 +19570,7 @@
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -19638,7 +19638,7 @@
           }
           try {
             throw new Error(message);
-          } catch (x) {
+          } catch (x2) {
           }
         };
       }
@@ -19676,11 +19676,11 @@
           shape: createShapeTypeChecker,
           exact: createStrictShapeTypeChecker
         };
-        function is(x, y) {
-          if (x === y) {
-            return x !== 0 || 1 / x === 1 / y;
+        function is(x2, y2) {
+          if (x2 === y2) {
+            return x2 !== 0 || 1 / x2 === 1 / y2;
           } else {
-            return x !== x && y !== y;
+            return x2 !== x2 && y2 !== y2;
           }
         }
         function PropTypeError(message, data2) {
@@ -19760,8 +19760,8 @@
               var propType = getPropType(propValue);
               return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
             }
-            for (var i = 0; i < propValue.length; i++) {
-              var error = typeChecker(propValue, i, componentName, location, propFullName + "[" + i + "]", ReactPropTypesSecret);
+            for (var i2 = 0; i2 < propValue.length; i2++) {
+              var error = typeChecker(propValue, i2, componentName, location, propFullName + "[" + i2 + "]", ReactPropTypesSecret);
               if (error instanceof Error) {
                 return error;
               }
@@ -19818,8 +19818,8 @@
           }
           function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
-            for (var i = 0; i < expectedValues.length; i++) {
-              if (is(propValue, expectedValues[i])) {
+            for (var i2 = 0; i2 < expectedValues.length; i2++) {
+              if (is(propValue, expectedValues[i2])) {
                 return null;
               }
             }
@@ -19861,19 +19861,19 @@
             true ? printWarning("Invalid argument supplied to oneOfType, expected an instance of array.") : void 0;
             return emptyFunctionThatReturnsNull;
           }
-          for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-            var checker = arrayOfTypeCheckers[i];
+          for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
+            var checker = arrayOfTypeCheckers[i2];
             if (typeof checker !== "function") {
               printWarning(
-                "Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i + "."
+                "Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + " at index " + i2 + "."
               );
               return emptyFunctionThatReturnsNull;
             }
           }
           function validate(props, propName, componentName, location, propFullName) {
             var expectedTypes = [];
-            for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
-              var checker2 = arrayOfTypeCheckers[i2];
+            for (var i3 = 0; i3 < arrayOfTypeCheckers.length; i3++) {
+              var checker2 = arrayOfTypeCheckers[i3];
               var checkerResult = checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
               if (checkerResult == null) {
                 return null;
@@ -20077,8 +20077,910 @@
     }
   });
 
+  // node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js
+  var require_react_stripe_umd = __commonJS({
+    "node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"(exports, module) {
+      (function(global, factory) {
+        typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react()) : typeof define === "function" && define.amd ? define(["exports", "react"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.ReactStripe = {}, global.React));
+      })(exports, (function(exports2, React38) {
+        "use strict";
+        function ownKeys(object, enumerableOnly) {
+          var keys = Object.keys(object);
+          if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object);
+            if (enumerableOnly) {
+              symbols = symbols.filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+              });
+            }
+            keys.push.apply(keys, symbols);
+          }
+          return keys;
+        }
+        function _objectSpread2(target) {
+          for (var i2 = 1; i2 < arguments.length; i2++) {
+            var source = arguments[i2] != null ? arguments[i2] : {};
+            if (i2 % 2) {
+              ownKeys(Object(source), true).forEach(function(key) {
+                _defineProperty(target, key, source[key]);
+              });
+            } else if (Object.getOwnPropertyDescriptors) {
+              Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+            } else {
+              ownKeys(Object(source)).forEach(function(key) {
+                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+              });
+            }
+          }
+          return target;
+        }
+        function _typeof(obj) {
+          "@babel/helpers - typeof";
+          if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+            _typeof = function(obj2) {
+              return typeof obj2;
+            };
+          } else {
+            _typeof = function(obj2) {
+              return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+            };
+          }
+          return _typeof(obj);
+        }
+        function _defineProperty(obj, key, value) {
+          if (key in obj) {
+            Object.defineProperty(obj, key, {
+              value,
+              enumerable: true,
+              configurable: true,
+              writable: true
+            });
+          } else {
+            obj[key] = value;
+          }
+          return obj;
+        }
+        function _objectWithoutPropertiesLoose(source, excluded) {
+          if (source == null) return {};
+          var target = {};
+          var sourceKeys = Object.keys(source);
+          var key, i2;
+          for (i2 = 0; i2 < sourceKeys.length; i2++) {
+            key = sourceKeys[i2];
+            if (excluded.indexOf(key) >= 0) continue;
+            target[key] = source[key];
+          }
+          return target;
+        }
+        function _objectWithoutProperties(source, excluded) {
+          if (source == null) return {};
+          var target = _objectWithoutPropertiesLoose(source, excluded);
+          var key, i2;
+          if (Object.getOwnPropertySymbols) {
+            var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+            for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+              key = sourceSymbolKeys[i2];
+              if (excluded.indexOf(key) >= 0) continue;
+              if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+              target[key] = source[key];
+            }
+          }
+          return target;
+        }
+        function _slicedToArray(arr, i2) {
+          return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i2) || _unsupportedIterableToArray(arr, i2) || _nonIterableRest();
+        }
+        function _arrayWithHoles(arr) {
+          if (Array.isArray(arr)) return arr;
+        }
+        function _iterableToArrayLimit(arr, i2) {
+          var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+          if (_i == null) return;
+          var _arr = [];
+          var _n = true;
+          var _d = false;
+          var _s, _e;
+          try {
+            for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+              _arr.push(_s.value);
+              if (i2 && _arr.length === i2) break;
+            }
+          } catch (err) {
+            _d = true;
+            _e = err;
+          } finally {
+            try {
+              if (!_n && _i["return"] != null) _i["return"]();
+            } finally {
+              if (_d) throw _e;
+            }
+          }
+          return _arr;
+        }
+        function _unsupportedIterableToArray(o2, minLen) {
+          if (!o2) return;
+          if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
+          var n3 = Object.prototype.toString.call(o2).slice(8, -1);
+          if (n3 === "Object" && o2.constructor) n3 = o2.constructor.name;
+          if (n3 === "Map" || n3 === "Set") return Array.from(o2);
+          if (n3 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n3)) return _arrayLikeToArray(o2, minLen);
+        }
+        function _arrayLikeToArray(arr, len) {
+          if (len == null || len > arr.length) len = arr.length;
+          for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
+          return arr2;
+        }
+        function _nonIterableRest() {
+          throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+        }
+        function getDefaultExportFromCjs(x2) {
+          return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
+        }
+        var propTypes = { exports: {} };
+        var ReactPropTypesSecret_1;
+        var hasRequiredReactPropTypesSecret;
+        function requireReactPropTypesSecret() {
+          if (hasRequiredReactPropTypesSecret) return ReactPropTypesSecret_1;
+          hasRequiredReactPropTypesSecret = 1;
+          var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
+          ReactPropTypesSecret_1 = ReactPropTypesSecret;
+          return ReactPropTypesSecret_1;
+        }
+        var factoryWithThrowingShims;
+        var hasRequiredFactoryWithThrowingShims;
+        function requireFactoryWithThrowingShims() {
+          if (hasRequiredFactoryWithThrowingShims) return factoryWithThrowingShims;
+          hasRequiredFactoryWithThrowingShims = 1;
+          var ReactPropTypesSecret = requireReactPropTypesSecret();
+          function emptyFunction() {
+          }
+          function emptyFunctionWithReset() {
+          }
+          emptyFunctionWithReset.resetWarningCache = emptyFunction;
+          factoryWithThrowingShims = function() {
+            function shim(props, propName, componentName, location, propFullName, secret) {
+              if (secret === ReactPropTypesSecret) {
+                return;
+              }
+              var err = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");
+              err.name = "Invariant Violation";
+              throw err;
+            }
+            shim.isRequired = shim;
+            function getShim() {
+              return shim;
+            }
+            var ReactPropTypes = {
+              array: shim,
+              bool: shim,
+              func: shim,
+              number: shim,
+              object: shim,
+              string: shim,
+              symbol: shim,
+              any: shim,
+              arrayOf: getShim,
+              element: shim,
+              elementType: shim,
+              instanceOf: getShim,
+              node: shim,
+              objectOf: getShim,
+              oneOf: getShim,
+              oneOfType: getShim,
+              shape: getShim,
+              exact: getShim,
+              checkPropTypes: emptyFunctionWithReset,
+              resetWarningCache: emptyFunction
+            };
+            ReactPropTypes.PropTypes = ReactPropTypes;
+            return ReactPropTypes;
+          };
+          return factoryWithThrowingShims;
+        }
+        {
+          propTypes.exports = requireFactoryWithThrowingShims()();
+        }
+        var propTypesExports = propTypes.exports;
+        var PropTypes9 = /* @__PURE__ */ getDefaultExportFromCjs(propTypesExports);
+        var useAttachEvent = function useAttachEvent2(element, event, cb) {
+          var cbDefined = !!cb;
+          var cbRef = React38.useRef(cb);
+          React38.useEffect(function() {
+            cbRef.current = cb;
+          }, [cb]);
+          React38.useEffect(function() {
+            if (!cbDefined || !element) {
+              return function() {
+              };
+            }
+            var decoratedCb = function decoratedCb2() {
+              if (cbRef.current) {
+                cbRef.current.apply(cbRef, arguments);
+              }
+            };
+            element.on(event, decoratedCb);
+            return function() {
+              element.off(event, decoratedCb);
+            };
+          }, [cbDefined, event, element, cbRef]);
+        };
+        var usePrevious = function usePrevious2(value) {
+          var ref = React38.useRef(value);
+          React38.useEffect(function() {
+            ref.current = value;
+          }, [value]);
+          return ref.current;
+        };
+        var isUnknownObject = function isUnknownObject2(raw) {
+          return raw !== null && _typeof(raw) === "object";
+        };
+        var isPromise = function isPromise2(raw) {
+          return isUnknownObject(raw) && typeof raw.then === "function";
+        };
+        var isStripe = function isStripe2(raw) {
+          return isUnknownObject(raw) && typeof raw.elements === "function" && typeof raw.createToken === "function" && typeof raw.createPaymentMethod === "function" && typeof raw.confirmCardPayment === "function";
+        };
+        var PLAIN_OBJECT_STR = "[object Object]";
+        var isEqual = function isEqual2(left, right) {
+          if (!isUnknownObject(left) || !isUnknownObject(right)) {
+            return left === right;
+          }
+          var leftArray = Array.isArray(left);
+          var rightArray = Array.isArray(right);
+          if (leftArray !== rightArray) return false;
+          var leftPlainObject = Object.prototype.toString.call(left) === PLAIN_OBJECT_STR;
+          var rightPlainObject = Object.prototype.toString.call(right) === PLAIN_OBJECT_STR;
+          if (leftPlainObject !== rightPlainObject) return false;
+          if (!leftPlainObject && !leftArray) return left === right;
+          var leftKeys = Object.keys(left);
+          var rightKeys = Object.keys(right);
+          if (leftKeys.length !== rightKeys.length) return false;
+          var keySet = {};
+          for (var i2 = 0; i2 < leftKeys.length; i2 += 1) {
+            keySet[leftKeys[i2]] = true;
+          }
+          for (var _i = 0; _i < rightKeys.length; _i += 1) {
+            keySet[rightKeys[_i]] = true;
+          }
+          var allKeys = Object.keys(keySet);
+          if (allKeys.length !== leftKeys.length) {
+            return false;
+          }
+          var l2 = left;
+          var r = right;
+          var pred = function pred2(key) {
+            return isEqual2(l2[key], r[key]);
+          };
+          return allKeys.every(pred);
+        };
+        var extractAllowedOptionsUpdates = function extractAllowedOptionsUpdates2(options, prevOptions, immutableKeys) {
+          if (!isUnknownObject(options)) {
+            return null;
+          }
+          return Object.keys(options).reduce(function(newOptions, key) {
+            var isUpdated = !isUnknownObject(prevOptions) || !isEqual(options[key], prevOptions[key]);
+            if (immutableKeys.includes(key)) {
+              if (isUpdated) {
+                console.warn("Unsupported prop change: options.".concat(key, " is not a mutable property."));
+              }
+              return newOptions;
+            }
+            if (!isUpdated) {
+              return newOptions;
+            }
+            return _objectSpread2(_objectSpread2({}, newOptions || {}), {}, _defineProperty({}, key, options[key]));
+          }, null);
+        };
+        var INVALID_STRIPE_ERROR$2 = "Invalid prop `stripe` supplied to `Elements`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
+        var validateStripe = function validateStripe2(maybeStripe) {
+          var errorMsg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : INVALID_STRIPE_ERROR$2;
+          if (maybeStripe === null || isStripe(maybeStripe)) {
+            return maybeStripe;
+          }
+          throw new Error(errorMsg);
+        };
+        var parseStripeProp = function parseStripeProp2(raw) {
+          var errorMsg = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : INVALID_STRIPE_ERROR$2;
+          if (isPromise(raw)) {
+            return {
+              tag: "async",
+              stripePromise: Promise.resolve(raw).then(function(result) {
+                return validateStripe(result, errorMsg);
+              })
+            };
+          }
+          var stripe = validateStripe(raw, errorMsg);
+          if (stripe === null) {
+            return {
+              tag: "empty"
+            };
+          }
+          return {
+            tag: "sync",
+            stripe
+          };
+        };
+        var registerWithStripeJs = function registerWithStripeJs2(stripe) {
+          if (!stripe || !stripe._registerWrapper || !stripe.registerAppInfo) {
+            return;
+          }
+          stripe._registerWrapper({
+            name: "react-stripe-js",
+            version: "3.9.0"
+          });
+          stripe.registerAppInfo({
+            name: "react-stripe-js",
+            version: "3.9.0",
+            url: "https://stripe.com/docs/stripe-js/react"
+          });
+        };
+        var ElementsContext = /* @__PURE__ */ React38.createContext(null);
+        ElementsContext.displayName = "ElementsContext";
+        var parseElementsContext = function parseElementsContext2(ctx, useCase) {
+          if (!ctx) {
+            throw new Error("Could not find Elements context; You need to wrap the part of your app that ".concat(useCase, " in an <Elements> provider."));
+          }
+          return ctx;
+        };
+        var Elements3 = function Elements4(_ref) {
+          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
+          var parsed = React38.useMemo(function() {
+            return parseStripeProp(rawStripeProp);
+          }, [rawStripeProp]);
+          var _React$useState = React38.useState(function() {
+            return {
+              stripe: parsed.tag === "sync" ? parsed.stripe : null,
+              elements: parsed.tag === "sync" ? parsed.stripe.elements(options) : null
+            };
+          }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
+          React38.useEffect(function() {
+            var isMounted = true;
+            var safeSetContext = function safeSetContext2(stripe) {
+              setContext(function(ctx2) {
+                if (ctx2.stripe) return ctx2;
+                return {
+                  stripe,
+                  elements: stripe.elements(options)
+                };
+              });
+            };
+            if (parsed.tag === "async" && !ctx.stripe) {
+              parsed.stripePromise.then(function(stripe) {
+                if (stripe && isMounted) {
+                  safeSetContext(stripe);
+                }
+              });
+            } else if (parsed.tag === "sync" && !ctx.stripe) {
+              safeSetContext(parsed.stripe);
+            }
+            return function() {
+              isMounted = false;
+            };
+          }, [parsed, ctx, options]);
+          var prevStripe = usePrevious(rawStripeProp);
+          React38.useEffect(function() {
+            if (prevStripe !== null && prevStripe !== rawStripeProp) {
+              console.warn("Unsupported prop change on Elements: You cannot change the `stripe` prop after setting it.");
+            }
+          }, [prevStripe, rawStripeProp]);
+          var prevOptions = usePrevious(options);
+          React38.useEffect(function() {
+            if (!ctx.elements) {
+              return;
+            }
+            var updates = extractAllowedOptionsUpdates(options, prevOptions, ["clientSecret", "fonts"]);
+            if (updates) {
+              ctx.elements.update(updates);
+            }
+          }, [options, prevOptions, ctx.elements]);
+          React38.useEffect(function() {
+            registerWithStripeJs(ctx.stripe);
+          }, [ctx.stripe]);
+          return /* @__PURE__ */ React38.createElement(ElementsContext.Provider, {
+            value: ctx
+          }, children);
+        };
+        Elements3.propTypes = {
+          stripe: PropTypes9.any,
+          options: PropTypes9.object
+        };
+        var useElementsContextWithUseCase = function useElementsContextWithUseCase2(useCaseMessage) {
+          var ctx = React38.useContext(ElementsContext);
+          return parseElementsContext(ctx, useCaseMessage);
+        };
+        var useElements3 = function useElements4() {
+          var _useElementsContextWi = useElementsContextWithUseCase("calls useElements()"), elements = _useElementsContextWi.elements;
+          return elements;
+        };
+        var ElementsConsumer = function ElementsConsumer2(_ref2) {
+          var children = _ref2.children;
+          var ctx = useElementsContextWithUseCase("mounts <ElementsConsumer>");
+          return children(ctx);
+        };
+        ElementsConsumer.propTypes = {
+          children: PropTypes9.func.isRequired
+        };
+        var _excluded$1 = ["on", "session"];
+        var CheckoutSdkContext = /* @__PURE__ */ React38.createContext(null);
+        CheckoutSdkContext.displayName = "CheckoutSdkContext";
+        var parseCheckoutSdkContext = function parseCheckoutSdkContext2(ctx, useCase) {
+          if (!ctx) {
+            throw new Error("Could not find CheckoutProvider context; You need to wrap the part of your app that ".concat(useCase, " in an <CheckoutProvider> provider."));
+          }
+          return ctx;
+        };
+        var CheckoutContext = /* @__PURE__ */ React38.createContext(null);
+        CheckoutContext.displayName = "CheckoutContext";
+        var extractCheckoutContextValue = function extractCheckoutContextValue2(checkoutSdk, sessionState) {
+          if (!checkoutSdk) {
+            return null;
+          }
+          checkoutSdk.on;
+          checkoutSdk.session;
+          var actions = _objectWithoutProperties(checkoutSdk, _excluded$1);
+          if (!sessionState) {
+            return Object.assign(checkoutSdk.session(), actions);
+          }
+          return Object.assign(sessionState, actions);
+        };
+        var INVALID_STRIPE_ERROR$1 = "Invalid prop `stripe` supplied to `CheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
+        var CheckoutProvider = function CheckoutProvider2(_ref) {
+          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
+          var parsed = React38.useMemo(function() {
+            return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR$1);
+          }, [rawStripeProp]);
+          var _React$useState = React38.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), session = _React$useState2[0], setSession = _React$useState2[1];
+          var _React$useState3 = React38.useState(function() {
+            return {
+              stripe: parsed.tag === "sync" ? parsed.stripe : null,
+              checkoutSdk: null
+            };
+          }), _React$useState4 = _slicedToArray(_React$useState3, 2), ctx = _React$useState4[0], setContext = _React$useState4[1];
+          var safeSetContext = function safeSetContext2(stripe, checkoutSdk) {
+            setContext(function(ctx2) {
+              if (ctx2.stripe && ctx2.checkoutSdk) {
+                return ctx2;
+              }
+              return {
+                stripe,
+                checkoutSdk
+              };
+            });
+          };
+          var initCheckoutCalledRef = React38.useRef(false);
+          React38.useEffect(function() {
+            var isMounted = true;
+            if (parsed.tag === "async" && !ctx.stripe) {
+              parsed.stripePromise.then(function(stripe) {
+                if (stripe && isMounted && !initCheckoutCalledRef.current) {
+                  initCheckoutCalledRef.current = true;
+                  stripe.initCheckout(options).then(function(checkoutSdk) {
+                    if (checkoutSdk) {
+                      safeSetContext(stripe, checkoutSdk);
+                      checkoutSdk.on("change", setSession);
+                    }
+                  });
+                }
+              });
+            } else if (parsed.tag === "sync" && parsed.stripe && !initCheckoutCalledRef.current) {
+              initCheckoutCalledRef.current = true;
+              parsed.stripe.initCheckout(options).then(function(checkoutSdk) {
+                if (checkoutSdk) {
+                  safeSetContext(parsed.stripe, checkoutSdk);
+                  checkoutSdk.on("change", setSession);
+                }
+              });
+            }
+            return function() {
+              isMounted = false;
+            };
+          }, [parsed, ctx, options, setSession]);
+          var prevStripe = usePrevious(rawStripeProp);
+          React38.useEffect(function() {
+            if (prevStripe !== null && prevStripe !== rawStripeProp) {
+              console.warn("Unsupported prop change on CheckoutProvider: You cannot change the `stripe` prop after setting it.");
+            }
+          }, [prevStripe, rawStripeProp]);
+          var prevOptions = usePrevious(options);
+          var prevCheckoutSdk = usePrevious(ctx.checkoutSdk);
+          React38.useEffect(function() {
+            var _prevOptions$elements, _options$elementsOpti, _prevOptions$elements2, _options$elementsOpti2;
+            if (!ctx.checkoutSdk) {
+              return;
+            }
+            var hasSdkLoaded = Boolean(!prevCheckoutSdk && ctx.checkoutSdk);
+            var previousAppearance = prevOptions === null || prevOptions === void 0 ? void 0 : (_prevOptions$elements = prevOptions.elementsOptions) === null || _prevOptions$elements === void 0 ? void 0 : _prevOptions$elements.appearance;
+            var currentAppearance = options === null || options === void 0 ? void 0 : (_options$elementsOpti = options.elementsOptions) === null || _options$elementsOpti === void 0 ? void 0 : _options$elementsOpti.appearance;
+            var hasAppearanceChanged = !isEqual(currentAppearance, previousAppearance);
+            if (currentAppearance && (hasAppearanceChanged || hasSdkLoaded)) {
+              ctx.checkoutSdk.changeAppearance(currentAppearance);
+            }
+            var previousFonts = prevOptions === null || prevOptions === void 0 ? void 0 : (_prevOptions$elements2 = prevOptions.elementsOptions) === null || _prevOptions$elements2 === void 0 ? void 0 : _prevOptions$elements2.fonts;
+            var currentFonts = options === null || options === void 0 ? void 0 : (_options$elementsOpti2 = options.elementsOptions) === null || _options$elementsOpti2 === void 0 ? void 0 : _options$elementsOpti2.fonts;
+            var hasFontsChanged = !isEqual(previousFonts, currentFonts);
+            if (currentFonts && (hasFontsChanged || hasSdkLoaded)) {
+              ctx.checkoutSdk.loadFonts(currentFonts);
+            }
+          }, [options, prevOptions, ctx.checkoutSdk, prevCheckoutSdk]);
+          React38.useEffect(function() {
+            registerWithStripeJs(ctx.stripe);
+          }, [ctx.stripe]);
+          var checkoutContextValue = React38.useMemo(function() {
+            return extractCheckoutContextValue(ctx.checkoutSdk, session);
+          }, [ctx.checkoutSdk, session]);
+          if (!ctx.checkoutSdk) {
+            return null;
+          }
+          return /* @__PURE__ */ React38.createElement(CheckoutSdkContext.Provider, {
+            value: ctx
+          }, /* @__PURE__ */ React38.createElement(CheckoutContext.Provider, {
+            value: checkoutContextValue
+          }, children));
+        };
+        CheckoutProvider.propTypes = {
+          stripe: PropTypes9.any,
+          options: PropTypes9.shape({
+            fetchClientSecret: PropTypes9.func.isRequired,
+            elementsOptions: PropTypes9.object
+          }).isRequired
+        };
+        var useCheckoutSdkContextWithUseCase = function useCheckoutSdkContextWithUseCase2(useCaseString) {
+          var ctx = React38.useContext(CheckoutSdkContext);
+          return parseCheckoutSdkContext(ctx, useCaseString);
+        };
+        var useElementsOrCheckoutSdkContextWithUseCase = function useElementsOrCheckoutSdkContextWithUseCase2(useCaseString) {
+          var checkoutSdkContext = React38.useContext(CheckoutSdkContext);
+          var elementsContext = React38.useContext(ElementsContext);
+          if (checkoutSdkContext && elementsContext) {
+            throw new Error("You cannot wrap the part of your app that ".concat(useCaseString, " in both <CheckoutProvider> and <Elements> providers."));
+          }
+          if (checkoutSdkContext) {
+            return parseCheckoutSdkContext(checkoutSdkContext, useCaseString);
+          }
+          return parseElementsContext(elementsContext, useCaseString);
+        };
+        var useCheckout = function useCheckout2() {
+          useCheckoutSdkContextWithUseCase("calls useCheckout()");
+          var ctx = React38.useContext(CheckoutContext);
+          if (!ctx) {
+            throw new Error("Could not find Checkout Context; You need to wrap the part of your app that calls useCheckout() in an <CheckoutProvider> provider.");
+          }
+          return ctx;
+        };
+        var _excluded = ["mode"];
+        var capitalized = function capitalized2(str) {
+          return str.charAt(0).toUpperCase() + str.slice(1);
+        };
+        var createElementComponent = function createElementComponent2(type, isServer2) {
+          var displayName = "".concat(capitalized(type), "Element");
+          var ClientElement = function ClientElement2(_ref) {
+            var id = _ref.id, className = _ref.className, _ref$options = _ref.options, options = _ref$options === void 0 ? {} : _ref$options, onBlur = _ref.onBlur, onFocus = _ref.onFocus, onReady = _ref.onReady, onChange = _ref.onChange, onEscape = _ref.onEscape, onClick = _ref.onClick, onLoadError = _ref.onLoadError, onLoaderStart = _ref.onLoaderStart, onNetworksChange = _ref.onNetworksChange, onConfirm = _ref.onConfirm, onCancel = _ref.onCancel, onShippingAddressChange = _ref.onShippingAddressChange, onShippingRateChange = _ref.onShippingRateChange;
+            var ctx = useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
+            var elements = "elements" in ctx ? ctx.elements : null;
+            var checkoutSdk = "checkoutSdk" in ctx ? ctx.checkoutSdk : null;
+            var _React$useState = React38.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), element = _React$useState2[0], setElement = _React$useState2[1];
+            var elementRef = React38.useRef(null);
+            var domNode = React38.useRef(null);
+            useAttachEvent(element, "blur", onBlur);
+            useAttachEvent(element, "focus", onFocus);
+            useAttachEvent(element, "escape", onEscape);
+            useAttachEvent(element, "click", onClick);
+            useAttachEvent(element, "loaderror", onLoadError);
+            useAttachEvent(element, "loaderstart", onLoaderStart);
+            useAttachEvent(element, "networkschange", onNetworksChange);
+            useAttachEvent(element, "confirm", onConfirm);
+            useAttachEvent(element, "cancel", onCancel);
+            useAttachEvent(element, "shippingaddresschange", onShippingAddressChange);
+            useAttachEvent(element, "shippingratechange", onShippingRateChange);
+            useAttachEvent(element, "change", onChange);
+            var readyCallback;
+            if (onReady) {
+              if (type === "expressCheckout") {
+                readyCallback = onReady;
+              } else {
+                readyCallback = function readyCallback2() {
+                  onReady(element);
+                };
+              }
+            }
+            useAttachEvent(element, "ready", readyCallback);
+            React38.useLayoutEffect(function() {
+              if (elementRef.current === null && domNode.current !== null && (elements || checkoutSdk)) {
+                var newElement = null;
+                if (checkoutSdk) {
+                  switch (type) {
+                    case "payment":
+                      newElement = checkoutSdk.createPaymentElement(options);
+                      break;
+                    case "address":
+                      if ("mode" in options) {
+                        var mode = options.mode, restOptions = _objectWithoutProperties(options, _excluded);
+                        if (mode === "shipping") {
+                          newElement = checkoutSdk.createShippingAddressElement(restOptions);
+                        } else if (mode === "billing") {
+                          newElement = checkoutSdk.createBillingAddressElement(restOptions);
+                        } else {
+                          throw new Error("Invalid options.mode. mode must be 'billing' or 'shipping'.");
+                        }
+                      } else {
+                        throw new Error("You must supply options.mode. mode must be 'billing' or 'shipping'.");
+                      }
+                      break;
+                    case "expressCheckout":
+                      newElement = checkoutSdk.createExpressCheckoutElement(options);
+                      break;
+                    case "currencySelector":
+                      newElement = checkoutSdk.createCurrencySelectorElement();
+                      break;
+                    case "taxId":
+                      newElement = checkoutSdk.createTaxIdElement(options);
+                      break;
+                    default:
+                      throw new Error("Invalid Element type ".concat(displayName, ". You must use either the <PaymentElement />, <AddressElement options={{mode: 'shipping'}} />, <AddressElement options={{mode: 'billing'}} />, or <ExpressCheckoutElement />."));
+                  }
+                } else if (elements) {
+                  newElement = elements.create(type, options);
+                }
+                elementRef.current = newElement;
+                setElement(newElement);
+                if (newElement) {
+                  newElement.mount(domNode.current);
+                }
+              }
+            }, [elements, checkoutSdk, options]);
+            var prevOptions = usePrevious(options);
+            React38.useEffect(function() {
+              if (!elementRef.current) {
+                return;
+              }
+              var updates = extractAllowedOptionsUpdates(options, prevOptions, ["paymentRequest"]);
+              if (updates && "update" in elementRef.current) {
+                elementRef.current.update(updates);
+              }
+            }, [options, prevOptions]);
+            React38.useLayoutEffect(function() {
+              return function() {
+                if (elementRef.current && typeof elementRef.current.destroy === "function") {
+                  try {
+                    elementRef.current.destroy();
+                    elementRef.current = null;
+                  } catch (error) {
+                  }
+                }
+              };
+            }, []);
+            return /* @__PURE__ */ React38.createElement("div", {
+              id,
+              className,
+              ref: domNode
+            });
+          };
+          var ServerElement = function ServerElement2(props) {
+            useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
+            var id = props.id, className = props.className;
+            return /* @__PURE__ */ React38.createElement("div", {
+              id,
+              className
+            });
+          };
+          var Element = isServer2 ? ServerElement : ClientElement;
+          Element.propTypes = {
+            id: PropTypes9.string,
+            className: PropTypes9.string,
+            onChange: PropTypes9.func,
+            onBlur: PropTypes9.func,
+            onFocus: PropTypes9.func,
+            onReady: PropTypes9.func,
+            onEscape: PropTypes9.func,
+            onClick: PropTypes9.func,
+            onLoadError: PropTypes9.func,
+            onLoaderStart: PropTypes9.func,
+            onNetworksChange: PropTypes9.func,
+            onConfirm: PropTypes9.func,
+            onCancel: PropTypes9.func,
+            onShippingAddressChange: PropTypes9.func,
+            onShippingRateChange: PropTypes9.func,
+            options: PropTypes9.object
+          };
+          Element.displayName = displayName;
+          Element.__elementType = type;
+          return Element;
+        };
+        var isServer = typeof window === "undefined";
+        var EmbeddedCheckoutContext = /* @__PURE__ */ React38.createContext(null);
+        EmbeddedCheckoutContext.displayName = "EmbeddedCheckoutProviderContext";
+        var useEmbeddedCheckoutContext = function useEmbeddedCheckoutContext2() {
+          var ctx = React38.useContext(EmbeddedCheckoutContext);
+          if (!ctx) {
+            throw new Error("<EmbeddedCheckout> must be used within <EmbeddedCheckoutProvider>");
+          }
+          return ctx;
+        };
+        var INVALID_STRIPE_ERROR = "Invalid prop `stripe` supplied to `EmbeddedCheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
+        var EmbeddedCheckoutProvider = function EmbeddedCheckoutProvider2(_ref) {
+          var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
+          var parsed = React38.useMemo(function() {
+            return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR);
+          }, [rawStripeProp]);
+          var embeddedCheckoutPromise = React38.useRef(null);
+          var loadedStripe = React38.useRef(null);
+          var _React$useState = React38.useState({
+            embeddedCheckout: null
+          }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
+          React38.useEffect(function() {
+            if (loadedStripe.current || embeddedCheckoutPromise.current) {
+              return;
+            }
+            var setStripeAndInitEmbeddedCheckout = function setStripeAndInitEmbeddedCheckout2(stripe) {
+              if (loadedStripe.current || embeddedCheckoutPromise.current) return;
+              loadedStripe.current = stripe;
+              embeddedCheckoutPromise.current = loadedStripe.current.initEmbeddedCheckout(options).then(function(embeddedCheckout) {
+                setContext({
+                  embeddedCheckout
+                });
+              });
+            };
+            if (parsed.tag === "async" && !loadedStripe.current && (options.clientSecret || options.fetchClientSecret)) {
+              parsed.stripePromise.then(function(stripe) {
+                if (stripe) {
+                  setStripeAndInitEmbeddedCheckout(stripe);
+                }
+              });
+            } else if (parsed.tag === "sync" && !loadedStripe.current && (options.clientSecret || options.fetchClientSecret)) {
+              setStripeAndInitEmbeddedCheckout(parsed.stripe);
+            }
+          }, [parsed, options, ctx, loadedStripe]);
+          React38.useEffect(function() {
+            return function() {
+              if (ctx.embeddedCheckout) {
+                embeddedCheckoutPromise.current = null;
+                ctx.embeddedCheckout.destroy();
+              } else if (embeddedCheckoutPromise.current) {
+                embeddedCheckoutPromise.current.then(function() {
+                  embeddedCheckoutPromise.current = null;
+                  if (ctx.embeddedCheckout) {
+                    ctx.embeddedCheckout.destroy();
+                  }
+                });
+              }
+            };
+          }, [ctx.embeddedCheckout]);
+          React38.useEffect(function() {
+            registerWithStripeJs(loadedStripe);
+          }, [loadedStripe]);
+          var prevStripe = usePrevious(rawStripeProp);
+          React38.useEffect(function() {
+            if (prevStripe !== null && prevStripe !== rawStripeProp) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the `stripe` prop after setting it.");
+            }
+          }, [prevStripe, rawStripeProp]);
+          var prevOptions = usePrevious(options);
+          React38.useEffect(function() {
+            if (prevOptions == null) {
+              return;
+            }
+            if (options == null) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot unset options after setting them.");
+              return;
+            }
+            if (options.clientSecret === void 0 && options.fetchClientSecret === void 0) {
+              console.warn("Invalid props passed to EmbeddedCheckoutProvider: You must provide one of either `options.fetchClientSecret` or `options.clientSecret`.");
+            }
+            if (prevOptions.clientSecret != null && options.clientSecret !== prevOptions.clientSecret) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the client secret after setting it. Unmount and create a new instance of EmbeddedCheckoutProvider instead.");
+            }
+            if (prevOptions.fetchClientSecret != null && options.fetchClientSecret !== prevOptions.fetchClientSecret) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change fetchClientSecret after setting it. Unmount and create a new instance of EmbeddedCheckoutProvider instead.");
+            }
+            if (prevOptions.onComplete != null && options.onComplete !== prevOptions.onComplete) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onComplete option after setting it.");
+            }
+            if (prevOptions.onShippingDetailsChange != null && options.onShippingDetailsChange !== prevOptions.onShippingDetailsChange) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onShippingDetailsChange option after setting it.");
+            }
+            if (prevOptions.onLineItemsChange != null && options.onLineItemsChange !== prevOptions.onLineItemsChange) {
+              console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onLineItemsChange option after setting it.");
+            }
+          }, [prevOptions, options]);
+          return /* @__PURE__ */ React38.createElement(EmbeddedCheckoutContext.Provider, {
+            value: ctx
+          }, children);
+        };
+        var EmbeddedCheckoutClientElement = function EmbeddedCheckoutClientElement2(_ref) {
+          var id = _ref.id, className = _ref.className;
+          var _useEmbeddedCheckoutC = useEmbeddedCheckoutContext(), embeddedCheckout = _useEmbeddedCheckoutC.embeddedCheckout;
+          var isMounted = React38.useRef(false);
+          var domNode = React38.useRef(null);
+          React38.useLayoutEffect(function() {
+            if (!isMounted.current && embeddedCheckout && domNode.current !== null) {
+              embeddedCheckout.mount(domNode.current);
+              isMounted.current = true;
+            }
+            return function() {
+              if (isMounted.current && embeddedCheckout) {
+                try {
+                  embeddedCheckout.unmount();
+                  isMounted.current = false;
+                } catch (e2) {
+                }
+              }
+            };
+          }, [embeddedCheckout]);
+          return /* @__PURE__ */ React38.createElement("div", {
+            ref: domNode,
+            id,
+            className
+          });
+        };
+        var EmbeddedCheckoutServerElement = function EmbeddedCheckoutServerElement2(_ref2) {
+          var id = _ref2.id, className = _ref2.className;
+          useEmbeddedCheckoutContext();
+          return /* @__PURE__ */ React38.createElement("div", {
+            id,
+            className
+          });
+        };
+        var EmbeddedCheckout = isServer ? EmbeddedCheckoutServerElement : EmbeddedCheckoutClientElement;
+        var useStripe3 = function useStripe4() {
+          var _useElementsOrCheckou = useElementsOrCheckoutSdkContextWithUseCase("calls useStripe()"), stripe = _useElementsOrCheckou.stripe;
+          return stripe;
+        };
+        var AuBankAccountElement = createElementComponent("auBankAccount", isServer);
+        var CardElement2 = createElementComponent("card", isServer);
+        var CardNumberElement = createElementComponent("cardNumber", isServer);
+        var CardExpiryElement = createElementComponent("cardExpiry", isServer);
+        var CardCvcElement = createElementComponent("cardCvc", isServer);
+        var FpxBankElement = createElementComponent("fpxBank", isServer);
+        var IbanElement = createElementComponent("iban", isServer);
+        var IdealBankElement = createElementComponent("idealBank", isServer);
+        var P24BankElement = createElementComponent("p24Bank", isServer);
+        var EpsBankElement = createElementComponent("epsBank", isServer);
+        var PaymentElement2 = createElementComponent("payment", isServer);
+        var ExpressCheckoutElement = createElementComponent("expressCheckout", isServer);
+        var CurrencySelectorElement = createElementComponent("currencySelector", isServer);
+        var PaymentRequestButtonElement = createElementComponent("paymentRequestButton", isServer);
+        var LinkAuthenticationElement = createElementComponent("linkAuthentication", isServer);
+        var AddressElement = createElementComponent("address", isServer);
+        var ShippingAddressElement = createElementComponent("shippingAddress", isServer);
+        var PaymentMethodMessagingElement = createElementComponent("paymentMethodMessaging", isServer);
+        var AffirmMessageElement = createElementComponent("affirmMessage", isServer);
+        var AfterpayClearpayMessageElement = createElementComponent("afterpayClearpayMessage", isServer);
+        var TaxIdElement = createElementComponent("taxId", isServer);
+        exports2.AddressElement = AddressElement;
+        exports2.AffirmMessageElement = AffirmMessageElement;
+        exports2.AfterpayClearpayMessageElement = AfterpayClearpayMessageElement;
+        exports2.AuBankAccountElement = AuBankAccountElement;
+        exports2.CardCvcElement = CardCvcElement;
+        exports2.CardElement = CardElement2;
+        exports2.CardExpiryElement = CardExpiryElement;
+        exports2.CardNumberElement = CardNumberElement;
+        exports2.CheckoutProvider = CheckoutProvider;
+        exports2.CurrencySelectorElement = CurrencySelectorElement;
+        exports2.Elements = Elements3;
+        exports2.ElementsConsumer = ElementsConsumer;
+        exports2.EmbeddedCheckout = EmbeddedCheckout;
+        exports2.EmbeddedCheckoutProvider = EmbeddedCheckoutProvider;
+        exports2.EpsBankElement = EpsBankElement;
+        exports2.ExpressCheckoutElement = ExpressCheckoutElement;
+        exports2.FpxBankElement = FpxBankElement;
+        exports2.IbanElement = IbanElement;
+        exports2.IdealBankElement = IdealBankElement;
+        exports2.LinkAuthenticationElement = LinkAuthenticationElement;
+        exports2.P24BankElement = P24BankElement;
+        exports2.PaymentElement = PaymentElement2;
+        exports2.PaymentMethodMessagingElement = PaymentMethodMessagingElement;
+        exports2.PaymentRequestButtonElement = PaymentRequestButtonElement;
+        exports2.ShippingAddressElement = ShippingAddressElement;
+        exports2.TaxIdElement = TaxIdElement;
+        exports2.useCheckout = useCheckout;
+        exports2.useElements = useElements3;
+        exports2.useStripe = useStripe3;
+      }));
+    }
+  });
+
   // src/main.js
-  var import_react7 = __toESM(require_react());
+  var import_react32 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // src/components/HomePage.js
@@ -20177,50 +21079,118 @@
     return Component4;
   };
 
-  // node_modules/lucide-react/dist/esm/icons/facebook.js
+  // node_modules/lucide-react/dist/esm/icons/calendar-check.js
   var __iconNode = [
+    ["path", { d: "M8 2v4", key: "1cmpym" }],
+    ["path", { d: "M16 2v4", key: "4m81vk" }],
+    ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
+    ["path", { d: "M3 10h18", key: "8toen8" }],
+    ["path", { d: "m9 16 2 2 4-4", key: "19s6y9" }]
+  ];
+  var CalendarCheck = createLucideIcon("calendar-check", __iconNode);
+
+  // node_modules/lucide-react/dist/esm/icons/circle-check-big.js
+  var __iconNode2 = [
+    ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+    ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+  ];
+  var CircleCheckBig = createLucideIcon("circle-check-big", __iconNode2);
+
+  // node_modules/lucide-react/dist/esm/icons/circle-minus.js
+  var __iconNode3 = [
+    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+    ["path", { d: "M8 12h8", key: "1wcyev" }]
+  ];
+  var CircleMinus = createLucideIcon("circle-minus", __iconNode3);
+
+  // node_modules/lucide-react/dist/esm/icons/circle-plus.js
+  var __iconNode4 = [
+    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+    ["path", { d: "M8 12h8", key: "1wcyev" }],
+    ["path", { d: "M12 8v8", key: "napkw2" }]
+  ];
+  var CirclePlus = createLucideIcon("circle-plus", __iconNode4);
+
+  // node_modules/lucide-react/dist/esm/icons/circle-x.js
+  var __iconNode5 = [
+    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+    ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+    ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+  ];
+  var CircleX = createLucideIcon("circle-x", __iconNode5);
+
+  // node_modules/lucide-react/dist/esm/icons/facebook.js
+  var __iconNode6 = [
     [
       "path",
       { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
     ]
   ];
-  var Facebook = createLucideIcon("facebook", __iconNode);
+  var Facebook = createLucideIcon("facebook", __iconNode6);
+
+  // node_modules/lucide-react/dist/esm/icons/house.js
+  var __iconNode7 = [
+    ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
+    [
+      "path",
+      {
+        d: "M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+        key: "1d0kgt"
+      }
+    ]
+  ];
+  var House = createLucideIcon("house", __iconNode7);
 
   // node_modules/lucide-react/dist/esm/icons/instagram.js
-  var __iconNode2 = [
+  var __iconNode8 = [
     ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5", key: "2e1cvw" }],
     ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }],
     ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
   ];
-  var Instagram = createLucideIcon("instagram", __iconNode2);
+  var Instagram = createLucideIcon("instagram", __iconNode8);
 
   // node_modules/lucide-react/dist/esm/icons/layout-dashboard.js
-  var __iconNode3 = [
+  var __iconNode9 = [
     ["rect", { width: "7", height: "9", x: "3", y: "3", rx: "1", key: "10lvy0" }],
     ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
     ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
     ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
   ];
-  var LayoutDashboard = createLucideIcon("layout-dashboard", __iconNode3);
+  var LayoutDashboard = createLucideIcon("layout-dashboard", __iconNode9);
 
   // node_modules/lucide-react/dist/esm/icons/log-out.js
-  var __iconNode4 = [
+  var __iconNode10 = [
     ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
     ["path", { d: "M21 12H9", key: "dn1m92" }],
     ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
   ];
-  var LogOut = createLucideIcon("log-out", __iconNode4);
+  var LogOut = createLucideIcon("log-out", __iconNode10);
 
   // node_modules/lucide-react/dist/esm/icons/menu.js
-  var __iconNode5 = [
+  var __iconNode11 = [
     ["path", { d: "M4 12h16", key: "1lakjw" }],
     ["path", { d: "M4 18h16", key: "19g7jn" }],
     ["path", { d: "M4 6h16", key: "1o0s65" }]
   ];
-  var Menu = createLucideIcon("menu", __iconNode5);
+  var Menu = createLucideIcon("menu", __iconNode11);
+
+  // node_modules/lucide-react/dist/esm/icons/package.js
+  var __iconNode12 = [
+    [
+      "path",
+      {
+        d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
+        key: "1a0edw"
+      }
+    ],
+    ["path", { d: "M12 22V12", key: "d0xqtd" }],
+    ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
+    ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }]
+  ];
+  var Package = createLucideIcon("package", __iconNode12);
 
   // node_modules/lucide-react/dist/esm/icons/shopping-cart.js
-  var __iconNode6 = [
+  var __iconNode13 = [
     ["circle", { cx: "8", cy: "21", r: "1", key: "jimo8o" }],
     ["circle", { cx: "19", cy: "21", r: "1", key: "13723u" }],
     [
@@ -20231,10 +21201,10 @@
       }
     ]
   ];
-  var ShoppingCart = createLucideIcon("shopping-cart", __iconNode6);
+  var ShoppingCart = createLucideIcon("shopping-cart", __iconNode13);
 
   // node_modules/lucide-react/dist/esm/icons/twitter.js
-  var __iconNode7 = [
+  var __iconNode14 = [
     [
       "path",
       {
@@ -20243,30 +21213,30 @@
       }
     ]
   ];
-  var Twitter = createLucideIcon("twitter", __iconNode7);
+  var Twitter = createLucideIcon("twitter", __iconNode14);
 
   // node_modules/lucide-react/dist/esm/icons/user.js
-  var __iconNode8 = [
+  var __iconNode15 = [
     ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
     ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
   ];
-  var User = createLucideIcon("user", __iconNode8);
+  var User = createLucideIcon("user", __iconNode15);
 
   // node_modules/lucide-react/dist/esm/icons/x.js
-  var __iconNode9 = [
+  var __iconNode16 = [
     ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
     ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
   ];
-  var X = createLucideIcon("x", __iconNode9);
+  var X = createLucideIcon("x", __iconNode16);
 
   // src/components/Header.js
-  var Header = ({ cartItemCount, currentUser, onAuthClick, onSignOut, onCartClick, setView }) => {
+  var Header = ({ cartItemCount, currentUser, onAuthClick, onSignOut, onCartClick, setView: setView2 }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react3.useState)(false);
     const toggleMobileMenu = () => {
       setIsMobileMenuOpen(!isMobileMenuOpen);
     };
     const handleNavigationClick = (viewName) => {
-      setView(viewName);
+      setView2(viewName);
       setIsMobileMenuOpen(false);
     };
     return /* @__PURE__ */ import_react3.default.createElement("header", { className: "bg-white shadow-md p-4 sticky top-0 z-50 rounded-b-xl" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "container mx-auto flex justify-between items-center px-4" }, /* @__PURE__ */ import_react3.default.createElement(
@@ -20443,7 +21413,7 @@
       if (typeof console !== "undefined") console.warn(message);
       try {
         throw new Error(message);
-      } catch (e) {
+      } catch (e2) {
       }
     }
   }
@@ -20591,8 +21561,8 @@
       },
       push,
       replace: replace2,
-      go(n) {
-        return globalHistory.go(n);
+      go(n3) {
+        return globalHistory.go(n3);
       }
     };
     return history;
@@ -20624,10 +21594,10 @@
     let branches = flattenRoutes(routes);
     rankRouteBranches(branches);
     let matches = null;
-    for (let i = 0; matches == null && i < branches.length; ++i) {
+    for (let i2 = 0; matches == null && i2 < branches.length; ++i2) {
       let decoded = decodePath(pathname);
       matches = matchRouteBranch(
-        branches[i],
+        branches[i2],
         decoded,
         allowPartial
       );
@@ -20725,9 +21695,9 @@
   }
   function rankRouteBranches(branches) {
     branches.sort(
-      (a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(
-        a.routesMeta.map((meta) => meta.childrenIndex),
-        b.routesMeta.map((meta) => meta.childrenIndex)
+      (a2, b3) => a2.score !== b3.score ? b3.score - a2.score : compareIndexes(
+        a2.routesMeta.map((meta) => meta.childrenIndex),
+        b3.routesMeta.map((meta) => meta.childrenIndex)
       )
     );
   }
@@ -20737,7 +21707,7 @@
   var emptySegmentValue = 1;
   var staticSegmentValue = 10;
   var splatPenalty = -2;
-  var isSplat = (s) => s === "*";
+  var isSplat = (s2) => s2 === "*";
   function computeScore(path, index) {
     let segments = path.split("/");
     let initialScore = segments.length;
@@ -20747,19 +21717,19 @@
     if (index) {
       initialScore += indexRouteValue;
     }
-    return segments.filter((s) => !isSplat(s)).reduce(
+    return segments.filter((s2) => !isSplat(s2)).reduce(
       (score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue),
       initialScore
     );
   }
-  function compareIndexes(a, b) {
-    let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+  function compareIndexes(a2, b3) {
+    let siblings = a2.length === b3.length && a2.slice(0, -1).every((n3, i2) => n3 === b3[i2]);
     return siblings ? (
       // If two routes are siblings, we should try to match the earlier sibling
       // first. This allows people to have fine-grained control over the matching
       // behavior by simply putting routes with identical paths in the order they
       // want them tried.
-      a[a.length - 1] - b[b.length - 1]
+      a2[a2.length - 1] - b3[b3.length - 1]
     ) : (
       // Otherwise, it doesn't really make sense to rank non-siblings by index,
       // so they sort equally.
@@ -20771,9 +21741,9 @@
     let matchedParams = {};
     let matchedPathname = "/";
     let matches = [];
-    for (let i = 0; i < routesMeta.length; ++i) {
-      let meta = routesMeta[i];
-      let end = i === routesMeta.length - 1;
+    for (let i2 = 0; i2 < routesMeta.length; ++i2) {
+      let meta = routesMeta[i2];
+      let end = i2 === routesMeta.length - 1;
       let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
       let match = matchPath(
         { path: meta.relativePath, caseSensitive: meta.caseSensitive, end },
@@ -20824,18 +21794,18 @@
     let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
     let captureGroups = match.slice(1);
     let params = compiledParams.reduce(
-      (memo2, { paramName, isOptional }, index) => {
+      (memo22, { paramName, isOptional }, index) => {
         if (paramName === "*") {
           let splatValue = captureGroups[index] || "";
           pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
         }
         const value = captureGroups[index];
         if (isOptional && !value) {
-          memo2[paramName] = void 0;
+          memo22[paramName] = void 0;
         } else {
-          memo2[paramName] = (value || "").replace(/%2F/g, "/");
+          memo22[paramName] = (value || "").replace(/%2F/g, "/");
         }
-        return memo2;
+        return memo22;
       },
       {}
     );
@@ -20854,7 +21824,7 @@
     let params = [];
     let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(
       /\/:([\w-]+)(\?)?/g,
-      (_, paramName, isOptional) => {
+      (_2, paramName, isOptional) => {
         params.push({ paramName, isOptional: isOptional != null });
         return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
       }
@@ -20873,7 +21843,7 @@
   }
   function decodePath(value) {
     try {
-      return value.split("/").map((v) => decodeURIComponent(v).replace(/\//g, "%2F")).join("/");
+      return value.split("/").map((v2) => decodeURIComponent(v2).replace(/\//g, "%2F")).join("/");
     } catch (error) {
       warning(
         false,
@@ -21317,15 +22287,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     }
     let renderedMatches = matches;
-    let errors = dataRouterState?.errors;
-    if (errors != null) {
+    let errors2 = dataRouterState?.errors;
+    if (errors2 != null) {
       let errorIndex = renderedMatches.findIndex(
-        (m) => m.route.id && errors?.[m.route.id] !== void 0
+        (m2) => m2.route.id && errors2?.[m2.route.id] !== void 0
       );
       invariant(
         errorIndex >= 0,
         `Could not find a matching route for errors on route IDs: ${Object.keys(
-          errors
+          errors2
         ).join(",")}`
       );
       renderedMatches = renderedMatches.slice(
@@ -21336,14 +22306,14 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     let renderFallback = false;
     let fallbackIndex = -1;
     if (dataRouterState) {
-      for (let i = 0; i < renderedMatches.length; i++) {
-        let match = renderedMatches[i];
+      for (let i2 = 0; i2 < renderedMatches.length; i2++) {
+        let match = renderedMatches[i2];
         if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
-          fallbackIndex = i;
+          fallbackIndex = i2;
         }
         if (match.route.id) {
-          let { loaderData, errors: errors2 } = dataRouterState;
-          let needsToRunLoader = match.route.loader && !loaderData.hasOwnProperty(match.route.id) && (!errors2 || errors2[match.route.id] === void 0);
+          let { loaderData, errors: errors22 } = dataRouterState;
+          let needsToRunLoader = match.route.loader && !loaderData.hasOwnProperty(match.route.id) && (!errors22 || errors22[match.route.id] === void 0);
           if (match.route.lazy || needsToRunLoader) {
             renderFallback = true;
             if (fallbackIndex >= 0) {
@@ -21363,7 +22333,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         let errorElement = null;
         let hydrateFallbackElement = null;
         if (dataRouterState) {
-          error = errors && match.route.id ? errors[match.route.id] : void 0;
+          error = errors2 && match.route.id ? errors2[match.route.id] : void 0;
           errorElement = match.route.errorElement || defaultErrorElement;
           if (renderFallback) {
             if (fallbackIndex < 0 && index === 0) {
@@ -21469,7 +22439,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       /* UseMatches */
     );
     return React22.useMemo(
-      () => matches.map((m) => convertRouteMatchToUiMatch(m, loaderData)),
+      () => matches.map((m2) => convertRouteMatchToUiMatch(m2, loaderData)),
       [matches, loaderData]
     );
   }
@@ -21620,7 +22590,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           0
         );
         _formDataSupportsSubmitter = false;
-      } catch (e) {
+      } catch (e2) {
         _formDataSupportsSubmitter = true;
       }
     }
@@ -22023,17 +22993,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
       let routesParams = /* @__PURE__ */ new Set();
       let foundOptOutRoute = false;
-      nextMatches.forEach((m) => {
-        let manifestRoute = manifest.routes[m.route.id];
+      nextMatches.forEach((m2) => {
+        let manifestRoute = manifest.routes[m2.route.id];
         if (!manifestRoute || !manifestRoute.hasLoader) {
           return;
         }
-        if (!newMatchesForData.some((m2) => m2.route.id === m.route.id) && m.route.id in loaderData && routeModules[m.route.id]?.shouldRevalidate) {
+        if (!newMatchesForData.some((m22) => m22.route.id === m2.route.id) && m2.route.id in loaderData && routeModules[m2.route.id]?.shouldRevalidate) {
           foundOptOutRoute = true;
         } else if (manifestRoute.hasClientLoader) {
           foundOptOutRoute = true;
         } else {
-          routesParams.add(m.route.id);
+          routesParams.add(m2.route.id);
         }
       });
       if (routesParams.size === 0) {
@@ -22043,7 +23013,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       if (foundOptOutRoute && routesParams.size > 0) {
         url.searchParams.set(
           "_routes",
-          nextMatches.filter((m) => routesParams.has(m.route.id)).map((m) => m.route.id).join(",")
+          nextMatches.filter((m2) => routesParams.has(m2.route.id)).map((m2) => m2.route.id).join(",")
         );
       }
       return [url.pathname + url.search];
@@ -22085,7 +23055,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       window.__reactRouterVersion = // @ts-expect-error
       "7.8.2";
     }
-  } catch (e) {
+  } catch (e2) {
   }
   function BrowserRouter({
     basename,
@@ -22179,7 +23149,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             } else {
               isExternal = true;
             }
-          } catch (e) {
+          } catch (e2) {
             warning(
               false,
               `<Link to="${to}"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.`
@@ -22507,10 +23477,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       path.search = location.search;
       let params = new URLSearchParams(path.search);
       let indexValues = params.getAll("index");
-      let hasNakedIndexParam = indexValues.some((v) => v === "");
+      let hasNakedIndexParam = indexValues.some((v2) => v2 === "");
       if (hasNakedIndexParam) {
         params.delete("index");
-        indexValues.filter((v) => v).forEach((v) => params.append("index", v));
+        indexValues.filter((v2) => v2).forEach((v2) => params.append("index", v2));
         let qs = params.toString();
         path.search = qs ? `?${qs}` : "";
       }
@@ -22596,7 +23566,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           if (sessionPositions) {
             savedScrollPositions = JSON.parse(sessionPositions);
           }
-        } catch (e) {
+        } catch (e2) {
         }
       }, [storageKey]);
       React10.useLayoutEffect(() => {
@@ -22669,15 +23639,2594 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
   }
 
+  // src/App.js
+  var import_react31 = __toESM(require_react());
+
+  // src/components/AuthModal.js
+  var import_react9 = __toESM(require_react());
+
+  // src/components/InputField.js
+  var import_react7 = __toESM(require_react());
+
+  // src/utils/showMessage.js
+  var showMessage = (message, type = "info") => {
+    let messageBox = document.getElementById("message-box");
+    if (!messageBox) {
+      messageBox = document.createElement("div");
+      messageBox.id = "message-box";
+      document.body.appendChild(messageBox);
+    }
+    messageBox.textContent = message;
+    messageBox.className = `fixed bottom-4 right-4 p-4 rounded-lg shadow-lg text-white z-50 transition-opacity duration-300 `;
+    if (type === "success") {
+      messageBox.classList.add("bg-green-500");
+    } else if (type === "error") {
+      messageBox.classList.add("bg-red-500");
+    } else {
+      messageBox.classList.add("bg-blue-500");
+    }
+    messageBox.classList.remove("opacity-0");
+    messageBox.classList.add("opacity-100");
+    setTimeout(() => {
+      messageBox.classList.remove("opacity-100");
+      messageBox.classList.add("opacity-0");
+    }, 3e3);
+  };
+  var showMessage_default = showMessage;
+
+  // src/context/AuthContext.js
+  var import_react8 = __toESM(require_react());
+  var import_prop_types3 = __toESM(require_prop_types());
+  var AuthContext = (0, import_react8.createContext)(null);
+  var useAppwrite = () => {
+    const [client, setClient] = (0, import_react8.useState)(null);
+    const [account, setAccount] = (0, import_react8.useState)(null);
+    const [database, setDatabase] = (0, import_react8.useState)(null);
+    const [storage2, setStorage] = (0, import_react8.useState)(null);
+    const [currentUser, setCurrentUser] = (0, import_react8.useState)(null);
+    const [isLoading, setIsLoading] = (0, import_react8.useState)(true);
+    const [error, setError] = (0, import_react8.useState)(null);
+    const APPWRITE_PROJECT_ID = process.env.REACT_APP_APPWRITE_PROJECT_ID;
+    const APPWRITE_ENDPOINT = process.env.REACT_APP_APPWRITE_ENDPOINT;
+    (0, import_react8.useEffect)(() => {
+      if (typeof window.Appwrite === "undefined" || !APPWRITE_PROJECT_ID || !APPWRITE_ENDPOINT) {
+        console.error("Appwrite SDK or environment variables are not set. Please ensure the Appwrite SDK is loaded via a script tag and check your .env file.");
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const appwriteClient = new window.Appwrite.Client().setEndpoint(APPWRITE_ENDPOINT).setProject(APPWRITE_PROJECT_ID);
+        const appwriteAccount = new window.Appwrite.Account(appwriteClient);
+        const appwriteDatabase = new window.Appwrite.Databases(appwriteClient);
+        const appwriteStorage = new window.Appwrite.Storage(appwriteClient);
+        setClient(appwriteClient);
+        setAccount(appwriteAccount);
+        setDatabase(appwriteDatabase);
+        setStorage(appwriteStorage);
+        const checkUserSession = async () => {
+          try {
+            const loggedInUser = await appwriteAccount.get();
+            setCurrentUser(loggedInUser);
+          } catch (err) {
+            console.log("No active Appwrite session:", err.message);
+            setCurrentUser(null);
+          } finally {
+            setIsLoading(false);
+          }
+        };
+        checkUserSession();
+      } catch (err) {
+        console.error("Error initializing Appwrite services:", err);
+        setIsLoading(false);
+      }
+    }, [APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID]);
+    const handleAuthAction = (0, import_react8.useCallback)(async (action) => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const result = await action();
+        setIsLoading(false);
+        return result;
+      } catch (err) {
+        console.error("Appwrite auth error:", err);
+        setError(err.message || "An unknown error occurred.");
+        setIsLoading(false);
+        throw err;
+      }
+    }, []);
+    const signUp = (0, import_react8.useCallback)(async (email, password, name) => {
+      if (!account) {
+        throw new Error("Appwrite Account not initialized.");
+      }
+      return handleAuthAction(async () => {
+        const user = await account.create(window.Appwrite.ID.unique(), email, password, name);
+        await account.createEmailSession(email, password);
+        const loggedInUser = await account.get();
+        setCurrentUser(loggedInUser);
+        return loggedInUser;
+      });
+    }, [account, handleAuthAction]);
+    const signIn = (0, import_react8.useCallback)(async (email, password) => {
+      if (!account) {
+        throw new Error("Appwrite Account not initialized.");
+      }
+      return handleAuthAction(async () => {
+        await account.createEmailSession(email, password);
+        const loggedInUser = await account.get();
+        setCurrentUser(loggedInUser);
+        return loggedInUser;
+      });
+    }, [account, handleAuthAction]);
+    const signOut = (0, import_react8.useCallback)(async () => {
+      if (!account) {
+        throw new Error("Appwrite Account not initialized.");
+      }
+      return handleAuthAction(async () => {
+        await account.deleteSession("current");
+        setCurrentUser(null);
+      });
+    }, [account, handleAuthAction]);
+    const value = (0, import_react8.useMemo)(() => ({
+      client,
+      account,
+      database,
+      storage: storage2,
+      currentUser,
+      userId: currentUser ? currentUser.$id : null,
+      isLoading,
+      error,
+      signIn,
+      signUp,
+      signOut,
+      ID: window.Appwrite.ID,
+      // userRole would need to be fetched separately, for now it's a placeholder
+      userRole: null
+    }), [client, account, database, storage2, currentUser, isLoading, error, signIn, signUp, signOut]);
+    return value;
+  };
+  var AuthProvider = ({ children }) => {
+    const {
+      currentUser,
+      userId,
+      isLoading,
+      error,
+      signIn,
+      signUp,
+      signOut,
+      userRole
+    } = useAppwrite();
+    const contextValue = (0, import_react8.useMemo)(() => ({
+      currentUser,
+      userId,
+      isLoading,
+      error,
+      signIn,
+      signUp,
+      signOut,
+      userRole,
+      // Helper for role-based access control
+      isAdmin: userRole === "admin"
+    }), [currentUser, userId, isLoading, error, signIn, signUp, signOut, userRole]);
+    return /* @__PURE__ */ import_react8.default.createElement(AuthContext.Provider, { value: contextValue }, children);
+  };
+  AuthProvider.propTypes = {
+    children: import_prop_types3.default.node.isRequired
+  };
+  var useAuth = () => {
+    const context = (0, import_react8.useContext)(AuthContext);
+    if (context === void 0) {
+      throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
+  };
+
+  // src/views/ProductsView.js
+  var import_react12 = __toESM(require_react());
+
+  // src/context/CartContext.js
+  var import_react10 = __toESM(require_react());
+  var import_prop_types4 = __toESM(require_prop_types());
+  var CartContext = (0, import_react10.createContext)();
+  var CartProvider = ({ children }) => {
+    const [cartItems, setCartItems] = (0, import_react10.useState)([]);
+    const [error, setError] = (0, import_react10.useState)(null);
+    const handleCartError = (0, import_react10.useCallback)((message) => {
+      setError(message);
+      showMessage_default(message, "error");
+    }, []);
+    const handleAddToCart = (0, import_react10.useCallback)((product) => {
+      try {
+        setCartItems((prevItems) => {
+          const existingItem = prevItems.find((item) => item.id === product.id);
+          if (existingItem) {
+            return prevItems.map(
+              (item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+          } else {
+            return [...prevItems, { ...product, quantity: 1 }];
+          }
+        });
+        showMessage_default(`${product.name} added to cart!`, "success");
+      } catch (err) {
+        handleCartError(err.message);
+      }
+    }, [handleCartError]);
+    const handleRemoveFromCart = (0, import_react10.useCallback)((productId) => {
+      setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+      showMessage_default("Item removed from cart.", "info");
+    }, []);
+    const handleUpdateQuantity = (0, import_react10.useCallback)((productId, quantity) => {
+      setCartItems(
+        (prevItems) => prevItems.map(
+          (item) => item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
+        )
+      );
+    }, []);
+    const clearCart = (0, import_react10.useCallback)(() => {
+      setCartItems([]);
+      showMessage_default("Cart cleared.", "info");
+    }, []);
+    const handleCheckout = (0, import_react10.useCallback)(() => {
+      showMessage_default("Proceeding to checkout!", "info");
+      clearCart();
+    }, [clearCart]);
+    const getTotalPrice = (0, import_react10.useCallback)(() => {
+      return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    }, [cartItems]);
+    const contextValue = (0, import_react10.useMemo)(() => ({
+      cartItems,
+      cartItemCount: cartItems.reduce((total, item) => total + item.quantity, 0),
+      cartTotal: getTotalPrice(),
+      handleAddToCart,
+      handleRemoveFromCart,
+      handleUpdateQuantity,
+      handleCheckout,
+      clearCart,
+      getTotalPrice,
+      error
+    }), [
+      cartItems,
+      handleAddToCart,
+      handleRemoveFromCart,
+      handleUpdateQuantity,
+      handleCheckout,
+      clearCart,
+      getTotalPrice,
+      error
+    ]);
+    return /* @__PURE__ */ import_react10.default.createElement(CartContext.Provider, { value: contextValue }, children);
+  };
+  CartProvider.propTypes = {
+    children: import_prop_types4.default.node.isRequired
+  };
+  var useCart = () => {
+    const context = (0, import_react10.useContext)(CartContext);
+    if (context === void 0) {
+      throw new Error("useCart must be used within a CartProvider");
+    }
+    return context;
+  };
+
+  // src/hooks/useAppwrite.js
+  var import_react11 = __toESM(require_react());
+  var AppwriteContext = (0, import_react11.createContext)(null);
+  var useAppwriteContext = () => {
+    const context = (0, import_react11.useContext)(AppwriteContext);
+    if (context === void 0) {
+      throw new Error("useAppwriteContext must be used within an AppwriteProvider");
+    }
+    return context;
+  };
+
+  // node_modules/appwrite/dist/esm/sdk.js
+  function __awaiter(thisArg, _arguments, P2, generator) {
+    function adopt(value) {
+      return value instanceof P2 ? value : new P2(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P2 || (P2 = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e2) {
+          reject(e2);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e2) {
+          reject(e2);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __classPrivateFieldGet(receiver, state, kind, f3) {
+    if (kind === "a" && !f3) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f3 : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f3 : kind === "a" ? f3.call(receiver) : f3 ? f3.value : state.get(receiver);
+  }
+  var Query = class {
+    /**
+     * Constructor for Query class.
+     *
+     * @param {string} method
+     * @param {AttributesTypes} attribute
+     * @param {QueryTypes} values
+     */
+    constructor(method, attribute, values) {
+      this.method = method;
+      this.attribute = attribute;
+      if (values !== void 0) {
+        if (Array.isArray(values)) {
+          this.values = values;
+        } else {
+          this.values = [values];
+        }
+      }
+    }
+    /**
+     * Convert the query object to a JSON string.
+     *
+     * @returns {string}
+     */
+    toString() {
+      return JSON.stringify({
+        method: this.method,
+        attribute: this.attribute,
+        values: this.values
+      });
+    }
+  };
+  Query.equal = (attribute, value) => new Query("equal", attribute, value).toString();
+  Query.notEqual = (attribute, value) => new Query("notEqual", attribute, value).toString();
+  Query.lessThan = (attribute, value) => new Query("lessThan", attribute, value).toString();
+  Query.lessThanEqual = (attribute, value) => new Query("lessThanEqual", attribute, value).toString();
+  Query.greaterThan = (attribute, value) => new Query("greaterThan", attribute, value).toString();
+  Query.greaterThanEqual = (attribute, value) => new Query("greaterThanEqual", attribute, value).toString();
+  Query.isNull = (attribute) => new Query("isNull", attribute).toString();
+  Query.isNotNull = (attribute) => new Query("isNotNull", attribute).toString();
+  Query.between = (attribute, start, end) => new Query("between", attribute, [start, end]).toString();
+  Query.startsWith = (attribute, value) => new Query("startsWith", attribute, value).toString();
+  Query.endsWith = (attribute, value) => new Query("endsWith", attribute, value).toString();
+  Query.select = (attributes) => new Query("select", void 0, attributes).toString();
+  Query.search = (attribute, value) => new Query("search", attribute, value).toString();
+  Query.orderDesc = (attribute) => new Query("orderDesc", attribute).toString();
+  Query.orderAsc = (attribute) => new Query("orderAsc", attribute).toString();
+  Query.cursorAfter = (documentId) => new Query("cursorAfter", void 0, documentId).toString();
+  Query.cursorBefore = (documentId) => new Query("cursorBefore", void 0, documentId).toString();
+  Query.limit = (limit) => new Query("limit", void 0, limit).toString();
+  Query.offset = (offset) => new Query("offset", void 0, offset).toString();
+  Query.contains = (attribute, value) => new Query("contains", attribute, value).toString();
+  Query.or = (queries) => new Query("or", void 0, queries.map((query) => JSON.parse(query))).toString();
+  Query.and = (queries) => new Query("and", void 0, queries.map((query) => JSON.parse(query))).toString();
+  var AppwriteException = class extends Error {
+    /**
+     * Initializes a Appwrite Exception.
+     *
+     * @param {string} message - The error message.
+     * @param {number} code - The error code. Default is 0.
+     * @param {string} type - The error type. Default is an empty string.
+     * @param {string} response - The response string. Default is an empty string.
+     */
+    constructor(message, code = 0, type = "", response = "") {
+      super(message);
+      this.name = "AppwriteException";
+      this.message = message;
+      this.code = code;
+      this.type = type;
+      this.response = response;
+    }
+  };
+  var Client = class _Client {
+    constructor() {
+      this.config = {
+        endpoint: "https://cloud.appwrite.io/v1",
+        endpointRealtime: "",
+        project: "",
+        jwt: "",
+        locale: "",
+        session: "",
+        devkey: ""
+      };
+      this.headers = {
+        "x-sdk-name": "Web",
+        "x-sdk-platform": "client",
+        "x-sdk-language": "web",
+        "x-sdk-version": "18.1.1",
+        "X-Appwrite-Response-Format": "1.7.0"
+      };
+      this.realtime = {
+        socket: void 0,
+        timeout: void 0,
+        heartbeat: void 0,
+        url: "",
+        channels: /* @__PURE__ */ new Set(),
+        subscriptions: /* @__PURE__ */ new Map(),
+        subscriptionsCounter: 0,
+        reconnect: true,
+        reconnectAttempts: 0,
+        lastMessage: void 0,
+        connect: () => {
+          clearTimeout(this.realtime.timeout);
+          this.realtime.timeout = window === null || window === void 0 ? void 0 : window.setTimeout(() => {
+            this.realtime.createSocket();
+          }, 50);
+        },
+        getTimeout: () => {
+          switch (true) {
+            case this.realtime.reconnectAttempts < 5:
+              return 1e3;
+            case this.realtime.reconnectAttempts < 15:
+              return 5e3;
+            case this.realtime.reconnectAttempts < 100:
+              return 1e4;
+            default:
+              return 6e4;
+          }
+        },
+        createHeartbeat: () => {
+          if (this.realtime.heartbeat) {
+            clearTimeout(this.realtime.heartbeat);
+          }
+          this.realtime.heartbeat = window === null || window === void 0 ? void 0 : window.setInterval(() => {
+            var _a2;
+            (_a2 = this.realtime.socket) === null || _a2 === void 0 ? void 0 : _a2.send(JSON.stringify({
+              type: "ping"
+            }));
+          }, 2e4);
+        },
+        createSocket: () => {
+          var _a2, _b, _c;
+          if (this.realtime.channels.size < 1) {
+            this.realtime.reconnect = false;
+            (_a2 = this.realtime.socket) === null || _a2 === void 0 ? void 0 : _a2.close();
+            return;
+          }
+          const channels = new URLSearchParams();
+          channels.set("project", this.config.project);
+          this.realtime.channels.forEach((channel) => {
+            channels.append("channels[]", channel);
+          });
+          const url = this.config.endpointRealtime + "/realtime?" + channels.toString();
+          if (url !== this.realtime.url || // Check if URL is present
+          !this.realtime.socket || // Check if WebSocket has not been created
+          ((_b = this.realtime.socket) === null || _b === void 0 ? void 0 : _b.readyState) > WebSocket.OPEN) {
+            if (this.realtime.socket && ((_c = this.realtime.socket) === null || _c === void 0 ? void 0 : _c.readyState) < WebSocket.CLOSING) {
+              this.realtime.reconnect = false;
+              this.realtime.socket.close();
+            }
+            this.realtime.url = url;
+            this.realtime.socket = new WebSocket(url);
+            this.realtime.socket.addEventListener("message", this.realtime.onMessage);
+            this.realtime.socket.addEventListener("open", (_event) => {
+              this.realtime.reconnectAttempts = 0;
+              this.realtime.createHeartbeat();
+            });
+            this.realtime.socket.addEventListener("close", (event) => {
+              var _a3, _b2, _c2;
+              if (!this.realtime.reconnect || ((_b2 = (_a3 = this.realtime) === null || _a3 === void 0 ? void 0 : _a3.lastMessage) === null || _b2 === void 0 ? void 0 : _b2.type) === "error" && // Check if last message was of type error
+              ((_c2 = this.realtime) === null || _c2 === void 0 ? void 0 : _c2.lastMessage.data).code === 1008) {
+                this.realtime.reconnect = true;
+                return;
+              }
+              const timeout = this.realtime.getTimeout();
+              console.error(`Realtime got disconnected. Reconnect will be attempted in ${timeout / 1e3} seconds.`, event.reason);
+              setTimeout(() => {
+                this.realtime.reconnectAttempts++;
+                this.realtime.createSocket();
+              }, timeout);
+            });
+          }
+        },
+        onMessage: (event) => {
+          var _a2, _b;
+          try {
+            const message = JSON.parse(event.data);
+            this.realtime.lastMessage = message;
+            switch (message.type) {
+              case "connected":
+                const cookie = JSON.parse((_a2 = window.localStorage.getItem("cookieFallback")) !== null && _a2 !== void 0 ? _a2 : "{}");
+                const session = cookie === null || cookie === void 0 ? void 0 : cookie[`a_session_${this.config.project}`];
+                const messageData = message.data;
+                if (session && !messageData.user) {
+                  (_b = this.realtime.socket) === null || _b === void 0 ? void 0 : _b.send(JSON.stringify({
+                    type: "authentication",
+                    data: {
+                      session
+                    }
+                  }));
+                }
+                break;
+              case "event":
+                let data2 = message.data;
+                if (data2 === null || data2 === void 0 ? void 0 : data2.channels) {
+                  const isSubscribed = data2.channels.some((channel) => this.realtime.channels.has(channel));
+                  if (!isSubscribed)
+                    return;
+                  this.realtime.subscriptions.forEach((subscription) => {
+                    if (data2.channels.some((channel) => subscription.channels.includes(channel))) {
+                      setTimeout(() => subscription.callback(data2));
+                    }
+                  });
+                }
+                break;
+              case "pong":
+                break;
+              // Handle pong response if needed
+              case "error":
+                throw message.data;
+              default:
+                break;
+            }
+          } catch (e2) {
+            console.error(e2);
+          }
+        },
+        cleanUp: (channels) => {
+          this.realtime.channels.forEach((channel) => {
+            if (channels.includes(channel)) {
+              let found = Array.from(this.realtime.subscriptions).some(([_key, subscription]) => {
+                return subscription.channels.includes(channel);
+              });
+              if (!found) {
+                this.realtime.channels.delete(channel);
+              }
+            }
+          });
+        }
+      };
+    }
+    /**
+     * Set Endpoint
+     *
+     * Your project endpoint
+     *
+     * @param {string} endpoint
+     *
+     * @returns {this}
+     */
+    setEndpoint(endpoint) {
+      if (!endpoint.startsWith("http://") && !endpoint.startsWith("https://")) {
+        throw new AppwriteException("Invalid endpoint URL: " + endpoint);
+      }
+      this.config.endpoint = endpoint;
+      this.config.endpointRealtime = endpoint.replace("https://", "wss://").replace("http://", "ws://");
+      return this;
+    }
+    /**
+     * Set Realtime Endpoint
+     *
+     * @param {string} endpointRealtime
+     *
+     * @returns {this}
+     */
+    setEndpointRealtime(endpointRealtime) {
+      if (!endpointRealtime.startsWith("ws://") && !endpointRealtime.startsWith("wss://")) {
+        throw new AppwriteException("Invalid realtime endpoint URL: " + endpointRealtime);
+      }
+      this.config.endpointRealtime = endpointRealtime;
+      return this;
+    }
+    /**
+     * Set Project
+     *
+     * Your project ID
+     *
+     * @param value string
+     *
+     * @return {this}
+     */
+    setProject(value) {
+      this.headers["X-Appwrite-Project"] = value;
+      this.config.project = value;
+      return this;
+    }
+    /**
+     * Set JWT
+     *
+     * Your secret JSON Web Token
+     *
+     * @param value string
+     *
+     * @return {this}
+     */
+    setJWT(value) {
+      this.headers["X-Appwrite-JWT"] = value;
+      this.config.jwt = value;
+      return this;
+    }
+    /**
+     * Set Locale
+     *
+     * @param value string
+     *
+     * @return {this}
+     */
+    setLocale(value) {
+      this.headers["X-Appwrite-Locale"] = value;
+      this.config.locale = value;
+      return this;
+    }
+    /**
+     * Set Session
+     *
+     * The user session to authenticate with
+     *
+     * @param value string
+     *
+     * @return {this}
+     */
+    setSession(value) {
+      this.headers["X-Appwrite-Session"] = value;
+      this.config.session = value;
+      return this;
+    }
+    /**
+     * Set DevKey
+     *
+     * Your secret dev API key
+     *
+     * @param value string
+     *
+     * @return {this}
+     */
+    setDevKey(value) {
+      this.headers["X-Appwrite-Dev-Key"] = value;
+      this.config.devkey = value;
+      return this;
+    }
+    /**
+     * Subscribes to Appwrite events and passes you the payload in realtime.
+     *
+     * @param {string|string[]} channels
+     * Channel to subscribe - pass a single channel as a string or multiple with an array of strings.
+     *
+     * Possible channels are:
+     * - account
+     * - collections
+     * - collections.[ID]
+     * - collections.[ID].documents
+     * - documents
+     * - documents.[ID]
+     * - files
+     * - files.[ID]
+     * - executions
+     * - executions.[ID]
+     * - functions.[ID]
+     * - teams
+     * - teams.[ID]
+     * - memberships
+     * - memberships.[ID]
+     * @param {(payload: RealtimeMessage) => void} callback Is called on every realtime update.
+     * @returns {() => void} Unsubscribes from events.
+     */
+    subscribe(channels, callback) {
+      let channelArray = typeof channels === "string" ? [channels] : channels;
+      channelArray.forEach((channel) => this.realtime.channels.add(channel));
+      const counter = this.realtime.subscriptionsCounter++;
+      this.realtime.subscriptions.set(counter, {
+        channels: channelArray,
+        callback
+      });
+      this.realtime.connect();
+      return () => {
+        this.realtime.subscriptions.delete(counter);
+        this.realtime.cleanUp(channelArray);
+        this.realtime.connect();
+      };
+    }
+    prepareRequest(method, url, headers = {}, params = {}) {
+      method = method.toUpperCase();
+      headers = Object.assign({}, this.headers, headers);
+      if (typeof window !== "undefined" && window.localStorage) {
+        const cookieFallback = window.localStorage.getItem("cookieFallback");
+        if (cookieFallback) {
+          headers["X-Fallback-Cookies"] = cookieFallback;
+        }
+      }
+      let options = {
+        method,
+        headers
+      };
+      if (headers["X-Appwrite-Dev-Key"] === void 0) {
+        options.credentials = "include";
+      }
+      if (method === "GET") {
+        for (const [key, value] of Object.entries(_Client.flatten(params))) {
+          url.searchParams.append(key, value);
+        }
+      } else {
+        switch (headers["content-type"]) {
+          case "application/json":
+            options.body = JSON.stringify(params);
+            break;
+          case "multipart/form-data":
+            const formData = new FormData();
+            for (const [key, value] of Object.entries(params)) {
+              if (value instanceof File) {
+                formData.append(key, value, value.name);
+              } else if (Array.isArray(value)) {
+                for (const nestedValue of value) {
+                  formData.append(`${key}[]`, nestedValue);
+                }
+              } else {
+                formData.append(key, value);
+              }
+            }
+            options.body = formData;
+            delete headers["content-type"];
+            break;
+        }
+      }
+      return { uri: url.toString(), options };
+    }
+    chunkedUpload(method, url, headers = {}, originalPayload = {}, onProgress) {
+      return __awaiter(this, void 0, void 0, function* () {
+        const file = Object.values(originalPayload).find((value) => value instanceof File);
+        if (!file) {
+          throw new Error("File not found in payload");
+        }
+        if (file.size <= _Client.CHUNK_SIZE) {
+          return yield this.call(method, url, headers, originalPayload);
+        }
+        let start = 0;
+        let response = null;
+        while (start < file.size) {
+          let end = start + _Client.CHUNK_SIZE;
+          if (end >= file.size) {
+            end = file.size;
+          }
+          headers["content-range"] = `bytes ${start}-${end - 1}/${file.size}`;
+          const chunk = file.slice(start, end);
+          let payload = Object.assign(Object.assign({}, originalPayload), { file: new File([chunk], file.name) });
+          response = yield this.call(method, url, headers, payload);
+          if (onProgress && typeof onProgress === "function") {
+            onProgress({
+              $id: response.$id,
+              progress: Math.round(end / file.size * 100),
+              sizeUploaded: end,
+              chunksTotal: Math.ceil(file.size / _Client.CHUNK_SIZE),
+              chunksUploaded: Math.ceil(end / _Client.CHUNK_SIZE)
+            });
+          }
+          if (response && response.$id) {
+            headers["x-appwrite-id"] = response.$id;
+          }
+          start = end;
+        }
+        return response;
+      });
+    }
+    ping() {
+      return __awaiter(this, void 0, void 0, function* () {
+        return this.call("GET", new URL(this.config.endpoint + "/ping"));
+      });
+    }
+    call(method, url, headers = {}, params = {}, responseType = "json") {
+      var _a2, _b;
+      return __awaiter(this, void 0, void 0, function* () {
+        const { uri, options } = this.prepareRequest(method, url, headers, params);
+        let data2 = null;
+        const response = yield fetch(uri, options);
+        if (response.type === "opaque") {
+          throw new AppwriteException(`Invalid Origin. Register your new client (${window.location.host}) as a new Web platform on your project console dashboard`, 403, "forbidden", "");
+        }
+        const warnings = response.headers.get("x-appwrite-warning");
+        if (warnings) {
+          warnings.split(";").forEach((warning2) => console.warn("Warning: " + warning2));
+        }
+        if ((_a2 = response.headers.get("content-type")) === null || _a2 === void 0 ? void 0 : _a2.includes("application/json")) {
+          data2 = yield response.json();
+        } else if (responseType === "arrayBuffer") {
+          data2 = yield response.arrayBuffer();
+        } else {
+          data2 = {
+            message: yield response.text()
+          };
+        }
+        if (400 <= response.status) {
+          let responseText = "";
+          if (((_b = response.headers.get("content-type")) === null || _b === void 0 ? void 0 : _b.includes("application/json")) || responseType === "arrayBuffer") {
+            responseText = JSON.stringify(data2);
+          } else {
+            responseText = data2 === null || data2 === void 0 ? void 0 : data2.message;
+          }
+          throw new AppwriteException(data2 === null || data2 === void 0 ? void 0 : data2.message, response.status, data2 === null || data2 === void 0 ? void 0 : data2.type, responseText);
+        }
+        const cookieFallback = response.headers.get("X-Fallback-Cookies");
+        if (typeof window !== "undefined" && window.localStorage && cookieFallback) {
+          window.console.warn("Appwrite is using localStorage for session management. Increase your security by adding a custom domain as your API endpoint.");
+          window.localStorage.setItem("cookieFallback", cookieFallback);
+        }
+        return data2;
+      });
+    }
+    static flatten(data2, prefix = "") {
+      let output = {};
+      for (const [key, value] of Object.entries(data2)) {
+        let finalKey = prefix ? prefix + "[" + key + "]" : key;
+        if (Array.isArray(value)) {
+          output = Object.assign(Object.assign({}, output), _Client.flatten(value, finalKey));
+        } else {
+          output[finalKey] = value;
+        }
+      }
+      return output;
+    }
+  };
+  Client.CHUNK_SIZE = 1024 * 1024 * 5;
+  var Service = class _Service {
+    constructor(client) {
+      this.client = client;
+    }
+    static flatten(data2, prefix = "") {
+      let output = {};
+      for (const [key, value] of Object.entries(data2)) {
+        let finalKey = prefix ? prefix + "[" + key + "]" : key;
+        if (Array.isArray(value)) {
+          output = Object.assign(Object.assign({}, output), _Service.flatten(value, finalKey));
+        } else {
+          output[finalKey] = value;
+        }
+      }
+      return output;
+    }
+  };
+  Service.CHUNK_SIZE = 5 * 1024 * 1024;
+  var Permission = class {
+  };
+  Permission.read = (role) => {
+    return `read("${role}")`;
+  };
+  Permission.write = (role) => {
+    return `write("${role}")`;
+  };
+  Permission.create = (role) => {
+    return `create("${role}")`;
+  };
+  Permission.update = (role) => {
+    return `update("${role}")`;
+  };
+  Permission.delete = (role) => {
+    return `delete("${role}")`;
+  };
+  var _a;
+  var _ID_hexTimestamp;
+  var ID2 = class _ID {
+    /**
+     * Uses the provided ID as the ID for the resource.
+     *
+     * @param {string} id
+     * @returns {string}
+     */
+    static custom(id) {
+      return id;
+    }
+    /**
+     * Have Appwrite generate a unique ID for you.
+     *
+     * @param {number} padding. Default is 7.
+     * @returns {string}
+     */
+    static unique(padding = 7) {
+      const baseId = __classPrivateFieldGet(_ID, _a, "m", _ID_hexTimestamp).call(_ID);
+      let randomPadding = "";
+      for (let i2 = 0; i2 < padding; i2++) {
+        const randomHexDigit = Math.floor(Math.random() * 16).toString(16);
+        randomPadding += randomHexDigit;
+      }
+      return baseId + randomPadding;
+    }
+  };
+  _a = ID2, _ID_hexTimestamp = function _ID_hexTimestamp2() {
+    const now = /* @__PURE__ */ new Date();
+    const sec = Math.floor(now.getTime() / 1e3);
+    const msec = now.getMilliseconds();
+    const hexTimestamp = sec.toString(16) + msec.toString(16).padStart(5, "0");
+    return hexTimestamp;
+  };
+  var AuthenticatorType;
+  (function(AuthenticatorType2) {
+    AuthenticatorType2["Totp"] = "totp";
+  })(AuthenticatorType || (AuthenticatorType = {}));
+  var AuthenticationFactor;
+  (function(AuthenticationFactor2) {
+    AuthenticationFactor2["Email"] = "email";
+    AuthenticationFactor2["Phone"] = "phone";
+    AuthenticationFactor2["Totp"] = "totp";
+    AuthenticationFactor2["Recoverycode"] = "recoverycode";
+  })(AuthenticationFactor || (AuthenticationFactor = {}));
+  var OAuthProvider;
+  (function(OAuthProvider2) {
+    OAuthProvider2["Amazon"] = "amazon";
+    OAuthProvider2["Apple"] = "apple";
+    OAuthProvider2["Auth0"] = "auth0";
+    OAuthProvider2["Authentik"] = "authentik";
+    OAuthProvider2["Autodesk"] = "autodesk";
+    OAuthProvider2["Bitbucket"] = "bitbucket";
+    OAuthProvider2["Bitly"] = "bitly";
+    OAuthProvider2["Box"] = "box";
+    OAuthProvider2["Dailymotion"] = "dailymotion";
+    OAuthProvider2["Discord"] = "discord";
+    OAuthProvider2["Disqus"] = "disqus";
+    OAuthProvider2["Dropbox"] = "dropbox";
+    OAuthProvider2["Etsy"] = "etsy";
+    OAuthProvider2["Facebook"] = "facebook";
+    OAuthProvider2["Figma"] = "figma";
+    OAuthProvider2["Github"] = "github";
+    OAuthProvider2["Gitlab"] = "gitlab";
+    OAuthProvider2["Google"] = "google";
+    OAuthProvider2["Linkedin"] = "linkedin";
+    OAuthProvider2["Microsoft"] = "microsoft";
+    OAuthProvider2["Notion"] = "notion";
+    OAuthProvider2["Oidc"] = "oidc";
+    OAuthProvider2["Okta"] = "okta";
+    OAuthProvider2["Paypal"] = "paypal";
+    OAuthProvider2["PaypalSandbox"] = "paypalSandbox";
+    OAuthProvider2["Podio"] = "podio";
+    OAuthProvider2["Salesforce"] = "salesforce";
+    OAuthProvider2["Slack"] = "slack";
+    OAuthProvider2["Spotify"] = "spotify";
+    OAuthProvider2["Stripe"] = "stripe";
+    OAuthProvider2["Tradeshift"] = "tradeshift";
+    OAuthProvider2["TradeshiftBox"] = "tradeshiftBox";
+    OAuthProvider2["Twitch"] = "twitch";
+    OAuthProvider2["Wordpress"] = "wordpress";
+    OAuthProvider2["Yahoo"] = "yahoo";
+    OAuthProvider2["Yammer"] = "yammer";
+    OAuthProvider2["Yandex"] = "yandex";
+    OAuthProvider2["Zoho"] = "zoho";
+    OAuthProvider2["Zoom"] = "zoom";
+    OAuthProvider2["Mock"] = "mock";
+  })(OAuthProvider || (OAuthProvider = {}));
+  var Browser;
+  (function(Browser2) {
+    Browser2["AvantBrowser"] = "aa";
+    Browser2["AndroidWebViewBeta"] = "an";
+    Browser2["GoogleChrome"] = "ch";
+    Browser2["GoogleChromeIOS"] = "ci";
+    Browser2["GoogleChromeMobile"] = "cm";
+    Browser2["Chromium"] = "cr";
+    Browser2["MozillaFirefox"] = "ff";
+    Browser2["Safari"] = "sf";
+    Browser2["MobileSafari"] = "mf";
+    Browser2["MicrosoftEdge"] = "ps";
+    Browser2["MicrosoftEdgeIOS"] = "oi";
+    Browser2["OperaMini"] = "om";
+    Browser2["Opera"] = "op";
+    Browser2["OperaNext"] = "on";
+  })(Browser || (Browser = {}));
+  var CreditCard;
+  (function(CreditCard2) {
+    CreditCard2["AmericanExpress"] = "amex";
+    CreditCard2["Argencard"] = "argencard";
+    CreditCard2["Cabal"] = "cabal";
+    CreditCard2["Cencosud"] = "cencosud";
+    CreditCard2["DinersClub"] = "diners";
+    CreditCard2["Discover"] = "discover";
+    CreditCard2["Elo"] = "elo";
+    CreditCard2["Hipercard"] = "hipercard";
+    CreditCard2["JCB"] = "jcb";
+    CreditCard2["Mastercard"] = "mastercard";
+    CreditCard2["Naranja"] = "naranja";
+    CreditCard2["TarjetaShopping"] = "targeta-shopping";
+    CreditCard2["UnionChinaPay"] = "union-china-pay";
+    CreditCard2["Visa"] = "visa";
+    CreditCard2["MIR"] = "mir";
+    CreditCard2["Maestro"] = "maestro";
+    CreditCard2["Rupay"] = "rupay";
+  })(CreditCard || (CreditCard = {}));
+  var Flag;
+  (function(Flag2) {
+    Flag2["Afghanistan"] = "af";
+    Flag2["Angola"] = "ao";
+    Flag2["Albania"] = "al";
+    Flag2["Andorra"] = "ad";
+    Flag2["UnitedArabEmirates"] = "ae";
+    Flag2["Argentina"] = "ar";
+    Flag2["Armenia"] = "am";
+    Flag2["AntiguaAndBarbuda"] = "ag";
+    Flag2["Australia"] = "au";
+    Flag2["Austria"] = "at";
+    Flag2["Azerbaijan"] = "az";
+    Flag2["Burundi"] = "bi";
+    Flag2["Belgium"] = "be";
+    Flag2["Benin"] = "bj";
+    Flag2["BurkinaFaso"] = "bf";
+    Flag2["Bangladesh"] = "bd";
+    Flag2["Bulgaria"] = "bg";
+    Flag2["Bahrain"] = "bh";
+    Flag2["Bahamas"] = "bs";
+    Flag2["BosniaAndHerzegovina"] = "ba";
+    Flag2["Belarus"] = "by";
+    Flag2["Belize"] = "bz";
+    Flag2["Bolivia"] = "bo";
+    Flag2["Brazil"] = "br";
+    Flag2["Barbados"] = "bb";
+    Flag2["BruneiDarussalam"] = "bn";
+    Flag2["Bhutan"] = "bt";
+    Flag2["Botswana"] = "bw";
+    Flag2["CentralAfricanRepublic"] = "cf";
+    Flag2["Canada"] = "ca";
+    Flag2["Switzerland"] = "ch";
+    Flag2["Chile"] = "cl";
+    Flag2["China"] = "cn";
+    Flag2["CoteDIvoire"] = "ci";
+    Flag2["Cameroon"] = "cm";
+    Flag2["DemocraticRepublicOfTheCongo"] = "cd";
+    Flag2["RepublicOfTheCongo"] = "cg";
+    Flag2["Colombia"] = "co";
+    Flag2["Comoros"] = "km";
+    Flag2["CapeVerde"] = "cv";
+    Flag2["CostaRica"] = "cr";
+    Flag2["Cuba"] = "cu";
+    Flag2["Cyprus"] = "cy";
+    Flag2["CzechRepublic"] = "cz";
+    Flag2["Germany"] = "de";
+    Flag2["Djibouti"] = "dj";
+    Flag2["Dominica"] = "dm";
+    Flag2["Denmark"] = "dk";
+    Flag2["DominicanRepublic"] = "do";
+    Flag2["Algeria"] = "dz";
+    Flag2["Ecuador"] = "ec";
+    Flag2["Egypt"] = "eg";
+    Flag2["Eritrea"] = "er";
+    Flag2["Spain"] = "es";
+    Flag2["Estonia"] = "ee";
+    Flag2["Ethiopia"] = "et";
+    Flag2["Finland"] = "fi";
+    Flag2["Fiji"] = "fj";
+    Flag2["France"] = "fr";
+    Flag2["MicronesiaFederatedStatesOf"] = "fm";
+    Flag2["Gabon"] = "ga";
+    Flag2["UnitedKingdom"] = "gb";
+    Flag2["Georgia"] = "ge";
+    Flag2["Ghana"] = "gh";
+    Flag2["Guinea"] = "gn";
+    Flag2["Gambia"] = "gm";
+    Flag2["GuineaBissau"] = "gw";
+    Flag2["EquatorialGuinea"] = "gq";
+    Flag2["Greece"] = "gr";
+    Flag2["Grenada"] = "gd";
+    Flag2["Guatemala"] = "gt";
+    Flag2["Guyana"] = "gy";
+    Flag2["Honduras"] = "hn";
+    Flag2["Croatia"] = "hr";
+    Flag2["Haiti"] = "ht";
+    Flag2["Hungary"] = "hu";
+    Flag2["Indonesia"] = "id";
+    Flag2["India"] = "in";
+    Flag2["Ireland"] = "ie";
+    Flag2["IranIslamicRepublicOf"] = "ir";
+    Flag2["Iraq"] = "iq";
+    Flag2["Iceland"] = "is";
+    Flag2["Israel"] = "il";
+    Flag2["Italy"] = "it";
+    Flag2["Jamaica"] = "jm";
+    Flag2["Jordan"] = "jo";
+    Flag2["Japan"] = "jp";
+    Flag2["Kazakhstan"] = "kz";
+    Flag2["Kenya"] = "ke";
+    Flag2["Kyrgyzstan"] = "kg";
+    Flag2["Cambodia"] = "kh";
+    Flag2["Kiribati"] = "ki";
+    Flag2["SaintKittsAndNevis"] = "kn";
+    Flag2["SouthKorea"] = "kr";
+    Flag2["Kuwait"] = "kw";
+    Flag2["LaoPeopleSDemocraticRepublic"] = "la";
+    Flag2["Lebanon"] = "lb";
+    Flag2["Liberia"] = "lr";
+    Flag2["Libya"] = "ly";
+    Flag2["SaintLucia"] = "lc";
+    Flag2["Liechtenstein"] = "li";
+    Flag2["SriLanka"] = "lk";
+    Flag2["Lesotho"] = "ls";
+    Flag2["Lithuania"] = "lt";
+    Flag2["Luxembourg"] = "lu";
+    Flag2["Latvia"] = "lv";
+    Flag2["Morocco"] = "ma";
+    Flag2["Monaco"] = "mc";
+    Flag2["Moldova"] = "md";
+    Flag2["Madagascar"] = "mg";
+    Flag2["Maldives"] = "mv";
+    Flag2["Mexico"] = "mx";
+    Flag2["MarshallIslands"] = "mh";
+    Flag2["NorthMacedonia"] = "mk";
+    Flag2["Mali"] = "ml";
+    Flag2["Malta"] = "mt";
+    Flag2["Myanmar"] = "mm";
+    Flag2["Montenegro"] = "me";
+    Flag2["Mongolia"] = "mn";
+    Flag2["Mozambique"] = "mz";
+    Flag2["Mauritania"] = "mr";
+    Flag2["Mauritius"] = "mu";
+    Flag2["Malawi"] = "mw";
+    Flag2["Malaysia"] = "my";
+    Flag2["Namibia"] = "na";
+    Flag2["Niger"] = "ne";
+    Flag2["Nigeria"] = "ng";
+    Flag2["Nicaragua"] = "ni";
+    Flag2["Netherlands"] = "nl";
+    Flag2["Norway"] = "no";
+    Flag2["Nepal"] = "np";
+    Flag2["Nauru"] = "nr";
+    Flag2["NewZealand"] = "nz";
+    Flag2["Oman"] = "om";
+    Flag2["Pakistan"] = "pk";
+    Flag2["Panama"] = "pa";
+    Flag2["Peru"] = "pe";
+    Flag2["Philippines"] = "ph";
+    Flag2["Palau"] = "pw";
+    Flag2["PapuaNewGuinea"] = "pg";
+    Flag2["Poland"] = "pl";
+    Flag2["FrenchPolynesia"] = "pf";
+    Flag2["NorthKorea"] = "kp";
+    Flag2["Portugal"] = "pt";
+    Flag2["Paraguay"] = "py";
+    Flag2["Qatar"] = "qa";
+    Flag2["Romania"] = "ro";
+    Flag2["Russia"] = "ru";
+    Flag2["Rwanda"] = "rw";
+    Flag2["SaudiArabia"] = "sa";
+    Flag2["Sudan"] = "sd";
+    Flag2["Senegal"] = "sn";
+    Flag2["Singapore"] = "sg";
+    Flag2["SolomonIslands"] = "sb";
+    Flag2["SierraLeone"] = "sl";
+    Flag2["ElSalvador"] = "sv";
+    Flag2["SanMarino"] = "sm";
+    Flag2["Somalia"] = "so";
+    Flag2["Serbia"] = "rs";
+    Flag2["SouthSudan"] = "ss";
+    Flag2["SaoTomeAndPrincipe"] = "st";
+    Flag2["Suriname"] = "sr";
+    Flag2["Slovakia"] = "sk";
+    Flag2["Slovenia"] = "si";
+    Flag2["Sweden"] = "se";
+    Flag2["Eswatini"] = "sz";
+    Flag2["Seychelles"] = "sc";
+    Flag2["Syria"] = "sy";
+    Flag2["Chad"] = "td";
+    Flag2["Togo"] = "tg";
+    Flag2["Thailand"] = "th";
+    Flag2["Tajikistan"] = "tj";
+    Flag2["Turkmenistan"] = "tm";
+    Flag2["TimorLeste"] = "tl";
+    Flag2["Tonga"] = "to";
+    Flag2["TrinidadAndTobago"] = "tt";
+    Flag2["Tunisia"] = "tn";
+    Flag2["Turkey"] = "tr";
+    Flag2["Tuvalu"] = "tv";
+    Flag2["Tanzania"] = "tz";
+    Flag2["Uganda"] = "ug";
+    Flag2["Ukraine"] = "ua";
+    Flag2["Uruguay"] = "uy";
+    Flag2["UnitedStates"] = "us";
+    Flag2["Uzbekistan"] = "uz";
+    Flag2["VaticanCity"] = "va";
+    Flag2["SaintVincentAndTheGrenadines"] = "vc";
+    Flag2["Venezuela"] = "ve";
+    Flag2["Vietnam"] = "vn";
+    Flag2["Vanuatu"] = "vu";
+    Flag2["Samoa"] = "ws";
+    Flag2["Yemen"] = "ye";
+    Flag2["SouthAfrica"] = "za";
+    Flag2["Zambia"] = "zm";
+    Flag2["Zimbabwe"] = "zw";
+  })(Flag || (Flag = {}));
+  var ExecutionMethod;
+  (function(ExecutionMethod2) {
+    ExecutionMethod2["GET"] = "GET";
+    ExecutionMethod2["POST"] = "POST";
+    ExecutionMethod2["PUT"] = "PUT";
+    ExecutionMethod2["PATCH"] = "PATCH";
+    ExecutionMethod2["DELETE"] = "DELETE";
+    ExecutionMethod2["OPTIONS"] = "OPTIONS";
+  })(ExecutionMethod || (ExecutionMethod = {}));
+  var ImageGravity;
+  (function(ImageGravity2) {
+    ImageGravity2["Center"] = "center";
+    ImageGravity2["Topleft"] = "top-left";
+    ImageGravity2["Top"] = "top";
+    ImageGravity2["Topright"] = "top-right";
+    ImageGravity2["Left"] = "left";
+    ImageGravity2["Right"] = "right";
+    ImageGravity2["Bottomleft"] = "bottom-left";
+    ImageGravity2["Bottom"] = "bottom";
+    ImageGravity2["Bottomright"] = "bottom-right";
+  })(ImageGravity || (ImageGravity = {}));
+  var ImageFormat;
+  (function(ImageFormat2) {
+    ImageFormat2["Jpg"] = "jpg";
+    ImageFormat2["Jpeg"] = "jpeg";
+    ImageFormat2["Png"] = "png";
+    ImageFormat2["Webp"] = "webp";
+    ImageFormat2["Heic"] = "heic";
+    ImageFormat2["Avif"] = "avif";
+  })(ImageFormat || (ImageFormat = {}));
+
+  // src/views/ServicesView.js
+  var import_react14 = __toESM(require_react());
+
+  // src/context/BookingContext.js
+  var import_react13 = __toESM(require_react());
+  var import_prop_types5 = __toESM(require_prop_types());
+  var BookingContext = (0, import_react13.createContext)();
+  var BookingProvider = ({ children }) => {
+    const { database, client, isAuthReady } = useAppwriteContext();
+    const { currentUser, isAuthReady: isAuthReadyAuth } = useAuth();
+    const APPWRITE_DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
+    const APPWRITE_BOOKINGS_COLLECTION_ID = process.env.REACT_APP_APPWRITE_BOOKINGS_COLLECTION_ID;
+    const APPWRITE_SERVICES_COLLECTION_ID = process.env.REACT_APP_APPWRITE_SERVICES_COLLECTION_ID;
+    const APPWRITE_STAFF_COLLECTION_ID = process.env.REACT_APP_APPWRITE_STAFF_COLLECTION_ID;
+    const [services, setServices] = (0, import_react13.useState)([]);
+    const [staff, setStaff] = (0, import_react13.useState)([]);
+    const [bookings, setBookings] = (0, import_react13.useState)([]);
+    const [error, setError] = (0, import_react13.useState)(null);
+    const [isFetchingBookings, setIsFetchingBookings] = (0, import_react13.useState)(false);
+    const [isFetchingServices, setIsFetchingServices] = (0, import_react13.useState)(false);
+    const [isFetchingStaff, setIsFetchingStaff] = (0, import_react13.useState)(false);
+    const [isBookingService, setIsBookingService] = (0, import_react13.useState)(false);
+    const [isCancellingBooking, setIsCancellingBooking] = (0, import_react13.useState)(false);
+    const handleBookingError = (err, message) => {
+      console.error(message, err);
+      setError(`Failed to complete action: ${err.message || "An unknown error occurred."}`);
+    };
+    const mapBookingDocument = (0, import_react13.useCallback)((doc) => {
+      const service = services.find((s2) => s2.id === doc.serviceId);
+      const staffMember = staff.find((s2) => s2.id === doc.staffId);
+      return {
+        id: doc.$id,
+        ...doc,
+        serviceName: service ? service.name : "Unknown Service",
+        staffName: staffMember ? staffMember.name : "Unknown Staff",
+        clientName: doc.clientName,
+        clientEmail: doc.clientEmail,
+        bookingDate: doc.bookingDate
+      };
+    }, [services, staff]);
+    const fetchServices = (0, import_react13.useCallback)(async () => {
+      if (!database || !isAuthReady) return;
+      setIsFetchingServices(true);
+      setError(null);
+      try {
+        const response = await database.listDocuments(
+          APPWRITE_DATABASE_ID,
+          APPWRITE_SERVICES_COLLECTION_ID,
+          [Query.limit(100)]
+        );
+        setServices(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
+      } catch (err) {
+        handleBookingError(err, "Error fetching services:");
+      } finally {
+        setIsFetchingServices(false);
+      }
+    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_SERVICES_COLLECTION_ID]);
+    const fetchStaff = (0, import_react13.useCallback)(async () => {
+      if (!database || !isAuthReady) return;
+      setIsFetchingStaff(true);
+      setError(null);
+      try {
+        const response = await database.listDocuments(
+          APPWRITE_DATABASE_ID,
+          APPWRITE_STAFF_COLLECTION_ID,
+          [Query.limit(100)]
+        );
+        setStaff(response.documents.map((doc) => ({ id: doc.$id, ...doc })));
+      } catch (err) {
+        handleBookingError(err, "Error fetching staff:");
+      } finally {
+        setIsFetchingStaff(false);
+      }
+    }, [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_STAFF_COLLECTION_ID]);
+    const fetchBookings = (0, import_react13.useCallback)(async () => {
+      if (!database || !isAuthReady || !currentUser) return;
+      setIsFetchingBookings(true);
+      setError(null);
+      try {
+        const response = await database.listDocuments(
+          APPWRITE_DATABASE_ID,
+          APPWRITE_BOOKINGS_COLLECTION_ID,
+          [
+            Query.equal("userId", currentUser.$id),
+            Query.orderDesc("bookingDate"),
+            Query.limit(100)
+          ]
+        );
+        setBookings(response.documents.map((doc) => mapBookingDocument(doc)));
+      } catch (err) {
+        handleBookingError(err, "Error fetching user bookings:");
+      } finally {
+        setIsFetchingBookings(false);
+      }
+    }, [database, isAuthReady, currentUser, mapBookingDocument, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]);
+    const bookService = (0, import_react13.useCallback)(
+      async (serviceId, staffId, bookingDate) => {
+        if (!database || !isAuthReady || !currentUser) {
+          setError("Appwrite not ready or user not logged in.");
+          return false;
+        }
+        setIsBookingService(true);
+        setError(null);
+        try {
+          const payload = {
+            serviceId,
+            staffId,
+            bookingDate,
+            userId: currentUser.$id,
+            clientName: currentUser.name,
+            clientEmail: currentUser.email,
+            status: "pending"
+          };
+          await database.createDocument(
+            APPWRITE_DATABASE_ID,
+            APPWRITE_BOOKINGS_COLLECTION_ID,
+            ID2.unique(),
+            payload
+          );
+          return true;
+        } catch (err) {
+          handleBookingError(err, "Error booking service:");
+          return false;
+        } finally {
+          setIsBookingService(false);
+        }
+      },
+      [database, isAuthReady, currentUser, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]
+    );
+    const cancelBooking = (0, import_react13.useCallback)(
+      async (bookingId) => {
+        if (!database || !isAuthReady) {
+          setError("Appwrite not ready.");
+          return false;
+        }
+        setIsCancellingBooking(true);
+        setError(null);
+        try {
+          await database.deleteDocument(
+            APPWRITE_DATABASE_ID,
+            APPWRITE_BOOKINGS_COLLECTION_ID,
+            bookingId
+          );
+          return true;
+        } catch (err) {
+          handleBookingError(err, "Error cancelling booking:");
+          return false;
+        } finally {
+          setIsCancellingBooking(false);
+        }
+      },
+      [database, isAuthReady, APPWRITE_DATABASE_ID, APPWRITE_BOOKINGS_COLLECTION_ID]
+    );
+    (0, import_react13.useEffect)(() => {
+      if (isAuthReady && isAuthReadyAuth) {
+        fetchServices();
+        fetchStaff();
+        if (currentUser) {
+          fetchBookings();
+        }
+        const unsubscribeServices = client.subscribe(
+          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_SERVICES_COLLECTION_ID}.documents`,
+          () => fetchServices()
+        );
+        const unsubscribeStaff = client.subscribe(
+          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_STAFF_COLLECTION_ID}.documents`,
+          () => fetchStaff()
+        );
+        const unsubscribeBookings = client.subscribe(
+          `databases.${APPWRITE_DATABASE_ID}.collections.${APPWRITE_BOOKINGS_COLLECTION_ID}.documents`,
+          () => {
+            if (currentUser) {
+              fetchBookings();
+            }
+          }
+        );
+        return () => {
+          unsubscribeServices();
+          unsubscribeStaff();
+          unsubscribeBookings();
+        };
+      }
+    }, [
+      isAuthReady,
+      isAuthReadyAuth,
+      currentUser,
+      client,
+      fetchServices,
+      fetchStaff,
+      fetchBookings,
+      APPWRITE_DATABASE_ID,
+      APPWRITE_SERVICES_COLLECTION_ID,
+      APPWRITE_STAFF_COLLECTION_ID,
+      APPWRITE_BOOKINGS_COLLECTION_ID
+    ]);
+    const contextValue = (0, import_react13.useMemo)(
+      () => ({
+        services,
+        staff,
+        bookings,
+        error,
+        fetchServices,
+        fetchStaff,
+        fetchBookings,
+        bookService,
+        cancelBooking,
+        isFetchingBookings,
+        isFetchingServices,
+        isFetchingStaff,
+        isBookingService,
+        isCancellingBooking,
+        isLoading: isFetchingBookings || isFetchingServices || isFetchingStaff || isBookingService || isCancellingBooking
+      }),
+      [
+        services,
+        staff,
+        bookings,
+        error,
+        fetchServices,
+        fetchStaff,
+        fetchBookings,
+        bookService,
+        cancelBooking,
+        isFetchingBookings,
+        isFetchingServices,
+        isFetchingStaff,
+        isBookingService,
+        isCancellingBooking
+      ]
+    );
+    return /* @__PURE__ */ import_react13.default.createElement(BookingContext.Provider, { value: contextValue }, children);
+  };
+  BookingProvider.propTypes = {
+    children: import_prop_types5.default.node.isRequired
+  };
+  var useBooking = () => {
+    const context = (0, import_react13.useContext)(BookingContext);
+    if (context === void 0) {
+      throw new Error("useBooking must be used within a BookingProvider");
+    }
+    return context;
+  };
+
+  // src/views/BookingView.js
+  var import_react19 = __toESM(require_react());
+
+  // src/context/MessageContext.js
+  var import_react17 = __toESM(require_react());
+  var import_react_dom = __toESM(require_react_dom());
+
+  // src/components/MessageContainer.js
+  var import_react16 = __toESM(require_react());
+
+  // src/components/MessageItem.js
+  var import_react15 = __toESM(require_react());
+
+  // src/context/MessageContext.js
+  var MessageContext = (0, import_react17.createContext)();
+
+  // src/components/icons/CalendarCheck.js
+  var import_react18 = __toESM(require_react());
+
+  // src/views/OrderConfirmationView.js
+  var import_react20 = __toESM(require_react());
+  var import_prop_types6 = __toESM(require_prop_types());
+  var OrderConfirmationView = ({ setView: setView2, transactionDetails }) => {
+    if (!transactionDetails || !transactionDetails.orderDetails) {
+      return /* @__PURE__ */ import_react20.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react20.default.createElement("p", { className: "text-gray-600 text-lg mb-4" }, "No order details found. This page is typically displayed after a successful checkout."), /* @__PURE__ */ import_react20.default.createElement(
+        "button",
+        {
+          onClick: () => setView2("home"),
+          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 hover:scale-105 flex items-center justify-center mx-auto"
+        },
+        /* @__PURE__ */ import_react20.default.createElement(House, { className: "mr-2", size: 20 }),
+        " Back to Home"
+      ));
+    }
+    const { orderDetails, transactionId, paymentStatus } = transactionDetails;
+    const { orderId, items, amount, shippingInfo, email, paymentGateway } = orderDetails;
+    return /* @__PURE__ */ import_react20.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto my-8" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "text-center mb-8" }, /* @__PURE__ */ import_react20.default.createElement(CircleCheckBig, { className: "w-20 h-20 text-green-500 mx-auto mb-4" }), /* @__PURE__ */ import_react20.default.createElement("h2", { className: "text-4xl font-bold text-gray-800 mb-2" }, "Order Confirmed!"), /* @__PURE__ */ import_react20.default.createElement("p", { className: "text-gray-600 text-lg" }, "Thank you for your purchase!")), /* @__PURE__ */ import_react20.default.createElement("div", { className: "mb-8 p-6 bg-green-50 bg-opacity-70 rounded-md border border-green-200" }, /* @__PURE__ */ import_react20.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Order Details Summary"), /* @__PURE__ */ import_react20.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react20.default.createElement("strong", null, "Order ID:"), " ", /* @__PURE__ */ import_react20.default.createElement("span", { className: "font-mono text-purple-700" }, orderId)), /* @__PURE__ */ import_react20.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react20.default.createElement("strong", null, "Total Amount:"), " ", /* @__PURE__ */ import_react20.default.createElement("span", { className: "font-bold text-pink-600" }, "$", amount.toFixed(2))), /* @__PURE__ */ import_react20.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react20.default.createElement("strong", null, "Payment Status:"), " ", /* @__PURE__ */ import_react20.default.createElement("span", { className: "capitalize text-green-700" }, paymentStatus)), /* @__PURE__ */ import_react20.default.createElement("p", { className: "mb-2" }, /* @__PURE__ */ import_react20.default.createElement("strong", null, "Payment Method:"), " ", /* @__PURE__ */ import_react20.default.createElement("span", { className: "capitalize" }, paymentGateway)), email && /* @__PURE__ */ import_react20.default.createElement("p", null, /* @__PURE__ */ import_react20.default.createElement("strong", null, "Confirmation sent to:"), " ", email)), /* @__PURE__ */ import_react20.default.createElement("div", { className: "mb-8 p-6 bg-blue-50 bg-opacity-70 rounded-md border border-blue-200" }, /* @__PURE__ */ import_react20.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Shipping Information"), /* @__PURE__ */ import_react20.default.createElement("p", null, shippingInfo.fullName), /* @__PURE__ */ import_react20.default.createElement("p", null, shippingInfo.addressLine1), shippingInfo.addressLine2 && /* @__PURE__ */ import_react20.default.createElement("p", null, shippingInfo.addressLine2), /* @__PURE__ */ import_react20.default.createElement("p", null, shippingInfo.city, ", ", shippingInfo.state, " ", shippingInfo.zipCode), /* @__PURE__ */ import_react20.default.createElement("p", null, shippingInfo.country)), /* @__PURE__ */ import_react20.default.createElement("div", { className: "mb-8 p-6 bg-gray-50 bg-opacity-70 rounded-md border border-gray-200" }, /* @__PURE__ */ import_react20.default.createElement("h3", { className: "text-xl font-semibold text-gray-700 mb-4" }, "Items Ordered"), /* @__PURE__ */ import_react20.default.createElement("ul", { className: "list-disc list-inside space-y-2" }, items.map((item) => /* @__PURE__ */ import_react20.default.createElement("li", { key: item.id, className: "text-gray-700" }, item.name, " (x", item.quantity, ") - $", item.price.toFixed(2), " each")))), /* @__PURE__ */ import_react20.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react20.default.createElement(
+      "button",
+      {
+        onClick: () => setView2("products"),
+        className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 hover:scale-105 flex items-center justify-center mx-auto"
+      },
+      /* @__PURE__ */ import_react20.default.createElement(House, { className: "mr-2", size: 20 }),
+      " Continue Shopping"
+    ), /* @__PURE__ */ import_react20.default.createElement("p", { className: "text-gray-500 text-sm mt-4" }, "A detailed receipt has been sent to your email address."))));
+  };
+  OrderConfirmationView.propTypes = {
+    setView: import_prop_types6.default.func.isRequired,
+    transactionDetails: import_prop_types6.default.shape({
+      transactionId: import_prop_types6.default.string.isRequired,
+      paymentStatus: import_prop_types6.default.string.isRequired,
+      orderDetails: import_prop_types6.default.shape({
+        orderId: import_prop_types6.default.string.isRequired,
+        items: import_prop_types6.default.arrayOf(import_prop_types6.default.shape({
+          id: import_prop_types6.default.string,
+          name: import_prop_types6.default.string.isRequired,
+          quantity: import_prop_types6.default.number.isRequired,
+          price: import_prop_types6.default.number.isRequired
+        })).isRequired,
+        amount: import_prop_types6.default.number.isRequired,
+        shippingInfo: import_prop_types6.default.shape({
+          fullName: import_prop_types6.default.string.isRequired,
+          addressLine1: import_prop_types6.default.string.isRequired,
+          addressLine2: import_prop_types6.default.string,
+          city: import_prop_types6.default.string.isRequired,
+          state: import_prop_types6.default.string.isRequired,
+          zipCode: import_prop_types6.default.string.isRequired,
+          country: import_prop_types6.default.string.isRequired
+        }).isRequired,
+        paymentGateway: import_prop_types6.default.string.isRequired,
+        email: import_prop_types6.default.string
+      }).isRequired
+    })
+  };
+
+  // src/components/CartView.js
+  var import_react23 = __toESM(require_react());
+  var import_prop_types7 = __toESM(require_prop_types());
+
+  // node_modules/react-hot-toast/dist/index.mjs
+  var import_react21 = __toESM(require_react(), 1);
+  var import_react22 = __toESM(require_react(), 1);
+  var y = __toESM(require_react(), 1);
+
+  // node_modules/goober/dist/goober.modern.js
+  var e = { data: "" };
+  var t = (t2) => "object" == typeof window ? ((t2 ? t2.querySelector("#_goober") : window._goober) || Object.assign((t2 || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : t2 || e;
+  var l = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g;
+  var a = /\/\*[^]*?\*\/|  +/g;
+  var n = /\n+/g;
+  var o = (e2, t2) => {
+    let r = "", l2 = "", a2 = "";
+    for (let n3 in e2) {
+      let c2 = e2[n3];
+      "@" == n3[0] ? "i" == n3[1] ? r = n3 + " " + c2 + ";" : l2 += "f" == n3[1] ? o(c2, n3) : n3 + "{" + o(c2, "k" == n3[1] ? "" : t2) + "}" : "object" == typeof c2 ? l2 += o(c2, t2 ? t2.replace(/([^,])+/g, (e3) => n3.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (t3) => /&/.test(t3) ? t3.replace(/&/g, e3) : e3 ? e3 + " " + t3 : t3)) : n3) : null != c2 && (n3 = /^--/.test(n3) ? n3 : n3.replace(/[A-Z]/g, "-$&").toLowerCase(), a2 += o.p ? o.p(n3, c2) : n3 + ":" + c2 + ";");
+    }
+    return r + (t2 && a2 ? t2 + "{" + a2 + "}" : a2) + l2;
+  };
+  var c = {};
+  var s = (e2) => {
+    if ("object" == typeof e2) {
+      let t2 = "";
+      for (let r in e2) t2 += r + s(e2[r]);
+      return t2;
+    }
+    return e2;
+  };
+  var i = (e2, t2, r, i2, p2) => {
+    let u2 = s(e2), d2 = c[u2] || (c[u2] = ((e3) => {
+      let t3 = 0, r2 = 11;
+      for (; t3 < e3.length; ) r2 = 101 * r2 + e3.charCodeAt(t3++) >>> 0;
+      return "go" + r2;
+    })(u2));
+    if (!c[d2]) {
+      let t3 = u2 !== e2 ? e2 : ((e3) => {
+        let t4, r2, o2 = [{}];
+        for (; t4 = l.exec(e3.replace(a, "")); ) t4[4] ? o2.shift() : t4[3] ? (r2 = t4[3].replace(n, " ").trim(), o2.unshift(o2[0][r2] = o2[0][r2] || {})) : o2[0][t4[1]] = t4[2].replace(n, " ").trim();
+        return o2[0];
+      })(e2);
+      c[d2] = o(p2 ? { ["@keyframes " + d2]: t3 } : t3, r ? "" : "." + d2);
+    }
+    let f3 = r && c.g ? c.g : null;
+    return r && (c.g = c[d2]), ((e3, t3, r2, l2) => {
+      l2 ? t3.data = t3.data.replace(l2, e3) : -1 === t3.data.indexOf(e3) && (t3.data = r2 ? e3 + t3.data : t3.data + e3);
+    })(c[d2], t2, i2, f3), d2;
+  };
+  var p = (e2, t2, r) => e2.reduce((e3, l2, a2) => {
+    let n3 = t2[a2];
+    if (n3 && n3.call) {
+      let e4 = n3(r), t3 = e4 && e4.props && e4.props.className || /^go/.test(e4) && e4;
+      n3 = t3 ? "." + t3 : e4 && "object" == typeof e4 ? e4.props ? "" : o(e4, "") : false === e4 ? "" : e4;
+    }
+    return e3 + l2 + (null == n3 ? "" : n3);
+  }, "");
+  function u(e2) {
+    let r = this || {}, l2 = e2.call ? e2(r.p) : e2;
+    return i(l2.unshift ? l2.raw ? p(l2, [].slice.call(arguments, 1), r.p) : l2.reduce((e3, t2) => Object.assign(e3, t2 && t2.call ? t2(r.p) : t2), {}) : l2, t(r.target), r.g, r.o, r.k);
+  }
+  var d;
+  var f;
+  var g;
+  var b = u.bind({ g: 1 });
+  var h = u.bind({ k: 1 });
+  function m(e2, t2, r, l2) {
+    o.p = t2, d = e2, f = r, g = l2;
+  }
+  function j(e2, t2) {
+    let r = this || {};
+    return function() {
+      let l2 = arguments;
+      function a2(n3, o2) {
+        let c2 = Object.assign({}, n3), s2 = c2.className || a2.className;
+        r.p = Object.assign({ theme: f && f() }, c2), r.o = / *go\d+/.test(s2), c2.className = u.apply(r, l2) + (s2 ? " " + s2 : ""), t2 && (c2.ref = o2);
+        let i2 = e2;
+        return e2[0] && (i2 = c2.as || e2, delete c2.as), g && i2[0] && g(c2), d(i2, c2);
+      }
+      return t2 ? t2(a2) : a2;
+    };
+  }
+
+  // node_modules/react-hot-toast/dist/index.mjs
+  var b2 = __toESM(require_react(), 1);
+  var x = __toESM(require_react(), 1);
+  var Z = (e2) => typeof e2 == "function";
+  var h2 = (e2, t2) => Z(e2) ? e2(t2) : e2;
+  var W = /* @__PURE__ */ (() => {
+    let e2 = 0;
+    return () => (++e2).toString();
+  })();
+  var E = /* @__PURE__ */ (() => {
+    let e2;
+    return () => {
+      if (e2 === void 0 && typeof window < "u") {
+        let t2 = matchMedia("(prefers-reduced-motion: reduce)");
+        e2 = !t2 || t2.matches;
+      }
+      return e2;
+    };
+  })();
+  var re = 20;
+  var k = "default";
+  var H = (e2, t2) => {
+    let { toastLimit: o2 } = e2.settings;
+    switch (t2.type) {
+      case 0:
+        return { ...e2, toasts: [t2.toast, ...e2.toasts].slice(0, o2) };
+      case 1:
+        return { ...e2, toasts: e2.toasts.map((r) => r.id === t2.toast.id ? { ...r, ...t2.toast } : r) };
+      case 2:
+        let { toast: s2 } = t2;
+        return H(e2, { type: e2.toasts.find((r) => r.id === s2.id) ? 1 : 0, toast: s2 });
+      case 3:
+        let { toastId: a2 } = t2;
+        return { ...e2, toasts: e2.toasts.map((r) => r.id === a2 || a2 === void 0 ? { ...r, dismissed: true, visible: false } : r) };
+      case 4:
+        return t2.toastId === void 0 ? { ...e2, toasts: [] } : { ...e2, toasts: e2.toasts.filter((r) => r.id !== t2.toastId) };
+      case 5:
+        return { ...e2, pausedAt: t2.time };
+      case 6:
+        let i2 = t2.time - (e2.pausedAt || 0);
+        return { ...e2, pausedAt: void 0, toasts: e2.toasts.map((r) => ({ ...r, pauseDuration: r.pauseDuration + i2 })) };
+    }
+  };
+  var v = [];
+  var j2 = { toasts: [], pausedAt: void 0, settings: { toastLimit: re } };
+  var f2 = {};
+  var Y = (e2, t2 = k) => {
+    f2[t2] = H(f2[t2] || j2, e2), v.forEach(([o2, s2]) => {
+      o2 === t2 && s2(f2[t2]);
+    });
+  };
+  var _ = (e2) => Object.keys(f2).forEach((t2) => Y(e2, t2));
+  var Q = (e2) => Object.keys(f2).find((t2) => f2[t2].toasts.some((o2) => o2.id === e2));
+  var S = (e2 = k) => (t2) => {
+    Y(t2, e2);
+  };
+  var se = { blank: 4e3, error: 4e3, success: 2e3, loading: 1 / 0, custom: 4e3 };
+  var ie = (e2, t2 = "blank", o2) => ({ createdAt: Date.now(), visible: true, dismissed: false, type: t2, ariaProps: { role: "status", "aria-live": "polite" }, message: e2, pauseDuration: 0, ...o2, id: (o2 == null ? void 0 : o2.id) || W() });
+  var P = (e2) => (t2, o2) => {
+    let s2 = ie(t2, e2, o2);
+    return S(s2.toasterId || Q(s2.id))({ type: 2, toast: s2 }), s2.id;
+  };
+  var n2 = (e2, t2) => P("blank")(e2, t2);
+  n2.error = P("error");
+  n2.success = P("success");
+  n2.loading = P("loading");
+  n2.custom = P("custom");
+  n2.dismiss = (e2, t2) => {
+    let o2 = { type: 3, toastId: e2 };
+    t2 ? S(t2)(o2) : _(o2);
+  };
+  n2.dismissAll = (e2) => n2.dismiss(void 0, e2);
+  n2.remove = (e2, t2) => {
+    let o2 = { type: 4, toastId: e2 };
+    t2 ? S(t2)(o2) : _(o2);
+  };
+  n2.removeAll = (e2) => n2.remove(void 0, e2);
+  n2.promise = (e2, t2, o2) => {
+    let s2 = n2.loading(t2.loading, { ...o2, ...o2 == null ? void 0 : o2.loading });
+    return typeof e2 == "function" && (e2 = e2()), e2.then((a2) => {
+      let i2 = t2.success ? h2(t2.success, a2) : void 0;
+      return i2 ? n2.success(i2, { id: s2, ...o2, ...o2 == null ? void 0 : o2.success }) : n2.dismiss(s2), a2;
+    }).catch((a2) => {
+      let i2 = t2.error ? h2(t2.error, a2) : void 0;
+      i2 ? n2.error(i2, { id: s2, ...o2, ...o2 == null ? void 0 : o2.error }) : n2.dismiss(s2);
+    }), e2;
+  };
+  var de = h`
+from {
+  transform: scale(0) rotate(45deg);
+	opacity: 0;
+}
+to {
+ transform: scale(1) rotate(45deg);
+  opacity: 1;
+}`;
+  var me = h`
+from {
+  transform: scale(0);
+  opacity: 0;
+}
+to {
+  transform: scale(1);
+  opacity: 1;
+}`;
+  var le = h`
+from {
+  transform: scale(0) rotate(90deg);
+	opacity: 0;
+}
+to {
+  transform: scale(1) rotate(90deg);
+	opacity: 1;
+}`;
+  var C = j("div")`
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: ${(e2) => e2.primary || "#ff4b4b"};
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: ${de} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+
+  &:after,
+  &:before {
+    content: '';
+    animation: ${me} 0.15s ease-out forwards;
+    animation-delay: 150ms;
+    position: absolute;
+    border-radius: 3px;
+    opacity: 0;
+    background: ${(e2) => e2.secondary || "#fff"};
+    bottom: 9px;
+    left: 4px;
+    height: 2px;
+    width: 12px;
+  }
+
+  &:before {
+    animation: ${le} 0.15s ease-out forwards;
+    animation-delay: 180ms;
+    transform: rotate(90deg);
+  }
+`;
+  var Te = h`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+  var F = j("div")`
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: ${(e2) => e2.secondary || "#e0e0e0"};
+  border-right-color: ${(e2) => e2.primary || "#616161"};
+  animation: ${Te} 1s linear infinite;
+`;
+  var ge = h`
+from {
+  transform: scale(0) rotate(45deg);
+	opacity: 0;
+}
+to {
+  transform: scale(1) rotate(45deg);
+	opacity: 1;
+}`;
+  var he = h`
+0% {
+	height: 0;
+	width: 0;
+	opacity: 0;
+}
+40% {
+  height: 0;
+	width: 6px;
+	opacity: 1;
+}
+100% {
+  opacity: 1;
+  height: 10px;
+}`;
+  var L = j("div")`
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: ${(e2) => e2.primary || "#61d345"};
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: ${ge} 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    animation: ${he} 0.2s ease-out forwards;
+    opacity: 0;
+    animation-delay: 200ms;
+    position: absolute;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-color: ${(e2) => e2.secondary || "#fff"};
+    bottom: 6px;
+    left: 6px;
+    height: 10px;
+    width: 6px;
+  }
+`;
+  var be = j("div")`
+  position: absolute;
+`;
+  var Se = j("div")`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+`;
+  var Ae = h`
+from {
+  transform: scale(0.6);
+  opacity: 0.4;
+}
+to {
+  transform: scale(1);
+  opacity: 1;
+}`;
+  var Pe = j("div")`
+  position: relative;
+  transform: scale(0.6);
+  opacity: 0.4;
+  min-width: 20px;
+  animation: ${Ae} 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+`;
+  var $ = ({ toast: e2 }) => {
+    let { icon: t2, type: o2, iconTheme: s2 } = e2;
+    return t2 !== void 0 ? typeof t2 == "string" ? b2.createElement(Pe, null, t2) : t2 : o2 === "blank" ? null : b2.createElement(Se, null, b2.createElement(F, { ...s2 }), o2 !== "loading" && b2.createElement(be, null, o2 === "error" ? b2.createElement(C, { ...s2 }) : b2.createElement(L, { ...s2 })));
+  };
+  var Re = (e2) => `
+0% {transform: translate3d(0,${e2 * -200}%,0) scale(.6); opacity:.5;}
+100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
+`;
+  var Ee = (e2) => `
+0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
+100% {transform: translate3d(0,${e2 * -150}%,-1px) scale(.6); opacity:0;}
+`;
+  var ve = "0%{opacity:0;} 100%{opacity:1;}";
+  var De = "0%{opacity:1;} 100%{opacity:0;}";
+  var Oe = j("div")`
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #363636;
+  line-height: 1.3;
+  will-change: transform;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+  max-width: 350px;
+  pointer-events: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+`;
+  var Ie = j("div")`
+  display: flex;
+  justify-content: center;
+  margin: 4px 10px;
+  color: inherit;
+  flex: 1 1 auto;
+  white-space: pre-line;
+`;
+  var ke = (e2, t2) => {
+    let s2 = e2.includes("top") ? 1 : -1, [a2, i2] = E() ? [ve, De] : [Re(s2), Ee(s2)];
+    return { animation: t2 ? `${h(a2)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${h(i2)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
+  };
+  var N = y.memo(({ toast: e2, position: t2, style: o2, children: s2 }) => {
+    let a2 = e2.height ? ke(e2.position || t2 || "top-center", e2.visible) : { opacity: 0 }, i2 = y.createElement($, { toast: e2 }), r = y.createElement(Ie, { ...e2.ariaProps }, h2(e2.message, e2));
+    return y.createElement(Oe, { className: e2.className, style: { ...a2, ...o2, ...e2.style } }, typeof s2 == "function" ? s2({ icon: i2, message: r }) : y.createElement(y.Fragment, null, i2, r));
+  });
+  m(x.createElement);
+  var Ce = u`
+  z-index: 9999;
+  > * {
+    pointer-events: auto;
+  }
+`;
+  var zt = n2;
+
+  // src/components/CartView.js
+  var CartView = ({ setView: setView2 }) => {
+    const { cartItems, updateCartItemQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
+    const [isLoading, setIsLoading] = (0, import_react23.useState)(false);
+    const handleCheckout = async () => {
+      setIsLoading(true);
+      try {
+        const userToken = "your-auth-token";
+        const checkoutData = {
+          items: cartItems.map((item) => ({ id: item.id, quantity: item.quantity, price: item.price })),
+          total: getTotalPrice()
+        };
+        const response = await fetch("/api/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Pass the user token for authentication and user-specific logic
+            "Authorization": `Bearer ${userToken}`
+          },
+          body: JSON.stringify(checkoutData)
+        });
+        const responseData = await response.json();
+        if (!response.ok) {
+          console.error("Checkout API Error:", responseData);
+          throw new Error(responseData.message || "An unknown error occurred during checkout.");
+        }
+        console.log("Checkout API success:", responseData);
+        zt.success("Proceeding to checkout...");
+        setView2("checkout");
+      } catch (error) {
+        console.error("Checkout failed:", error);
+        zt.error(`Checkout failed: ${error.message}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (cartItems.length === 0) {
+      return /* @__PURE__ */ import_react23.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react23.default.createElement(ShoppingCart, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react23.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Your Cart is Empty"), /* @__PURE__ */ import_react23.default.createElement("p", { className: "text-gray-600 mb-6" }, "Looks like you haven't added anything to your cart yet."), /* @__PURE__ */ import_react23.default.createElement(
+        "button",
+        {
+          onClick: () => setView2("products"),
+          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
+        },
+        "Start Shopping"
+      ));
+    }
+    return /* @__PURE__ */ import_react23.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react23.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Your Shopping Cart"), /* @__PURE__ */ import_react23.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react23.default.createElement("div", { className: "divide-y divide-gray-200" }, cartItems.map((item) => /* @__PURE__ */ import_react23.default.createElement("div", { key: item.id, className: "flex items-center py-4" }, /* @__PURE__ */ import_react23.default.createElement(
+      "img",
+      {
+        src: item.imageUrl || `https://placehold.co/100x100/E0FFFF/333333?text=${item.name.replace(/\s/g, "+")}`,
+        alt: item.name,
+        onError: (e2) => {
+          e2.target.onerror = null;
+          e2.target.src = `https://placehold.co/100x100/E0FFFF/333333?text=${item.name.replace(/\s/g, "+")}`;
+        },
+        className: "w-24 h-24 object-cover rounded-lg mr-6 shadow-md"
+      }
+    ), /* @__PURE__ */ import_react23.default.createElement("div", { className: "flex-grow" }, /* @__PURE__ */ import_react23.default.createElement("h3", { className: "text-xl font-semibold text-gray-800" }, item.name), /* @__PURE__ */ import_react23.default.createElement("p", { className: "text-gray-600" }, "$", item.price?.toFixed(2))), /* @__PURE__ */ import_react23.default.createElement("div", { className: "flex items-center space-x-3" }, /* @__PURE__ */ import_react23.default.createElement(
+      "button",
+      {
+        onClick: () => updateCartItemQuantity(item.id, item.quantity - 1),
+        disabled: item.quantity <= 1,
+        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-full transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      },
+      /* @__PURE__ */ import_react23.default.createElement(CircleMinus, { className: "w-5 h-5" })
+    ), /* @__PURE__ */ import_react23.default.createElement("span", { className: "text-lg font-semibold text-gray-800" }, item.quantity), /* @__PURE__ */ import_react23.default.createElement(
+      "button",
+      {
+        onClick: () => updateCartItemQuantity(item.id, item.quantity + 1),
+        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-full transition duration-200"
+      },
+      /* @__PURE__ */ import_react23.default.createElement(CirclePlus, { className: "w-5 h-5" })
+    )), /* @__PURE__ */ import_react23.default.createElement(
+      "button",
+      {
+        onClick: () => removeFromCart(item.id),
+        className: "ml-8 text-red-500 hover:text-red-700 transition duration-200"
+      },
+      /* @__PURE__ */ import_react23.default.createElement(CircleX, { className: "w-6 h-6" })
+    )))), /* @__PURE__ */ import_react23.default.createElement("div", { className: "flex justify-between items-center border-t border-gray-200 pt-6 mt-6" }, /* @__PURE__ */ import_react23.default.createElement("span", { className: "text-2xl font-bold text-gray-800" }, "Total:"), /* @__PURE__ */ import_react23.default.createElement("span", { className: "text-3xl font-bold text-pink-600" }, "$", getTotalPrice()?.toFixed(2))), /* @__PURE__ */ import_react23.default.createElement("div", { className: "mt-8 flex justify-end space-x-4" }, /* @__PURE__ */ import_react23.default.createElement(
+      "button",
+      {
+        onClick: clearCart,
+        className: "bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-lg transition duration-300"
+      },
+      "Clear Cart"
+    ), /* @__PURE__ */ import_react23.default.createElement(
+      "button",
+      {
+        onClick: handleCheckout,
+        disabled: isLoading,
+        className: `bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`
+      },
+      isLoading ? "Processing..." : "Proceed to Checkout"
+    ))));
+  };
+  CartView.propTypes = {
+    setView: import_prop_types7.default.func.isRequired
+  };
+
+  // src/components/Checkout.js
+  var import_react25 = __toESM(require_react());
+
+  // node_modules/@stripe/stripe-js/dist/index.mjs
+  var RELEASE_TRAIN = "basil";
+  var runtimeVersionToUrlVersion = function runtimeVersionToUrlVersion2(version) {
+    return version === 3 ? "v3" : version;
+  };
+  var ORIGIN = "https://js.stripe.com";
+  var STRIPE_JS_URL = "".concat(ORIGIN, "/").concat(RELEASE_TRAIN, "/stripe.js");
+  var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+  var STRIPE_JS_URL_REGEX = /^https:\/\/js\.stripe\.com\/(v3|[a-z]+)\/stripe\.js(\?.*)?$/;
+  var EXISTING_SCRIPT_MESSAGE = "loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used";
+  var isStripeJSURL = function isStripeJSURL2(url) {
+    return V3_URL_REGEX.test(url) || STRIPE_JS_URL_REGEX.test(url);
+  };
+  var findScript = function findScript2() {
+    var scripts = document.querySelectorAll('script[src^="'.concat(ORIGIN, '"]'));
+    for (var i2 = 0; i2 < scripts.length; i2++) {
+      var script = scripts[i2];
+      if (!isStripeJSURL(script.src)) {
+        continue;
+      }
+      return script;
+    }
+    return null;
+  };
+  var injectScript = function injectScript2(params) {
+    var queryString = params && !params.advancedFraudSignals ? "?advancedFraudSignals=false" : "";
+    var script = document.createElement("script");
+    script.src = "".concat(STRIPE_JS_URL).concat(queryString);
+    var headOrBody = document.head || document.body;
+    if (!headOrBody) {
+      throw new Error("Expected document.body not to be null. Stripe.js requires a <body> element.");
+    }
+    headOrBody.appendChild(script);
+    return script;
+  };
+  var registerWrapper = function registerWrapper2(stripe, startTime) {
+    if (!stripe || !stripe._registerWrapper) {
+      return;
+    }
+    stripe._registerWrapper({
+      name: "stripe-js",
+      version: "7.8.0",
+      startTime
+    });
+  };
+  var stripePromise$1 = null;
+  var onErrorListener = null;
+  var onLoadListener = null;
+  var onError = function onError2(reject) {
+    return function(cause) {
+      reject(new Error("Failed to load Stripe.js", {
+        cause
+      }));
+    };
+  };
+  var onLoad = function onLoad2(resolve, reject) {
+    return function() {
+      if (window.Stripe) {
+        resolve(window.Stripe);
+      } else {
+        reject(new Error("Stripe.js not available"));
+      }
+    };
+  };
+  var loadScript = function loadScript2(params) {
+    if (stripePromise$1 !== null) {
+      return stripePromise$1;
+    }
+    stripePromise$1 = new Promise(function(resolve, reject) {
+      if (typeof window === "undefined" || typeof document === "undefined") {
+        resolve(null);
+        return;
+      }
+      if (window.Stripe && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      }
+      if (window.Stripe) {
+        resolve(window.Stripe);
+        return;
+      }
+      try {
+        var script = findScript();
+        if (script && params) {
+          console.warn(EXISTING_SCRIPT_MESSAGE);
+        } else if (!script) {
+          script = injectScript(params);
+        } else if (script && onLoadListener !== null && onErrorListener !== null) {
+          var _script$parentNode;
+          script.removeEventListener("load", onLoadListener);
+          script.removeEventListener("error", onErrorListener);
+          (_script$parentNode = script.parentNode) === null || _script$parentNode === void 0 ? void 0 : _script$parentNode.removeChild(script);
+          script = injectScript(params);
+        }
+        onLoadListener = onLoad(resolve, reject);
+        onErrorListener = onError(reject);
+        script.addEventListener("load", onLoadListener);
+        script.addEventListener("error", onErrorListener);
+      } catch (error) {
+        reject(error);
+        return;
+      }
+    });
+    return stripePromise$1["catch"](function(error) {
+      stripePromise$1 = null;
+      return Promise.reject(error);
+    });
+  };
+  var initStripe = function initStripe2(maybeStripe, args, startTime) {
+    if (maybeStripe === null) {
+      return null;
+    }
+    var pk = args[0];
+    var isTestKey = pk.match(/^pk_test/);
+    var version = runtimeVersionToUrlVersion(maybeStripe.version);
+    var expectedVersion = RELEASE_TRAIN;
+    if (isTestKey && version !== expectedVersion) {
+      console.warn("Stripe.js@".concat(version, " was loaded on the page, but @stripe/stripe-js@").concat("7.8.0", " expected Stripe.js@").concat(expectedVersion, ". This may result in unexpected behavior. For more information, see https://docs.stripe.com/sdks/stripejs-versioning"));
+    }
+    var stripe = maybeStripe.apply(void 0, args);
+    registerWrapper(stripe, startTime);
+    return stripe;
+  };
+  var stripePromise;
+  var loadCalled = false;
+  var getStripePromise = function getStripePromise2() {
+    if (stripePromise) {
+      return stripePromise;
+    }
+    stripePromise = loadScript(null)["catch"](function(error) {
+      stripePromise = null;
+      return Promise.reject(error);
+    });
+    return stripePromise;
+  };
+  Promise.resolve().then(function() {
+    return getStripePromise();
+  })["catch"](function(error) {
+    if (!loadCalled) {
+      console.warn(error);
+    }
+  });
+  var loadStripe = function loadStripe2() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    loadCalled = true;
+    var startTime = Date.now();
+    return getStripePromise().then(function(maybeStripe) {
+      return initStripe(maybeStripe, args, startTime);
+    });
+  };
+
+  // src/components/Checkout.js
+  var import_react_stripe_js = __toESM(require_react_stripe_umd());
+
+  // node_modules/@paypal/react-paypal-js/dist/esm/react-paypal-js.js
+  var import_react24 = __toESM(require_react());
+  var SCRIPT_LOADING_STATE;
+  (function(SCRIPT_LOADING_STATE2) {
+    SCRIPT_LOADING_STATE2["INITIAL"] = "initial";
+    SCRIPT_LOADING_STATE2["PENDING"] = "pending";
+    SCRIPT_LOADING_STATE2["REJECTED"] = "rejected";
+    SCRIPT_LOADING_STATE2["RESOLVED"] = "resolved";
+  })(SCRIPT_LOADING_STATE || (SCRIPT_LOADING_STATE = {}));
+  var DISPATCH_ACTION;
+  (function(DISPATCH_ACTION2) {
+    DISPATCH_ACTION2["LOADING_STATUS"] = "setLoadingStatus";
+    DISPATCH_ACTION2["RESET_OPTIONS"] = "resetOptions";
+    DISPATCH_ACTION2["SET_BRAINTREE_INSTANCE"] = "braintreeInstance";
+  })(DISPATCH_ACTION || (DISPATCH_ACTION = {}));
+  var PAYPAL_HOSTED_FIELDS_TYPES;
+  (function(PAYPAL_HOSTED_FIELDS_TYPES2) {
+    PAYPAL_HOSTED_FIELDS_TYPES2["NUMBER"] = "number";
+    PAYPAL_HOSTED_FIELDS_TYPES2["CVV"] = "cvv";
+    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_DATE"] = "expirationDate";
+    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_MONTH"] = "expirationMonth";
+    PAYPAL_HOSTED_FIELDS_TYPES2["EXPIRATION_YEAR"] = "expirationYear";
+    PAYPAL_HOSTED_FIELDS_TYPES2["POSTAL_CODE"] = "postalCode";
+  })(PAYPAL_HOSTED_FIELDS_TYPES || (PAYPAL_HOSTED_FIELDS_TYPES = {}));
+  var __assign = function() {
+    __assign = Object.assign || function __assign2(t2) {
+      for (var s2, i2 = 1, n3 = arguments.length; i2 < n3; i2++) {
+        s2 = arguments[i2];
+        for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2)) t2[p2] = s2[p2];
+      }
+      return t2;
+    };
+    return __assign.apply(this, arguments);
+  };
+  function __rest$1(s2, e2) {
+    var t2 = {};
+    for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0) t2[p2] = s2[p2];
+    if (s2 != null && typeof Object.getOwnPropertySymbols === "function") for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
+      if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2])) t2[p2[i2]] = s2[p2[i2]];
+    }
+    return t2;
+  }
+  function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i2 = 0, l2 = from.length, ar; i2 < l2; i2++) {
+      if (ar || !(i2 in from)) {
+        if (!ar) ar = Array.prototype.slice.call(from, 0, i2);
+        ar[i2] = from[i2];
+      }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+  }
+  var SDK_SETTINGS = {
+    DATA_CLIENT_TOKEN: "dataClientToken",
+    DATA_JS_SDK_LIBRARY: "dataJsSdkLibrary",
+    DATA_LIBRARY_VALUE: "react-paypal-js",
+    DATA_NAMESPACE: "dataNamespace",
+    DATA_SDK_INTEGRATION_SOURCE: "dataSdkIntegrationSource",
+    DATA_USER_ID_TOKEN: "dataUserIdToken"
+  };
+  var braintreeVersion = "3.117.0";
+  var BRAINTREE_SOURCE = "https://js.braintreegateway.com/web/".concat(braintreeVersion, "/js/client.min.js");
+  var BRAINTREE_PAYPAL_CHECKOUT_SOURCE = "https://js.braintreegateway.com/web/".concat(braintreeVersion, "/js/paypal-checkout.min.js");
+  var DEFAULT_PAYPAL_NAMESPACE = "paypal";
+  var SCRIPT_PROVIDER_REDUCER_ERROR = "usePayPalScriptReducer must be used within a PayPalScriptProvider";
+  function getPayPalWindowNamespace$1(namespace) {
+    if (namespace === void 0) {
+      namespace = DEFAULT_PAYPAL_NAMESPACE;
+    }
+    return window[namespace];
+  }
+  function generateErrorMessage(_a2) {
+    var reactComponentName = _a2.reactComponentName, sdkComponentKey = _a2.sdkComponentKey, _b = _a2.sdkRequestedComponents, sdkRequestedComponents = _b === void 0 ? "" : _b, _c = _a2.sdkDataNamespace, sdkDataNamespace = _c === void 0 ? DEFAULT_PAYPAL_NAMESPACE : _c;
+    var requiredOptionCapitalized = sdkComponentKey.charAt(0).toUpperCase().concat(sdkComponentKey.substring(1));
+    var errorMessage = "Unable to render <".concat(reactComponentName, " /> because window.").concat(sdkDataNamespace, ".").concat(requiredOptionCapitalized, " is undefined.");
+    var requestedComponents = typeof sdkRequestedComponents === "string" ? sdkRequestedComponents : sdkRequestedComponents.join(",");
+    if (!requestedComponents.includes(sdkComponentKey)) {
+      var expectedComponents = [requestedComponents, sdkComponentKey].filter(Boolean).join();
+      errorMessage += "\nTo fix the issue, add '".concat(sdkComponentKey, "' to the list of components passed to the parent PayPalScriptProvider:") + "\n`<PayPalScriptProvider options={{ components: '".concat(expectedComponents, "'}}>`.");
+    }
+    return errorMessage;
+  }
+  var ScriptContext = (0, import_react24.createContext)(null);
+  function validateReducer(scriptContext) {
+    if (typeof (scriptContext === null || scriptContext === void 0 ? void 0 : scriptContext.dispatch) === "function" && scriptContext.dispatch.length !== 0) {
+      return scriptContext;
+    }
+    throw new Error(SCRIPT_PROVIDER_REDUCER_ERROR);
+  }
+  function usePayPalScriptReducer() {
+    var scriptContext = validateReducer((0, import_react24.useContext)(ScriptContext));
+    var derivedStatusContext = __assign(__assign({}, scriptContext), {
+      isInitial: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.INITIAL,
+      isPending: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.PENDING,
+      isResolved: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.RESOLVED,
+      isRejected: scriptContext.loadingStatus === SCRIPT_LOADING_STATE.REJECTED
+    });
+    return [derivedStatusContext, scriptContext.dispatch];
+  }
+  var PayPalHostedFieldsContext = (0, import_react24.createContext)({});
+  function useProxyProps(props) {
+    var proxyRef = (0, import_react24.useRef)(new Proxy({}, {
+      get: function(target, prop, receiver) {
+        if (typeof target[prop] === "function") {
+          return function() {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+              args[_i] = arguments[_i];
+            }
+            return target[prop].apply(target, args);
+          };
+        }
+        return Reflect.get(target, prop, receiver);
+      }
+    }));
+    proxyRef.current = Object.assign(proxyRef.current, props);
+    return proxyRef.current;
+  }
+  var PayPalButtons = function(_a2) {
+    var _b;
+    var _c = _a2.className, className = _c === void 0 ? "" : _c, _d = _a2.disabled, disabled = _d === void 0 ? false : _d, children = _a2.children, _e = _a2.forceReRender, forceReRender = _e === void 0 ? [] : _e, buttonProps = __rest$1(_a2, ["className", "disabled", "children", "forceReRender"]);
+    var isDisabledStyle = disabled ? {
+      opacity: 0.38
+    } : {};
+    var classNames = "".concat(className, " ").concat(disabled ? "paypal-buttons-disabled" : "").trim();
+    var buttonsContainerRef = (0, import_react24.useRef)(null);
+    var buttons = (0, import_react24.useRef)(null);
+    var proxyProps = useProxyProps(buttonProps);
+    var _f = usePayPalScriptReducer()[0], isResolved = _f.isResolved, options = _f.options;
+    var _g = (0, import_react24.useState)(null), initActions = _g[0], setInitActions = _g[1];
+    var _h = (0, import_react24.useState)(true), isEligible = _h[0], setIsEligible = _h[1];
+    var _j = (0, import_react24.useState)(null), setErrorState = _j[1];
+    function closeButtonsComponent() {
+      if (buttons.current !== null) {
+        buttons.current.close().catch(function() {
+        });
+      }
+    }
+    if ((_b = buttons.current) === null || _b === void 0 ? void 0 : _b.updateProps) {
+      buttons.current.updateProps({
+        message: buttonProps.message
+      });
+    }
+    (0, import_react24.useEffect)(function() {
+      if (isResolved === false) {
+        return closeButtonsComponent;
+      }
+      var paypalWindowNamespace = getPayPalWindowNamespace$1(options.dataNamespace);
+      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Buttons === void 0) {
+        setErrorState(function() {
+          throw new Error(generateErrorMessage({
+            reactComponentName: PayPalButtons.displayName,
+            sdkComponentKey: "buttons",
+            sdkRequestedComponents: options.components,
+            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
+          }));
+        });
+        return closeButtonsComponent;
+      }
+      var decoratedOnInit = function(data2, actions) {
+        setInitActions(actions);
+        if (typeof buttonProps.onInit === "function") {
+          buttonProps.onInit(data2, actions);
+        }
+      };
+      try {
+        buttons.current = paypalWindowNamespace.Buttons(__assign(__assign({}, proxyProps), {
+          onInit: decoratedOnInit
+        }));
+      } catch (err) {
+        return setErrorState(function() {
+          throw new Error("Failed to render <PayPalButtons /> component. Failed to initialize:  ".concat(err));
+        });
+      }
+      if (buttons.current.isEligible() === false) {
+        setIsEligible(false);
+        return closeButtonsComponent;
+      }
+      if (!buttonsContainerRef.current) {
+        return closeButtonsComponent;
+      }
+      buttons.current.render(buttonsContainerRef.current).catch(function(err) {
+        if (buttonsContainerRef.current === null || buttonsContainerRef.current.children.length === 0) {
+          return;
+        }
+        setErrorState(function() {
+          throw new Error("Failed to render <PayPalButtons /> component. ".concat(err));
+        });
+      });
+      return closeButtonsComponent;
+    }, __spreadArray(__spreadArray([isResolved], forceReRender, true), [buttonProps.fundingSource], false));
+    (0, import_react24.useEffect)(function() {
+      if (initActions === null) {
+        return;
+      }
+      if (disabled === true) {
+        initActions.disable().catch(function() {
+        });
+      } else {
+        initActions.enable().catch(function() {
+        });
+      }
+    }, [disabled, initActions]);
+    return import_react24.default.createElement(import_react24.default.Fragment, null, isEligible ? import_react24.default.createElement("div", {
+      ref: buttonsContainerRef,
+      style: isDisabledStyle,
+      className: classNames
+    }) : children);
+  };
+  PayPalButtons.displayName = "PayPalButtons";
+  var PayPalMarks = function(_a2) {
+    var _b = _a2.className, className = _b === void 0 ? "" : _b, children = _a2.children, markProps = __rest$1(_a2, ["className", "children"]);
+    var _c = usePayPalScriptReducer()[0], isResolved = _c.isResolved, options = _c.options;
+    var markContainerRef = (0, import_react24.useRef)(null);
+    var _d = (0, import_react24.useState)(true), isEligible = _d[0], setIsEligible = _d[1];
+    var _e = (0, import_react24.useState)(null), setErrorState = _e[1];
+    var renderPayPalMark = function(mark) {
+      var current = markContainerRef.current;
+      if (!current || !mark.isEligible()) {
+        return setIsEligible(false);
+      }
+      if (current.firstChild) {
+        current.removeChild(current.firstChild);
+      }
+      mark.render(current).catch(function(err) {
+        if (current === null || current.children.length === 0) {
+          return;
+        }
+        setErrorState(function() {
+          throw new Error("Failed to render <PayPalMarks /> component. ".concat(err));
+        });
+      });
+    };
+    (0, import_react24.useEffect)(function() {
+      if (isResolved === false) {
+        return;
+      }
+      var paypalWindowNamespace = getPayPalWindowNamespace$1(options[SDK_SETTINGS.DATA_NAMESPACE]);
+      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Marks === void 0) {
+        return setErrorState(function() {
+          throw new Error(generateErrorMessage({
+            reactComponentName: PayPalMarks.displayName,
+            sdkComponentKey: "marks",
+            sdkRequestedComponents: options.components,
+            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
+          }));
+        });
+      }
+      renderPayPalMark(paypalWindowNamespace.Marks(__assign({}, markProps)));
+    }, [isResolved, markProps.fundingSource]);
+    return import_react24.default.createElement(import_react24.default.Fragment, null, isEligible ? import_react24.default.createElement("div", {
+      ref: markContainerRef,
+      className
+    }) : children);
+  };
+  PayPalMarks.displayName = "PayPalMarks";
+  var PayPalMessages = function(_a2) {
+    var _b = _a2.className, className = _b === void 0 ? "" : _b, _c = _a2.forceReRender, forceReRender = _c === void 0 ? [] : _c, messageProps = __rest$1(_a2, ["className", "forceReRender"]);
+    var _d = usePayPalScriptReducer()[0], isResolved = _d.isResolved, options = _d.options;
+    var messagesContainerRef = (0, import_react24.useRef)(null);
+    var messages = (0, import_react24.useRef)(null);
+    var _e = (0, import_react24.useState)(null), setErrorState = _e[1];
+    (0, import_react24.useEffect)(function() {
+      if (isResolved === false) {
+        return;
+      }
+      var paypalWindowNamespace = getPayPalWindowNamespace$1(options[SDK_SETTINGS.DATA_NAMESPACE]);
+      if (paypalWindowNamespace === void 0 || paypalWindowNamespace.Messages === void 0) {
+        return setErrorState(function() {
+          throw new Error(generateErrorMessage({
+            reactComponentName: PayPalMessages.displayName,
+            sdkComponentKey: "messages",
+            sdkRequestedComponents: options.components,
+            sdkDataNamespace: options[SDK_SETTINGS.DATA_NAMESPACE]
+          }));
+        });
+      }
+      messages.current = paypalWindowNamespace.Messages(__assign({}, messageProps));
+      messages.current.render(messagesContainerRef.current).catch(function(err) {
+        if (messagesContainerRef.current === null || messagesContainerRef.current.children.length === 0) {
+          return;
+        }
+        setErrorState(function() {
+          throw new Error("Failed to render <PayPalMessages /> component. ".concat(err));
+        });
+      });
+    }, __spreadArray([isResolved], forceReRender, true));
+    return import_react24.default.createElement("div", {
+      ref: messagesContainerRef,
+      className
+    });
+  };
+  PayPalMessages.displayName = "PayPalMessages";
+  function ignore() {
+    return;
+  }
+  var PayPalCardFieldsContext = (0, import_react24.createContext)({
+    cardFieldsForm: null,
+    fields: {},
+    registerField: ignore,
+    unregisterField: ignore
+    // implementation is inside hook and passed through the provider
+  });
+  var FUNDING$1 = {
+    PAYPAL: "paypal",
+    VENMO: "venmo",
+    APPLEPAY: "applepay",
+    ITAU: "itau",
+    CREDIT: "credit",
+    PAYLATER: "paylater",
+    CARD: "card",
+    IDEAL: "ideal",
+    SEPA: "sepa",
+    BANCONTACT: "bancontact",
+    GIROPAY: "giropay",
+    SOFORT: "sofort",
+    EPS: "eps",
+    MYBANK: "mybank",
+    P24: "p24",
+    PAYU: "payu",
+    BLIK: "blik",
+    TRUSTLY: "trustly",
+    OXXO: "oxxo",
+    BOLETO: "boleto",
+    BOLETOBANCARIO: "boletobancario",
+    WECHATPAY: "wechatpay",
+    MERCADOPAGO: "mercadopago",
+    MULTIBANCO: "multibanco",
+    SATISPAY: "satispay",
+    PAIDY: "paidy",
+    ZIMPLER: "zimpler",
+    MAXIMA: "maxima"
+  };
+  [FUNDING$1.IDEAL, FUNDING$1.BANCONTACT, FUNDING$1.GIROPAY, FUNDING$1.SOFORT, FUNDING$1.EPS, FUNDING$1.MYBANK, FUNDING$1.P24, FUNDING$1.PAYU, FUNDING$1.BLIK, FUNDING$1.TRUSTLY, FUNDING$1.OXXO, FUNDING$1.BOLETO, FUNDING$1.BOLETOBANCARIO, FUNDING$1.WECHATPAY, FUNDING$1.MERCADOPAGO, FUNDING$1.MULTIBANCO, FUNDING$1.SATISPAY, FUNDING$1.PAIDY, FUNDING$1.MAXIMA, FUNDING$1.ZIMPLER];
+
+  // src/components/Checkout.js
+  var stripePromise2 = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
+  // src/components/ContactSection.js
+  var import_react26 = __toESM(require_react());
+  var DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID;
+  var CONTACT_COLLECTION_ID = process.env.REACT_APP_APPWRITE_CONTACT_COLLECTION_ID;
+  var GALLERY_COLLECTION_ID = process.env.REACT_APP_APPWRITE_GALLERY_COLLECTION_ID;
+  var BUCKET_ID = process.env.REACT_APP_APPWRITE_BUCKET_ID;
+
+  // src/views/UserDashboardView.js
+  var import_react27 = __toESM(require_react());
+  var import_prop_types8 = __toESM(require_prop_types());
+  var formatDateTime2 = (isoString) => {
+    const date = new Date(isoString);
+    return {
+      date: date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+      time: date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
+    };
+  };
+  var UserDashboardView = ({ setView: setView2 }) => {
+    const { currentUser, userId } = useAuth();
+    const { bookings, cancelBooking, isLoading, bookingMessage } = useBooking();
+    const handleCancelBooking = async (bookingId) => {
+      if (window.confirm("Are you sure you want to cancel this booking?")) {
+        await cancelBooking(bookingId);
+      }
+    };
+    if (!currentUser) {
+      return /* @__PURE__ */ import_react27.default.createElement("div", { className: "container mx-auto p-8 text-center animate-fade-in" }, /* @__PURE__ */ import_react27.default.createElement(User, { className: "w-24 h-24 text-gray-400 mx-auto mb-6" }), /* @__PURE__ */ import_react27.default.createElement("h2", { className: "text-3xl font-bold text-gray-800 mb-4" }, "Access Denied"), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600 mb-6" }, "Please log in to view your dashboard."), /* @__PURE__ */ import_react27.default.createElement(
+        "button",
+        {
+          onClick: () => setView2("login"),
+          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
+        },
+        "Log In"
+      ));
+    }
+    return /* @__PURE__ */ import_react27.default.createElement("div", { className: "container mx-auto p-4 animate-fade-in" }, /* @__PURE__ */ import_react27.default.createElement("h2", { className: "text-4xl font-bold text-center text-gray-800 mb-8" }, "Your Dashboard"), /* @__PURE__ */ import_react27.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6 mb-8 flex items-center space-x-6" }, /* @__PURE__ */ import_react27.default.createElement("div", { className: "w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0" }, /* @__PURE__ */ import_react27.default.createElement(User, { className: "w-10 h-10 text-purple-500" })), /* @__PURE__ */ import_react27.default.createElement("div", null, /* @__PURE__ */ import_react27.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-2" }, "Welcome, ", currentUser.name || currentUser.email.split("@")[0], "!"), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600" }, "Email: ", /* @__PURE__ */ import_react27.default.createElement("span", { className: "font-semibold" }, currentUser.email)), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600" }, "User ID: ", /* @__PURE__ */ import_react27.default.createElement("span", { className: "font-mono text-sm" }, userId)), /* @__PURE__ */ import_react27.default.createElement("button", { className: "mt-4 bg-purple-100 text-purple-700 py-2 px-4 rounded-full hover:bg-purple-200 transition duration-300" }, "Edit Profile"))), /* @__PURE__ */ import_react27.default.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8" }, /* @__PURE__ */ import_react27.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react27.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react27.default.createElement(CalendarCheck, { className: "mr-3 text-pink-500" }), " My Bookings"), isLoading ? /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-center text-gray-500" }, "Loading bookings...") : bookings.length === 0 ? /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600 text-center" }, "You have no upcoming bookings.") : /* @__PURE__ */ import_react27.default.createElement("div", { className: "divide-y divide-gray-200" }, bookings.map((booking) => {
+      const { date, time } = formatDateTime2(booking.dateTime);
+      return /* @__PURE__ */ import_react27.default.createElement("div", { key: booking.id, className: "py-4" }, /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-lg font-semibold text-gray-800" }, booking.serviceName), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600" }, "Staff: ", booking.staffName), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600" }, "Date: ", date), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600" }, "Time: ", time), /* @__PURE__ */ import_react27.default.createElement("p", { className: `font-semibold ${booking.status === "confirmed" ? "text-green-600" : booking.status === "pending" ? "text-orange-500" : "text-red-600"}` }, "Status: ", booking.status.charAt(0).toUpperCase() + booking.status.slice(1)), /* @__PURE__ */ import_react27.default.createElement(
+        "button",
+        {
+          onClick: () => handleCancelBooking(booking.id),
+          className: "mt-2 bg-red-500 hover:bg-red-600 text-white text-sm py-1 px-3 rounded-lg transition duration-300",
+          disabled: isLoading
+        },
+        isLoading ? "Cancelling..." : "Cancel Booking"
+      ));
+    })), bookingMessage && /* @__PURE__ */ import_react27.default.createElement("p", { className: `mt-4 text-center ${bookingMessage.includes("successful") ? "text-green-600" : "text-red-600"} font-semibold` }, bookingMessage)), /* @__PURE__ */ import_react27.default.createElement("div", { className: "bg-white rounded-lg shadow-xl p-6" }, /* @__PURE__ */ import_react27.default.createElement("h3", { className: "text-2xl font-bold text-gray-800 mb-6 flex items-center" }, /* @__PURE__ */ import_react27.default.createElement(Package, { className: "mr-3 text-blue-500" }), " My Orders"), /* @__PURE__ */ import_react27.default.createElement("p", { className: "text-gray-600 text-center mb-4" }, "This section will display your past product orders.", /* @__PURE__ */ import_react27.default.createElement("br", null), " (Feature coming soon!)"), /* @__PURE__ */ import_react27.default.createElement(
+      "button",
+      {
+        onClick: () => setView2("products"),
+        className: "w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
+      },
+      "Browse Products"
+    ))));
+  };
+  UserDashboardView.propTypes = {
+    setView: import_prop_types8.default.func.isRequired
+  };
+
+  // src/components/PaymentView.js
+  var import_react28 = __toESM(require_react());
+  var import_react_stripe_js2 = __toESM(require_react_stripe_umd());
+  var stripePromise3 = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
+  // src/components/ServiceCard.js
+  var import_react29 = __toESM(require_react());
+
+  // src/context/AdminContext.js
+  var import_react30 = __toESM(require_react());
+  var AdminContext = (0, import_react30.createContext)();
+
   // src/main.js
   var MainApp = () => {
-    return /* @__PURE__ */ import_react7.default.createElement(HomePage_default, null);
+    return /* @__PURE__ */ import_react32.default.createElement(HomePage_default, null);
   };
   var rootElement = document.getElementById("root");
   if (rootElement) {
     const root = import_client.default.createRoot(rootElement);
     root.render(
-      /* @__PURE__ */ import_react7.default.createElement(import_react7.default.StrictMode, null, /* @__PURE__ */ import_react7.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react7.default.createElement(MainApp, null)))
+      /* @__PURE__ */ import_react32.default.createElement(import_react32.default.StrictMode, null, /* @__PURE__ */ import_react32.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react32.default.createElement(MainApp, null)))
     );
   } else {
     console.error('Root element with ID "root" not found in the document.');
@@ -22751,11 +26300,18 @@ lucide-react/dist/esm/shared/src/utils.js:
 lucide-react/dist/esm/defaultAttributes.js:
 lucide-react/dist/esm/Icon.js:
 lucide-react/dist/esm/createLucideIcon.js:
+lucide-react/dist/esm/icons/calendar-check.js:
+lucide-react/dist/esm/icons/circle-check-big.js:
+lucide-react/dist/esm/icons/circle-minus.js:
+lucide-react/dist/esm/icons/circle-plus.js:
+lucide-react/dist/esm/icons/circle-x.js:
 lucide-react/dist/esm/icons/facebook.js:
+lucide-react/dist/esm/icons/house.js:
 lucide-react/dist/esm/icons/instagram.js:
 lucide-react/dist/esm/icons/layout-dashboard.js:
 lucide-react/dist/esm/icons/log-out.js:
 lucide-react/dist/esm/icons/menu.js:
+lucide-react/dist/esm/icons/package.js:
 lucide-react/dist/esm/icons/shopping-cart.js:
 lucide-react/dist/esm/icons/twitter.js:
 lucide-react/dist/esm/icons/user.js:
@@ -22779,5 +26335,23 @@ react-router/dist/development/index.mjs:
    * LICENSE.md file in the root directory of this source tree.
    *
    * @license MIT
+   *)
+
+@paypal/react-paypal-js/dist/esm/react-paypal-js.js:
+  (*!
+   * react-paypal-js v8.8.3 (2025-04-11T19:50:46.506Z)
+   * Copyright 2020-present, PayPal, Inc. All rights reserved.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * https://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
    *)
 */
