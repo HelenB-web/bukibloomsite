@@ -2390,9 +2390,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React42 = require_react();
+          var React41 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React42.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React41.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3999,7 +3999,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React42.Children.forEach(props.children, function(child) {
+                  React41.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -24873,274 +24873,6 @@
     }
   });
 
-  // src/assets/Images/logo.png
-  var logo_default;
-  var init_logo = __esm({
-    "src/assets/Images/logo.png"() {
-      logo_default = "./logo-55DNWN2R.png";
-    }
-  });
-
-  // src/components/Header.js
-  var import_react3, import_prop_types, Header, Header_default;
-  var init_Header = __esm({
-    "src/components/Header.js"() {
-      import_react3 = __toESM(require_react());
-      import_prop_types = __toESM(require_prop_types());
-      init_lucide_react();
-      init_logo();
-      Header = ({ cartItemCount, currentUser, onAuthClick, onSignOut, onCartClick, setView: setView2 }) => {
-        const [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react3.useState)(false);
-        const [isScrolled, setIsScrolled] = (0, import_react3.useState)(false);
-        (0, import_react3.useEffect)(() => {
-          const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-          };
-          window.addEventListener("scroll", handleScroll);
-          return () => window.removeEventListener("scroll", handleScroll);
-        }, []);
-        const toggleMobileMenu = () => {
-          setIsMobileMenuOpen(!isMobileMenuOpen);
-        };
-        const handleNavigationClick = (viewName) => {
-          setView2(viewName);
-          setIsMobileMenuOpen(false);
-        };
-        return /* @__PURE__ */ import_react3.default.createElement(
-          "header",
-          {
-            className: `bg-white px-4 py-4 z-50 rounded-b-xl transition-all duration-300 ${isScrolled ? "sticky top-0 shadow-md" : "relative"}`
-          },
-          /* @__PURE__ */ import_react3.default.createElement("div", { className: "container mx-auto max-w-screen-xl flex justify-between items-center" }, /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: () => handleNavigationClick("home"),
-              className: "flex items-center space-x-2 focus:outline-none",
-              "aria-label": "Go to home page"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(
-              "img",
-              {
-                src: logo_default,
-                alt: "Bukibloom Logo",
-                className: `h-10 sm:h-12 w-auto transition-all duration-300 ${isScrolled ? "opacity-90 scale-95" : "opacity-100 scale-100"}`,
-                title: "Bukibloom"
-              }
-            ),
-            /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl sm:text-3xl font-bold text-purple-700" }, "BUKIBLOOM")
-          ), /* @__PURE__ */ import_react3.default.createElement("nav", { className: "hidden md:flex flex-wrap space-x-6 items-center" }, ["home", "services", "products", "booking", "contact", "cart", "login", "register"].map((view) => /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              key: view,
-              onClick: () => handleNavigationClick(view),
-              className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300 capitalize"
-            },
-            view === "booking" ? "Book Now" : view
-          )), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: () => handleNavigationClick("dashboard"),
-              className: "text-gray-700 hover:text-purple-600 transition duration-300 flex items-center"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-1" }),
-            " Dashboard"
-          ), /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onSignOut,
-              className: "text-red-500 hover:text-red-600 transition duration-300 flex items-center"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-1" }),
-            " Sign Out"
-          )) : /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onAuthClick,
-              className: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 flex items-center"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-1" }),
-            " Sign In / Sign Up"
-          ), /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onCartClick,
-              className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
-              "aria-label": "View shopping cart"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 hover:text-purple-700" }),
-            cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
-          )), /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden flex items-center space-x-4" }, /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onCartClick,
-              className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
-              "aria-label": "View shopping cart"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 hover:text-purple-700" }),
-            cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
-          ), /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: toggleMobileMenu,
-              className: "text-gray-600 hover:text-purple-700 focus:outline-none",
-              "aria-label": "Toggle mobile menu"
-            },
-            isMobileMenuOpen ? /* @__PURE__ */ import_react3.default.createElement(X, { className: "w-6 h-6" }) : /* @__PURE__ */ import_react3.default.createElement(Menu, { className: "w-6 h-6" })
-          ))),
-          isMobileMenuOpen && /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden absolute top-20 left-0 w-full bg-white shadow-lg py-4 px-4 animate-slide-down" }, /* @__PURE__ */ import_react3.default.createElement("nav", { className: "flex flex-col space-y-4" }, ["home", "services", "products", "booking", "contact"].map((view) => /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              key: view,
-              onClick: () => handleNavigationClick(view),
-              className: "w-full text-gray-600 hover:bg-gray-100 py-2 text-base text-left"
-            },
-            view === "booking" ? "Book Now" : view
-          )), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: () => handleNavigationClick("dashboard"),
-              className: "w-full text-gray-700 hover:bg-gray-100 py-2 text-left"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-2 inline-block" }),
-            " Dashboard"
-          ), /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onSignOut,
-              className: "w-full text-red-500 hover:bg-gray-100 py-2 text-left"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-2 inline-block" }),
-            " Sign Out"
-          )) : /* @__PURE__ */ import_react3.default.createElement(
-            "button",
-            {
-              onClick: onAuthClick,
-              className: "w-full bg-purple-600 text-white py-2 px-4 rounded-full mt-2"
-            },
-            /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-2 inline-block" }),
-            " Sign In / Sign Up"
-          )))
-        );
-      };
-      Header.propTypes = {
-        cartItemCount: import_prop_types.default.number.isRequired,
-        currentUser: import_prop_types.default.object,
-        onAuthClick: import_prop_types.default.func.isRequired,
-        onSignOut: import_prop_types.default.func.isRequired,
-        onCartClick: import_prop_types.default.func.isRequired,
-        setView: import_prop_types.default.func.isRequired
-      };
-      Header_default = Header;
-    }
-  });
-
-  // src/components/HeroSection.js
-  var import_react4, import_prop_types2, HeroSection, HeroSection_default;
-  var init_HeroSection = __esm({
-    "src/components/HeroSection.js"() {
-      import_react4 = __toESM(require_react());
-      import_prop_types2 = __toESM(require_prop_types());
-      init_logo();
-      HeroSection = ({
-        heading,
-        subheading,
-        bookButtonText,
-        onBookClick,
-        shopButtonText,
-        onShopClick,
-        backgroundImage
-      }) => {
-        return /* @__PURE__ */ import_react4.default.createElement(
-          "div",
-          {
-            className: "relative text-center py-16 px-4 sm:px-6 lg:px-8 bg-cover bg-center rounded-lg shadow-xl mb-12 overflow-hidden",
-            style: { backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none" }
-          },
-          backgroundImage && /* @__PURE__ */ import_react4.default.createElement("div", { className: "absolute inset-0 bg-black opacity-50" }),
-          /* @__PURE__ */ import_react4.default.createElement("div", { className: "relative z-10 text-white flex flex-col items-center justify-center" }, /* @__PURE__ */ import_react4.default.createElement(
-            "img",
-            {
-              src: logo_default,
-              alt: "Bukibloom Logo",
-              className: "h-12 md:h-16 w-auto mb-6",
-              title: "Bukibloom"
-            }
-          ), /* @__PURE__ */ import_react4.default.createElement("h1", { className: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight" }, heading), /* @__PURE__ */ import_react4.default.createElement("p", { className: "text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 px-2" }, subheading), /* @__PURE__ */ import_react4.default.createElement("div", { className: "flex flex-wrap justify-center gap-4" }, /* @__PURE__ */ import_react4.default.createElement(
-            "button",
-            {
-              onClick: onBookClick,
-              title: "Book your appointment",
-              className: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-            },
-            bookButtonText
-          ), /* @__PURE__ */ import_react4.default.createElement(
-            "button",
-            {
-              onClick: onShopClick,
-              title: "Browse our products",
-              className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
-            },
-            shopButtonText
-          )))
-        );
-      };
-      HeroSection.propTypes = {
-        heading: import_prop_types2.default.string.isRequired,
-        subheading: import_prop_types2.default.string.isRequired,
-        bookButtonText: import_prop_types2.default.string,
-        onBookClick: import_prop_types2.default.func,
-        shopButtonText: import_prop_types2.default.string,
-        onShopClick: import_prop_types2.default.func,
-        backgroundImage: import_prop_types2.default.string
-      };
-      HeroSection.defaultProps = {
-        bookButtonText: "Book Now",
-        shopButtonText: "Shop Products"
-      };
-      HeroSection_default = HeroSection;
-    }
-  });
-
-  // src/components/Footer.js
-  var import_react5, Footer, Footer_default;
-  var init_Footer = __esm({
-    "src/components/Footer.js"() {
-      import_react5 = __toESM(require_react());
-      init_lucide_react();
-      init_logo();
-      Footer = () => {
-        const socialLinks = [
-          { name: "Facebook", href: "https://facebook.com/bukibloom", Icon: Facebook },
-          { name: "Instagram", href: "https://instagram.com/bukibloom", Icon: Instagram },
-          { name: "Twitter", href: "https://twitter.com/bukibloom", Icon: Twitter }
-        ];
-        return /* @__PURE__ */ import_react5.default.createElement("footer", { className: "bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-xl" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "container mx-auto flex flex-col items-center text-center space-y-6 md:space-y-4" }, /* @__PURE__ */ import_react5.default.createElement(
-          "img",
-          {
-            src: logo_default,
-            alt: "Bukibloom Logo",
-            className: "h-12 md:h-14 w-auto",
-            title: "Bukibloom"
-          }
-        ), /* @__PURE__ */ import_react5.default.createElement("p", { className: "text-base md:text-lg font-semibold" }, "\xA9 ", (/* @__PURE__ */ new Date()).getFullYear(), " BukiBloom. All rights reserved."), /* @__PURE__ */ import_react5.default.createElement("div", { className: "flex flex-wrap justify-center gap-6" }, socialLinks.map(({ name, href, Icon: Icon2 }) => /* @__PURE__ */ import_react5.default.createElement(
-          "a",
-          {
-            key: name,
-            href,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            title: name,
-            className: "text-gray-400 hover:text-white transition duration-300 transform hover:scale-110",
-            "aria-label": name
-          },
-          /* @__PURE__ */ import_react5.default.createElement(Icon2, { size: 24 }),
-          /* @__PURE__ */ import_react5.default.createElement("span", { className: "sr-only" }, name)
-        ))), /* @__PURE__ */ import_react5.default.createElement("p", { className: "text-sm text-gray-400 px-2" }, "Designed with ", /* @__PURE__ */ import_react5.default.createElement("span", { className: "text-red-400" }, "\u2665"), " for your beauty needs.")));
-      };
-      Footer_default = Footer;
-    }
-  });
-
   // src/context/AuthContext.js
   var import_react7, import_prop_types3, AuthContext, useAppwrite, AuthProvider, useAuth;
   var init_AuthContext = __esm({
@@ -26686,7 +26418,7 @@
     "node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"(exports, module) {
       (function(global, factory) {
         typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require_react()) : typeof define === "function" && define.amd ? define(["exports", "react"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.ReactStripe = {}, global.React));
-      })(exports, (function(exports2, React42) {
+      })(exports, (function(exports2, React41) {
         "use strict";
         function ownKeys(object, enumerableOnly) {
           var keys = Object.keys(object);
@@ -26888,11 +26620,11 @@
         var PropTypes9 = /* @__PURE__ */ getDefaultExportFromCjs(propTypesExports);
         var useAttachEvent = function useAttachEvent2(element, event, cb) {
           var cbDefined = !!cb;
-          var cbRef = React42.useRef(cb);
-          React42.useEffect(function() {
+          var cbRef = React41.useRef(cb);
+          React41.useEffect(function() {
             cbRef.current = cb;
           }, [cb]);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (!cbDefined || !element) {
               return function() {
               };
@@ -26909,8 +26641,8 @@
           }, [cbDefined, event, element, cbRef]);
         };
         var usePrevious = function usePrevious2(value) {
-          var ref = React42.useRef(value);
-          React42.useEffect(function() {
+          var ref = React41.useRef(value);
+          React41.useEffect(function() {
             ref.current = value;
           }, [value]);
           return ref.current;
@@ -27018,7 +26750,7 @@
             url: "https://stripe.com/docs/stripe-js/react"
           });
         };
-        var ElementsContext = /* @__PURE__ */ React42.createContext(null);
+        var ElementsContext = /* @__PURE__ */ React41.createContext(null);
         ElementsContext.displayName = "ElementsContext";
         var parseElementsContext = function parseElementsContext2(ctx, useCase) {
           if (!ctx) {
@@ -27028,16 +26760,16 @@
         };
         var Elements3 = function Elements4(_ref) {
           var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React42.useMemo(function() {
+          var parsed = React41.useMemo(function() {
             return parseStripeProp(rawStripeProp);
           }, [rawStripeProp]);
-          var _React$useState = React42.useState(function() {
+          var _React$useState = React41.useState(function() {
             return {
               stripe: parsed.tag === "sync" ? parsed.stripe : null,
               elements: parsed.tag === "sync" ? parsed.stripe.elements(options) : null
             };
           }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             var isMounted = true;
             var safeSetContext = function safeSetContext2(stripe) {
               setContext(function(ctx2) {
@@ -27062,13 +26794,13 @@
             };
           }, [parsed, ctx, options]);
           var prevStripe = usePrevious(rawStripeProp);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (prevStripe !== null && prevStripe !== rawStripeProp) {
               console.warn("Unsupported prop change on Elements: You cannot change the `stripe` prop after setting it.");
             }
           }, [prevStripe, rawStripeProp]);
           var prevOptions = usePrevious(options);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (!ctx.elements) {
               return;
             }
@@ -27077,10 +26809,10 @@
               ctx.elements.update(updates);
             }
           }, [options, prevOptions, ctx.elements]);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             registerWithStripeJs(ctx.stripe);
           }, [ctx.stripe]);
-          return /* @__PURE__ */ React42.createElement(ElementsContext.Provider, {
+          return /* @__PURE__ */ React41.createElement(ElementsContext.Provider, {
             value: ctx
           }, children);
         };
@@ -27089,7 +26821,7 @@
           options: PropTypes9.object
         };
         var useElementsContextWithUseCase = function useElementsContextWithUseCase2(useCaseMessage) {
-          var ctx = React42.useContext(ElementsContext);
+          var ctx = React41.useContext(ElementsContext);
           return parseElementsContext(ctx, useCaseMessage);
         };
         var useElements3 = function useElements4() {
@@ -27105,7 +26837,7 @@
           children: PropTypes9.func.isRequired
         };
         var _excluded$1 = ["on", "session"];
-        var CheckoutSdkContext = /* @__PURE__ */ React42.createContext(null);
+        var CheckoutSdkContext = /* @__PURE__ */ React41.createContext(null);
         CheckoutSdkContext.displayName = "CheckoutSdkContext";
         var parseCheckoutSdkContext = function parseCheckoutSdkContext2(ctx, useCase) {
           if (!ctx) {
@@ -27113,7 +26845,7 @@
           }
           return ctx;
         };
-        var CheckoutContext = /* @__PURE__ */ React42.createContext(null);
+        var CheckoutContext = /* @__PURE__ */ React41.createContext(null);
         CheckoutContext.displayName = "CheckoutContext";
         var extractCheckoutContextValue = function extractCheckoutContextValue2(checkoutSdk, sessionState) {
           if (!checkoutSdk) {
@@ -27130,11 +26862,11 @@
         var INVALID_STRIPE_ERROR$1 = "Invalid prop `stripe` supplied to `CheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
         var CheckoutProvider = function CheckoutProvider2(_ref) {
           var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React42.useMemo(function() {
+          var parsed = React41.useMemo(function() {
             return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR$1);
           }, [rawStripeProp]);
-          var _React$useState = React42.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), session = _React$useState2[0], setSession = _React$useState2[1];
-          var _React$useState3 = React42.useState(function() {
+          var _React$useState = React41.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), session = _React$useState2[0], setSession = _React$useState2[1];
+          var _React$useState3 = React41.useState(function() {
             return {
               stripe: parsed.tag === "sync" ? parsed.stripe : null,
               checkoutSdk: null
@@ -27151,8 +26883,8 @@
               };
             });
           };
-          var initCheckoutCalledRef = React42.useRef(false);
-          React42.useEffect(function() {
+          var initCheckoutCalledRef = React41.useRef(false);
+          React41.useEffect(function() {
             var isMounted = true;
             if (parsed.tag === "async" && !ctx.stripe) {
               parsed.stripePromise.then(function(stripe) {
@@ -27180,14 +26912,14 @@
             };
           }, [parsed, ctx, options, setSession]);
           var prevStripe = usePrevious(rawStripeProp);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (prevStripe !== null && prevStripe !== rawStripeProp) {
               console.warn("Unsupported prop change on CheckoutProvider: You cannot change the `stripe` prop after setting it.");
             }
           }, [prevStripe, rawStripeProp]);
           var prevOptions = usePrevious(options);
           var prevCheckoutSdk = usePrevious(ctx.checkoutSdk);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             var _prevOptions$elements, _options$elementsOpti, _prevOptions$elements2, _options$elementsOpti2;
             if (!ctx.checkoutSdk) {
               return;
@@ -27206,18 +26938,18 @@
               ctx.checkoutSdk.loadFonts(currentFonts);
             }
           }, [options, prevOptions, ctx.checkoutSdk, prevCheckoutSdk]);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             registerWithStripeJs(ctx.stripe);
           }, [ctx.stripe]);
-          var checkoutContextValue = React42.useMemo(function() {
+          var checkoutContextValue = React41.useMemo(function() {
             return extractCheckoutContextValue(ctx.checkoutSdk, session);
           }, [ctx.checkoutSdk, session]);
           if (!ctx.checkoutSdk) {
             return null;
           }
-          return /* @__PURE__ */ React42.createElement(CheckoutSdkContext.Provider, {
+          return /* @__PURE__ */ React41.createElement(CheckoutSdkContext.Provider, {
             value: ctx
-          }, /* @__PURE__ */ React42.createElement(CheckoutContext.Provider, {
+          }, /* @__PURE__ */ React41.createElement(CheckoutContext.Provider, {
             value: checkoutContextValue
           }, children));
         };
@@ -27229,12 +26961,12 @@
           }).isRequired
         };
         var useCheckoutSdkContextWithUseCase = function useCheckoutSdkContextWithUseCase2(useCaseString) {
-          var ctx = React42.useContext(CheckoutSdkContext);
+          var ctx = React41.useContext(CheckoutSdkContext);
           return parseCheckoutSdkContext(ctx, useCaseString);
         };
         var useElementsOrCheckoutSdkContextWithUseCase = function useElementsOrCheckoutSdkContextWithUseCase2(useCaseString) {
-          var checkoutSdkContext = React42.useContext(CheckoutSdkContext);
-          var elementsContext = React42.useContext(ElementsContext);
+          var checkoutSdkContext = React41.useContext(CheckoutSdkContext);
+          var elementsContext = React41.useContext(ElementsContext);
           if (checkoutSdkContext && elementsContext) {
             throw new Error("You cannot wrap the part of your app that ".concat(useCaseString, " in both <CheckoutProvider> and <Elements> providers."));
           }
@@ -27245,7 +26977,7 @@
         };
         var useCheckout = function useCheckout2() {
           useCheckoutSdkContextWithUseCase("calls useCheckout()");
-          var ctx = React42.useContext(CheckoutContext);
+          var ctx = React41.useContext(CheckoutContext);
           if (!ctx) {
             throw new Error("Could not find Checkout Context; You need to wrap the part of your app that calls useCheckout() in an <CheckoutProvider> provider.");
           }
@@ -27262,9 +26994,9 @@
             var ctx = useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
             var elements = "elements" in ctx ? ctx.elements : null;
             var checkoutSdk = "checkoutSdk" in ctx ? ctx.checkoutSdk : null;
-            var _React$useState = React42.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), element = _React$useState2[0], setElement = _React$useState2[1];
-            var elementRef = React42.useRef(null);
-            var domNode = React42.useRef(null);
+            var _React$useState = React41.useState(null), _React$useState2 = _slicedToArray(_React$useState, 2), element = _React$useState2[0], setElement = _React$useState2[1];
+            var elementRef = React41.useRef(null);
+            var domNode = React41.useRef(null);
             useAttachEvent(element, "blur", onBlur);
             useAttachEvent(element, "focus", onFocus);
             useAttachEvent(element, "escape", onEscape);
@@ -27288,7 +27020,7 @@
               }
             }
             useAttachEvent(element, "ready", readyCallback);
-            React42.useLayoutEffect(function() {
+            React41.useLayoutEffect(function() {
               if (elementRef.current === null && domNode.current !== null && (elements || checkoutSdk)) {
                 var newElement = null;
                 if (checkoutSdk) {
@@ -27333,7 +27065,7 @@
               }
             }, [elements, checkoutSdk, options]);
             var prevOptions = usePrevious(options);
-            React42.useEffect(function() {
+            React41.useEffect(function() {
               if (!elementRef.current) {
                 return;
               }
@@ -27342,7 +27074,7 @@
                 elementRef.current.update(updates);
               }
             }, [options, prevOptions]);
-            React42.useLayoutEffect(function() {
+            React41.useLayoutEffect(function() {
               return function() {
                 if (elementRef.current && typeof elementRef.current.destroy === "function") {
                   try {
@@ -27353,7 +27085,7 @@
                 }
               };
             }, []);
-            return /* @__PURE__ */ React42.createElement("div", {
+            return /* @__PURE__ */ React41.createElement("div", {
               id,
               className,
               ref: domNode
@@ -27362,7 +27094,7 @@
           var ServerElement = function ServerElement2(props) {
             useElementsOrCheckoutSdkContextWithUseCase("mounts <".concat(displayName, ">"));
             var id = props.id, className = props.className;
-            return /* @__PURE__ */ React42.createElement("div", {
+            return /* @__PURE__ */ React41.createElement("div", {
               id,
               className
             });
@@ -27391,10 +27123,10 @@
           return Element;
         };
         var isServer = typeof window === "undefined";
-        var EmbeddedCheckoutContext = /* @__PURE__ */ React42.createContext(null);
+        var EmbeddedCheckoutContext = /* @__PURE__ */ React41.createContext(null);
         EmbeddedCheckoutContext.displayName = "EmbeddedCheckoutProviderContext";
         var useEmbeddedCheckoutContext = function useEmbeddedCheckoutContext2() {
-          var ctx = React42.useContext(EmbeddedCheckoutContext);
+          var ctx = React41.useContext(EmbeddedCheckoutContext);
           if (!ctx) {
             throw new Error("<EmbeddedCheckout> must be used within <EmbeddedCheckoutProvider>");
           }
@@ -27403,15 +27135,15 @@
         var INVALID_STRIPE_ERROR = "Invalid prop `stripe` supplied to `EmbeddedCheckoutProvider`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.";
         var EmbeddedCheckoutProvider = function EmbeddedCheckoutProvider2(_ref) {
           var rawStripeProp = _ref.stripe, options = _ref.options, children = _ref.children;
-          var parsed = React42.useMemo(function() {
+          var parsed = React41.useMemo(function() {
             return parseStripeProp(rawStripeProp, INVALID_STRIPE_ERROR);
           }, [rawStripeProp]);
-          var embeddedCheckoutPromise = React42.useRef(null);
-          var loadedStripe = React42.useRef(null);
-          var _React$useState = React42.useState({
+          var embeddedCheckoutPromise = React41.useRef(null);
+          var loadedStripe = React41.useRef(null);
+          var _React$useState = React41.useState({
             embeddedCheckout: null
           }), _React$useState2 = _slicedToArray(_React$useState, 2), ctx = _React$useState2[0], setContext = _React$useState2[1];
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (loadedStripe.current || embeddedCheckoutPromise.current) {
               return;
             }
@@ -27434,7 +27166,7 @@
               setStripeAndInitEmbeddedCheckout(parsed.stripe);
             }
           }, [parsed, options, ctx, loadedStripe]);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             return function() {
               if (ctx.embeddedCheckout) {
                 embeddedCheckoutPromise.current = null;
@@ -27449,17 +27181,17 @@
               }
             };
           }, [ctx.embeddedCheckout]);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             registerWithStripeJs(loadedStripe);
           }, [loadedStripe]);
           var prevStripe = usePrevious(rawStripeProp);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (prevStripe !== null && prevStripe !== rawStripeProp) {
               console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the `stripe` prop after setting it.");
             }
           }, [prevStripe, rawStripeProp]);
           var prevOptions = usePrevious(options);
-          React42.useEffect(function() {
+          React41.useEffect(function() {
             if (prevOptions == null) {
               return;
             }
@@ -27486,16 +27218,16 @@
               console.warn("Unsupported prop change on EmbeddedCheckoutProvider: You cannot change the onLineItemsChange option after setting it.");
             }
           }, [prevOptions, options]);
-          return /* @__PURE__ */ React42.createElement(EmbeddedCheckoutContext.Provider, {
+          return /* @__PURE__ */ React41.createElement(EmbeddedCheckoutContext.Provider, {
             value: ctx
           }, children);
         };
         var EmbeddedCheckoutClientElement = function EmbeddedCheckoutClientElement2(_ref) {
           var id = _ref.id, className = _ref.className;
           var _useEmbeddedCheckoutC = useEmbeddedCheckoutContext(), embeddedCheckout = _useEmbeddedCheckoutC.embeddedCheckout;
-          var isMounted = React42.useRef(false);
-          var domNode = React42.useRef(null);
-          React42.useLayoutEffect(function() {
+          var isMounted = React41.useRef(false);
+          var domNode = React41.useRef(null);
+          React41.useLayoutEffect(function() {
             if (!isMounted.current && embeddedCheckout && domNode.current !== null) {
               embeddedCheckout.mount(domNode.current);
               isMounted.current = true;
@@ -27510,7 +27242,7 @@
               }
             };
           }, [embeddedCheckout]);
-          return /* @__PURE__ */ React42.createElement("div", {
+          return /* @__PURE__ */ React41.createElement("div", {
             ref: domNode,
             id,
             className
@@ -27519,7 +27251,7 @@
         var EmbeddedCheckoutServerElement = function EmbeddedCheckoutServerElement2(_ref2) {
           var id = _ref2.id, className = _ref2.className;
           useEmbeddedCheckoutContext();
-          return /* @__PURE__ */ React42.createElement("div", {
+          return /* @__PURE__ */ React41.createElement("div", {
             id,
             className
           });
@@ -27649,47 +27381,13 @@
   });
 
   // src/components/HomePage.js
-  var HomePage_exports = {};
-  __export(HomePage_exports, {
-    default: () => HomePage_default
-  });
-  var import_react30, Homepage, HomePage_default;
-  var init_HomePage = __esm({
+  var require_HomePage = __commonJS({
     "src/components/HomePage.js"() {
-      import_react30 = __toESM(require_react());
-      init_Header();
-      init_HeroSection();
-      init_Footer();
-      Homepage = () => {
-        return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(
-          Header_default,
-          {
-            cartItemCount: 0,
-            currentUser: null,
-            onAuthClick: () => alert("Auth clicked"),
-            onSignOut: () => alert("Signed out"),
-            onCartClick: () => alert("Cart clicked"),
-            setView: (view) => console.log(`Navigating to ${view}`)
-          }
-        ), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, /* @__PURE__ */ import_react30.default.createElement(
-          HeroSection_default,
-          {
-            heading: "Welcome to Bukibloom",
-            subheading: "Experience the beauty of nature with our handcrafted floral designs.",
-            bookButtonText: "Book Now",
-            onBookClick: () => alert("Booking..."),
-            shopButtonText: "Shop Products",
-            onShopClick: () => alert("Shopping..."),
-            backgroundImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-          }
-        )), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null));
-      };
-      HomePage_default = Homepage;
     }
   });
 
   // src/main.js
-  var import_react35 = __toESM(require_react());
+  var import_react34 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // node_modules/react-router/dist/development/chunk-PVWAREVJ.mjs
@@ -30006,10 +29704,254 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // src/App.js
-  var import_react31 = __toESM(require_react());
-  init_Header();
-  init_HeroSection();
-  init_Footer();
+  var import_react30 = __toESM(require_react());
+
+  // src/components/Header.js
+  var import_react3 = __toESM(require_react());
+  var import_prop_types = __toESM(require_prop_types());
+  init_lucide_react();
+
+  // src/assets/Images/logo.png
+  var logo_default = "./logo-55DNWN2R.png";
+
+  // src/components/Header.js
+  var Header = ({ cartItemCount, currentUser, onAuthClick, onSignOut, onCartClick, setView: setView2 }) => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = (0, import_react3.useState)(false);
+    const [isScrolled, setIsScrolled] = (0, import_react3.useState)(false);
+    (0, import_react3.useEffect)(() => {
+      const handleScroll = () => {
+        setIsScrolled(window.scrollY > 50);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+    const toggleMobileMenu = () => {
+      setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+    const handleNavigationClick = (viewName) => {
+      setView2(viewName);
+      setIsMobileMenuOpen(false);
+    };
+    return /* @__PURE__ */ import_react3.default.createElement(
+      "header",
+      {
+        className: `bg-white px-4 py-4 z-50 rounded-b-xl transition-all duration-300 ${isScrolled ? "sticky top-0 shadow-md" : "relative"}`
+      },
+      /* @__PURE__ */ import_react3.default.createElement("div", { className: "container mx-auto max-w-screen-xl flex justify-between items-center" }, /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: () => handleNavigationClick("home"),
+          className: "flex items-center space-x-2 focus:outline-none",
+          "aria-label": "Go to home page"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(
+          "img",
+          {
+            src: logo_default,
+            alt: "Bukibloom Logo",
+            className: `h-10 sm:h-12 w-auto transition-all duration-300 ${isScrolled ? "opacity-90 scale-95" : "opacity-100 scale-100"}`,
+            title: "Bukibloom"
+          }
+        ),
+        /* @__PURE__ */ import_react3.default.createElement("span", { className: "text-2xl sm:text-3xl font-bold text-purple-700" }, "BUKIBLOOM")
+      ), /* @__PURE__ */ import_react3.default.createElement("nav", { className: "hidden md:flex flex-wrap space-x-6 items-center" }, ["home", "services", "products", "booking", "contact", "cart", "login", "register"].map((view) => /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          key: view,
+          onClick: () => handleNavigationClick(view),
+          className: "text-gray-600 hover:text-purple-700 font-medium transition duration-300 capitalize"
+        },
+        view === "booking" ? "Book Now" : view
+      )), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: () => handleNavigationClick("dashboard"),
+          className: "text-gray-700 hover:text-purple-600 transition duration-300 flex items-center"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-1" }),
+        " Dashboard"
+      ), /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onSignOut,
+          className: "text-red-500 hover:text-red-600 transition duration-300 flex items-center"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-1" }),
+        " Sign Out"
+      )) : /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onAuthClick,
+          className: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 flex items-center"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-1" }),
+        " Sign In / Sign Up"
+      ), /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onCartClick,
+          className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
+          "aria-label": "View shopping cart"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 hover:text-purple-700" }),
+        cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
+      )), /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden flex items-center space-x-4" }, /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onCartClick,
+          className: "relative p-2 rounded-full hover:bg-gray-100 transition duration-300",
+          "aria-label": "View shopping cart"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(ShoppingCart, { className: "h-7 w-7 text-gray-600 hover:text-purple-700" }),
+        cartItemCount > 0 && /* @__PURE__ */ import_react3.default.createElement("span", { className: "absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-ping-once" }, cartItemCount)
+      ), /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: toggleMobileMenu,
+          className: "text-gray-600 hover:text-purple-700 focus:outline-none",
+          "aria-label": "Toggle mobile menu"
+        },
+        isMobileMenuOpen ? /* @__PURE__ */ import_react3.default.createElement(X, { className: "w-6 h-6" }) : /* @__PURE__ */ import_react3.default.createElement(Menu, { className: "w-6 h-6" })
+      ))),
+      isMobileMenuOpen && /* @__PURE__ */ import_react3.default.createElement("div", { className: "md:hidden absolute top-20 left-0 w-full bg-white shadow-lg py-4 px-4 animate-slide-down" }, /* @__PURE__ */ import_react3.default.createElement("nav", { className: "flex flex-col space-y-4" }, ["home", "services", "products", "booking", "contact"].map((view) => /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          key: view,
+          onClick: () => handleNavigationClick(view),
+          className: "w-full text-gray-600 hover:bg-gray-100 py-2 text-base text-left"
+        },
+        view === "booking" ? "Book Now" : view
+      )), currentUser ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: () => handleNavigationClick("dashboard"),
+          className: "w-full text-gray-700 hover:bg-gray-100 py-2 text-left"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(LayoutDashboard, { size: 18, className: "mr-2 inline-block" }),
+        " Dashboard"
+      ), /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onSignOut,
+          className: "w-full text-red-500 hover:bg-gray-100 py-2 text-left"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(LogOut, { size: 18, className: "mr-2 inline-block" }),
+        " Sign Out"
+      )) : /* @__PURE__ */ import_react3.default.createElement(
+        "button",
+        {
+          onClick: onAuthClick,
+          className: "w-full bg-purple-600 text-white py-2 px-4 rounded-full mt-2"
+        },
+        /* @__PURE__ */ import_react3.default.createElement(User, { size: 18, className: "mr-2 inline-block" }),
+        " Sign In / Sign Up"
+      )))
+    );
+  };
+  Header.propTypes = {
+    cartItemCount: import_prop_types.default.number.isRequired,
+    currentUser: import_prop_types.default.object,
+    onAuthClick: import_prop_types.default.func.isRequired,
+    onSignOut: import_prop_types.default.func.isRequired,
+    onCartClick: import_prop_types.default.func.isRequired,
+    setView: import_prop_types.default.func.isRequired
+  };
+  var Header_default = Header;
+
+  // src/components/HeroSection.js
+  var import_react4 = __toESM(require_react());
+  var import_prop_types2 = __toESM(require_prop_types());
+  var HeroSection = ({
+    heading,
+    subheading,
+    bookButtonText,
+    onBookClick,
+    shopButtonText,
+    onShopClick,
+    backgroundImage
+  }) => {
+    return /* @__PURE__ */ import_react4.default.createElement(
+      "div",
+      {
+        className: "relative text-center py-16 px-4 sm:px-6 lg:px-8 bg-cover bg-center rounded-lg shadow-xl mb-12 overflow-hidden",
+        style: { backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none" }
+      },
+      backgroundImage && /* @__PURE__ */ import_react4.default.createElement("div", { className: "absolute inset-0 bg-black opacity-50" }),
+      /* @__PURE__ */ import_react4.default.createElement("div", { className: "relative z-10 text-white flex flex-col items-center justify-center" }, /* @__PURE__ */ import_react4.default.createElement(
+        "img",
+        {
+          src: logo_default,
+          alt: "Bukibloom Logo",
+          className: "h-12 md:h-16 w-auto mb-6",
+          title: "Bukibloom"
+        }
+      ), /* @__PURE__ */ import_react4.default.createElement("h1", { className: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight" }, heading), /* @__PURE__ */ import_react4.default.createElement("p", { className: "text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-8 px-2" }, subheading), /* @__PURE__ */ import_react4.default.createElement("div", { className: "flex flex-wrap justify-center gap-4" }, /* @__PURE__ */ import_react4.default.createElement(
+        "button",
+        {
+          onClick: onBookClick,
+          title: "Book your appointment",
+          className: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
+        },
+        bookButtonText
+      ), /* @__PURE__ */ import_react4.default.createElement(
+        "button",
+        {
+          onClick: onShopClick,
+          title: "Browse our products",
+          className: "bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
+        },
+        shopButtonText
+      )))
+    );
+  };
+  HeroSection.propTypes = {
+    heading: import_prop_types2.default.string.isRequired,
+    subheading: import_prop_types2.default.string.isRequired,
+    bookButtonText: import_prop_types2.default.string,
+    onBookClick: import_prop_types2.default.func,
+    shopButtonText: import_prop_types2.default.string,
+    onShopClick: import_prop_types2.default.func,
+    backgroundImage: import_prop_types2.default.string
+  };
+  HeroSection.defaultProps = {
+    bookButtonText: "Book Now",
+    shopButtonText: "Shop Products"
+  };
+  var HeroSection_default = HeroSection;
+
+  // src/components/Footer.js
+  var import_react5 = __toESM(require_react());
+  init_lucide_react();
+  var Footer = () => {
+    const socialLinks = [
+      { name: "Facebook", href: "https://facebook.com/bukibloom", Icon: Facebook },
+      { name: "Instagram", href: "https://instagram.com/bukibloom", Icon: Instagram },
+      { name: "Twitter", href: "https://twitter.com/bukibloom", Icon: Twitter }
+    ];
+    return /* @__PURE__ */ import_react5.default.createElement("footer", { className: "bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-xl" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "container mx-auto flex flex-col items-center text-center space-y-6 md:space-y-4" }, /* @__PURE__ */ import_react5.default.createElement(
+      "img",
+      {
+        src: logo_default,
+        alt: "Bukibloom Logo",
+        className: "h-12 md:h-14 w-auto",
+        title: "Bukibloom"
+      }
+    ), /* @__PURE__ */ import_react5.default.createElement("p", { className: "text-base md:text-lg font-semibold" }, "\xA9 ", (/* @__PURE__ */ new Date()).getFullYear(), " BukiBloom. All rights reserved."), /* @__PURE__ */ import_react5.default.createElement("div", { className: "flex flex-wrap justify-center gap-6" }, socialLinks.map(({ name, href, Icon: Icon2 }) => /* @__PURE__ */ import_react5.default.createElement(
+      "a",
+      {
+        key: name,
+        href,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        title: name,
+        className: "text-gray-400 hover:text-white transition duration-300 transform hover:scale-110",
+        "aria-label": name
+      },
+      /* @__PURE__ */ import_react5.default.createElement(Icon2, { size: 24 }),
+      /* @__PURE__ */ import_react5.default.createElement("span", { className: "sr-only" }, name)
+    ))), /* @__PURE__ */ import_react5.default.createElement("p", { className: "text-sm text-gray-400 px-2" }, "Designed with ", /* @__PURE__ */ import_react5.default.createElement("span", { className: "text-red-400" }, "\u2665"), " for your beauty needs.")));
+  };
+  var Footer_default = Footer;
 
   // src/components/AuthModal.js
   var import_react8 = __toESM(require_react());
@@ -33366,18 +33308,18 @@ to {
   var PrivateRoute_default = PrivateRoute;
 
   // src/App.js
-  var import_react32 = __toESM(require_react());
-  var HomePage = (0, import_react32.lazy)(() => Promise.resolve().then(() => (init_HomePage(), HomePage_exports)));
-  var Dashboard = (0, import_react32.lazy)(() => Promise.resolve().then(() => (init_UserDashboardView(), UserDashboardView_exports)));
-  /* @__PURE__ */ import_react31.default.createElement(import_react32.Suspense, { fallback: /* @__PURE__ */ import_react31.default.createElement("div", null, "Loading...") }, /* @__PURE__ */ import_react31.default.createElement(Routes, null, /* @__PURE__ */ import_react31.default.createElement(Route, { path: "/", element: /* @__PURE__ */ import_react31.default.createElement(HomePage, null) }), "``", /* @__PURE__ */ import_react31.default.createElement(Route, { element: /* @__PURE__ */ import_react31.default.createElement(PrivateRoute_default, null) }), "``", /* @__PURE__ */ import_react31.default.createElement(Route, { path: "/dashboard", element: /* @__PURE__ */ import_react31.default.createElement(Dashboard, null) }), /* @__PURE__ */ import_react31.default.createElement(Route, { path: "/settings", element: /* @__PURE__ */ import_react31.default.createElement(Settings, null) })));
+  var import_react31 = __toESM(require_react());
+  var HomePage = (0, import_react31.lazy)(() => Promise.resolve().then(() => __toESM(require_HomePage())));
+  var Dashboard = (0, import_react31.lazy)(() => Promise.resolve().then(() => (init_UserDashboardView(), UserDashboardView_exports)));
+  /* @__PURE__ */ import_react30.default.createElement(import_react31.Suspense, { fallback: /* @__PURE__ */ import_react30.default.createElement("div", null, "Loading...") }, /* @__PURE__ */ import_react30.default.createElement(Routes, null, /* @__PURE__ */ import_react30.default.createElement(Route, { path: "/", element: /* @__PURE__ */ import_react30.default.createElement(HomePage, null) }), "``", /* @__PURE__ */ import_react30.default.createElement(Route, { element: /* @__PURE__ */ import_react30.default.createElement(PrivateRoute_default, null) }), "``", /* @__PURE__ */ import_react30.default.createElement(Route, { path: "/dashboard", element: /* @__PURE__ */ import_react30.default.createElement(Dashboard, null) }), /* @__PURE__ */ import_react30.default.createElement(Route, { path: "/settings", element: /* @__PURE__ */ import_react30.default.createElement(Settings, null) })));
   var AppContent = () => {
     const { currentUser, isAuthReady } = useAuth();
     const { cartItemCount, showCartModal, setShowCartModal } = useCart();
     const { services, selectedService, setSelectedService, selectedStaff, selectedDate, selectedTime, bookService } = useBooking();
-    const [view, setView2] = (0, import_react31.useState)("home");
-    const [showAuthModal, setShowAuthModal] = (0, import_react31.useState)(false);
-    const [serviceToPayDeposit, setServiceToPayDeposit] = (0, import_react31.useState)(null);
-    const [depositAmount, setDepositAmount] = (0, import_react31.useState)(0);
+    const [view, setView2] = (0, import_react30.useState)("home");
+    const [showAuthModal, setShowAuthModal] = (0, import_react30.useState)(false);
+    const [serviceToPayDeposit, setServiceToPayDeposit] = (0, import_react30.useState)(null);
+    const [depositAmount, setDepositAmount] = (0, import_react30.useState)(0);
     const handleSignOut = async () => {
       try {
         showMessage_default("Logged out successfully.", "success");
@@ -33410,22 +33352,22 @@ to {
     const renderView = () => {
       switch (view) {
         case "home":
-          return /* @__PURE__ */ import_react31.default.createElement(HeroSection_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(HeroSection_default, { setView: setView2 });
         // HeroSection needs setView to navigate
         case "services":
-          return /* @__PURE__ */ import_react31.default.createElement(ServicesView_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(ServicesView_default, { setView: setView2 });
         case "products":
-          return /* @__PURE__ */ import_react31.default.createElement(ProductsView_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(ProductsView_default, { setView: setView2 });
         case "booking":
-          return /* @__PURE__ */ import_react31.default.createElement(BookingView_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(BookingView_default, { setView: setView2 });
         case "cart":
-          return /* @__PURE__ */ import_react31.default.createElement(CartView_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(CartView_default, { setView: setView2 });
         case "checkout":
-          return /* @__PURE__ */ import_react31.default.createElement(Checkout_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(Checkout_default, { setView: setView2 });
         case "dashboard":
-          return /* @__PURE__ */ import_react31.default.createElement(UserDashboardView_default, { setView: setView2 });
+          return /* @__PURE__ */ import_react30.default.createElement(UserDashboardView_default, { setView: setView2 });
         case "payment":
-          return /* @__PURE__ */ import_react31.default.createElement(
+          return /* @__PURE__ */ import_react30.default.createElement(
             PaymentView_default,
             {
               setView: setView2,
@@ -33435,23 +33377,23 @@ to {
             }
           );
         case "contact":
-          return /* @__PURE__ */ import_react31.default.createElement(ContactSection_default, null);
+          return /* @__PURE__ */ import_react30.default.createElement(ContactSection_default, null);
         default:
-          return /* @__PURE__ */ import_react31.default.createElement("p", null, "Page Not Found");
+          return /* @__PURE__ */ import_react30.default.createElement("p", null, "Page Not Found");
       }
     };
-    (0, import_react31.useEffect)(() => {
+    (0, import_react30.useEffect)(() => {
       if (isAuthReady && currentUser) {
         setShowAuthModal(false);
       }
     }, [currentUser, isAuthReady]);
-    (0, import_react31.useEffect)(() => {
+    (0, import_react30.useEffect)(() => {
       if (isAuthReady && !currentUser && (view === "dashboard" || view === "checkout" || view === "payment")) {
         showMessage_default("Please log in to access this page.", "info");
         setView2("home");
       }
     }, [view, currentUser, isAuthReady, setView2]);
-    return /* @__PURE__ */ import_react31.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react31.default.createElement(
+    return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(
       Header_default,
       {
         cartItemCount,
@@ -33461,7 +33403,7 @@ to {
         onCartClick: () => setView2("cart"),
         setView: setView2
       }
-    ), /* @__PURE__ */ import_react31.default.createElement("main", { className: "flex-grow" }, renderView()), /* @__PURE__ */ import_react31.default.createElement(Footer_default, null), showAuthModal && /* @__PURE__ */ import_react31.default.createElement(
+    ), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, renderView()), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null), showAuthModal && /* @__PURE__ */ import_react30.default.createElement(
       AuthModal_default,
       {
         onClose: () => setShowAuthModal(false),
@@ -33479,13 +33421,13 @@ to {
     ));
   };
   var App = () => {
-    return /* @__PURE__ */ import_react31.default.createElement(AppwriteProvider, null, /* @__PURE__ */ import_react31.default.createElement(AuthProvider, null, /* @__PURE__ */ import_react31.default.createElement(BookingProvider, null, /* @__PURE__ */ import_react31.default.createElement(CartProvider, null, /* @__PURE__ */ import_react31.default.createElement(AdminProvider, null, /* @__PURE__ */ import_react31.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react31.default.createElement(AppContent, null)))))));
+    return /* @__PURE__ */ import_react30.default.createElement(AppwriteProvider, null, /* @__PURE__ */ import_react30.default.createElement(AuthProvider, null, /* @__PURE__ */ import_react30.default.createElement(BookingProvider, null, /* @__PURE__ */ import_react30.default.createElement(CartProvider, null, /* @__PURE__ */ import_react30.default.createElement(AdminProvider, null, /* @__PURE__ */ import_react30.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react30.default.createElement(AppContent, null)))))));
   };
   var App_default = App;
 
   // src/components/ErrorBoundary.js
-  var import_react33 = __toESM(require_react());
-  var ErrorBoundary = class extends import_react33.default.Component {
+  var import_react32 = __toESM(require_react());
+  var ErrorBoundary = class extends import_react32.default.Component {
     constructor(props) {
       super(props);
       this.state = { hasError: false };
@@ -33498,7 +33440,7 @@ to {
     }
     render() {
       if (this.state.hasError) {
-        return /* @__PURE__ */ import_react33.default.createElement("h1", null, "Something went wrong.");
+        return /* @__PURE__ */ import_react32.default.createElement("h1", null, "Something went wrong.");
       }
       return this.props.children;
     }
@@ -33510,10 +33452,10 @@ to {
   init_useAppwrite();
 
   // src/context/ThemeContext.js
-  var import_react34 = __toESM(require_react());
-  var ThemeContext = (0, import_react34.createContext)();
+  var import_react33 = __toESM(require_react());
+  var ThemeContext = (0, import_react33.createContext)();
   var ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = (0, import_react34.useState)("light");
+    const [theme, setTheme] = (0, import_react33.useState)("light");
     const toggleTheme = () => setTheme((prev) => prev === "light" ? "dark" : "light");
     return /* @__PURE__ */ React.createElement(ThemeContext.Provider, { value: { theme, toggleTheme } }, children);
   };
@@ -33524,7 +33466,7 @@ to {
   if (rootElement) {
     const root = import_client.default.createRoot(rootElement);
     root.render(
-      /* @__PURE__ */ import_react35.default.createElement(import_react35.default.StrictMode, null, /* @__PURE__ */ import_react35.default.createElement(ErrorBoundary_default, null, /* @__PURE__ */ import_react35.default.createElement(AppwriteProvider, null, /* @__PURE__ */ import_react35.default.createElement(AuthProvider, null, /* @__PURE__ */ import_react35.default.createElement(ThemeProvider, null, /* @__PURE__ */ import_react35.default.createElement(BookingProvider, null, /* @__PURE__ */ import_react35.default.createElement(CartProvider, null, /* @__PURE__ */ import_react35.default.createElement(AdminProvider, null, /* @__PURE__ */ import_react35.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react35.default.createElement(App_default, null))))))))))
+      /* @__PURE__ */ import_react34.default.createElement(import_react34.default.StrictMode, null, /* @__PURE__ */ import_react34.default.createElement(ErrorBoundary_default, null, /* @__PURE__ */ import_react34.default.createElement(AppwriteProvider, null, /* @__PURE__ */ import_react34.default.createElement(AuthProvider, null, /* @__PURE__ */ import_react34.default.createElement(ThemeProvider, null, /* @__PURE__ */ import_react34.default.createElement(BookingProvider, null, /* @__PURE__ */ import_react34.default.createElement(CartProvider, null, /* @__PURE__ */ import_react34.default.createElement(AdminProvider, null, /* @__PURE__ */ import_react34.default.createElement(BrowserRouter, { basename: "/bukibloomsite" }, /* @__PURE__ */ import_react34.default.createElement(App_default, null))))))))))
     );
   } else {
     console.error('Root element with ID "root" not found in the document.');
