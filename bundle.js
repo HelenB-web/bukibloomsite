@@ -27661,7 +27661,18 @@
       init_HeroSection();
       init_Footer();
       Homepage = () => {
-        return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(Header_default, null), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, /* @__PURE__ */ import_react30.default.createElement(HeroSection_default, null)), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null));
+        return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(Header_default, null), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, /* @__PURE__ */ import_react30.default.createElement(
+          HeroSection_default,
+          {
+            heading: "Welcome to Bukibloom",
+            subheading: "Experience the beauty of nature with our handcrafted floral designs.",
+            bookButtonText: "Book Now",
+            onBookClick: () => alert("Booking..."),
+            shopButtonText: "Shop Products",
+            onShopClick: () => alert("Shopping..."),
+            backgroundImage: "https://yourdomain.com/path-to-background.jpg"
+          }
+        )), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null));
       };
       HomePage_default = Homepage;
     }
