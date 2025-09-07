@@ -27661,7 +27661,17 @@
       init_HeroSection();
       init_Footer();
       Homepage = () => {
-        return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(Header_default, null), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, /* @__PURE__ */ import_react30.default.createElement(
+        return /* @__PURE__ */ import_react30.default.createElement("div", { className: "flex flex-col min-h-screen" }, /* @__PURE__ */ import_react30.default.createElement(
+          Header_default,
+          {
+            cartItemCount: 0,
+            currentUser: null,
+            onAuthClick: () => alert("Auth clicked"),
+            onSignOut: () => alert("Signed out"),
+            onCartClick: () => alert("Cart clicked"),
+            setView: (view) => console.log(`Navigating to ${view}`)
+          }
+        ), /* @__PURE__ */ import_react30.default.createElement("main", { className: "flex-grow" }, /* @__PURE__ */ import_react30.default.createElement(
           HeroSection_default,
           {
             heading: "Welcome to Bukibloom",
@@ -27670,7 +27680,7 @@
             onBookClick: () => alert("Booking..."),
             shopButtonText: "Shop Products",
             onShopClick: () => alert("Shopping..."),
-            backgroundImage: "https://yourdomain.com/path-to-background.jpg"
+            backgroundImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
           }
         )), /* @__PURE__ */ import_react30.default.createElement(Footer_default, null));
       };
